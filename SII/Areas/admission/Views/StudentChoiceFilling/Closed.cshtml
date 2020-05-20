@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Closed";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>
+            Chocie filling Closed
+            <a class="btn btn-sm btn-info pull-right" href="~/admission/dashboard"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+        </h2>
+        <hr />
+        <p>
+            Student choice filling has beeen closed on "<strong>@Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["StudentChoiceFillingDateTime"].ToString()).ToString("dd-MMM-yyyy hh:mm:ss tt")</strong>".
+        </p>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+﻿
+
+@{
+    ViewBag.Title = "Course";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    p {
+        margin: 0 0 0px !important;
+    }
+</style>
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+            <div class="panel-heading">
+                Mock Round - Student List  Apply For - (UG)
+                <div class="tools">
+                    <a href="@Url.Content("~/")Admin/Dashboard" class="btn btn-success">Back</a>
+                </div>
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel-body table-responsive">
+                                <table class="table table-striped table-hover table-fw-widget" id="tbl">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. no</th>
+                                            <th>Student-Id</th>
+                                            <th>Student Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Gender</th>
+                                            <th>Nationality</th>
+                                            <th>Total Choice Filled</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCostofliving">
+                                        @{
+                                            SIIRepository.Adminservice.DashboardRepository _objRepository = new SIIRepository.Adminservice.DashboardRepository();
+                                            System.Data.DataSet _ds = _objRepository.Select_DashboradRptProgramWiseInstitute("StudentApply", "", "", "6");
+                                            if (_ds != null)
+                                            {
+
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                    {
+                                                        <tr>
+                                                            <td>@_dr["RowNo"].ToString()</td>
+                                                            <td>@_dr["Student_ID"].ToString()</td>
+                                                            <td>@_dr["FirstName"].ToString()  @_dr["MiddleName"].ToString() @_dr["LastName"].ToString()</td>
+                                                            <td>@_dr["Email"].ToString()</td>
+                                                            <td> @_dr["Mobile"].ToString()</td>
+                                                            <td>@_dr["Gender"].ToString()</td>
+                                                            <td>@_dr["Nationality"].ToString()</td>
+                                                            <td><button data-toggle="modal" data-target="#form-bp1" type="button" id="@_dr["Student_ID"].ToString()" class="btn btn-space btn-primary">@_dr["TotalChoicefilled"].ToString()</button></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="6">
+                                                            No data found.
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="6">
+                                                        No data found.
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+<!--Form Modals-->
+@*<div id="form-bp1" tabindex="-1" role="dialog" class="modal fade colored-header colored-header-primary">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><span class="mdi mdi-close"></span></button>
+                <h3 class="modal-title">Student Choice List</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @{
+                        SIIRepository.StudentRegService.DashboardRepository ___objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+                        System.Data.DataSet __ds = ___objRepository.Get_Dashboard_Modal_Data("SII-2018-STUD-00000002", "ChoiceFilling");
+                        if (_ds != null)
+                        {
+                            <h2 class="text-center">Filled Choices</h2>
+                            if (_ds.Tables[0].Rows.Count > 0)
+                            {
+                                int indexInternationalCollaboration = 1;
+                                <div class="col-md-12">
+                                    <h4 class="page-header">Filled Choices</h4>
+                                    <table class="table table-condensed table-responsive table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Institute</th>
+                                                <th>Courses</th>
+                                                <th>Fee Waivers</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyChoicefilling">
+                                            @foreach (System.Data.DataRow _dr in __ds.Tables[0].Rows)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @(indexInternationalCollaboration++)
+                                                    </td>
+                                                    <td>@_dr["InstituteName"].ToString()</td>
+                                                    <td>@_dr["Natureofcourse"].ToString()</td>
+                                                    <td>@_dr["SeatWaivertype"].ToString()</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+}
+@section scripts{
+    <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/js/main.js" type="text/javascript"></script>
+    <script src="/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.flash.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.print.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.colVis.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mainToggle").addClass("be-wrapper be-collapsible-sidebar be-collapsible-sidebar-collapsed");
+            $("#tbl").DataTable({
+                searching: true,
+                paging: true,
+                info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
+                lengthMenu: [[25, 50, -1], [25, 50, "All"]],
+                dom: 'Bfrtip',
+                buttons: [
+            {
+                extend: 'csvHtml5',
+                text: 'Export',
+                titleAttr: 'CSV'
+            },
+                ],
+                columnDefs: [{
+                    "targets": 5,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}
+

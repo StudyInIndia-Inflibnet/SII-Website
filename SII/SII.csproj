@@ -1,0 +1,1609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.3.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.2.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76F8D403-5F9F-46D5-B05D-6520CD828847}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SII</RootNamespace>
+    <AssemblyName>SII</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AntiXssLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\AntiXssLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.9.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.9.1\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.7.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.7\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MCPG.CCA.Util">
+      <HintPath>C:\Users\Dev1\Desktop\Web-and-Mobile-Integration-kits\WEB &amp; MOBILE INTEGRATION KIT\Web Integration\ASP.Net_Kit_Version_3.5\IFRAME_KIT\libs\MCPG.CCA.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SRVTextToImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SRVTextToImage.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="404.htm" />
+    <Content Include="500.htm" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\img\140x140.png" />
+    <Content Include="assets\img\404-bg.png" />
+    <Content Include="assets\img\avatar-150.png" />
+    <Content Include="assets\img\avatar.png" />
+    <Content Include="assets\img\avatar1.png" />
+    <Content Include="assets\img\avatar2.png" />
+    <Content Include="assets\img\avatar3.png" />
+    <Content Include="assets\img\avatar4.png" />
+    <Content Include="assets\img\avatar5.png" />
+    <Content Include="assets\img\avatar6.png" />
+    <Content Include="assets\img\bitbucket.png" />
+    <Content Include="assets\img\dribbble.png" />
+    <Content Include="assets\img\dropbox.png" />
+    <Content Include="assets\img\gallery\img1.jpg" />
+    <Content Include="assets\img\gallery\img10.jpg" />
+    <Content Include="assets\img\gallery\img11.jpg" />
+    <Content Include="assets\img\gallery\img12.jpg" />
+    <Content Include="assets\img\gallery\img2.jpg" />
+    <Content Include="assets\img\gallery\img3.jpg" />
+    <Content Include="assets\img\gallery\img4.jpg" />
+    <Content Include="assets\img\gallery\img5.jpg" />
+    <Content Include="assets\img\gallery\img6.jpg" />
+    <Content Include="assets\img\gallery\img7.jpg" />
+    <Content Include="assets\img\gallery\img8.jpg" />
+    <Content Include="assets\img\gallery\img9.jpg" />
+    <Content Include="assets\img\github.png" />
+    <Content Include="assets\img\logo-fav.png" />
+    <Content Include="assets\img\logo-symbol.png" />
+    <Content Include="assets\img\logo-white-xx.png" />
+    <Content Include="assets\img\logo-white.png" />
+    <Content Include="assets\img\logo-xx.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\mail_chimp.png" />
+    <Content Include="assets\img\slack.png" />
+    <Content Include="assets\img\theme_log.png" />
+    <Content Include="assets\img\user-profile-display.png" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\lib\bootstrap-markdown\js\bootstrap-markdown.js" />
+    <Content Include="assets\lib\bootstrap-multiselect\css\bootstrap-multiselect.css" />
+    <Content Include="assets\lib\bootstrap-multiselect\js\bootstrap-multiselect.js" />
+    <Content Include="assets\lib\bootstrap-slider\css\bootstrap-slider.css" />
+    <Content Include="assets\lib\bootstrap-slider\js\bootstrap-slider.js" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput-angular.js" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput-angular.min.js" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.css" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.js" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.min.js" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="assets\lib\chartjs\Chart.min.js" />
+    <Content Include="assets\lib\countup\countUp.min.js" />
+    <Content Include="assets\lib\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="assets\lib\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="assets\lib\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\buttons.bootstrap.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\buttons.colVis.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\buttons.flash.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\buttons.html5.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\buttons.print.js" />
+    <Content Include="assets\lib\datatables\plugins\buttons\js\dataTables.buttons.js" />
+    <Content Include="assets\lib\daterangepicker\css\daterangepicker.css" />
+    <Content Include="assets\lib\daterangepicker\js\daterangepicker.js" />
+    <Content Include="assets\lib\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\lib\datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\lib\dropzone\dist\dropzone.css" />
+    <Content Include="assets\lib\dropzone\dist\dropzone.js" />
+    <Content Include="assets\lib\font-awesome\css\font-awesome.min.html" />
+    <Content Include="assets\lib\fuelux\js\wizard.js" />
+    <Content Include="assets\lib\jQuertMarquee\jquery.marquee.js" />
+    <Content Include="assets\lib\jQuertMarquee\jquery.marquee.min.js" />
+    <Content Include="assets\lib\jquery-flot\jquery.flot.js" />
+    <Content Include="assets\lib\jquery-flot\jquery.flot.pie.js" />
+    <Content Include="assets\lib\jquery-flot\jquery.flot.resize.js" />
+    <Content Include="assets\lib\jquery-flot\plugins\curvedLines.js" />
+    <Content Include="assets\lib\jquery-flot\plugins\jquery.flot.orderBars.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-addon-i18n.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-af.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-am.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-bg.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-ca.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-cs.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-da.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-de.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-el.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-es.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-et.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-eu.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-fa.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-fi.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-fr.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-gl.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-he.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-hr.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-hu.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-id.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-it.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-ja.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-ko.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-lt.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-lv.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-mk.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-nl.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-no.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-pl.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-pt-BR.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-pt.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-ro.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-ru.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sk.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sl.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sq.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sr-RS.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sr-YU.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-sv.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-th.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-tr.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-uk.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-vi.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-zh-CN.js" />
+    <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-zh-TW.js" />
+    <Content Include="assets\lib\jquery-ui\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui-sliderAccess.js" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui-timepicker-addon.css" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui-timepicker-addon.js" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui-timepicker-addon.min.css" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui-timepicker-addon.min.js" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui.css" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui.js" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui.min.css" />
+    <Content Include="assets\lib\jquery-ui\jquery-ui.min.js" />
+    <Content Include="assets\lib\jquery.fullcalendar\fullcalendar.min.css" />
+    <Content Include="assets\lib\jquery.fullcalendar\fullcalendar.min.js" />
+    <Content Include="assets\lib\jquery.gritter\css\jquery.gritter.css" />
+    <Content Include="assets\lib\jquery.gritter\images\gritter-bg.png" />
+    <Content Include="assets\lib\jquery.gritter\images\gritter-light.png" />
+    <Content Include="assets\lib\jquery.gritter\images\gritter.png" />
+    <Content Include="assets\lib\jquery.gritter\images\ie-spacer.gif" />
+    <Content Include="assets\lib\jquery.gritter\js\jquery.gritter.js" />
+    <Content Include="assets\lib\jquery.magnific-popup\jquery.magnific-popup.min.js" />
+    <Content Include="assets\lib\jquery.magnific-popup\magnific-popup.css" />
+    <Content Include="assets\lib\jquery.maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="assets\lib\jquery.nestable\jquery.nestable.js" />
+    <Content Include="assets\lib\jquery.niftymodals\dist\jquery.niftymodals.js" />
+    <Content Include="assets\lib\jquery.sparkline\jquery.sparkline.min.js" />
+    <Content Include="assets\lib\jquery.vectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="assets\lib\jquery.vectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-au-mill-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-ca-lcc-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-fr-merc-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-in-mill-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-map.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-uk-mill-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-us-il-chicago-mill-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-us-merc-en.js" />
+    <Content Include="assets\lib\jquery.vectormap\maps\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="assets\lib\jQueryConfirm\jcFunctions.js" />
+    <Content Include="assets\lib\jQueryConfirm\jquery-confirm.min.css" />
+    <Content Include="assets\lib\jQueryConfirm\jquery-confirm.min.js" />
+    <Content Include="assets\lib\jquery\jquery.min.js" />
+    <Content Include="assets\lib\jqvmap\jquery.vmap.min.js" />
+    <Content Include="assets\lib\jqvmap\jqvmap.min.css" />
+    <Content Include="assets\lib\jqvmap\maps\jquery.vmap.world.js" />
+    <Content Include="assets\lib\markdown-js\markdown.js" />
+    <Content Include="assets\lib\masonry\masonry.pkgd.min.js" />
+    <Content Include="assets\lib\material-design-icons\css\material-design-iconic-font.min.css" />
+    <Content Include="assets\lib\moment.js\min\moment.min.js" />
+    <Content Include="assets\lib\morrisjs\morris.css" />
+    <Content Include="assets\lib\morrisjs\morris.min.js" />
+    <Content Include="assets\lib\multiselect\css\multi-select.css" />
+    <Content Include="assets\lib\multiselect\img\switch.png" />
+    <Content Include="assets\lib\multiselect\js\jquery.multi-select.js" />
+    <Content Include="assets\lib\parsley\parsley.min.js" />
+    <Content Include="assets\lib\perfect-scrollbar\css\perfect-scrollbar.min.css" />
+    <Content Include="assets\lib\perfect-scrollbar\js\perfect-scrollbar.jquery.min.js" />
+    <Content Include="assets\lib\prettify\prettify.js" />
+    <Content Include="assets\lib\quicksearch\jquery.quicksearch.min.js" />
+    <Content Include="assets\lib\raphael\raphael-min.js" />
+    <Content Include="assets\lib\roboto\Roboto-Black.svg" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.svg" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Light.svg" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.svg" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.svg" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.svg" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.svg" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.svg" />
+    <Content Include="assets\lib\select2\css\select2.min.css" />
+    <Content Include="assets\lib\select2\js\select2.full.min.js" />
+    <Content Include="assets\lib\select2\js\select2.min.js" />
+    <Content Include="assets\lib\simplePagination\jquery.simplePagination.js" />
+    <Content Include="assets\lib\simplePagination\simplePagination.css" />
+    <Content Include="assets\lib\summernote\lang\summernote-ar-AR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-bg-BG.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ca-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-cs-CZ.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-da-DK.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-de-DE.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-el-GR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-es-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-es-EU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fa-IR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fi-FI.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-fr-FR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-gl-ES.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-he-IL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-hr-HR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-hu-HU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-id-ID.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-it-IT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ja-JP.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ko-KR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-lt-LT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-lt-LV.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-mn-MN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-nb-NO.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-nl-NL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pl-PL.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pt-BR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-pt-PT.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ro-RO.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ru-RU.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sk-SK.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sl-SI.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sr-RS-Latin.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sr-RS.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-sv-SE.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-ta-IN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-th-TH.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-tr-TR.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-uk-UA.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-vi-VN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-zh-CN.js" />
+    <Content Include="assets\lib\summernote\lang\summernote-zh-TW.js" />
+    <Content Include="assets\lib\summernote\plugin\databasic\summernote-ext-databasic.css" />
+    <Content Include="assets\lib\summernote\plugin\databasic\summernote-ext-databasic.js" />
+    <Content Include="assets\lib\summernote\plugin\hello\summernote-ext-hello.js" />
+    <Content Include="assets\lib\summernote\plugin\specialchars\summernote-ext-specialchars.js" />
+    <Content Include="assets\lib\summernote\summernote-bs4.css" />
+    <Content Include="assets\lib\summernote\summernote-bs4.js" />
+    <Content Include="assets\lib\summernote\summernote-bs4.min.js" />
+    <Content Include="assets\lib\summernote\summernote-ext-beagle.js" />
+    <Content Include="assets\lib\summernote\summernote-lite.css" />
+    <Content Include="assets\lib\summernote\summernote-lite.js" />
+    <Content Include="assets\lib\summernote\summernote.css" />
+    <Content Include="assets\lib\summernote\summernote.js" />
+    <Content Include="assets\lib\summernote\summernote.min.js" />
+    <Content Include="assets\lib\sweetalert2\sweetalert2.common.js" />
+    <Content Include="assets\lib\sweetalert2\sweetalert2.css" />
+    <Content Include="assets\lib\sweetalert2\sweetalert2.js" />
+    <Content Include="assets\lib\sweetalert2\sweetalert2.min.css" />
+    <Content Include="assets\lib\sweetalert2\sweetalert2.min.js" />
+    <Content Include="assets\lib\wizard\jquery.backstretch.min.js" />
+    <Content Include="assets\lib\wizard\retina-1.1.0.min.js" />
+    <Content Include="assets\lib\wizard\scripts.js" />
+    <Content Include="assets\lib\wizard\style.css" />
+    <Content Include="assets\lib\x-editable\bootstrap3-editable\css\bootstrap-editable.css" />
+    <Content Include="assets\lib\x-editable\bootstrap3-editable\img\clear.png" />
+    <Content Include="assets\lib\x-editable\bootstrap3-editable\img\loading.gif" />
+    <Content Include="assets\lib\x-editable\bootstrap3-editable\js\bootstrap-editable.min.js" />
+    <Content Include="assets\lib\x-editable\inputs-ext\typeaheadjs\lib\typeahead.js" />
+    <Content Include="assets\lib\x-editable\inputs-ext\typeaheadjs\lib\typeahead.js-bootstrap.css" />
+    <Content Include="assets\lib\x-editable\inputs-ext\typeaheadjs\typeaheadjs.js" />
+    <Content Include="css\animate.min.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom-front.css" />
+    <Content Include="css\custom-institute.css" />
+    <Content Include="css\custom-website.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\css\materialdesignicons.css" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\css\materialdesignicons.min.css" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="css\hover.min.css" />
+    <Content Include="css\jQuery-plugin-progressbar.css" />
+    <Content Include="css\material-design-iconic-font.min.css" />
+    <Content Include="css\nice-select.css" />
+    <Content Include="css\owl.carousel.css" />
+    <Content Include="css\owl.video.play.html" />
+    <Content Include="css\pages\home.css" />
+    <Content Include="css\pages\registration.css" />
+    <Content Include="css\reposnsive-choice.css" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_Student_Ch_Basic.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\Phase2.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\All.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\ProgrammeType.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\ChoiceFilling.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Merit.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Alloted.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Country.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\CountryWise.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\CountryWiseList.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\StudentsList.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\Student.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_AcademicInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_BackgroundInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_BasicInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_ChoicefillingInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_ChoicefillingInformationSecondRound.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_DocumentInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\_Student_Ch_Basic.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\PreviewStudent\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseData\Phase2.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\Index - Copy.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\SkypeInterview.cshtml" />
+    <Content Include="Areas\admission\Views\Result\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Upload\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Upload\Documents.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\UploadAllotmentLatter.cshtml" />
+    <Content Include="Areas\admission\Views\Result\Accept.cshtml" />
+    <Content Include="Areas\admission\Views\Result\Reject.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\ChoiceFillingTest.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\Phase2 - Copy.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Reports.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_Country.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_CountryStudents.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_ConsideredStudents.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_AllottedStudents.cshtml" />
+    <Content Include="Areas\admission\Views\TravelPlan\Index.cshtml" />
+    <Content Include="Areas\admission\Views\TravelPlan\Passport.cshtml" />
+    <Content Include="Areas\admission\Views\TravelPlan\AirTicket.cshtml" />
+    <Content Include="Areas\admission\Views\TravelPlan\Visa.cshtml" />
+    <Content Include="Areas\admission\Views\TravelPlan\InstituteSpoc.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_ConsideredStudentsPrograllevlwise.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_ScholarshipCountryWise.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\TravelDocumentation.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\InstituteSpoc.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_InstituteList.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_StudentPassport.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_StudentTicket.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_StudentVisa.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_ConsideredStudentsInstituteWise.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Round2Students.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\Round3Students.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase2\_Phase2_ScholarshipCountryWiseAllRound.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\NICHE.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\NICHE - Copy.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\visaregulations\Index - Copy.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\frro\Index - Copy.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_NicheCourses.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\ViewDetailsNicheCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseData\_Phase2NicheCourse.cshtml" />
+    <Content Include="Areas\Institute\Views\ParticipationYears\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\Basic.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\SelectDisciplines.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\ChoiceFilling.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\UploadDocs.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\Submit.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFillingNiche\_ProgressBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Phase3.cshtml" />
+    <Content Include="Areas\Admin\Views\ParticipationYears\Index.cshtml" />
+    <Content Include="Areas\admission\Views\RegistrationsNiche\Index.cshtml" />
+    <Content Include="Areas\admission\Views\RegistrationsNiche\ThankYou.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase3\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase3\NicheReports.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase3\NicheReportsList.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase3\NicheReportsList - Copy.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudentNICHECourse\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Payment.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\PaymentRequest.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\RedirectUrl.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentData\Phase3.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentData\Phase2Test.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentData\Phase2.cshtml" />
+    <Content Include="Areas\Admin\Views\SCFDates\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SCFDates\Edit.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\_FillChoiceGrid_2020-01-20_14-25.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\ChoiceFilling_2020-01-20_14-26.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_AcademicInformation.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\IndSAT.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\FeeWaiver.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\Scholarship.cshtml" />
+    <Content Include="Areas\admission\Views\IndSATSelection\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_IndSATSelection.cshtml" />
+    <Content Include="Areas\Admin\Views\IndSATSelection\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\StudentData.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\Verified.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\Rejected.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\NotVerified.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\UploadDocuments.cshtml" />
+    <Content Include="Areas\Admin\Views\ConvertBase64ToImage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Phase3\NicheReportsList - Copy %282%29.cshtml" />
+    <Content Include="Areas\Admin\Views\ActivationLinkGenerator\Index.cshtml" />
+    <Content Include="Areas\admission\Views\IndSATCredentials\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Registrations\Index - Copy.cshtml" />
+    <None Include="css\responsive.css1" />
+    <Content Include="css\responsive - Copy.css" />
+    <Content Include="css\responsive.css" />
+    <Content Include="css\slicknav.min.css" />
+    <None Include="css\style.css1" />
+    <None Include="css\style2.css2" />
+    <Content Include="css\style_BK.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\style.default.css" />
+    <Content Include="Global.asax" />
+    <Content Include="img\02_Banner.jpg" />
+    <Content Include="img\1.jpg" />
+    <Content Include="img\2.jpg" />
+    <Content Include="img\3.jpg" />
+    <Content Include="img\303.jpg" />
+    <Content Include="img\33.jpg" />
+    <Content Include="img\330.jpg" />
+    <Content Include="img\333.jpg" />
+    <Content Include="img\6.jpg" />
+    <Content Include="img\a11.png" />
+    <Content Include="img\a21.png" />
+    <Content Include="img\about-quote.png" />
+    <Content Include="img\abtVisa_reg.jpg" />
+    <Content Include="img\abt_ayurvedic.jpg" />
+    <Content Include="img\abt_buddhism.jpg" />
+    <Content Include="img\abt_frro.jpg" />
+    <Content Include="img\abt_tibetan.jpg" />
+    <Content Include="img\abt_yoga.jpg" />
+    <Content Include="img\alumini_Img1.jpg" />
+    <Content Include="img\alumini_Img2.jpg" />
+    <Content Include="img\alumini_Img3.jpg" />
+    <Content Include="img\alumini_Img4.jpg" />
+    <Content Include="img\Banner-Niche-Courses.jpg" />
+    <Content Include="img\Banner1.jpg" />
+    <Content Include="img\Banner1_old.jpg" />
+    <Content Include="img\bg.jpg" />
+    <Content Include="img\blog-img-1.jpg" />
+    <Content Include="img\blog-img-2.jpg" />
+    <Content Include="img\blog-img-3.jpg" />
+    <Content Include="img\blogs\dfs.jpg" />
+    <Content Include="img\blogs\how-the-%27study-in-india%27-program-helps-you-find-the-right-college.jpg" />
+    <Content Include="img\blogs\how-to-select-the-right-college-for-you!-.jpeg" />
+    <Content Include="img\blogs\india-and-stem-education.jpg" />
+    <Content Include="img\blogs\packing-for-india-the-essentials.jpg" />
+    <Content Include="img\blogs\test-title-for-blog.jpg" />
+    <Content Include="img\blogs\test-title-for-blog.png" />
+    <Content Include="img\blogs\this-is-second-bloge-text.jpg" />
+    <Content Include="img\blogs\this-is-second-bloge-text.png" />
+    <Content Include="img\blogs\tips-on-how-to-travel-wonderfully-in-india.jpg" />
+    <Content Include="img\blogs\useful-first-week-tips-for-new-students-in-india.jpg" />
+    <Content Include="img\calendar.png" />
+    <Content Include="img\counter-icon.png" />
+    <Content Include="img\event.jpg" />
+    <Content Include="img\event_2.jpeg" />
+    <Content Include="img\explore.jpg" />
+    <Content Include="img\Explore.png" />
+    <Content Include="img\fairschedulepartofsii\bangladesh.png" />
+    <Content Include="img\fairschedulepartofsii\Delhu.png" />
+    <Content Include="img\fairschedulepartofsii\Dubai.png" />
+    <Content Include="img\fairschedulepartofsii\Mumbai.png" />
+    <Content Include="img\fairschedulepartofsii\Nepal.png" />
+    <Content Include="img\fairschedulepartofsii\tanzania.png" />
+    <Content Include="img\fairschedulepartofsii\Usa.png" />
+    <Content Include="img\favicon.ico" />
+    <Content Include="img\fee_waivers.jpg" />
+    <Content Include="img\footer_logo.jpg" />
+    <Content Include="img\frro.jpg" />
+    <Content Include="img\gallery\gallery-1.png" />
+    <Content Include="img\gallery\gallery-2.png" />
+    <Content Include="img\gallery\thumb\thumnail-1.jpg" />
+    <Content Include="img\gallery\thumb\thumnail-2.jpg" />
+    <Content Include="img\header_banner.jpg" />
+    <Content Include="img\HomePageBanner.jpg" />
+    <Content Include="img\icons\culture_icon.png" />
+    <Content Include="img\icons\culture_icon2.png" />
+    <Content Include="img\icons\edu_icon.png" />
+    <Content Include="img\icons\edu_icon2.png" />
+    <Content Include="img\icons\experience_icon.png" />
+    <Content Include="img\icons\experience_icon2.png" />
+    <Content Include="img\icons\explore.jpg" />
+    <Content Include="img\icons\Explore.png" />
+    <Content Include="img\icons\news.jpg" />
+    <Content Include="img\icons\news.png" />
+    <Content Include="img\icons\ranking.jpg" />
+    <Content Include="img\icons\Ranking.png" />
+    <Content Include="img\icons\stay.jpg" />
+    <Content Include="img\icons\stay.png" />
+    <Content Include="img\icons\travel.jpg" />
+    <Content Include="img\icons\travel.png" />
+    <Content Include="img\icons\travel_icon.png" />
+    <Content Include="img\icons\travel_icon2.png" />
+    <Content Include="img\icons\visa.jpg" />
+    <Content Include="img\icons\visa.png" />
+    <Content Include="img\icons\why_icon.png" />
+    <Content Include="img\icons\why_icon2.png" />
+    <Content Include="img\iit.png" />
+    <Content Include="img\image-1.jpg" />
+    <Content Include="img\image-2.jpg" />
+    <Content Include="img\image-3.jpg" />
+    <Content Include="img\image-4.jpg" />
+    <Content Include="img\image-5.jpg" />
+    <Content Include="img\image-6.jpg" />
+    <Content Include="img\img-1.jpg" />
+    <Content Include="img\img-2.jpg" />
+    <Content Include="img\img-3.jpg" />
+    <Content Include="img\IndSAT\MHRD.png" />
+    <Content Include="img\IndSAT\MHRD_PDF.png" />
+    <Content Include="img\IndSAT\NTA.png" />
+    <Content Include="img\IndSAT\NTA_PDF.png" />
+    <Content Include="img\IndSAT\SII.png" />
+    <Content Include="img\IndSAT\SII_PDF.png" />
+    <Content Include="img\ind_sat.jpg" />
+    <Content Include="img\institutesList.jpg" />
+    <Content Include="img\nicheCourse-01.jpg" />
+    <Content Include="img\nicheCourse-02.jpg" />
+    <Content Include="img\nicheCourse-03.jpg" />
+    <Content Include="img\nicheCourse-04.jpg" />
+    <Content Include="img\nicheCourses.jpg" />
+    <Content Include="img\nicheCourses_new.jpg" />
+    <Content Include="img\noImageAvailable.png" />
+    <Content Include="img\privacyBG.jpg" />
+    <Content Include="img\reg_fee.jpg" />
+    <Content Include="img\rel_01.jpg" />
+    <Content Include="img\rel_02.jpg" />
+    <Content Include="img\rel_03.jpg" />
+    <Content Include="img\rv_icon-1.png" />
+    <Content Include="img\rv_icon-2.png" />
+    <Content Include="img\rv_icon-3.png" />
+    <Content Include="img\rv_icon-4.png" />
+    <Content Include="img\rv_icon-5.png" />
+    <Content Include="img\rv_icon-6.png" />
+    <Content Include="img\rv_icon-7.png" />
+    <Content Include="img\searchicon.png" />
+    <Content Include="img\siiIcon.png" />
+    <Content Include="img\sii_scholarship.jpg" />
+    <Content Include="img\slider_images\02_Banner.jpg" />
+    <Content Include="img\slider_images\03.jpg" />
+    <Content Include="img\slider_images\04.jpg" />
+    <Content Include="img\slider_images\05.jpg" />
+    <Content Include="img\slider_images\06.jpg" />
+    <Content Include="img\slider_images\06_.jpg" />
+    <Content Include="img\slider_images\07.jpg" />
+    <Content Include="img\slider_images\08.jpg" />
+    <Content Include="img\slider_images\09.jpg" />
+    <Content Include="img\slider_images\11.jpg" />
+    <Content Include="img\slider_images\13.jpg" />
+    <Content Include="img\slider_images\15.jpg" />
+    <Content Include="img\slider_images\16.jpg" />
+    <Content Include="img\slider_images\17.jpg" />
+    <Content Include="img\slider_images\21-Banner.jpg" />
+    <Content Include="img\slider_images\21-Banner_old.jpg" />
+    <Content Include="img\slider_images\22.jpg" />
+    <Content Include="img\slider_images\23.jpg" />
+    <Content Include="img\slider_images\24.png" />
+    <Content Include="img\slider_images\25.jpg" />
+    <Content Include="img\slider_images\HomePageBanner.jpg" />
+    <Content Include="img\slider_images\mobile\02_Banner.jpg" />
+    <Content Include="img\slider_images\mobile\09.jpg" />
+    <Content Include="img\slider_images\mobile\11.jpg" />
+    <Content Include="img\slider_images\mobile\13.jpg" />
+    <Content Include="img\slider_images\mobile\15.jpg" />
+    <Content Include="img\slider_images\mobile\16.jpg" />
+    <Content Include="img\slider_images\mobile\17.jpg" />
+    <Content Include="img\slider_images\mobile\21-Banner.jpg" />
+    <Content Include="img\slider_images\mobile\21-Banner_old.jpg" />
+    <Content Include="img\slider_images\mobile\22.jpg" />
+    <Content Include="img\slider_images\mobile\23.jpg" />
+    <Content Include="img\slider_images\mobile\24.png" />
+    <Content Include="img\slider_images\mobile\25.jpg" />
+    <Content Include="img\slider_images\mobile\HomePageBanner.jpg" />
+    <Content Include="img\slider_images\mobile\result-banner.jpg" />
+    <Content Include="img\slider_images\mobile\slider7.jpg" />
+    <Content Include="img\slider_images\mobile\slider5.jpg" />
+    <Content Include="img\slider_images\mobile\slider6.jpg" />
+    <Content Include="img\slider_images\mobile\slider.jpg" />
+    <Content Include="img\slider_images\mobile\slider2.jpg" />
+    <Content Include="img\slider_images\mobile\slider3.jpg" />
+    <Content Include="img\slider_images\mobile\slider4.jpg" />
+    <Content Include="img\slider_images\mobile\slider5_.jpg" />
+    <Content Include="img\slider_images\PG_SecondCouncellingRound.jpg" />
+    <Content Include="img\slider_images\result-banner.jpg" />
+    <Content Include="img\slider_images\slider1.jpg" />
+    <Content Include="img\inner-title-bg.jpg" />
+    <Content Include="img\institute-1.jpg" />
+    <Content Include="img\institute-2.jpg" />
+    <Content Include="img\logo-compressed.jpg" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo1.png" />
+    <Content Include="img\logo2.png" />
+    <Content Include="img\logo_SII.png" />
+    <Content Include="img\menu-1.jpg" />
+    <Content Include="img\mhrd.png" />
+    <Content Include="img\mobile-bg.jpg" />
+    <Content Include="img\naac.png" />
+    <Content Include="img\news.jpg" />
+    <Content Include="img\news.png" />
+    <Content Include="img\news1.jpg" />
+    <Content Include="img\news2.jpg" />
+    <Content Include="img\nirf.png" />
+    <Content Include="img\noimage.jpg" />
+    <Content Include="img\Philadelphia.jpg" />
+    <Content Include="img\Philadelphia1.jpg" />
+    <Content Include="img\Philadelphia2.jpg" />
+    <Content Include="img\ranking.jpg" />
+    <Content Include="img\Ranking.png" />
+    <Content Include="img\service-icon-1.png" />
+    <Content Include="img\service-icon-2.png" />
+    <Content Include="img\service-icon-3.png" />
+    <Content Include="img\service-icon-4.png" />
+    <Content Include="img\service-icon-5.png" />
+    <Content Include="img\service-icon-6.png" />
+    <Content Include="img\slide-1.jpg" />
+    <Content Include="img\slide-2.jpg" />
+    <Content Include="img\slide-3.jpg" />
+    <Content Include="img\slider_images\mobile-bg.jpg" />
+    <Content Include="img\slider_images\mobile-bg2.jpg" />
+    <Content Include="img\slider_images\mobile-bg3.jpg" />
+    <Content Include="img\slider_images\slider-3.jpg" />
+    <Content Include="img\slider_images\slider-4.jpg" />
+    <Content Include="img\slider_images\slider-5.jpg" />
+    <Content Include="img\slider_images\slider-6.jpg" />
+    <Content Include="img\slider_images\slider-7.jpg" />
+    <Content Include="img\slider_images\slider-8.jpg" />
+    <Content Include="img\slider_images\slider-9.jpg" />
+    <Content Include="img\slider_images\slider.jpg" />
+    <Content Include="img\slider_images\slider2.jpg" />
+    <Content Include="img\slider_images\slider3.jpg" />
+    <Content Include="img\slider_images\slider4.jpg" />
+    <Content Include="img\stay.jpg" />
+    <Content Include="img\stay.png" />
+    <Content Include="img\stdReg01.png" />
+    <Content Include="img\stdReg02.png" />
+    <Content Include="img\stdReg03.png" />
+    <Content Include="img\story-img.jpg" />
+    <Content Include="img\studentReg.jpg" />
+    <Content Include="img\testimonial_1.jpg" />
+    <Content Include="img\testimonial_10.jpg" />
+    <Content Include="img\testimonial_11.jpg" />
+    <Content Include="img\testimonial_2.jpg" />
+    <Content Include="img\testimonial_3.jpg" />
+    <Content Include="img\testimonial_4.jpg" />
+    <Content Include="img\testimonial_5.jpg" />
+    <Content Include="img\testimonial_6.jpg" />
+    <Content Include="img\testimonial_7.jpg" />
+    <Content Include="img\testimonial_8.jpg" />
+    <Content Include="img\testimonial_9.jpg" />
+    <Content Include="img\testimonioals.png" />
+    <Content Include="img\theme_log.png" />
+    <Content Include="img\ticker\tiker1.gif" />
+    <Content Include="img\travel.jpg" />
+    <Content Include="img\travel.png" />
+    <Content Include="img\uae.jpg" />
+    <Content Include="img\uae1.jpg" />
+    <Content Include="img\ugc.png" />
+    <Content Include="img\upcoming-img-1.jpg" />
+    <Content Include="img\upcoming-img-2.jpg" />
+    <Content Include="img\upcoming-img-3.jpg" />
+    <Content Include="img\visa.jpg" />
+    <Content Include="img\visa.png" />
+    <Content Include="img\visa_reg.jpg" />
+    <Content Include="img\why_india.jpg" />
+    <Content Include="img\yoga.jpg" />
+    <Content Include="js\active.js" />
+    <Content Include="js\bootstrap-hover-dropdown.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\counter.js" />
+    <Content Include="js\inview.js" />
+    <Content Include="js\jQuery-plugin-progressbar.js" />
+    <Content Include="js\jquery.easyPaginate.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquery.nice-select.min.js" />
+    <Content Include="js\jquery.slicknav.min.js" />
+    <Content Include="js\jssor.slider.mini.js" />
+    <Content Include="js\owl.carousel.min.js" />
+    <Content Include="js\pagination.min.js" />
+    <Content Include="js\slider.js" />
+    <Content Include="js\wow.min.js" />
+    <Content Include="Scipts\Areas\Admin\AdminLogin.js" />
+    <Content Include="Scipts\Areas\Admin\AdminRegistion.js" />
+    <Content Include="Scipts\Areas\Admin\admin_acedemic.js" />
+    <Content Include="Scipts\Areas\Admin\Agencydetail.js" />
+    <Content Include="Scipts\Areas\Admin\AgencyMaster.js" />
+    <Content Include="Scipts\Areas\Admin\editprofile.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\CourseOfStudy.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\CourseOfStudyMapping.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\EQPLMapping.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\QualificationMapping.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\ProgramLevelMapping.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\Qualification.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\ProgramLevel.js" />
+    <Content Include="Scipts\Areas\Admin\Masters\Discipline.js" />
+    <Content Include="Scipts\Areas\Admin\UplaodDoc.js" />
+    <Content Include="Scipts\Areas\Admin\UploadGallery.js" />
+    <Content Include="Scipts\Areas\Admin\VerifyDocument.js" />
+    <Content Include="Scipts\Areas\admission\ChoiceFilling.js" />
+    <Content Include="Scipts\Areas\admission\ChoiceFillingList.js" />
+    <Content Include="Scipts\Areas\admission\ChoiceFillingListSecondRound.js" />
+    <Content Include="Scipts\Areas\admission\ChoiceFillingSecondRound.js" />
+    <Content Include="Scipts\Areas\admission\Dashboardacademic.js" />
+    <Content Include="Scipts\Areas\admission\Declaration.js" />
+    <Content Include="Scipts\Areas\admission\MockcounsellingFinalSecond.js" />
+    <Content Include="Scipts\Areas\admission\MockcounsellingFinal.js" />
+    <Content Include="Scipts\Areas\admission\StudentAcademicinformation.js" />
+    <Content Include="Scipts\Areas\admission\StudentBackground.js" />
+    <Content Include="Scipts\Areas\admission\Ind-SATSelection.js" />
+    <Content Include="Scipts\Areas\admission\Studentbasic.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\Basic.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\ChoiceFilling.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\rank.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\SaveChoice.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\SelectDisciplines.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\Submit.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\SubmittedReport.js" />
+    <Content Include="Scipts\Areas\admission\StudentChoiceFilling\UplaodDoc.js" />
+    <Content Include="Scipts\Areas\admission\StudentDocument.js" />
+    <Content Include="Scipts\Areas\admission\StudentForgotPassword.js" />
+    <Content Include="Scipts\Areas\admission\StudentLogin.js" />
+    <Content Include="Scipts\Areas\admission\StudentChangePassword.js" />
+    <Content Include="Scipts\Areas\admission\StudentRegistration.js" />
+    <Content Include="Scipts\Areas\admission\StudentRegistrationsNiche.js" />
+    <Content Include="Scipts\Areas\admission\StudentRegistrations.js" />
+    <Content Include="Scipts\Areas\admission\UploadVerifiedDoc.js" />
+    <Content Include="Scipts\Areas\Contest.js" />
+    <Content Include="Scipts\Areas\Courses\BridgeCourse.js" />
+    <Content Include="Scipts\Areas\Courses\NicheCourse.js" />
+    <Content Include="Scipts\Areas\Courses\CourseOffer.js" />
+    <Content Include="Scipts\Areas\Courses\CourseOffer_20-02-2019_11-46.js" />
+    <Content Include="Scipts\Areas\Courses\CourseOffer_2019-02-22.js" />
+    <Content Include="Scipts\Areas\Courses\NicheCourse_Piyush.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\AgencychoiceFilling.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\Agencychoicefillinglist.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GOVchangepassword.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GovLogin.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GOVStudentAcademicinformation.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GOVStudentBackground.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GOVstudentbasic.js" />
+    <Content Include="Scipts\Areas\Govermentscheme\GOVStudentDocument.js" />
+    <Content Include="Scipts\Areas\Institute\AdmittedStudentSecond.js" />
+    <Content Include="Scipts\Areas\Institute\AdmittedStudent.js" />
+    <Content Include="Scipts\Areas\Institute\Alumni.js" />
+    <Content Include="Scipts\Areas\Institute\CampusInfrastructure.js" />
+    <Content Include="Scipts\Areas\Institute\CampusLifeOnCampus.js" />
+    <Content Include="Scipts\Areas\Institute\CampusLifeOutsideCampus.js" />
+    <Content Include="Scipts\Areas\Institute\CostofLiving.js" />
+    <Content Include="Scipts\Areas\Institute\Details.js" />
+    <Content Include="Scipts\Areas\Institute\Faculty.js" />
+    <Content Include="Scipts\Areas\Institute\pdf.js" />
+    <Content Include="Scipts\Areas\Institute\HowToReach.js" />
+    <Content Include="Scipts\Areas\Institute\IndustryAssociations.js" />
+    <Content Include="Scipts\Areas\Institute\InstituteChangePassword.js" />
+    <Content Include="Scipts\Areas\Institute\InstituteForgotPassword.js" />
+    <Content Include="Scipts\Areas\Institute\InstituteLogin.js" />
+    <Content Include="Scipts\Areas\Institute\InternationalCollaboration.js" />
+    <Content Include="Scipts\Areas\Institute\InternationalStudents.js" />
+    <Content Include="Scipts\Areas\Institute\navKeyStatistics.js" />
+    <Content Include="Scipts\Areas\Institute\PhotoGallery.js" />
+    <Content Include="Scipts\Areas\Institute\Studentdatadisplay.js" />
+    <Content Include="Scipts\Areas\Institute\StudentdatadisplaySecond.js" />
+    <Content Include="Scipts\Areas\Institute\VideoGallery.js" />
+    <Content Include="Scipts\Areas\validations\frmvalidations.js" />
+    <Content Include="img\slider_images\b05.png" />
+    <Content Include="img\slider_images\b21.png" />
+    <Content Include="Scipts\CommonJS.js" />
+    <Content Include="Scipts\Layout\Layout.js" />
+    <Content Include="Scipts\NicheCourse - Copy.js" />
+    <Content Include="Scipts\NicheCourse.js" />
+    <Content Include="Scipts\Pages\GetVideoSrc.js" />
+    <Content Include="Scipts\Pages\GTagScripts.js" />
+    <Content Include="Scipts\Pages\Home.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ActivationLinkGeneratorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AgencyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AgencyDetailsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogPageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChangeNodalHeadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChangePasswordController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ConvertBase64ToImageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CountrywiseStudentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseDataController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseOfStudyMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DisciplineMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ECSubjectMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EQPLMappingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IndSATSelectionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InstituteDataController.cs" />
+    <Compile Include="Areas\Admin\Controllers\InstitutePhotoUploadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogoutController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MockRoundController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MockRoundSecondController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ParticipationYearsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Phase3Controller.cs" />
+    <Compile Include="Areas\Admin\Controllers\Phase2Controller.cs" />
+    <Compile Include="Areas\Admin\Controllers\PreviewInstituteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PreviewStudentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProfileMngtController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProgrammeLevelMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QualificationMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SCFDatesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatewiseCountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatewiseInstituteDataController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StudentDataController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VerifyDocumentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ViewInstituteGlanceController.cs" />
+    <Compile Include="Areas\admission\admissionAreaRegistration.cs" />
+    <Compile Include="Areas\admission\Controllers\AllotmentletterController.cs" />
+    <Compile Include="Areas\admission\Controllers\changepasswordController.cs" />
+    <Compile Include="Areas\admission\Controllers\ChoiceFillingController.cs" />
+    <Compile Include="Areas\admission\Controllers\ChoiceFillingListController.cs" />
+    <Compile Include="Areas\admission\Controllers\ChoiceFillingNewController.cs" />
+    <Compile Include="Areas\admission\Controllers\ChoiceFillingSecondRoundController.cs" />
+    <Compile Include="Areas\admission\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\admission\Controllers\FinalcounsellingController.cs" />
+    <Compile Include="Areas\admission\Controllers\forgotPasswordController.cs" />
+    <Compile Include="Areas\admission\Controllers\IndSATCredentialsController.cs" />
+    <Compile Include="Areas\admission\Controllers\IndSATSelectionController.cs" />
+    <Compile Include="Areas\admission\Controllers\loginController.cs" />
+    <Compile Include="Areas\admission\Controllers\LogoutController.cs" />
+    <Compile Include="Areas\admission\Controllers\MockcounsellingCategoryController.cs" />
+    <Compile Include="Areas\admission\Controllers\MockcounsellingCategorySecondController.cs" />
+    <Compile Include="Areas\admission\Controllers\MockcounsellingController.cs" />
+    <Compile Include="Areas\admission\Controllers\MockcounsellingFinalController.cs" />
+    <Compile Include="Areas\admission\Controllers\MockcounsellingFinalSecondController.cs" />
+    <Compile Include="Areas\admission\Controllers\RegistrationsNicheController.cs" />
+    <Compile Include="Areas\admission\Controllers\RegistrationsController.cs" />
+    <Compile Include="Areas\admission\Controllers\ResultController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentAcademicInformationController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentBackgroundInformationController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentBasicInformationController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentChoiceFillingController_BK_240419.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentChoiceFillingController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentChoiceFillingNicheController.cs" />
+    <Compile Include="Areas\admission\Controllers\studentController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentDeclarationController.cs" />
+    <Compile Include="Areas\admission\Controllers\StudentDocumentInformationController.cs" />
+    <Compile Include="Areas\admission\Controllers\TravelPlanController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\AgencyChoiceFillingController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\AgencyChoiceFillingListController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\changepasswordController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\LoginController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\LogoutgovController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\SearchStudentController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\Controllers\StudentsController.cs" />
+    <Compile Include="Areas\GovernmentSchemeAdmission\GovernmentSchemeAdmissionAreaRegistration.cs" />
+    <Compile Include="Areas\Institute\AdmittedStudentNICHECourseController.cs" />
+    <Compile Include="Areas\Institute\Controllers\AdmittedStudentController.cs" />
+    <Compile Include="Areas\Institute\Controllers\AdmittedStudentSecondRoundController.cs" />
+    <Compile Include="Areas\Institute\Controllers\CampusController.cs" />
+    <Compile Include="Areas\Institute\Controllers\ChangePasswordController.cs" />
+    <Compile Include="Areas\Institute\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Institute\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Institute\Controllers\DetailsController.cs" />
+    <Compile Include="Areas\Institute\Controllers\FacultyAlumniController.cs" />
+    <Compile Include="Areas\Institute\Controllers\FeeBreakupController.cs" />
+    <Compile Include="Areas\Institute\Controllers\FeesController.cs" />
+    <Compile Include="Areas\Institute\Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Areas\Institute\Controllers\GalleryController.cs" />
+    <Compile Include="Areas\Institute\Controllers\GenerateDataForMailController.cs" />
+    <Compile Include="Areas\Institute\Controllers\HowToReachController.cs" />
+    <Compile Include="Areas\Institute\Controllers\InternationalStudentsController.cs" />
+    <Compile Include="Areas\Institute\Controllers\LandingPageController.cs" />
+    <Compile Include="Areas\Institute\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Institute\Controllers\LogoutController.cs" />
+    <Compile Include="Areas\Institute\Controllers\ParticipationYearsController.cs" />
+    <Compile Include="Areas\Institute\Controllers\PreambleController.cs" />
+    <Compile Include="Areas\Institute\Controllers\PreviewStudentController.cs" />
+    <Compile Include="Areas\Institute\Controllers\VacantstudentlistController.cs" />
+    <Compile Include="Areas\Institute\Controllers\ViewStudentDataController.cs" />
+    <Compile Include="Areas\Institute\Controllers\ViewStudentDataSecondController.cs" />
+    <Compile Include="Areas\Institute\InstituteAreaRegistration.cs" />
+    <Compile Include="Areas\Master\Controllers\CityController.cs" />
+    <Compile Include="Areas\Master\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Master\Controllers\StateController.cs" />
+    <Compile Include="Areas\Master\MasterAreaRegistration.cs" />
+    <Compile Include="Areas\planyourstay\Controllers\accomodationController.cs" />
+    <Compile Include="Areas\planyourstay\Controllers\dosanddontsController.cs" />
+    <Compile Include="Areas\planyourstay\Controllers\helplinenosController.cs" />
+    <Compile Include="Areas\planyourstay\Controllers\moneycostsController.cs" />
+    <Compile Include="Areas\planyourstay\Controllers\travelguideController.cs" />
+    <Compile Include="Areas\planyourstay\planyourstayAreaRegistration.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\DetailsofIndianEducationsController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\eligibilitycriteriaController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\englishproficiencyController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\frroController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\indianeducationController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\RankingandaccredidationController.cs" />
+    <Compile Include="Areas\planyourstudies\Controllers\visaregulationsController.cs" />
+    <Compile Include="Areas\planyourstudies\planyourstudiesAreaRegistration.cs" />
+    <Compile Include="Areas\scholarships\Controllers\FeeWaiversandConcessionsController.cs" />
+    <Compile Include="Areas\scholarships\scholarshipsAreaRegistration.cs" />
+    <Compile Include="CloseStudentChoiceFillingJsonAttribute.cs" />
+    <Compile Include="CloseStudentRegistrationAttribute.cs" />
+    <Compile Include="CloseStudentChoiceFillingAttribute.cs" />
+    <Compile Include="CompressContentAttribute .cs" />
+    <Compile Include="Controllers\aboutController.cs" />
+    <Compile Include="Controllers\blogController.cs" />
+    <Compile Include="Controllers\blogsController.cs" />
+    <Compile Include="Controllers\CaptchaController.cs" />
+    <Compile Include="Controllers\channelController.cs" />
+    <Compile Include="Controllers\contactController.cs" />
+    <Compile Include="Controllers\ContestController.cs" />
+    <Compile Include="Controllers\EligibilityCriteriasController.cs" />
+    <Compile Include="Controllers\eventsController.cs" />
+    <Compile Include="Controllers\ExploreController.cs" />
+    <Compile Include="Controllers\faqsController.cs" />
+    <Compile Include="Controllers\GradesConversionController.cs" />
+    <Compile Include="Controllers\homeController.cs" />
+    <Compile Include="Controllers\institutesController.cs" />
+    <Compile Include="Controllers\InstituteSearchController.cs" />
+    <Compile Include="Controllers\newsboardController.cs" />
+    <Compile Include="Controllers\newsfeedController.cs" />
+    <Compile Include="Controllers\NICHEController.cs" />
+    <Compile Include="Controllers\PrivacypolicyController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\shorttermcourseController.cs" />
+    <Compile Include="Controllers\ViewDetailController.cs" />
+    <Compile Include="Controllers\whyindiaController.cs" />
+    <Compile Include="Controllers\whyindiacultureController.cs" />
+    <Compile Include="Controllers\whyindiaeducationController.cs" />
+    <Compile Include="Controllers\whyindiaexperiencesController.cs" />
+    <Compile Include="Controllers\whyindiatravelController.cs" />
+    <Compile Include="Encrypt_Decrypt.cs" />
+    <Compile Include="Filters\RecaptchaFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="HtmlHelpers.cs" />
+    <Compile Include="InstituteClosesCheck.cs" />
+    <Compile Include="Models\StringCipher.cs" />
+    <Compile Include="NoDirectAccessAdmin.cs" />
+    <Compile Include="NoDirectAccess.cs" />
+    <Compile Include="NoDirectAccessLearner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendEmail.cs" />
+    <Compile Include="SessionExpireAdmin.cs" />
+    <Compile Include="SessionExpireAttribute.cs" />
+    <Compile Include="SessionExpiregov.cs" />
+    <Compile Include="SessionExpireInstitute.cs" />
+    <Compile Include="SessionExpireStudentJson.cs" />
+    <Compile Include="SessionExpireStudent.cs" />
+    <Compile Include="WebGridExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="css\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="css\fonts\FontAwesome.otf" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="css\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="css\fonts\Material-Design-Iconic-Fontd1f1.ttf" />
+    <Content Include="css\fonts\Material-Design-Iconic-Fontd1f1.woff" />
+    <Content Include="css\fonts\Material-Design-Iconic-Fontd1f1.woff2" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\about\Index.cshtml" />
+    <Content Include="Views\institutes\Index.cshtml" />
+    <Content Include="Views\whyindiaeducation\Index.cshtml" />
+    <Content Include="Views\whyindiatravel\Index.cshtml" />
+    <Content Include="Views\whyindiaculture\Index.cshtml" />
+    <Content Include="Views\whyindiaexperiences\Index.cshtml" />
+    <Content Include="Areas\scholarships\Views\web.config" />
+    <Content Include="Areas\planyourstay\Views\web.config" />
+    <Content Include="Areas\planyourstay\Views\moneycosts\Index.cshtml" />
+    <Content Include="Areas\planyourstay\Views\dosanddonts\Index.cshtml" />
+    <Content Include="Areas\planyourstay\Views\travelguide\Index.cshtml" />
+    <Content Include="Areas\planyourstay\Views\accomodation\Index.cshtml" />
+    <Content Include="Areas\planyourstay\Views\helplinenos\Index.cshtml" />
+    <Content Include="Views\events\Index.cshtml" />
+    <Content Include="Views\contact\Index.cshtml" />
+    <Content Include="Views\faqs\Index.cshtml" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\lib\bootstrap\dist\fonts\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Fontd1f1.ttf" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Fontd1f1.woff" />
+    <Content Include="assets\lib\material-design-icons\fonts\Material-Design-Iconic-Fontd1f1.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Black.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Black.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Black.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Black.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Blackd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-BlackItalicd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Bold.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Boldd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-BoldItalicd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Light.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Light.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Light.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Light.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Lightd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-LightItalicd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Medium.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Mediumd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-MediumItalicd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Regular.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Regulard41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-RegularItalicd41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.eot" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.woff" />
+    <Content Include="assets\lib\roboto\Roboto-Thin.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-Thind41d.eot" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.eot" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.ttf" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.woff" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalic.woff2" />
+    <Content Include="assets\lib\roboto\Roboto-ThinItalicd41d.eot" />
+    <Content Include="assets\lib\summernote\font\summernoted41d.eot" />
+    <Content Include="assets\lib\summernote\font\summernotef534.eot" />
+    <Content Include="assets\lib\summernote\font\summernotef534.ttf" />
+    <Content Include="assets\lib\summernote\font\summernotef534.woff" />
+    <Content Include="Areas\admission\Views\web.config" />
+    <Content Include="Areas\admission\Views\Registration\Index.cshtml" />
+    <Content Include="Areas\admission\Views\login\Index.cshtml" />
+    <Content Include="Views\Shared\_Layoutportal.cshtml" />
+    <Content Include="Views\Shared\_Headerportal.cshtml" />
+    <Content Include="Views\Shared\_Menuportal.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\admission\Views\student\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Shared\_MainTabs.cshtml" />
+    <Content Include="Areas\admission\Views\student\_Basicinformation.cshtml" />
+    <Content Include="Areas\admission\Views\student\_Academicinformation.cshtml" />
+    <Content Include="Areas\admission\Views\student\_BackgroundInformation.cshtml" />
+    <Content Include="Areas\admission\Views\changepassword\Index.cshtml" />
+    <Content Include="Areas\Master\Views\web.config" />
+    <Content Include="Areas\Master\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Master\Views\State\Index.cshtml" />
+    <Content Include="Areas\Master\Views\City\Index.cshtml" />
+    <Content Include="Areas\admission\Views\forgotPassword\Index.cshtml" />
+    <Content Include="Views\whyindia\Index.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\Index.cshtml" />
+    <Content Include="Areas\admission\Views\student\_Documentinformation.cshtml" />
+    <Content Include="Areas\admission\Views\student\_Declaration.cshtml" />
+    <Content Include="Areas\Institute\Views\Campus\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index2.cshtml" />
+    <Content Include="Areas\Institute\Views\Details\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\FacultyAlumni\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Fees\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\HowToReach\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\InternationalStudents\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Preamble\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Shared\_InstituteMenus.cshtml" />
+    <Content Include="Areas\Institute\Views\web.config" />
+    <Content Include="Views\Shared\_HeaderInstitute.cshtml" />
+    <Content Include="Views\Shared\_LayoutInstitute.cshtml" />
+    <Content Include="Views\Shared\_MenuInstitute.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Institute\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\ChangePassword\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\web.config" />
+    <Content Include="Areas\planyourstudies\Views\visaregulations\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\frro\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\englishproficiency\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\eligibilitycriteria\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\DetailsofIndianEducations\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\indianeducation\Index.cshtml" />
+    <Content Include="Areas\planyourstudies\Views\Rankingandaccredidation\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\GenerateDataForMail\Index.cshtml" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\css\materialdesignicons.css.map" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\css\materialdesignicons.min.css.map" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\materialdesignicons.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_animated.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_core.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_extras.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_functions.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_icons.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_path.scss" />
+    <Content Include="css\fonts\MaterialDesign-Webfont-master\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChangePassword\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InstituteData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StatewiseCount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseData\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\ViewDetails.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_Campus.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_CostOfLiving.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_Courses.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_ExtendedAssistant.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_FacultyAlumni.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_Gallery.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_HowToReach.cshtml" />
+    <Content Include="Areas\Institute\Views\Dashboard\_InstituteProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_Campus.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_CostOfLiving.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_Courses.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_ExtendedAssistant.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_FacultyAlumni.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_Gallery.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_HowToReach.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\_InstituteProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewInstitute\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StatewiseInstituteData\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\ForgotPassword\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\ViewDetails.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_AcademicInformation1.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_BackgroundInformation.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_BasicInformation.cshtml" />
+    <Content Include="Areas\admission\Views\Dashboard\_DocumentInformation.cshtml" />
+    <Content Include="Areas\admission\Views\StudentAcademicInformation\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentBackgroundInformation\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentBasicInformation\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDeclaration\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDeclaration\_AcademicInformation.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDeclaration\_BackgroundInformation.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDeclaration\_BasicInformation.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDeclaration\_DocumentInformation.cshtml" />
+    <Content Include="Areas\admission\Views\StudentDocumentInformation\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\InstitutePhotoUpload\Index.cshtml" />
+    <Content Include="Areas\admission\Views\ChoiceFilling\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Allotmentletter\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Finalcounselling\Index.cshtml" />
+    <Content Include="Areas\admission\Views\Mockcounselling\Index.cshtml" />
+    <Content Include="Areas\admission\Views\ChoiceFillingList\Index.cshtml" />
+    <Content Include="Areas\admission\Views\ChoiceFillingNew\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CountrywiseStudent\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_AcademicInformation.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_BackgroundInformation.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_BasicInformation.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_DocumentInformation.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_ChoicefillingInformation.cshtml" />
+    <Content Include="Areas\Institute\Views\LandingPage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ViewInstituteGlance\Course.cshtml" />
+    <Content Include="Areas\Admin\Views\ViewInstituteGlance\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ViewInstituteGlance\Institutes.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\web.config" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Login\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\SearchStudent\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Students\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Students\_Basicinformationgov.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Students\_Academicinformationgov.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Students\_BackgroundInformationgov.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\Students\_Documentinformationgov.cshtml" />
+    <Content Include="Areas\admission\Views\Registrations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AgencyDetails\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Agency\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\changepassword\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\AgencyChoiceFilling\Index.cshtml" />
+    <Content Include="Areas\GovernmentSchemeAdmission\Views\AgencyChoiceFillingList\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Registration\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_Allotted.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_CourseDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_GenerateResult.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_Merit.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_MeritList.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_MeritRank.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_PendingSeat.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_ProgramLevelDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_StudentApply.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_StudentFillChoiceDisciplineWise.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_EligibilityCriteria.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRound\_ViewAllottedDetails.cshtml" />
+    <Content Include="Areas\admission\Views\MockcounsellingCategory\Index.cshtml" />
+    <Content Include="Areas\admission\Views\MockcounsellingFinal\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_CountryWiseStudentApply.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_CountryWiseStudentApplyList.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_MultipleDiscipline.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_AllChoice.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_DuplicateCourse.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_InvalidSeatMatrix.cshtml" />
+    <Content Include="Areas\Institute\Views\Vacantstudentlist\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudent\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\ViewStudentData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_FirstMockInstituteAction.cshtml" />
+    <Content Include="Areas\admission\Views\ChoiceFillingSecondRound\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PreviewStudent\_ChoicefillingInformationSecondRound.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_Allotted.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_CourseDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_EligibilityCriteria.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_GenerateResult.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_Merit.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_MeritList.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_MeritRank.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_PendingSeat.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_ProgramLevelDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_StudentApply.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_StudentFillChoiceDisciplineWise.cshtml" />
+    <Content Include="Areas\Admin\Views\MockRoundSecond\_ViewAllottedDetails.cshtml" />
+    <Content Include="Areas\Institute\Views\AdmittedStudentSecondRound\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\ViewStudentDataSecond\Index.cshtml" />
+    <Content Include="Areas\admission\Views\MockcounsellingCategorySecond\Index.cshtml" />
+    <Content Include="Areas\admission\Views\MockcounsellingFinalSecond\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_ViewAllottedDetails2ndRound.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_ViewAllottedDetails1stRound.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_ViewAllottedDetailsFirst.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_ViewAllottedDetailsSecond.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_CountryWiseStudentApply1stRound.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_InstituteWiseStudentApplyList1stRound.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_SecondMockInstituteAction.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_InstituteWiseStudentApply1st.cshtml" />
+    <Content Include="Areas\Admin\Views\Reports\_CountryWiseStudentApplyList1stRound.cshtml" />
+    <Content Include="Areas\Admin\Views\CountrywiseStudent\Phase2.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Phase2.cshtml" />
+    <Content Include="Areas\Admin\Views\StudentData\Phase2_old.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogPage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogPage\Page.cshtml" />
+    <Content Include="assets\lib\summernote\font\summernote.eot" />
+    <Content Include="assets\lib\summernote\font\summernote.ttf" />
+    <Content Include="assets\lib\summernote\font\summernote.woff" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput-angular.min.js.map" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.less" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.min.js.map" />
+    <Content Include="assets\lib\bootstrap-tags\bootstrap-tagsinput.zip" />
+    <Content Include="Areas\Institute\Views\FeeBreakup\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DisciplineMaster\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProgrammeLevelMaster\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\QualificationMaster\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseOfStudyMaster\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProgrammeLevelMaster\Mapping.cshtml" />
+    <Content Include="Areas\Admin\Views\QualificationMaster\Mapping.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseOfStudyMaster\Mapping.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Basic.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\SelectDisciplines.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\ChoiceFilling.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Rank.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Submit.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\UploadDocs.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\_ProgressBar.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index_BK_210119.cshtml" />
+    <Content Include="Areas\Admin\Views\ECSubjectMaster\Index.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Basic_BK.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index_2019-02-22_.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index_2.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Closed.cshtml" />
+    <Content Include="Areas\Admin\Views\ChangeNodalHead\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChangeNodalHead\Edit.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\_FillChoiceGrid.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\_FillElegibilityCriteria.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\_SessionExpired.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Report.cshtml" />
+    <Content Include="Areas\Admin\Views\EQPLMapping\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index_%28Original%29_21-02-2019_11-45.cshtml" />
+    <Content Include="Areas\Admin\Views\ProfileMngt\Editprofile.cshtml" />
+    <Content Include="Areas\Admin\Views\ProfileMngt\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\Courses\Index_Niche.cshtml" />
+    <Content Include="css\fonts\GilroyBold.ttf" />
+    <Content Include="css\fonts\GilroyLight.ttf" />
+    <Content Include="Areas\admission\Views\Registrations\ThankYou.cshtml" />
+    <Content Include="Areas\admission\Views\StudentChoiceFilling\Submitted.cshtml" />
+    <Content Include="img\ALL_Work - Shortcut.lnk" />
+    <Content Include="img\slider_images\ALL_Work - Shortcut.lnk" />
+    <None Include="Properties\PublishProfiles\SIII.pubxml" />
+    <Content Include="Views\Shared\_LayoutOther.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_Headeradmin.cshtml" />
+    <Content Include="Views\Shared\_Menuadmin.cshtml" />
+    <Content Include="Views\newsboard\Index.cshtml" />
+    <Content Include="Views\shorttermcourse\Index.cshtml" />
+    <Content Include="Views\Explore\Index.cshtml" />
+    <Content Include="Views\Explore\ViewDetails.cshtml" />
+    <Content Include="Views\Explore\_AreaOfExpert.cshtml" />
+    <Content Include="Views\Explore\_Campus.cshtml" />
+    <Content Include="Views\Explore\_HowToReach.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\ViewDetail\Index.cshtml" />
+    <Content Include="Views\Explore\_Course.cshtml" />
+    <Content Include="Views\channel\Index.cshtml" />
+    <Content Include="Views\Explore\_AboutInstitute.cshtml" />
+    <Content Include="Views\Explore\_Fees.cshtml" />
+    <Content Include="Views\Explore\_Gallery.cshtml" />
+    <Content Include="Views\Explore\_GalleryPhoto.cshtml" />
+    <Content Include="Views\Shared\_LayoutportalChoiceFilling.cshtml" />
+    <Content Include="Views\Shared\_LayoutgovschemeAdmissions.cshtml" />
+    <Content Include="Views\Shared\_Headergov.cshtml" />
+    <Content Include="Views\Shared\_Menugov.cshtml" />
+    <Content Include="Views\blogs\Index.cshtml" />
+    <Content Include="Views\blog\page.cshtml" />
+    <Content Include="Views\Shared\_LayoutStudent.cshtml" />
+    <Content Include="Views\Views\Contest\Index.cshtml" />
+    <Content Include="Views\Views\Contest\Submit.cshtml" />
+    <Content Include="Views\Contest\Index.cshtml" />
+    <Content Include="Views\Contest\Submit.cshtml" />
+    <Content Include="Views\GradesConversion\Index.cshtml" />
+    <Content Include="Views\Home\Index_BK.cshtml" />
+    <Content Include="Views\InstituteSearch\Index_BK.cshtml" />
+    <Content Include="Views\newsfeed\Index.cshtml" />
+    <Content Include="Views\NICHE\Yoga.cshtml" />
+    <Content Include="Views\NICHE\Ayurvedic.cshtml" />
+    <Content Include="Views\NICHE\Tibetan.cshtml" />
+    <Content Include="Views\NICHE\Buddhism.cshtml" />
+    <Content Include="Views\NICHE\CourseSearch.cshtml" />
+    <Content Include="Views\NICHE\Index - Copy.cshtml" />
+    <Content Include="Views\Home\Index - Copy.cshtml" />
+    <Content Include="Views\NICHE\Index.cshtml" />
+    <Content Include="Views\NICHE\CourseSearch_2019-11-26_10-41.cshtml" />
+    <Content Include="Views\InstituteSearch\Index.cshtml" />
+    <Content Include="Views\EligibilityCriterias\Index.cshtml" />
+    <Content Include="Views\NICHE\CourseSearch - Copy.cshtml" />
+    <Content Include="Views\NICHE\CourseSearch_2019-12-04_12-33.cshtml" />
+    <Content Include="Views\Explore\_NICHECourseSearch.cshtml" />
+    <Content Include="Views\Explore\_NICHECourse.cshtml" />
+    <Content Include="Views\Explore\_NICHECourseSearch_BK_2019-12-05_10-28.cshtml" />
+    <Content Include="Views\Explore\ViewNicheDetails.cshtml" />
+    <Content Include="Views\Shared\_GoogleTagManagerHead.cshtml" />
+    <Content Include="Views\Shared\_GoogleTagManagerBody.cshtml" />
+    <Content Include="Views\Privacypolicy\Index.cshtml" />
+    <None Include="Web.config1">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config1">
+      <DependentUpon>Web.config1</DependentUpon>
+    </None>
+    <None Include="Web.Release.config1">
+      <DependentUpon>Web.config1</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Logout\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\admission\Models\" />
+    <Folder Include="Areas\admission\Views\Logout\" />
+    <Folder Include="Areas\admission\Views\register\" />
+    <Folder Include="Areas\GovernmentSchemeAdmission\Models\" />
+    <Folder Include="Areas\GovernmentSchemeAdmission\Views\Logoutgov\" />
+    <Folder Include="Areas\GovernmentSchemeAdmission\Views\Shared\" />
+    <Folder Include="Areas\Institute\Models\" />
+    <Folder Include="Areas\Institute\Views\Logout\" />
+    <Folder Include="Areas\Master\Models\" />
+    <Folder Include="Areas\Master\Views\Shared\" />
+    <Folder Include="Areas\planyourstay\Models\" />
+    <Folder Include="Areas\planyourstay\Views\Shared\" />
+    <Folder Include="Areas\planyourstudies\Models\" />
+    <Folder Include="Areas\planyourstudies\Views\Shared\" />
+    <Folder Include="Areas\scholarships\Models\" />
+    <Folder Include="Areas\scholarships\Views\Shared\" />
+    <Folder Include="Views\Captcha\" />
+    <Folder Include="Views\MinifyHtmlAttribute\" />
+    <Folder Include="Views\Page\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SIIModel\SIIModel.csproj">
+      <Project>{45a0924f-cea9-47af-bc19-f3f3c748e4fe}</Project>
+      <Name>SIIModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIIRepository\SIIRepository.csproj">
+      <Project>{2d411e00-41b0-4a45-a90b-33931c5a2bb9}</Project>
+      <Name>SIIRepository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\SecurityCodeScan.dll" />
+    <Analyzer Include="..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\YamlDotNet.dll" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53104</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53114/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.2.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

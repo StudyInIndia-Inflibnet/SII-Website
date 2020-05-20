@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ChoiceFillingTest";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Student Choice Filling List
+                <a class="btn btn-primary pull-right" href="~/Admin/Phase2/List/ProgrammeType">Back</a>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-info panel-border-color panel-border-color-primary">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="panel-body in table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Srno</th>
+                                    <th>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>Country</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>DB Priority No</th>
+                                    <th>Actual Priority NO</th>
+                                    <th>InstituteID</th>
+                                    <th>Institute Name</th>
+                                    <th>Discipline</th>
+                                    <th>Programme Level</th>
+                                    <th>Qualification</th>
+                                    <th>Course of Study</th>
+                                    <th>Seat Allotment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    SIIRepository.Adminservice.ReportsRepository _objRepo = new SIIRepository.Adminservice.ReportsRepository();
+                                    System.Data.DataSet _ds = _objRepo.SELECT_PHASE2_RESULT("List", "ProgrammeLevel", "ChoiceFilling", ViewBag.Value, ViewBag.Value);
+                                    if (_ds != null)
+                                    {
+                                        if (_ds.Tables[0].Rows.Count > 0)
+                                        {
+                                            int i = 1;
+                                            int SeqNo = 0;
+                                            string SID = "";
+                                            foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                            {
+                                                if (SID == _dr["Studentid"].ToString())
+                                                {
+                                                    SeqNo = SeqNo + 1;
+                                                }
+                                                else
+                                                {
+                                                    SID = _dr["Studentid"].ToString();
+                                                    SeqNo = 1;
+                                                }
+                                                <tr>
+                                                    <td>@(i++)</td>
+
+                                                    <td>
+                                                        <a href="~/Admin/PreviewStudent/ViewDetails/@_dr["Studentid"].ToString()?d=ChoiceFilling" target="_blank">
+                                                            @_dr["Studentid"].ToString()
+                                                        </a>
+                                                    </td>
+                                                    <td>@_dr["FirstName"].ToString() @_dr["LastName"].ToString()</td>
+                                                    <td>@_dr["Country_Name"].ToString()</td>
+                                                    <td>@_dr["Mobile"].ToString()</td>
+                                                    <td>@_dr["Email"].ToString()</td>
+                                                    <td>@_dr["SequenceNumber"].ToString()</td>
+                                                    <td>@SeqNo</td>
+                                                    <td>@_dr["InstituteID"].ToString()</td>
+                                                    <td>@_dr["InstituteName"].ToString(), @_dr["City"].ToString(), @_dr["state_name"].ToString() (@_dr["InstituteType"].ToString())</td>
+                                                    <td>@_dr["Discipline"].ToString()</td>
+                                                    <td>@_dr["ProgramLevel"].ToString()</td>
+                                                    <td>@_dr["Coursename"].ToString()</td>
+                                                    <td>@_dr["Specialization"].ToString()</td>
+                                                    <td>
+                                                        @if (_dr["SEAT_ALLOTED"].ToString() == "Alloted")
+                                                        {
+                                                            <label class="label label-success">
+                                                                @_dr["SEAT_ALLOTED"].ToString()
+                                                            </label>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

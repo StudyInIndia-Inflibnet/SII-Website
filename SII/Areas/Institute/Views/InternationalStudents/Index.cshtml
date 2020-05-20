@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Facilities for International Students<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <form id="frmStudentFacility" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="ID" id="hdfID" value="0" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>International Student Cell/Office In Charge.| International Student Cell/Office Committee Head/Members.| Buddy/mentor program/international committee.</label>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select class="form-control" id="drpcelloffice" name="HasCellOffice">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="cellbrief">
+                                <div class="form-group">
+                                    <label>Brief</label>
+                                    <textarea class="form-control" id="textStudentCell" name="CellOfficeDesc"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>International Students Visa Assistance Facilities.</label>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select class="form-control" id="drpvisassistance" name="HasVisaAssistance">
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="visabrief">
+                                <div class="form-group">
+                                    <label>Brief</label>
+                                    <textarea class="form-control" id="textVisaAssistanceFacilities" name="VisaAssistanceDesc"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Other Facility</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label><input type="checkbox" id="chkcultural" name="HasCulturalEngagement" value="1" /> International Students Cultural Engagement facilities</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label><input type="checkbox" id="chkboarding" name="HasStudentBoarding" value="1" /> International Student On Boarding</label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label><input type="checkbox" id="chkarrivalwelcome" name="HasArrival" value="1" /> Arrival & welcome</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label><input type="checkbox" id="chkinduction" value="1" name="IntroProgram" /> Induction program for International Students</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>Contact person for above mentioned facilities</h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Name&nbsp;<span style="color:red">*</span></label>
+                                    <input name="ContactPersonName" type="text" class="form-control" placeholder="Name" id="txtname" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Email&nbsp;<span style="color:red">*</span></label>
+                                    <input name="ContactPersonEmail" type="email" class="form-control" placeholder="Email" id="txtemail" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Mobile&nbsp;<span style="color:red">*</span></label>
+                                    <input data-parsley-length="[10,10]" data-parsley-length-message="Mobile should be 10 digit long." name="ContactPersonMobile" type="text" class="form-control allow_only_number" placeholder="Mobile" id="txtmobile" required maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Phone&nbsp;<span style="color:red">*</span></label>
+                                    <input name="ContactPersonPhone" type="text" class="form-control allow_only_number" placeholder="Phone" id="txtphone" required maxlength="15" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="col-md-6">
+            <div class="form-group">
+                <label>International Students Cultural Engagement facilities</label>
+                <textarea class="form-control" placeholder="International Students Cultural Engagement facilities"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>International Student On Boarding</label>
+                <textarea class="form-control" placeholder="International Student On Boarding"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Arrival & welcome</label>
+                <textarea class="form-control" placeholder="Arrival & welcome"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Buddy/mentor program/international committee</label>
+                <textarea class="form-control" placeholder="Buddy/mentor program/international committee"></textarea>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Induction program for International Students</label>
+                <textarea class="form-control" placeholder="Induction program for International Students"></textarea>
+            </div>
+        </div>*@
+                        @*</form>
+        </div>*@
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-primary" id="btnSaveStudentFacility">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .tab-content {
+            min-height: 300px;
+        }
+    </style>
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Institute/InternationalStudents.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,15 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIModel.Admin.MockRound _obj = new SIIModel.Admin.MockRound();
+            SIIRepository.Adminservice.MockRoundRepository _objRepository = new SIIRepository.Adminservice.MockRoundRepository();
+            _obj.Type = "Count";
+            System.Data.DataSet _ds = _objRepository.GenerateResult_Second("CourseEligibility", "CourseEligibility", @TempData["ProgramlevelId"].ToString(), @TempData["Discipline_Id"].ToString(), null, @TempData["ReportFor"].ToString());
+            if (_ds != null)
+            {
+                <h2 class="text-center">Academic Information</h2>
+            }
+        }
+    </div>
+
+</div>

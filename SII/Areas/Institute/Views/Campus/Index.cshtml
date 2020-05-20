@@ -1,0 +1,331 @@
+﻿@{
+    ViewBag.Title = "Campus";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Campus<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#navInfrastructure" data-toggle="tab">Infrastructure</a></li>
+                    <li><a href="#navLifeOnCampus" data-toggle="tab">Life on Campus</a></li>
+                    <li><a href="#navLifeOutsideCampus" data-toggle="tab">Life Outside Campus</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Infrastructure*@
+                    <div id="navInfrastructure" class="tab-pane active cont">
+                        <form id="frmInfrastructure" method="post">
+                            @Html.AntiForgeryToken()
+                            <h2>Campus</h2>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Area&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureArea" name="Area" class="form-control" placeholder="Area" rows="4" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>IT Facility</h2>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>IT Infrastructure&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureITInfrastructure" name="ITInfrastructure" class="form-control" rows="4" placeholder="IT Infrastructure" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Wifi Facility&nbsp;<span style="color:red">*</span></label>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label><input id="rdbInfrastructureITInfrastructureWifiYes" type="radio" name="ITInfrastructureWifiFacility" value="Yes" required="" /> Yes </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label><input id="rdbInfrastructureITInfrastructureWifiNo" type="radio" name="ITInfrastructureWifiFacility" value="No" /> No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Academic Facilities&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureAcademicFacilities" name="AcademicFacilities" class="form-control" rows="4" required="" placeholder="Academic Facilities"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Library</h2>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>Database&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureDatabase" name="Database" class="form-control" placeholder="Database" rows="4" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>e-library?&nbsp;<span style="color:red">*</span></label><br />
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label><input id="rdbInfrastructureElibraryYes" type="radio" name="elibrary" required="" value="Yes" /> Yes </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label><input id="rdbInfrastructureElibraryNo" type="radio" name="elibrary" value="No" /> No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Research facilities & Labs&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureResearchFacilitiesLabs" name="ResearchFacilitiesLabs" rows="4" class="form-control" placeholder="Research facilities & Labs" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Hostel/accommodation</h2>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>Hostel/accommodation (along with the facilities provided)&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureAccommodation" name="Accommodation" class="form-control" rows="4" placeholder="Hostel/accommodation (along with the facilities provided)" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Wifi facility?&nbsp;<span style="color:red">*</span></label><br />
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label><input id="rbdInfrastructureAccommodationWifiYes" type="radio" name="AccommodationWifi" required="" value="Yes" /> Yes </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label><input id="rdbInfrastructureAccommodationWifiNo" type="radio" name="AccommodationWifi" value="No"/> No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Cuisine served in mess/cafe</h2>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label><input id="rbdInfrastructureCuisineServedInMessVeg" type="radio" name="CuisineServedInMess" value="Veg." required="" checked /> Veg.</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label><input id="rbdInfrastructureCuisineServedInMessNonVeg" type="radio" name="CuisineServedInMess" value="Non Veg." /> Non Veg.</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label><input id="rbdInfrastructureCuisineServedInMessBoth" type="radio" name="CuisineServedInMess" value="Both" /> Both</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Cuisines of food served&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureCuisinesOfFoodServed" name="CuisinesOfFoodServed" rows="4" class="form-control" placeholder="Cuisines of food served" required=""></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <h2>Medical facility</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Doctors with qualification&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructureDoctors" name="Doctors" class="form-control" rows="4" placeholder="Doctors with qualification" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pharmacy&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtInfrastructurePharmacy" name="Pharmacy" class="form-control" rows="4" placeholder="Pharmacy" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSaveInfrastructure" type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Life on Campus*@
+                    <div id="navLifeOnCampus" class="tab-pane">
+                        <form id="frmLifeOnCampus" method="post">
+                            @Html.AntiForgeryToken()
+                            <h2>Sports</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Area&nbsp;<span style="color:red">*</span></label>
+                                        <input type="text" id="txtLifeOnCampusSportArea" name="SportArea" class="form-control" placeholder="Area" required="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Types of sports currently played&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusTypesOfSportsCurrentlyPlayed" name="TypesOfSportsCurrentlyPlayed" rows="3" class="form-control" placeholder="Types of sports currently played" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Accomplishments&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusSportAccomplishments" name="SportAccomplishments" class="form-control" rows="3" placeholder="Accomplishments" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Music</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Instruments&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusMusicInstruments" name="MusicInstruments" class="form-control" rows="3" placeholder="Instruments" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Accomplishments&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusMusicAccomplishments" name="MusicAccomplishments" rows="3" class="form-control" placeholder="Accomplishments" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Student bodies / Clubs / Committes</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Academic bodies and their contact numbers&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusAcademicBodie" name="AcademicBodie" class="form-control" rows="3" placeholder="Academic bodies and their contact numbers" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Festivals conducted by students&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusFestivalsConductedByStudents" name="FestivalsConductedByStudents" rows="3" class="form-control" placeholder="Festivals conducted by students" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Newsletter (if any)</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="file" id="fuNewsletter" />
+                                        </div>
+                                        <div class="col-md-6" id="divNewslatter" style="display:none;">
+                                            <a id="btnNewsletter" target="_blank" href="" class="btn btn-warning">View Newslatter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Events</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Competitions&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusEventsCompetitions" name="EventsCompetitions" rows="3" class="form-control" placeholder="Competitions" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Official Events&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOnCampusOfficialEvents" name="OfficialEvents" class="form-control" rows="3" placeholder="Official Events" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button id="btnSaveLifeOnCampus" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                    @*Life Outside Campus*@
+                    <div id="navLifeOutsideCampus" class="tab-pane">
+                        <form id="frmLifeOutsideCampus" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Places to visit near by&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOutsideCampusPlacesToVisit" name="PlacesToVisit" class="form-control" rows="3" placeholder="Places to visit near by" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Things To Do&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOutsideCampusThingsToDo" name="ThingsToDo" class="form-control" rows="3" placeholder="Things To Do" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Local Language&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOutsideCampusLocalLanguages" name="LocalLanguages" class="form-control" rows="3" placeholder="Local Language" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Local Culture&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtLifeOutsideCampusLocalCulture" name="LocalCulture" class="form-control" rows="3" placeholder="Local Culture" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnLifeOutsideCampus" type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+@section styles{
+    <style>
+        .tab-content {
+            min-height: 300px;
+        }
+    </style>
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+        });
+    </script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Institute/CampusInfrastructure.js"></script>
+    <script src="~/Scipts/Areas/Institute/CampusLifeOnCampus.js"></script>
+    <script src="~/Scipts/Areas/Institute/CampusLifeOutsideCampus.js"></script>
+}
+

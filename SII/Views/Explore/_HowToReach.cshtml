@@ -1,0 +1,81 @@
+﻿<div class="row">
+
+    <div class="single-service-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="single-service-tab-menu">
+                        <ul class="nav category_ul" role="tablist">
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                            @*<li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                            <li  class="hide" role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                            <li role="presentation" class="active"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="single-service-tab-items">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            @{
+                                SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "HowToReach","");
+                                int count = 0;
+
+
+                                <div role="tabpanel" class="tab-pane active" id="reach">
+                                    <div class="single-tab cta">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                <div class="section-title">
+                                                    <h3 class="inner-title"><span>How to Reach</span></h3>
+                                                    @if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            <div class="">
+                                                                @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                                {
+                                                                    <div class="col-md-4">
+
+                                                                        <div class="post-title">
+                                                                            <h4 class="howReach"><span class="@_dr["ReachByIcon"].ToString()"></span> @_dr["ReachBy"].ToString()</h4>
+                                                                        </div>
+                                                                        <p class="text-justify">
+                                                                            <b>Nearest Airport/Station :</b>
+                                                                            @_dr["NearByStationName"].ToString()
+                                                                        </p>
+                                                                        <p class="text-justify">
+                                                                            <b>Approx time to reach  :</b> @_dr["ApproxTime"].ToString() - @_dr["ApproxTimeType"].ToString()
+                                                                        </p>
+                                                                        <p class="text-justify">
+                                                                            <b>Distance  : </b>@_dr["Distance"].ToString() - @_dr["DistanceType"].ToString()
+                                                                        </p>
+                                                                        <p class="text-justify">
+                                                                            <b>
+                                                                                Remarks:
+                                                                            </b>
+                                                                            @_dr["remarks"].ToString()
+                                                                        </p>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

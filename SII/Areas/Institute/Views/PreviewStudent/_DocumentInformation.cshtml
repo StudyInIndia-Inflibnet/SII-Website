@@ -1,0 +1,46 @@
+﻿<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        @{
+            SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("studentid").ToString().ToString(), "Doc");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Document Information</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int index = 1;
+
+                    <h4 class="page-header">Document Information</h4>
+                    <table class="table table-condensed table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Document Name</th>
+                                <th>Document For Qualification</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodydocument">
+
+                            @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                            {
+                                <tr>
+                                    <td>
+                                        @(index++)
+                                    </td>
+                                    <td>@_dr["EQ_AE_Name"].ToString()</td>
+                                    <td>@_dr["EQ_AE_For"].ToString()</td>
+                                    <td><a href="@_dr["doc"].ToString()" class="btn btn-warning" target="_blank">View</a></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+
+                }
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,260 @@
+﻿
+
+@{
+    ViewBag.Title = "State";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>2nd Mock Round  - (Generate Result)</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    @*Approx Cost Of living*@
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">Sr.no</th>
+                                            <th>Program Level</th>
+                                            <th width="50%">Seat Matrix</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCostofliving">
+                                        @{
+                                            SIIModel.Admin.MockRound _obj = new SIIModel.Admin.MockRound();
+                                            SIIRepository.Adminservice.MockRoundRepository _objRepository = new SIIRepository.Adminservice.MockRoundRepository();
+                                            _obj.Type = "Count";
+                                            System.Data.DataSet _ds = _objRepository.GenerateResult_Second("GenerateResult", "Programlevel", null);
+                                            if (_ds != null)
+                                            {
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                    {
+                                                        <tr>
+                                                            <td>@_dr["RowNo"].ToString()</td>
+                                                            <td>@_dr["ProgramLevel"].ToString()</td>
+                                                            <td>
+                                                                <a href="@Url.Content("~/")Admin/MockroundSecond/ViewDetails?For=GenerateMeritGroupByDiscipline&&PrgId=@_dr["ProgramLevel_Id"].ToString()&&Prgname=@_dr["ProgramLevel"].ToString()&&Discipline_Id=100&&Discipline="><button class="btn btn-space btn-primary"><i class="icon mdi mdi-view-list"></i> View Merit (Discipline)</button></a>
+                                                                <a href="@Url.Content("~/")Admin/MockroundSecond/ViewDetails?For=GenerateMeritGroupByDiscipline&&PrgId=@_dr["ProgramLevel_Id"].ToString()&&Prgname=@_dr["ProgramLevel"].ToString()&&Discipline_Id=0&&Discipline=All"><button class="btn btn-space btn-warning"><i class="icon mdi mdi-view-list"></i> View Seat Matrix (All)</button></a>
+                                                                <a href="@Url.Content("~/")Admin/MockroundSecond/ViewDetails?For=ViewAllottedDetails&&PrgId=@_dr["ProgramLevel_Id"].ToString()&&Prgname=@_dr["ProgramLevel"].ToString()"><button class="btn btn-space btn-default"><i class="icon mdi mdi-view-list"></i> View </button></a>
+                                                            </td>
+
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            No data found.
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="3">
+                                                        No data found.
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<style>
+        .border-right {
+            border-right: 3px solid #a5cdff;
+        }
+        /*.vl {
+                border-left: 2px solid green;
+                height: 100%;
+                position: absolute;
+                left: 50%;
+                margin-left: -3px;
+                top: 115px;
+            }*/
+
+        .not-active {
+            pointer-events: none;
+            cursor: default;
+            background: #dddddd;
+            color: #aaaaaa;
+        }
+
+        .choice-table > tbody > tr > td, .choice-table > thead > tr > th {
+            padding: 5px;
+        }
+
+        .label-message {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .panel-without-padding > .panel-body, .panel-without-padding > .panel-heading {
+            padding: 0;
+        }
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('.loading').hide();
+
+            $('.btn-success').on('click', function (e) {
+                $('.loading').show();
+
+                $('.loading').hide();
+            });
+        });
+
+    </script>*@
+

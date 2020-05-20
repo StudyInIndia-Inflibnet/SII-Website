@@ -1,0 +1,55 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "HowToReach");
+            if (_ds != null)
+            {
+                <h2 class="text-center">How to Reach</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int index = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Mode of travel</th>
+                                <th>Nearest Airport/Station</th>
+                                <th>Approx time to reach </th>
+                                <th>Distance</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+                            <tr>
+                                <td>
+                                    @(index++)
+                                </td>
+                                <td>@_dr["ReachBy"].ToString()</td>
+                                <td>@_dr["NearByStationName"].ToString()</td>
+                                <td>@_dr["ApproxTime"].ToString() - @_dr["ApproxTimeType"].ToString()</td>
+                                <td>@_dr["Distance"].ToString() - @_dr["DistanceType"].ToString()</td>
+                                <td>@_dr["remarks"].ToString()</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

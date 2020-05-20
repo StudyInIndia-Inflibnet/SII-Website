@@ -1,0 +1,173 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "Campus");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Campus</h2>
+                <h4>Infrastructure</h4>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="2">Campus</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Area: <br /><strong>@_dr["Area"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">IT Facility</th>
+                        </tr>
+                        <tr>
+                            <td>IT Infrastructure: <br /><strong>@_dr["ITInfrastructure"].ToString()</strong> </td>
+                            <td>Wifi Facility?: <strong>@_dr["ITInfrastructureWifiFacility"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Academic Facilities: <br /><strong>@_dr["AcademicFacilities"].ToString()</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Library</th>
+                        </tr>
+                        <tr>
+                            <td>Database : <br /><strong>@_dr["Database"].ToString()</strong> </td>
+                            <td>e-library?: <strong>@_dr["elibrary"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Research facilities & Labs: <br /><strong>@_dr["ResearchFacilitiesLabs"].ToString()</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Hostel/accommodation</th>
+                        </tr>
+                        <tr>
+                            <td>Hostel/accommodation (along with the facilities provided) : <br /><strong>@_dr["Accommodation"].ToString()</strong> </td>
+                            <td>Wifi facility?: <strong>@(_dr["AccommodationWifi"].ToString().ToLower() == "on" ? "Yes" : "No")</strong> </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Cuisine served in mess/cafe</th>
+                        </tr>
+                        <tr>
+                            <td>Veg./Non Veg.? : <strong>@_dr["CuisineServedInMess"].ToString()</strong> </td>
+                            <td>Cuisines of food served: <strong>@_dr["CuisinesOfFoodServed"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Medical facility</th>
+                        </tr>
+                        <tr>
+                            <td>Doctors with qualification : <br /><strong>@_dr["Doctors"].ToString()</strong> </td>
+                            <td>Pharmacy : <strong>@_dr["Pharmacy"].ToString()</strong> </td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Life on Campus</h4>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[1].Rows[0];
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="2">Sports</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Area: <br /><strong>@_dr["SportArea"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Types of sports currently played : <br /><strong>@_dr["TypesOfSportsCurrentlyPlayed"].ToString()</strong> </td>
+                            <td>Accomplishments : <br /><strong>@_dr["SportAccomplishments"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Music</th>
+                        </tr>
+                        <tr>
+                            <td>Instruments : <br /><strong>@_dr["MusicInstruments"].ToString()</strong> </td>
+                            <td>Accomplishments : <br /><strong>@_dr["MusicAccomplishments"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Student bodies / Clubs / Committes</th>
+                        </tr>
+                        <tr>
+                            <td>Academic bodies and their contact numbers : <br /><strong>@_dr["AcademicBodie"].ToString()</strong> </td>
+                            <td>Festivals conducted by students: <br /><strong>@_dr["FestivalsConductedByStudents"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                Newsletter (if any): 
+                                @if (_dr["NewsLatters"].ToString() != "")
+                                {
+                                    <strong><a href="@Url.Content("~/")@_dr["NewsLatters"].ToString()" target="_blank">View Newsletter</a></strong>
+                                }
+                                else
+                                {
+                                    <strong>---</strong>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Events</th>
+                        </tr>
+                        <tr>
+                            <td>Competitions : <br /><strong>@_dr["EventsCompetitions"].ToString()</strong> </td>
+                            <td>Official Events : <br /><strong>@_dr["OfficialEvents"].ToString()</strong> </td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Life Outside Campus</h4>
+                if (_ds.Tables[2].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[2].Rows[0];
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <td>Places to visit near by : <br /><strong>@_dr["PlacesToVisit"].ToString()</strong> </td>
+                            <td>Things To Do  : <br /><strong>@_dr["ThingsToDo"].ToString()</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Local Language : <br /><strong>@_dr["LocalLanguages"].ToString()</strong> </td>
+                            <td>Local Culture : <br /><strong>@_dr["LocalCulture"].ToString()</strong> </td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

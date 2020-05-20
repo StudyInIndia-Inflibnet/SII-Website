@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="instituteNICHE">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="inner-title-left instituteList_breadbumb">
+                    <p>List of Institutes/Universities-NICHE Courses</p>
+                    <h2>NICHE Courses</h2>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label for="sel1" class="white_text">Discipline</label>
+                    @Html.DropDownList("Discipline_ID", new SelectList(ViewBag.Disciplines, "Id", "Value"), "All",
+                         new
+                         {
+                             @class = "form-control",
+                             @id = "drpDiscipline",
+                             @required = ""
+                         })
+                </div>
+            </div>
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label for="sel1" class="white_text">Program Level</label>
+                    @Html.DropDownList("ProgrammeLevel_ID", new SelectList(ViewBag.ProgrammeLevel, "Id", "Value"), "All",
+                         new
+                         {
+                             @class = "form-control",
+                             @id = "drpProgramLevel",
+                             @required = ""
+                         })
+                </div>
+            </div>
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label for="sel1" class="white_text">Nature of Courses</label>
+                    @Html.DropDownList("Natureofcourse", new SelectList(ViewBag.Qualification, "Id", "Value"), "All",
+                         new
+                         {
+                             @class = "form-control",
+                             @id = "drpNatureofcourse",
+                             @required = ""
+                         })
+                </div>
+            </div>
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label for="sel1" class="white_text">Branch/Subjects</label>
+                    @Html.DropDownList("CourseOfStudy", new SelectList(ViewBag.CourseOfStudy, "Id", "Value"), "All",
+                         new
+                         {
+                             @class = "form-control",
+                             @id = "drpBranch",
+                             @required = ""
+                         })
+                </div>
+            </div>
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label for="sel1" class="white_text">Select by Month</label>
+                    <select class="form-control" id="sel1">
+                        <option>-----Select-----</option>
+                        <option value="0" selected>Any</option>
+                        <option value="1">JANUARY</option>
+                        <option value="2">FEBRUARY</option>
+                        <option value="3">MARCH</option>
+                        <option value="4">APRIL</option>
+                        <option value="5">MAY</option>
+                        <option value="6">JUNE</option>
+                        <option value="7">JULY</option>
+                        <option value="8">AUGUST</option>
+                        <option value="9">SEPTEMBER</option>
+                        <option value="10">OCTOBER</option>
+                        <option value="11">NOVEMBER</option>
+                        <option value="12">DECEMBER </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="nicheField_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label class="white_text"> &nbsp; </label>
+                    <a href="" class="additionalFilter_btn">Additional Filter <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+            <div class="nicheFieldBtn_box">
+                <div class="form-group institutesDropdown_slider">
+                    <label class="white_text"> &nbsp; </label>
+                    <a href="" class="additionalFilterSearch_btn"> <i class="fa fa-search"></i></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="single-blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12 mt20">
+                <!-- single blog comment start -->
+                <div class="single-blog-left-comment wow fadeInDown">
+
+                    <div class="nicheCoursesSearchBox">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ncSearchBoxImage">
+                                <img src="~/img/nicheCourses.jpg" class="img-responsive" />
+                                <h5>University Name</h5>
+                                <ul>
+                                    <li>PGD in Yoga</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box bl1">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Location:</strong></p>
+                                <h4>Gujarat</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box ml-30">
+                                <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Duration of Course</strong></p>
+                                <h4>Start date-End date</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20 ml-30">
+                            <center class="location_box br0">
+                                <p><i class="fa fa-users" aria-hidden="true"></i> <strong>No. of Seats:</strong></p>
+                                <h4>10</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="instituteSearchBox-btn">
+                                <a href="">More Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="nicheCoursesSearchBox">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ncSearchBoxImage">
+                                <img src="~/img/nicheCourses.jpg" class="img-responsive" />
+                                <h5>University Name</h5>
+                                <ul>
+                                    <li>PGD in Yoga</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box bl1">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Location:</strong></p>
+                                <h4>Gujarat</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box ml-30">
+                                <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Duration of Course</strong></p>
+                                <h4>Start date-End date</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20 ml-30">
+                            <center class="location_box br0">
+                                <p><i class="fa fa-users" aria-hidden="true"></i> <strong>No. of Seats:</strong></p>
+                                <h4>10</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="instituteSearchBox-btn">
+                                <a href="">More Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="nicheCoursesSearchBox">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ncSearchBoxImage">
+                                <img src="~/img/nicheCourses.jpg" class="img-responsive" />
+                                <h5>University Name</h5>
+                                <ul>
+                                    <li>PGD in Yoga</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box bl1">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Location:</strong></p>
+                                <h4>Gujarat</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box ml-30">
+                                <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Duration of Course</strong></p>
+                                <h4>Start date-End date</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20 ml-30">
+                            <center class="location_box br0">
+                                <p><i class="fa fa-users" aria-hidden="true"></i> <strong>No. of Seats:</strong></p>
+                                <h4>10</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="instituteSearchBox-btn">
+                                <a href="">More Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="nicheCoursesSearchBox">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ncSearchBoxImage">
+                                <img src="~/img/nicheCourses.jpg" class="img-responsive" />
+                                <h5>University Name</h5>
+                                <ul>
+                                    <li>PGD in Yoga</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box bl1">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Location:</strong></p>
+                                <h4>Gujarat</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box ml-30">
+                                <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Duration of Course</strong></p>
+                                <h4>Start date-End date</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20 ml-30">
+                            <center class="location_box br0">
+                                <p><i class="fa fa-users" aria-hidden="true"></i> <strong>No. of Seats:</strong></p>
+                                <h4>10</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="instituteSearchBox-btn">
+                                <a href="">More Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="nicheCoursesSearchBox">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ncSearchBoxImage">
+                                <img src="~/img/nicheCourses.jpg" class="img-responsive" />
+                                <h5>University Name</h5>
+                                <ul>
+                                    <li>PGD in Yoga</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box bl1">
+                                <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Location:</strong></p>
+                                <h4>Gujarat</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="location_box ml-30">
+                                <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> <strong>Duration of Course</strong></p>
+                                <h4>Start date-End date</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20 ml-30">
+                            <center class="location_box br0">
+                                <p><i class="fa fa-users" aria-hidden="true"></i> <strong>No. of Seats:</strong></p>
+                                <h4>10</h4>
+                            </center>
+                        </div>
+                        <div class="col-md-2 col-xs-12 mt20">
+                            <center class="instituteSearchBox-btn">
+                                <a href="">More Details <i class="fa fa-caret-right" aria-hidden="true"></i></a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section styles{
+    <link href="~/css/style.css" rel="stylesheet" />
+}

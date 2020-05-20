@@ -1,0 +1,84 @@
+﻿
+
+
+
+<div class="row">
+    @{
+        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "GalleryPhoto", TempData["Category"].ToString());
+        <div class="single-service-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="single-service-tab-menu">
+                            <ul class="nav category_ul" role="tablist">
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                                @*<li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                                <li role="presentation" class="active hide"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="single-service-tab-items">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="infrastructure">
+                                    <div class="single-tab cta">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                <div class="section-title">
+                                                    <h3 class="inner-title"><span>Photo Gallery</span></h3>
+                                                    @if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            <ul class="row photo_gallery">
+                                                                @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                                {
+                                                                    <li class="col-lg-3 col-md-3 col-sm-3 col-xs-4 check">
+                                                                        <img src="@Url.Content("~/")@_dr["ImagePath"].ToString()" id="test" class="img-responsive">
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body"></div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+
+            });
+
+        </script>
+    }
+</div>

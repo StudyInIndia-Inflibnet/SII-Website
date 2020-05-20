@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+@*@section PageHead{
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Course of Study Mapping</h3>
+            </div>
+        </div>
+    }*@
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <h3 class="text-center">Regular Courses Choice Filling <a href="~/admission/Dashboard" class="btn btn-sm btn-info pull-right"><i class="fa fa-arrow-left"></i> Home</a></h3>
+    </div>
+    <div class="col-md-12">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="66.65" data-number-of-steps="6" style="width: 66.65%;"></div>
+            </div>
+            @Html.Partial("_ProgressBar")
+        </div>
+    </div>
+    <hr />
+    <fieldset class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+                <h4>Filled Choices <span style="color:red" class="_blink">(Please rank your courses as per your preference)</span></h4>
+                <hr />
+                <form id="frmStep2" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Set Choices No. &nbsp;<span style="color:red"></span></label>
+                                <select class="form-control" id="drptypechoicefilling" name="Type" required>
+                                    <option value="">--Select--</option>
+                                    <option value="SWAP">Swap Choice</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>From&nbsp;<span style="color:red"></span></label>
+                                        <select class="form-control ChoiceNumberChange" name="drpformid" id="drpFrom" required>
+                                            <option value="">--Select--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>To&nbsp;<span style="color:red"></span></label>
+                                        <select class="form-control ChoiceNumberChange" name="drptoid" id="drpTo" required>
+                                            <option value="">--Select--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="padding-top: 26px;">
+                                        <button id="btnsavechoice" type="button" class="btn btn-warning">Swap/Move</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <table class="table table-striped table-hover table-bordered table-fw-widget choice-table data-grid2" id="tbl2">
+                    <thead>
+                        <tr>
+                            <th>Choice No.</th>
+                            <th>Institute</th>
+                            <th>Discipline</th>
+                            <th>Courses</th>
+                            <th>Specialization</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFill"></tbody>
+                </table>
+
+                @*<button id="btnsavechoicefilling" type="button" class="btn btn-success">Save Choices</button>
+                    <a id="btnsaveandnext" class="btn btn-danger pull-right" href="@Url.Content("~/")admission/ChoiceFillingList">Save Choices &amp; Next</a>*@
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="col-md-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+                <form id="frm">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                        @*<button type="submit" id="btnSave" class="btn btn-primary">Save &amp; Next</button>*@
+                        <a href="~/admission/StudentChoiceFilling/UploadDocs" class="btn btn-primary">Save &amp; Next</a>
+                        <a href="~/admission/StudentChoiceFilling/ChoiceFilling" class="btn btn-primary">Previous</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_NodalHeadDetails")*@
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_Completed")*@
+    </fieldset>
+</div>
+@section styles{
+    <link href="~/assets/lib/wizard/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+    <style>
+        /*.f1-step.active .f1-step-icon {
+            height: 52px;
+        }*/
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/wizard/retina-1.1.0.min.js"></script>
+    <script src="~/assets/lib/wizard/scripts.js"></script>
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scipts/Areas/admission/StudentChoiceFilling/rank.js"></script>
+}

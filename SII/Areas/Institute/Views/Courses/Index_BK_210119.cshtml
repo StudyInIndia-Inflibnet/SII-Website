@@ -1,0 +1,1086 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Courses<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#navCourseDetails" data-toggle="tab">Courses Offer</a></li>
+                    <li><a href="#navAreaOfexcellence" data-toggle="tab">Bridge Courses</a></li>
+                    <li><a href="#navCalander" data-toggle="tab" style="display:none">Important Dates</a></li>
+                    <li><a href="#navStudentTestinomials" data-toggle="tab" style="display:none">Student Testimonials</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Courses Offer*@
+                    <div id="navCourseDetails" class="tab-pane active cont">
+                        <form id="frmCoursesOffer" method="post">
+                            <input type="hidden" id="hdnInstituteId" name="InstituteID" value="@Session["InstituteID"].ToString()" />
+                            <input type="hidden" name="ID" id="hdfID" value="0" />
+                            <input type="hidden" id="hdfIsGivenFromInstitute" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewCost" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div style="display:none" id="divhideshow">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Course Details</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Discipline&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("Discipline_ID", new SelectList(ViewBag.Descipline, "Discipline_ID", "Discipline"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control CourseChange",
+                                                @id = "drpDiscipline",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Programme Level&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("ProgramLevel_Id", new SelectList(ViewBag.ProgramLevels, "ProgramLevel_Id", "ProgramLevel"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control CourseChange",
+                                                @id = "drpProgramLevel",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Qualification&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" id="drpNatureofcourse" required name="Natureofcourse_Id">
+                                                <option value="">--Select--</option>
+                                                @*<option>BE (Bachlore Of Engineering)</option>
+                                                    <option>ME (Master Of Engineering)</option>
+                                                    <option>Diploma</option>
+                                                    <option>Short Term</option>*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Course of Study</label>
+                                            <select class="form-control" id="drpBranch" name="Branch_Id" @*required*@>
+                                                <option value="">--Select--</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="Divother" style="display:none">
+                                            <label>Add New Branch/Subject&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="txtbranchnamesubject" name="Branch_Name" placeholder="Branch/Subject" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total seat offer to foreign student&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalseats" name="SeatForForeignStudent" placeholder="Total seat offer to be foreign Student" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Eligibility Criteria&nbsp;<span style="color:red">*</span></label>
+                                        <table class="table table-bordered">
+                                            <thead style="text-align:center">
+                                                <tr>
+                                                    <td class="col-md-2">Required</td>
+                                                    <td class="col-md-3">Qualification</td>
+                                                    <td class="col-md-7"></td>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align:center">
+                                                <tr>
+                                                    <td>
+                                                        <label>First Qualification</label>
+                                                        <input type="checkbox" id="cbQ0Req" />
+                                                    </td>
+                                                    <td>
+                                                        <label>10th</label>
+                                                    </td>
+                                                    <td>
+                                                        <table class="table table-bordered " style="background-color:white">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td class="col-md-2">Qualification</td>
+                                                                    <td class="col-md-6">Subject</td>
+                                                                    <td class="col-md-4">Percentage</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>10th</label>
+                                                                        <input name="Q0Qualification" type="hidden" value="10" id="txtQ0Qualification" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input name="Q0Subject" type="text" class="form-control Q0_TXT" placeholder="" id="txtQ0Subject" pattern="/^[A-Za-z ]+$/" readonly />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q0_TXT drpPercentage" name="Q0Percentage" id="txtQ0Percentage" disabled>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input name="Q0Percentage" type="text" class="form-control Q0_TXT allow_only_number" pattern="\d{2}" maxlength="2" placeholder="" id="txtQ0Percentage" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>Second Qualification:</label>
+                                                        <input type="checkbox" id="cbQ1Req" />
+                                                    </td>
+                                                    <td>
+                                                        <label></label>
+                                                        <select class="form-control" id="drpQ1Qualification" disabled>
+                                                            <option value="">--Select--</option>
+                                                            <option value="10_2">10+2</option>
+                                                            <option value="Diploma">Diploma</option>
+                                                            <option value="Either">Either (10+2 or Diploma)</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <table class="table table-bordered" style="background-color:white">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <td class="col-md-2">Qualification</td>
+                                                                    <td class="col-md-6">Subject</td>
+                                                                    <td class="col-md-4">Percentage</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>10+2</label>
+                                                                        <input type="hidden" value="10+2" id="txtQ1Qualification_10_2" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control allowAlphabetOnly Q1_TXT Q1_10_2" placeholder="" pattern="/^[A-Za-z ]+$/" id="txtQ1Subject_10_2" readonly />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q1_TXT Q1_10_2  drpPercentage" id="txtQ1Percentage_10_2" disabled>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control allow_only_number Q1_TXT Q1_10_2" pattern="\d{2}" maxlength="2" placeholder="" id="txtQ1Percentage_10_2" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Diploma</label>
+                                                                        <input type="hidden" value="Diploma" id="txtQ1Qualification_Diploma" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control allowAlphabetOnly Q1_TXT Q1_Diploma" placeholder="" id="txtQ1Subject_Diploma" readonly />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q1_TXT Q1_Diploma drpPercentage" id="txtQ1Percentage_Diploma" disabled>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control allow_only_number Q1_TXT Q1_Diploma" placeholder="" maxlength="2" id="txtQ1Percentage_Diploma" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>Third Qualification:</label>
+                                                        <input type="checkbox" id="cbQ2Req" />
+                                                    </td>
+                                                    <td>
+                                                        <label></label>
+                                                        <select class="form-control" id="drpQ2Qualification" disabled>
+                                                            <option value="">--Select--</option>
+                                                            <option value="UG">UG</option>
+                                                            <option value="PG">PG</option>
+                                                            <option value="Either">Either (UG or PG)</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <table class="table table-bordered " style="background-color:white">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td class="col-md-2">Qualification</td>
+                                                                    <td class="col-md-6">Subject</td>
+                                                                    <td class="col-md-4">Percentage</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>UG</label>
+                                                                        <input type="hidden" value="UG" id="txtQ2Qualification_UG" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control Q2_TXT Q2_UG allowAlphabetOnly" placeholder="" id="txtQ2Subject_UG" disabled />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q2_TXT Q2_UG drpPercentage" id="txtQ2Percentage_UG" readonly>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control Q2_TXT Q2_UG allow_only_number" placeholder="" maxlength="2" id="txtQ2Percentage_UG" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>PG</label>
+                                                                        <input type="hidden" value="PG" id="txtQ2Qualification_PG" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control Q2_TXT Q2_PG allowAlphabetOnly" placeholder="" id="txtQ2Subject_PG" disabled />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q2_TXT Q2_PG drpPercentage" id="txtQ2Percentage_PG" readonly>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control Q2_TXT Q2_PG allow_only_number" placeholder="" maxlength="2" id="txtQ2Percentage_PG" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label>Fourth Qualification:</label>
+                                                        <input type="checkbox" id="cbQ3Req" />
+                                                    </td>
+                                                    <td>
+                                                        <label></label>
+                                                        <select class="form-control" id="drpQ3Qualification" disabled>
+                                                            <option value="">--Select--</option>
+                                                            <option value="PG">PG</option>
+                                                            <option value="Mphil">M.Phil</option>
+                                                            <option value="Either">Either (PG or M.Phil)</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <table class="table table-bordered " style="background-color:white">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <td class="col-md-2">Qualification</td>
+                                                                    <td class="col-md-6">Subject</td>
+                                                                    <td class="col-md-4">Percentage</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>PG</label>
+                                                                        <input type="hidden" value="PG" id="txtQ3Qualification_PG" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control Q3_TXT Q3_PG allowAlphabetOnly" placeholder="" id="txtQ3Subject_PG" readonly />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q3_TXT Q3_PG drpPercentage" id="txtQ3Percentage_PG" disabled>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control Q3_TXT Q3_PG allow_only_number" placeholder="" maxlength="2" id="txtQ3Percentage_PG" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>M.Phil</label>
+                                                                        <input type="hidden" value="Mphil" id="txtQ3Qualification_Mphil" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control Q3_TXT Q3_Mphil allowAlphabetOnly" placeholder="" id="txtQ3Subject_Mphil" readonly />
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control Q3_TXT Q3_Mphil drpPercentage" id="txtQ3Percentage_Mphil" disabled>
+                                                                            <option value="">--Select--</option>
+                                                                        </select>
+                                                                        @*<input type="text" class="form-control Q3_TXT Q3_Mphil allow_only_number" placeholder="" maxlength="2" id="txtQ3Percentage_Mphil" readonly />*@
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label>Aditional Eligibility&nbsp;<span style="color:red">*</span></label>
+                                                <input type="text" class="form-control" id="txtEligibilityCriteria" name="EligibilityCriteria" placeholder="Eligibility Criteria" @*required=""*@ />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Aditional Qualification&nbsp;<span style="color:red">*</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <table class="table table-bordered Aditional_qua">
+                                            <thead style="text-align:center">
+                                                <tr>
+                                                    <td class="col-md-5">Aditional Qualification</td>
+                                                    <td class="col-md-3">Required</td>
+                                                    <td class="col-md-4">Cutt-off marks Required</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align:center">
+                                                <tr>
+                                                    <td>Joint Entrance Examination (JEE) MAIN</td>
+                                                    <td>
+                                                        <input id="rbtJEEMainReqYes" type="radio" name="JEEMainReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtJEEMainReqNo" type="radio" name="JEEMainReq" value="0" class="rbtJEEMainReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtJEEMainscoreReq form-control allow_only_number" maxlength="4" id="tx_JEEMainscoreReq" placeholder="Cutoff Score" name="JEEMainscoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Joint Entrance Examination (JEE) Advance</td>
+                                                    <td>
+                                                        <input id="rbtJEEAdvanceReqYes" type="radio" name="JEEAdvanceReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtJEEAdvanceReqNo" type="radio" name="JEEAdvanceReq" value="0" class="rbtJEEAdvanceReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtJEEAdvanceScoreReq form-control allow_only_number" maxlength="4" id="tx_JEEAdvanceScoreReq" placeholder="Cutoff Score" name="JEEAdvanceScoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>International English Language Testing System [IELTS]</td>
+                                                    <td>
+                                                        <input id="rbtIELTSReqYes" type="radio" name="IELTSReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtIELTSReqNo" type="radio" name="IELTSReq" value="0" class="rbtIELTSReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtIELTSscoreReq form-control allow_only_number" maxlength="4" id="tx_IELTSscoreReq" placeholder="Cutoff Score" name="IELTSscoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Graduate Management Admission Test [GMAT]</td>
+                                                    <td>
+                                                        <input id="rbtGMATReqYes" type="radio" name="GMATReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtGMATReqNo" type="radio" name="GMATReq" value="0" class="rbtGMATReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtGMATScoreReq form-control allow_only_number" maxlength="4" id="tx_GMATScoreReq" placeholder="Cutoff Score" name="GMATScoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Test of English as a Foreign Language [TOFEL]</td>
+                                                    <td>
+                                                        <input id="rbtTOFELReqYes" type="radio" name="TOFELReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtTOFELReqNo" type="radio" name="TOFELReq" value="0" class="rbtTOFELReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtTOFELScoreReq form-control allow_only_number" maxlength="4" id="tx_TOFELScoreReq" placeholder="Cutoff Score" name="TOFELScoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Scholastic Aptitude Test [SAT]</td>
+                                                    <td>
+                                                        <input id="rbtSATReqYes" type="radio" name="SATReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtSATReqNo" type="radio" name="SATReq" value="0" class="rbtSATReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtSATScoreReq form-control allow_only_number" maxlength="4" id="tx_SATScoreReq" placeholder="Cutoff Score" name="SATScoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Graduate Aptitude Test in Engineering [GATE]</td>
+                                                    <td>
+                                                        <input id="rbtGATEReqYes" type="radio" name="GATEReq" value="1" /> Yes
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input id="rbtGATEReqNo" type="radio" name="GATEReq" value="0" class="rbtGATEReq" checked="checked" />  No
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="txtGATEScoreReq form-control allow_only_number" maxlength="4" id="tx_GATEScoreReq" placeholder="Cutoff Score" name="GATEScoreReq" disabled />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Annual Fees</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("AnnualTutionFeesCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpAnnualFeesCurrency",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Tution Fees per Seat&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtAnnualFees" name="AnnualTutionFees" placeholder="Annual tution fees for Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("AnnualBoardingFeesCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpAnnualBoardingFeesCurrency",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Total Fees per Seat&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalBoarding" name="AnnualBoardingFees" placeholder="Annual Total Fees per Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpSAARCFeesCurrency",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>
+                                                Annual Tuition Fees (SAARC Country)&nbsp;<span style="color:red">*</span>
+                                            </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtSAARC" name="FeesForSAARCCountry" placeholder="Annual Tuition Fees (SAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForNonSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpNonSAARCCurrency",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Tuition Fees (NonSAARC Country)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtNonSAARC" name="FeesForNonSAARCCountry" placeholder="Annual Tuition Fees (NonSAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Tuition Fee Waiver seat allocation</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>100% waiver in tuition fees(G1 scheme)<span style="color:red">*</span></label>@*No of seat for fees waiver (G1 Scheme)*@
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg1" name="G1SeatWaiver" placeholder="Fees Waiver G1" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>50% waiver in tuition fees(G2 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg2" name="G2SeatWaiver" placeholder="Fees Waiver G2" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>25% waiver in tuition fees(G3 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg3" name="G3SeatWaiver" placeholder="Fees Waiver G3" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>0% waiver in tuition fees(G4 scheme)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg4" name="G4SeatWaiver" placeholder="Fees Waiver G4" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Other Details</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Credits&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtCredits" name="Credits" placeholder="Credits" maxlength="8" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Course Duration(in Months)&nbsp;<span style="color:red">*</span> </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtcourseduration" name="CourseDurations" placeholder="Course Duration" maxlength="2" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Classroom Hours&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtClassrooms" name="ClassRoomHours" placeholder="Classroom hours" maxlength="4" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Examination/Course Pattern &nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="CoursePatterns" id="drpCoursePattern">
+                                                <option value="Yearly">Yearly</option>
+                                                <option value="Trimaster">Trimaster</option>
+                                                <option value="semester">semester</option>
+                                                <option Other="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Course Description&nbsp;<span style="color:red">*</span></label>
+                                            <textarea id="txtCourseDescription" class="form-control" rows="3" name="CourseDesc" placeholder="Course Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Admission & entry requirements&nbsp;<span style="color:red">*</span></label>
+                                            <textarea id="txtAdmission" class="form-control" rows="3" name="AdmissionReq" placeholder="Admission & entry requirements"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button id="btnSaveCourse" type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Program Level</th>
+                                                <th>Qualification</th>
+                                                <th>Course of Study</th>
+                                                <th>Total seats</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyCourse"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Bridge Courses*@
+                    <div id="navAreaOfexcellence" class="tab-pane">
+                        <form id="frmBridgeCourses" method="post">
+                            <input type="hidden" id="hdnInstituteId" name="InstituteID" value="@Session["InstituteID"].ToString()" />
+                            <input type="hidden" name="ID" id="hdfBridgeID" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewBridgeCourse" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div id="divhideshowBridgeCourses" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Bridge Courses for International Students&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="txtCourseName" name="CourseName" placeholder="Course Name" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Language&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="Language" id="DrpLanguage" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Duration&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtDuration" name="Duration" placeholder="Duration" required="" maxlength="3" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Duration Type&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="DurationType" id="DrpDurationType" required>
+                                                <option value="">-Select-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Total seats offered to foreign students <span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeNumberOfSeats" name="NumberOfSeats" required="" data-parsley-type="number" placeholder="Total seats offered to foreign students" maxlength="3" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Type of Fees&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="TypeOfFees" id="DrpTypeOfFees" required>
+                                                <option value="">--Select--</option>
+                                                <option>Week</option>
+                                                <option>Weeks</option>
+                                                <option>Month</option>
+                                                <option>Months </option>
+                                                <option>Annual</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpSAARCFeesCurrencyBridge",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>
+                                                Tuition Fees (SAARC Country)&nbsp;<span style="color:red">*</span>
+                                            </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeSAARC" name="FeesForSAARCCountry" placeholder="Tuition Fees (SAARC Country)" required="" data-parsley-type="number" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForNonSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpNonSAARCCurrencyBridge",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Tuition Fees (NonSAARC Country)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeNonSAARC" name="FeesForNonSAARCCountry" placeholder="Tuition Fees (NonSAARC Country)" required="" data-parsley-type="number" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="TotalFeesBridgeCourseCurrency" id="txttotalfeebridgecoursecurrency" required>
+                                                <option value="">--Select--</option>
+                                                <option>INR</option>
+                                                <option>USD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Total Fees&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalfeebridgecourse" name="TotalFeesBridgeCourse" placeholder="Total Fees For Bridge Course" required="" maxlength="8" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Classroom Hours&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeClassrooms" name="ClassRoomHours" placeholder="Classroom hours" required="" maxlength="4" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Tuition Fee Waiver seat allocation</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>100% waiver in tuition fees(G1 scheme)<span style="color:red">*</span></label>@*No of seat for fees waiver (G1 Scheme)*@
+                                            <input type="text" class="form-control totalseatbridge allow_only_number " maxlength="4" id="txtBridgefeeswaiverg1" name="G1SeatWaiver" placeholder="Fees Waiver G1" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>50% waiver in tuition fees(G2 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg2" name="G2SeatWaiver" placeholder="Fees Waiver G2" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>25% waiver in tuition fees(G3 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg3" name="G3SeatWaiver" placeholder="Fees Waiver G3" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>0% waiver in tuition fees(G4 scheme)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg4" name="G4SeatWaiver" placeholder="Fees Waiver G4" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <button id="btnSaveBridgeCourse" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="btnCancelBridgeCourse" type="reset" class="btn btn-default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Language Courses for International Students</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyBridgeCourse"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Important Dates*@
+                    <div id="navCalander" class="tab-pane">
+                        <form id="frmImportantDates" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Discipline</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Engineering</option>
+                                            <option>Medical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Select Courses</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>UG-4 ||Engineering || IT(Information & Technology)</option>
+                                            <option>UG-4 ||Engineering || EC </option>
+                                            <option>UG-4 ||Engineering || Automobiles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="text-primary"> Admission Dates :</h2>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label> Sr.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label> Title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>End date</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Sr." disabled value="1" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Title" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button id="btnSave" type="submit" class="btn btn-danger"><i class="mdi mdi-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Sr." disabled value="2" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Title" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button id="btnSave" type="submit" class="btn btn-danger"><i class="mdi mdi-close"></i></button>
+                                                <button id="btnSave" type="submit" class="btn btn-success"><i class="mdi mdi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                                        <button id="btnCancel" type="reset" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Student Testimonials*@
+                    <div id="navStudentTestinomials" class="tab-pane">
+                        <form id="frmStudentTestimonials" method="post">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Discipline</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>--None--</option>
+                                            <option>Engineering</option>
+                                            <option>Medical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Course</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>UG-4 || BE (Bachlore Of Engineering)</option>
+                                            <option>UG-4 || ME (Master Of Engineering) </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Branch</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>IT(Information & Technology)</option>
+                                            <option>EC </option>
+                                            <option>Arch</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>By</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Student</option>
+                                            <option>Visiters </option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Video</option>
+                                            <option>Photos </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Path (Video)</label>
+                                        <input type="text" class="form-control" id="txtCourseName" name="CourseName" placeholder="Path (Video/Photoes)" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Upload Image </label>
+                                        <input type="file" id="txtCourseName" name="Course Name" placeholder="Course Name" required="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Course Name" required="" />
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="txtCourseDescription" class="form-control" rows="3" name="CourseDescription" placeholder="Description" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                                        <button id="btnCancel" type="reset" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Course name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .tab-content {
+            min-height: 300px;
+        }
+    </style>
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Courses/CourseOffer.js"></script>
+    <script src="~/Scipts/Areas/Courses/BridgeCourse.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,106 @@
+﻿<div class="row">
+    @{
+        SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("studentid").ToString().ToString(), "ChoiceFilling");
+        if (_ds != null)
+        {
+            if (_ds.Tables[0].Rows.Count > 0)
+            {
+                int Index = 1;
+                <div class="col-md-4">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td><b>StudentID</b> : </td>
+                                <td style="color:brown">@_ds.Tables[0].Rows[0]["studentid"].ToString()</td>
+                            </tr>
+                            <tr>
+                                <td><b>Student Name</b> : </td>
+                                <td style="color:brown">@_ds.Tables[0].Rows[0]["name"].ToString()</td>
+                            </tr>
+                            <tr>
+                                <td><b>Application No</b> : </td>
+                                <td style="color:brown">@_ds.Tables[0].Rows[0]["ApplicationNo"].ToString()</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <h3 class="page-header">Qualification</h3>
+                    <div class="row">
+                        @{
+                            System.Data.DataSet _dsStudent_Ch_Basic = _objRepository.SELECT_tbl_Student_Ch_Basic_For_Admin(_ds.Tables[0].Rows[0]["studentid"].ToString());
+                            if (_dsStudent_Ch_Basic != null)
+                            {
+                                if (_dsStudent_Ch_Basic.Tables[1].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    <div class="col-md-6">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Srno</th>
+                                                    <th>Qualification</th>
+                                                    <th>Percentage</th>
+                                                    <th>Certificate / Marksheet</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (System.Data.DataRow _dr in _dsStudent_Ch_Basic.Tables[1].Rows)
+                                                {
+                                                    <tr>
+                                                        <td>@(i++)</td>
+                                                        <td>
+                                                            @_dr["EduQualificationsName"].ToString()
+                                                            @if (_dr["IsGiven"].ToString() == "2")
+                                                            {
+                                                                <label class="badge badge-danger">Result Awaited</label>
+                                                            }
+                                                        </td>
+                                                        <td>@_dr["MainPart"].ToString().@_dr["DeciamlPart"].ToString() %</td>
+                                                        <td>
+                                                            <a class="btn btn-info" href="~/@_dr["Path"].ToString()" target="_blank">View</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                if (_dsStudent_Ch_Basic.Tables[2].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    <div class="col-md-6">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Srno</th>
+                                                    <th>Exam</th>
+                                                    <th>Score</th>
+                                                    <th>Certificate / Marksheet</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (System.Data.DataRow _dr in _dsStudent_Ch_Basic.Tables[2].Rows)
+                                                {
+                                                    <tr>
+                                                        <td>@(i++)</td>
+                                                        <td>@_dr["AditionalExams"].ToString()</td>
+                                                        <td>@_dr["Score"].ToString()</td>
+                                                        <td>
+                                                            <a class="btn btn-info" href="~/@_dr["Path"].ToString()" target="_blank">View</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>

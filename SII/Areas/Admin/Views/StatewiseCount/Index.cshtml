@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "State";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Statewise Data</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+                <div class="tools">
+                    <a href="@Url.Content("~/")Admin/Dashboard" class="btn btn-success">Back</a>
+                </div>
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    @*Approx Cost Of living*@
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.no</th>
+                                            <th>State Name</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCostofliving">
+                                        @{
+                                            SIIModel.Admin.Dashboard _obj = new SIIModel.Admin.Dashboard();
+                                            SIIRepository.Adminservice.DashboardRepository _objRepository = new SIIRepository.Adminservice.DashboardRepository();
+                                            _obj.Type = "Count";
+                                            System.Data.DataSet _ds = _objRepository.Dashboard_Admin_StateWiseInstituteCount(_obj);
+                                            if (_ds != null)
+                                            {
+
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                    {
+                                                        <tr>
+                                                            <td>@_dr["RowNo"].ToString()</td>
+                                                            <td>@_dr["State_name"].ToString()</td>
+                                                            <td><a href="@Url.Content("~/")Admin/StatewiseInstituteData?stateid=@_dr["State_Id"].ToString()">@_dr["CountInstitute"].ToString()</a></td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            No data found.
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="3">
+                                                        No data found.
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

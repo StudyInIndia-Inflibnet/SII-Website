@@ -1,0 +1,9 @@
+﻿@import url(../../assets/lib/sweetalert2/sweetalert2.min.css);
+
+input, select {
+    background-color: #fff !important
+}
+
+    select.border-redius {
+        padding: 6px 10px
+    }

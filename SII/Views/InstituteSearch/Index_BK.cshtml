@@ -1,0 +1,730 @@
+﻿
+@{
+    ViewBag.Title = "List of Indian Institutes & Universities | India";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section metatags {
+    <meta name='Title' content='List of Indian Institutes & Universities | India' />
+    <meta name='description' content='Options available for all the students from abroad to check and select an Indian institute or university, depending upon the location and course they would like to opt for.' />
+}
+@*<div class="slider_mt">
+    <div class="">
+        <img src="~/img/slider_images/slider.jpg" class="img-responsive hidden-xs" alt="" />
+        <a href="@Url.Content("~/")admission/Registrations" class="hidden-sm hidden-md hidden-lg"><img src="~/img/slider_images/mobile-bg.jpg" class="img-responsive" alt="" /></a>
+        <!--desktop view-->
+        <div class="hero-text col-md-4 hidden-xs">
+            <h2>
+                India's Top 100 <br />
+                colleges offer
+            </h2>
+            <div class="mb15">
+                <p>19000+ seats across</p>
+                <p>2500+ courses, with more than</p>
+                <p>9500 seats having a fee waiver.</p>
+            </div>
+            <h1>Hurry!</h1>
+            <a href="@Url.Content("~/")admission/Registrations" class="theme-btn theme-xs-btn"><i class="fa fa-pencil-square"></i> &nbsp;Register Now</a>
+        </div>
+        <!--end desktop view-->
+    </div>
+</div>*@
+<div class="marquee_bg" style="margin-top:110px;">
+    <div class="container marquee_text">
+        @*<marquee onmouseover="this.stop();" onmouseout="this.start();" direction="left">
+            <a href="@Url.Content("~/")admission/Login">The deadline for second round choice filling in Indian colleges is 20th July 2018. The results will be declared shortly.</a>
+        </marquee>*@
+    </div>
+</div>
+@*<div class="inner-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="inner-title-left">
+                        <h2>List of Institutes/Universities-Discipline wise</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="inner-ttile-right text-right">
+                        <h4><a href="@Url.Content("~/")home">Home</a> / List of Institutes/Universities-Discipline wise</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="single-blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="loading"></div>
+            <div class="col-md-12">
+                <h2 class="inner-title">List of Institutes/Universities-Discipline wise </h2>
+            </div>
+            @*<div class="col-md-4 hidden-xs hidden-sm"></div>
+                <div class="col-md-4 col-xs-12 col-sm-4 mb20">
+                    <center>
+                        <span class="single-blog-right-serach">
+                            <input type="text" placeholder="Search Institutes Details">
+                            <span class="serch-icon"><a href="#"><i class="fa fa-search"></i></a></span>
+                        </span>
+                    </center>
+                </div>
+                <div class="col-md-4 hidden-xs hidden-sm"></div>
+                <div class="clearfix"></div>*@
+            <!-- single blog right start -->
+            <div class="col-sm-4 mt20">
+                <form id="frmFilter">
+                    @Html.AntiForgeryToken()
+                    <div id="accordion1" class="panel-group accordion filter-accodion">
+
+                        @{
+                            SIIRepository.FrontPanel.InstituteSearchRepository _objRepository = new SIIRepository.FrontPanel.InstituteSearchRepository();
+                            SIIModel.FrontPanel.InstituteSearch _objModel = new SIIModel.FrontPanel.InstituteSearch();
+                            _objModel.Type = "Load";
+                            _objModel.State = "0";
+                            System.Data.DataSet _ds = _objRepository.OperationInstituteSearch(_objModel);
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[5].Rows.Count > 0)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne"><i class="icon mdi mdi-chevron-down"></i>Institute Type</a></h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <a class="btn btn-danger btn-xs btn-filter-clear ">Clear</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                        <a class="btn btn-success btn-xs btn-filter-search ">Apply</a>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <ul class="filter-ul" id="ulInstituteType"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                if (_ds.Tables[1].Rows.Count > 0)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo"><i class="icon mdi mdi-chevron-down"></i>Program Level</a></h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Search..." class="form-control filter-search-text no-border-radius" />
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <a class="btn btn-danger btn-xs btn-filter-clear ">Clear</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                        <a class="btn btn-success btn-xs btn-filter-search ">Apply</a>
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <ul class="filter-ul" id="ulProgramLevel">
+                                                    @*@foreach (System.Data.DataRow _dr1 in _ds.Tables[1].Rows)
+                                        {
+                                            <li class="checkbox search-chekbox liFilterProgramLevel">
+                                                <label>
+                                                    <input type="checkbox" name="filterProgramLevel" value="@_dr1["Id"].ToString()" class="filterCheckbox" id="@_dr1["Id"].ToString()">
+                                                    @_dr1["Value"].ToString() <strong class="text-primary">[ @_dr1["Help"].ToString() ]</strong>
+                                                </label>
+                                            </li>
+                                        }*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseThree"><i class="icon mdi mdi-chevron-down"></i>State</a></h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Search..." class="form-control filter-search-text no-border-radius" />
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <a class="btn btn-danger btn-xs btn-filter-clear ">Clear</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                        <a class="btn btn-success btn-xs btn-filter-search ">Apply</a>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <ul class="filter-ul" id="ulState">
+                                                    @*@foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                        {
+                                            <li class="checkbox search-chekbox liFilterState">
+                                                <label>
+                                                    <input type="checkbox" name="filterState" value="@_dr["Id"].ToString()" class="filterCheckbox" id="@_dr["Id"].ToString()">
+                                                    @_dr["Value"].ToString() <strong class="text-primary">[ @_dr["Help"].ToString() ]</strong>
+                                                </label>
+                                            </li>
+                                        }*@
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                if (_ds.Tables[2].Rows.Count > 0)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseFour"><i class="icon mdi mdi-chevron-down"></i>Nature of Courses</a></h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Search..." class="form-control filter-search-text no-border-radius" />
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <a class="btn btn-danger btn-xs btn-filter-clear ">Clear</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                        <a class="btn btn-success btn-xs btn-filter-search ">Apply</a>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <ul class="filter-ul" id="ulNatureOfCourse">
+                                                    @*@foreach (System.Data.DataRow _dr3 in _ds.Tables[2].Rows)
+                                        {
+                                            <li class="checkbox search-chekbox liFilterNatureOfCourse">
+                                                <label>
+                                                    <input type="checkbox" name="filterNatureOfCourse" value="@_dr3["Id"].ToString()" class="filterCheckbox" id="@_dr3["Id"].ToString()">
+                                                    @_dr3["Value"].ToString() <strong class="text-primary">[ @_dr3["Help"].ToString() ]</strong>
+                                                </label>
+                                            </li>
+                                        }*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                if (_ds.Tables[4].Rows.Count > 0)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseFive"><i class="icon mdi mdi-chevron-down"></i>Branch/Subject</a></h4>
+                                        </div>
+                                        <div id="collapseFive" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Search..." class="form-control filter-search-text no-border-radius" />
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                                        <a class="btn btn-danger btn-xs btn-filter-clear ">Clear</a>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                                        <a class="btn btn-success btn-xs btn-filter-search ">Apply</a>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <ul class="filter-ul" id="ulBranch">
+                                                    @*@foreach (System.Data.DataRow _dr3 in _ds.Tables[2].Rows)
+                                        {
+                                            <li class="checkbox search-chekbox liFilterNatureOfCourse">
+                                                <label>
+                                                    <input type="checkbox" name="filterNatureOfCourse" value="@_dr3["Id"].ToString()" class="filterCheckbox" id="@_dr3["Id"].ToString()">
+                                                    @_dr3["Value"].ToString() <strong class="text-primary">[ @_dr3["Help"].ToString() ]</strong>
+                                                </label>
+                                            </li>
+                                        }*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-8 mt20">
+                @*<input id="txtInstituteSearch" type="text" placeholder="Search by Institute Name" class="form-control no-border-radius" />
+                    <br />*@
+                <div class="row">
+                    <div class="col-md-8 filter-accodion">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Filtered Criteria</h4>
+                            </div>
+                            <div class="panel-body">
+                                <label>Program Level: <strong id="lblProgramLevelFilter">All</strong></label>
+                                <br />
+                                <label>State: <strong id="lblStateFilter">All</strong></label>
+                                <br />
+                                <label>Nature of Courses: <strong id="lblNatureOfCoursesFilter">All</strong></label>
+                                <br />
+                                <label>Branch/Subject: <strong id="lblBranch">All</strong></label>
+                                <br />
+                                <label>Institute Type: <strong id="lblInstituteType">All</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 filter-accodion">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Filtered Result</h4>
+                            </div>
+                            <div class="panel-body">
+                                <label>Total No. of Institues: <strong id="lblTotalInstitues" class="">--</strong></label>
+                                <br />
+                                <label>Total No. of Courses: <strong id="lblTotalCourses" class="">--</strong></label>
+                                <br />
+                                <label>Total No. of Intakes: <strong id="lblTotalIntake" class="">--</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-borderless datatable-grid">
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <div id="divPanelInstitute">
+                    <div class="single-blog-left-comment wow fadeInDown" style="display:none;">
+                        <div class="single-comment institute-img">
+                            <img src="img/institute-1.jpg" alt="">
+                            <div class="blog-comment-text">
+                                <h4>[Name] </h4>
+                                <table>
+                                    <tr>
+                                        <td><strong>Degree / Level</strong></td>
+                                        <td class="pl8">:</td>
+                                        <td class="pl8">[Name]</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Course Language </strong></td>
+                                        <td class="pl8">:</td>
+                                        <td class="pl8">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date </strong></td>
+                                        <td class="pl8">:</td>
+                                        <td class="pl8">March-01, 2018</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+@section styles{
+    <link href="~/css/custom-front.css" rel="stylesheet" />
+    <style>
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 99999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .table .table {
+            background-color: transparent;
+        }
+
+        .label-count {
+            font-size: 14px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            page_init();
+            $('.btn-filter-search').on('click', function (e) {
+                e.preventDefault();
+                //var ul = $(this).parent().parent().parent().find('.filter-ul');
+
+                FilterData();
+            });
+            $('.btn-filter-clear').on('click', function (e) {
+                e.preventDefault();
+                var ul = $(this).parent().parent().parent().find('.filter-ul');
+                ul.find("li").each(function (index) {
+                    $(this).find('.filterCheckbox').removeAttr('checked');
+                });
+                FilterData();
+            });
+            $('.filter-search-text').on('keyup', function (e) {
+                e.preventDefault();
+                var currentTxt = $(this);
+                var ul = currentTxt.parent().parent().parent().find('ul.filter-ul');
+                ul.find("li").filter(function () {
+                    var li = $(this);
+                    li.toggle(li.text().toLowerCase().indexOf(currentTxt.val().toLowerCase()) > -1);
+                });
+            });
+            $('#txtInstituteSearch').on('keyup', function (e) {
+                e.preventDefault();
+                var currentTxt = $(this);
+                $('#divPanelInstitute').find(".single-blog-left-comment").filter(function () {
+                    var control = $(this);
+                    if (control.find('.institute-name').text() == currentTxt.val()) {
+                        alert('Matched')
+                    }
+                    control.toggle(control.find('.blog-comment-text > .institute-name').text().toLowerCase().indexOf(currentTxt.val()) > -1)
+                });
+            });
+        });
+        function FilterData() {
+            $('.loading').show();
+            var filterInstituteType = [];
+            $.each($('.liFilterType input[name="filterType"]:checked'), function () {
+                filterInstituteType.push($(this).val());
+            });
+            var filterState = [];
+            var filterStateName = [];
+            $.each($('.liFilterState input[name="filterState"]:checked'), function () {
+                filterState.push($(this).val());
+                filterStateName.push($(this).attr('data-text'));
+            });
+            var filterProgramLevel = [];
+            var filterProgramLevelName = [];
+            $.each($('.liFilterProgramLevel input[name="filterProgramLevel"]:checked'), function () {
+                filterProgramLevel.push($(this).val());
+                filterProgramLevelName.push($(this).attr('data-text'));
+            });
+            var filterNatureOfCourse = [];
+            var filterNatureOfCourseName = [];
+            $.each($('.liFilterNatureOfCourse input[name="filterNatureOfCourse"]:checked'), function () {
+                filterNatureOfCourse.push($(this).val());
+                filterNatureOfCourseName.push($(this).attr('data-text'));
+            });
+            var filterBranch = [];
+            var filterBranchName = [];
+            $.each($('.liFilterBranch input[name="filterBranch"]:checked'), function () {
+                filterBranch.push($(this).val());
+                filterBranchName.push($(this).attr('data-text'));
+            });
+            FillInstitutes(filterState, filterProgramLevel, filterNatureOfCourse, filterBranch, filterInstituteType);
+
+            $('#lblProgramLevelFilter').text((filterProgramLevelName.length > 0 ? filterProgramLevelName.join(',') : 'All'));
+            $('#lblStateFilter').text((filterStateName.length > 0 ? filterStateName.join(',') : 'All'));
+            $('#lblNatureOfCoursesFilter').text((filterNatureOfCourseName.length > 0 ? filterNatureOfCourseName.join(',') : 'All'));
+            $('#lblBranch').text((filterBranchName.length > 0 ? filterBranchName.join(',') : 'All'));
+            $('#lblInstituteType').text((filterInstituteType.length > 0 ? filterInstituteType.join(',') : 'All'));
+
+        }
+        function page_init() {
+            var filterState = [];
+            var strfilterProgramLevel = "@ViewBag.Discipline";
+            var filterProgramLevel = strfilterProgramLevel.split(',');
+            var filterNatureOfCourse = [];
+            var filterBranch = [];
+            var filterInstituteType = [];
+            FillInstitutes(filterState, filterProgramLevel, filterNatureOfCourse, filterBranch, filterInstituteType);
+        }
+        function FillInstitutes(filterState, filterProgramLevel, filterNatureOfCourse, filterBranch, filterInstituteType, token = $('input[name="__RequestVerificationToken"]', $('#frmFilter')).val()) {
+            $.ajax({
+                method: 'POST',
+                url: $('#hdfBaseUrl').val() + 'InstituteSearch/FilterData',
+                data: { __RequestVerificationToken: token, State: filterState.join(','), ProgramLevel: filterProgramLevel.join(','), NatureOfCourse: filterNatureOfCourse.join(','), BranchID: filterBranch.join(','), InstituteType: filterInstituteType.join(','), Type: 'GridDetails' },
+                async: false,
+                success: function (data) {
+                }
+            }).done(function (data) {
+                //$('#divPanelInstitute').html('');
+                $('#tbody').empty();
+                if ($.fn.DataTable.isDataTable(".datatable-grid")) {
+                    $('.datatable-grid').DataTable().clear().destroy();
+                }
+                var TotalInstitutes = 0;
+                var TotalCourses = 0;
+                var TotalIntake = 0;
+                $.each(data["List"], function (index, item) {
+                    var single_blog_left_comment = $('<div class="single-blog-left-comment"></div>');
+                    var single_comment = $('<div class="single-comment institute-img"></div>');
+                    single_comment.append('<img src="' + $('#hdfBaseUrl').val() + item['Photo'] + '" alt="">');
+                    var blog_comment_text = $('<div class="blog-comment-text"></div>');
+                    single_comment.append(blog_comment_text);
+                    blog_comment_text.append('<h4 class="inner-title text-primary"><a class="btn-link btn-institute-name" href="' + $('#hdfBaseUrl').val() + 'Explore/ViewDetails?instituteid=' + item['InstituteID'].toString() + '&For=Courses' + '">' + item['InstituteName'] + '</a></h4>');
+                    var table = $('<table class="table table-borderless"></table>');
+                    if (item["City"].toString() != '' && item["state_name"].toString() != '') {
+                        table.append('<tr><td colspan="1"><strong><i class="fa fa-map-marker"></i> Location</strong>: ' + (item['City'] != '' ? item['City'] : '') + ', ' + item['state_name'] + '</td><td colspan="3"><strong><i class="fa fa-globe"></i> Website</strong>: <a target="_blank" class="btn-link" href="' + item["instituteweburl"].toString() + '">' + item["instituteweburl"].toString() + '</a></td></tr>');
+                    } else {
+                        table.append('<tr><td colspan="1"><strong><i class="fa fa-map-marker"></i> Location</strong>: ---</td><td colspan="3"><strong><i class="fa fa-globe"></i> Website</strong>: ---</td></tr>');
+                    }
+                    //mihir 18042018 1207 cooment code as discuss with hitesh sir
+                    //if (item["instituteweburl"].toString() != '') {
+                    //    table.append('<tr><td><strong><i class="fa fa-globe"></i> Website</strong>: <a target="_blank" class="btn-link" href="' + item["instituteweburl"].toString() + '">' + item["instituteweburl"].toString() + '</a></td></tr>');
+                    //} else {
+                    //    table.append('<tr><td colspan="2"><strong><i class="fa fa-globe"></i> Website</strong>: ---</td></tr>');
+                    //}
+                    //if (item["NoOfInterStudentIntake"].toString() != '0') {
+                    //    table.append('<tr><td><strong>International Student Intake </strong>: ' + item['NoOfInterStudentIntake'] + '</td></tr>');
+                    //}
+                    //mihir 18042018 1207 cooment code as discuss with hitesh sir
+                    if (item["CourseCount"].toString() != '0' && item['SheetCount'].toString() != '0') {
+                        table.append('<tr><td><strong><i class="fa fa-graduation-cap"></i> No. of Courses Offered</strong>: <a class="btn-link" href="' + $('#hdfBaseUrl').val() + 'Explore/ViewDetails?instituteid=' + item['InstituteID'].toString() + '&For=Courses' + '">' + item['CourseCount'] + '</a></td><td><strong><i class="fa fa-users"></i> No of Seats</strong>: ' + item['SheetCount'] + '</td><td colspan="2"><a class="btn btn-sm btn-primary pull-right" href="' + $('#hdfBaseUrl').val() + 'Explore/ViewDetails?instituteid=' + item['InstituteID'].toString() + '&For=Courses' + '">More Details</a></td></tr>');
+                    } else if (item["CourseCount"].toString() != '0' && item['SheetCount'].toString() == '0') {
+                        table.append('<tr><td colspan="2"><strong><i class="fa fa-graduation-cap"></i> No. of Courses Offered</strong>: ' + item['CourseCount'] + '</td></tr>');
+                    } else if (item["CourseCount"].toString() == '0' && item['SheetCount'].toString() != '0') {
+                        table.append('<tr><td colspan="2"><strong><i class="fa fa-users"></i> No of Seats</strong>: ' + item['SheetCount'] + '</td></tr>');
+                    }
+                    //if (item["AcademicCourses"].toString() != '') {
+                    //    table.append('<tr><td><strong>Academic Courses</strong>: <br>' + item['AcademicCourses'] + '</td></tr>');
+                    //} else {
+                    //    table.append('<tr><td colspan="2"><strong>Academic Courses</strong>: ---</td></tr>');
+                    //}
+                    //if (item["AreaOfExcellence"].toString() != '') {
+                    //    table.append('<tr><td><strong>Area Of Excellence</strong>: <br>' + item['AreaOfExcellence'] + '</td></tr>');
+                    //} else {
+                    //    table.append('<tr><td colspan="2"><strong>Area Of Excellence</strong>: ---</td></tr>');
+                    //}
+                    //mihir 18042018 1207 cooment code as discuss with hitesh sir
+                    // table.append('<tr><td colspan="2"><a class="btn btn-sm btn-primary pull-right" href="' + $('#hdfBaseUrl').val() + 'Explore/ViewDetails?instituteid=' + item['InstituteID'].toString() + '&For=Courses' + '">More Details</a></td></tr>');
+                    //mihir 18042018 1207 cooment code as discuss with hitesh sir
+                    blog_comment_text.append(table);
+                    single_blog_left_comment.append(single_comment);
+
+                    var tr = $('<tr></tr>');
+                    var td = $('<td></td>');
+                    td.append(single_blog_left_comment);
+                    tr.append(td);
+                    $('#tbody').append(tr);
+                    TotalInstitutes = TotalInstitutes + 1;
+                    TotalCourses = TotalCourses + parseInt(item['FilttredCourseCount']);
+                    TotalIntake = TotalIntake + parseInt(item['FiltteredSheetCount']);
+                    //$('#divPanelInstitute').append(single_blog_left_comment);
+                });
+                $('#lblTotalInstitues').text(TotalInstitutes);
+                $('#lblTotalCourses').text(TotalCourses);
+                $('#lblTotalIntake').text(TotalIntake);
+                $('.datatable-grid').DataTable({
+                    ordering: false,
+                    "bDestroy": true
+                });
+                $('#ulInstituteType').html('');
+                $.each(data["FilterListType"], function (index, item) {
+                    $('#ulInstituteType').append('<li class="checkbox search-chekbox liFilterType"><label><input type="checkbox" name="filterType" value="' + item["Id"] + '" data-text="' + item["Value"] + '" class="filterCheckbox" id="' + item["Id"] + '">' + item["Value"] + '<strong class="text-primary"> [ ' + item["Help"] + ' ]</strong></label></li>');
+                });
+
+                $('#ulState').html('');
+                $.each(data["FilterListState"], function (index, item) {
+                    $('#ulState').append('<li class="checkbox search-chekbox liFilterState"><label><input type="checkbox" name="filterState" value="' + item["Id"] + '" data-text="' + item["Value"] + '" class="filterCheckbox" id="' + item["Id"] + '">' + item["Value"] + '<strong class="text-primary"> [ ' + item["Help"] + ' ]</strong></label></li>');
+                });
+                $('#ulProgramLevel').html('');
+                $.each(data["FilterListProgramLevel"], function (index, item) {
+                    $('#ulProgramLevel').append('<li class="checkbox search-chekbox liFilterProgramLevel"><label><input type="checkbox" name="filterProgramLevel" value="' + item["Id"] + '" data-text="' + item["Value"] + '" class="filterCheckbox" id="' + item["Id"] + '">' + item["Value"] + '<strong class="text-primary"> [ ' + item["Help"] + ' ]</strong></label></li>');
+                });
+                $('#ulNatureOfCourse').html('');
+                $.each(data["FilterListNatureOfCourse"], function (index, item) {
+                    $('#ulNatureOfCourse').append('<li class="checkbox search-chekbox liFilterNatureOfCourse"><label><input type="checkbox" name="filterNatureOfCourse" value="' + item["Id"] + '" data-text="' + item["Value"] + '" class="filterCheckbox" id="' + item["Id"] + '">' + item["Value"] + '<strong class="text-primary"> [ ' + item["Help"] + ' ]</strong></label></li>');
+                });
+                $('#ulBranch').html('');
+                $.each(data["FilterListBranch"], function (index, item) {
+                    $('#ulBranch').append('<li class="checkbox search-chekbox liFilterBranch"><label><input type="checkbox" name="filterBranch" value="' + item["Id"] + '" data-text="' + item["Value"] + '" class="filterCheckbox" id="' + item["Id"] + '">' + item["Value"] + '<strong class="text-primary"> [ ' + item["Help"] + ' ]</strong></label></li>');
+                });
+
+                if (data['InstituteTypePara'] != '') {
+                    var strArray = data['InstituteTypePara'].split(',');
+                    $.each(strArray, function (key, value) {
+                        var arrayValue = value;
+                        $.each($('.liFilterType input[name="filterType"]'), function () {
+                            var currentLi = $(this);
+                            if (arrayValue == currentLi.val()) {
+                                currentLi.attr('checked', true);
+                            }
+                        });
+                    });
+                }
+                if (data['StatePara'] != '') {
+                    var strArray = data['StatePara'].split(',');
+                    $.each(strArray, function (key, value) {
+                        var arrayValue = value;
+                        $.each($('.liFilterState input[name="filterState"]'), function () {
+                            var currentLi = $(this);
+                            if (arrayValue == currentLi.val()) {
+                                currentLi.attr('checked', true);
+                            }
+                        });
+                    });
+                }
+                if (data['ProgramLevelPara'] != '') {
+                    var strArray = data['ProgramLevelPara'].split(',');
+                    $.each(strArray, function (key, value) {
+                        var arrayValue = value;
+                        $.each($('.liFilterProgramLevel input[name="filterProgramLevel"]'), function () {
+                            var currentLi = $(this);
+                            if (arrayValue == currentLi.val()) {
+                                currentLi.attr('checked', true);
+                            }
+                        });
+                    });
+                }
+                if (data['NatureOfCoursePara'] != '') {
+                    var strArray = data['NatureOfCoursePara'].split(',');
+                    $.each(strArray, function (key, value) {
+                        var arrayValue = value;
+                        $.each($('.liFilterNatureOfCourse input[name="filterNatureOfCourse"]'), function () {
+                            var currentLi = $(this);
+                            if (arrayValue == currentLi.val()) {
+                                currentLi.attr('checked', true);
+                            }
+                        });
+                    });
+                }
+                if (data['BranchIDPara'] != '') {
+                    var strArray = data['BranchIDPara'].split(',');
+                    $.each(strArray, function (key, value) {
+                        var arrayValue = value;
+                        $.each($('.liFilterBranch input[name="filterBranch"]'), function () {
+                            var currentLi = $(this);
+                            if (arrayValue == currentLi.val()) {
+                                currentLi.attr('checked', true);
+                            }
+                        });
+                    });
+                }
+                $('.loading').hide();
+            }).error(function () {
+                $('.loading').hide();
+            });
+        }
+    </script>
+}

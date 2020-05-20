@@ -1,0 +1,354 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+@*@section PageHead{
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Course of Study Mapping</h3>
+            </div>
+        </div>
+    }*@
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="6" style="width: 16.66%;"></div>
+            </div>
+            @Html.Partial("_ProgressBar")
+        </div>
+    </div>
+    <hr />
+    <fieldset class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form id="frm">
+                    <div class="list-group">
+                        @{
+                        SIIRepository.Courses.CourseRepository _objRepoCourse = new SIIRepository.Courses.CourseRepository();
+                        System.Data.DataSet _dsRepoCourse = _objRepoCourse.SELECT_tbl_EduQualifications();
+                        if (_dsRepoCourse != null)
+                        {
+                            if (_dsRepoCourse.Tables[0].Rows.Count > 0)
+                            {
+                                foreach (System.Data.DataRow _dr in _dsRepoCourse.Tables[0].Rows)
+                                {
+                                    if (_dr["EduQualifications"].ToString() == "10th")
+                                    {
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @_dr["EduQualificationsName"].ToString() Score
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control drpPercentage drpPercentageMainPart" id="drpMain@_dr["EduQualifications_Id"].ToString()" required=""></select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control drpPercentage drpPercentageDeciamlPart" id="drpDecimal@_dr["EduQualifications_Id"].ToString()" required=""></select>
+                            </div>
+                        </div>
+                    </div>
+                                    }
+                                    else
+                                    {
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @_dr["EduQualificationsName"].ToString() Score?
+                            </div>
+                            <div class="col-md-4">
+                                <div class="be-radio inline">
+                                    <input type="radio" checked="" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkYesEQ" id="rbYes@_dr["EduQualifications_Id"].ToString()" value="1">
+                                    <label for="rbYes@_dr["EduQualifications_Id"].ToString()">Yes</label>
+                                </div>
+                                <div class="be-radio inline">
+                                    <input type="radio" checked="" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkNoEQ" id="rbNo@_dr["EduQualifications_Id"].ToString()" value="0">
+                                    <label for="rbNo@_dr["EduQualifications_Id"].ToString()">No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control drpPercentage drpPercentageMainPart drp@_dr["EduQualifications_Id"].ToString()" id="drpMain@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control drpPercentage drpPercentageDeciamlPart drp@_dr["EduQualifications_Id"].ToString()" id="drpDecimal@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                            </div>
+                        </div>
+                    </div>
+                                    }
+                                }
+                            }
+                        }
+                        }
+                        @{
+                        SIIRepository.StudentRegService.ChoiceFillingRepository _objRepoCH = new SIIRepository.StudentRegService.ChoiceFillingRepository();
+                        System.Data.DataSet _dsRepoCH = _objRepoCH.SELECT_tbl_AditionalExams_For_Ch();
+                        if (_dsRepoCH != null)
+                        {
+                            if (_dsRepoCH.Tables[0].Rows.Count > 0)
+                            {
+                                foreach (System.Data.DataRow _dr in _dsRepoCH.Tables[0].Rows)
+                                {
+                    <div class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Do you have @_dr["AditionalExams"].ToString() score?
+                            </div>
+                            <div class="col-md-4">
+                                <div class="be-radio inline">
+                                    <input type="radio" checked="" name="Is@_dr["AditionalExams_Id"].ToString()" class="chkYes" id="rbYesAE@_dr["AditionalExams_Id"].ToString()" value="1">
+                                    <label for="rbYesAE@_dr["AditionalExams_Id"].ToString()">Yes</label>
+                                </div>
+                                <div class="be-radio inline">
+                                    <input type="radio" checked="" name="Is@_dr["AditionalExams_Id"].ToString()" class="chkNo" id="rbNoAE@_dr["AditionalExams_Id"].ToString()" value="0">
+                                    <label for="rbNoAE@_dr["AditionalExams_Id"].ToString()">No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" name="JEEScore" placeholder="@_dr["AditionalExams"].ToString()" id="txt@_dr["AditionalExams_Id"].ToString()" data-parsley-max="@_dr["MaxLimit"].ToString()" disabled="" />
+                            </div>
+                        </div>
+                    </div>
+                                }
+                            }
+                        }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                        <button type="submit" id="btnSaveAndContinue" class="btn btn-primary">Save &amp; Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @*<div class="panel panel-default ">
+            <div class="panel-body">
+                <form id="frm">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    10th Score?
+                                </div>
+                                <div class="col-md-4">
+                                   
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageMainPart" name="TenthScoreMainPart" id="drpTenthScoreMainPart" required=""></select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageDeciamlPart" name="TenthScoreDeciamlPart" id="drpTenthScoreDeciamlPart" required=""></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    12th Score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsTwelvethScore" class="chkYes" id="rb12thScoreYes" value="1">
+                                        <label for="rb12thScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsTwelvethScore" class="chkNo" id="rb12thScoreNo" value="0">
+                                        <label for="rb12thScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageMainPart" name="TwelvethScoreMainPart" id="drpTwelvethScoreMainPart" required=""></select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageDeciamlPart" name="TwelvethScoreDeciamlPart" id="drpTwelvethScoreDeciamlPart" required=""></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Graduation Score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsGraduationScore" class="chkYes" id="rbGraduationScoreYes" value="1">
+                                        <label for="rbGraduationScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsGraduationScore" class="chkNo" id="rbGraduationScoreNo" value="0">
+                                        <label for="rbGraduationScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageMainPart" name="GraduationScoreMainPart" id="drpGraduationScoreMainPart" required=""></select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageDeciamlPart" name="GraduationScoreDeciamlPart" id="drpGraduationScoreDeciamlPart" required=""></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Post Graduation Score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsPostGraduationScore" class="chkYes" id="rbPostGraduationScoreYes" value="1">
+                                        <label for="rbPostGraduationScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsPostGraduationScore" class="chkNo" id="rbPostGraduationScoreNo" value="0">
+                                        <label for="rbPostGraduationScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageMainPart" name="PostGraduationScoreMainPart" id="drpPostGraduationScoreMainPart" required=""></select>
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control drpPercentage drpPercentageDeciamlPart" name="PostGraduationScoreDeciamlPart" id="drpPostGraduationScoreDeciamlPart" required=""></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have IELTS score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsIELTSScore" class="chkYes" id="rbIELTSScoreYes" value="1">
+                                        <label for="rbIELTSScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsIELTSScore" class="chkNo" id="rbIELTSScoreNo" value="0">
+                                        <label for="rbIELTSScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" name="IELTSScore" placeholder="IELTS Score" id="drpIELTSScore" disabled="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have JEE score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsJEEScore" class="chkYes" id="rbJEEScoreYes" value="1">
+                                        <label for="rbJEEScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsJEEScore" class="chkNo" id="rbJEEScoreNo" value="0">
+                                        <label for="rbJEEScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" name="JEEScore" placeholder="JEE Score" id="drpJEEScore" disabled="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have GMAT score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsGMATScore" class="chkYes" id="rbGMATScoreYes" value="1">
+                                        <label for="rbGMATScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsGMATScore" class="chkNo" id="rbGMATScoreNo" value="0">
+                                        <label for="rbGMATScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" name="GMATScore" placeholder="GMAT Score" id="drpGMATScore" disabled="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have TOFEL score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsTOFELScore" class="chkYes" id="rbTOFELScoreYes" value="1">
+                                        <label for="rbTOFELScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsTOFELScore" class="chkNo" id="rbTOFELScoreNo" value="0">
+                                        <label for="rbTOFELScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" name="TOFELScore" placeholder="TOFEL Score" id="drpTOFELScore" disabled="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have SAT score?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsSATScore" class="chkYes" id="rbSATScoreYes" value="1">
+                                        <label for="rbSATScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsSATScore" class="chkNo" id="rbSATScoreNo" value="0">
+                                        <label for="rbSATScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" name="SATScore" placeholder="SAT Score" id="drpSATScore" disabled="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Do you have work experience?
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsWorkExperienceScore" class="chkYes" id="rbWorkExperienceScoreYes" value="1">
+                                        <label for="rbWorkExperienceScoreYes">Yes</label>
+                                    </div>
+                                    <div class="be-radio inline">
+                                        <input type="radio" checked="" name="IsWorkExperienceScore" class="chkNo" id="rbWorkExperienceScoreNo" value="0">
+                                        <label for="rbWorkExperienceScoreNo">No</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="WorkExperienceScore" id="drpWorkExperienceScore" disabled="" data-parsley-type="number" maxlength="2" placeholder="In Months" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                        <button type="submit" id="btnSaveAndContinue" class="btn btn-primary">Save &amp; Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>*@
+    </fieldset>
+</div>
+@section styles{
+    <link href="~/assets/lib/wizard/style.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/wizard/retina-1.1.0.min.js"></script>
+    <script src="~/assets/lib/wizard/scripts.js"></script>
+    <script src="~/Scipts/Areas/admission/StudentChoiceFilling/Basic.js"></script>
+}

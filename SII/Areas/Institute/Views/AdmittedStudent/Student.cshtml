@@ -1,0 +1,433 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "StudentsList";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+    string TotalRecords = "0";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Admitted Student 2019 for @ViewBag.id <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (Session["InstituteID"].ToString() == "SII-I-00001")
+                            {
+                                <a class="btn btn-danger pull-right" href="~/institute/admittedStudent/InstituteSpoc/@ViewBag.id">Add/Edit Institute SPOC</a>
+                            }
+                            <br />
+                            <br />
+                        </div>
+                        <div class="col-md-12 table-responsive">
+                            <input type="hidden" id="hdfIsAdminFLag" value="@Session["IsAdminFLag"].ToString()" />
+                            <input type="hidden" id="hdfIsAdminEdit" value="@Session["IsAdminEdit"].ToString()" />
+                            <form id="frm" method="post">
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <select id="drpPerPage" class="form-control">
+                                                    <option>10</option>
+                                                    <option>25</option>
+                                                    <option>50</option>
+                                                    <option>100</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-right pull-right">
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-4">
+                                                <input type="text" class="form-control" id="txtSearch" placeholder="Search..." value="@ViewBag.SearchByText" />
+                                                <input type="hidden" id="hdfSearchText" value="@ViewBag.SearchByText" />
+                                                <input type="hidden" id="hdfProgrammeLevel" value="@ViewBag.id" />
+                                                <input type="hidden" id="hdfPageSize" value="@ViewBag.PageSize" />
+                                                <input type="hidden" id="hdfStartPage" value="@ViewBag.StartPage" />
+                                                <input type="hidden" id="hdfStartIndex" value="@ViewBag.StartIndex" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" id="btnSearch" class="btn btn-info">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                </div>
+                                <table id="tbl" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr No</th>
+                                            <th>StudentID</th>
+                                            <th>Student Name</th>
+                                            <th>Country</th>
+                                            <th>Gender</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>Discipline</th>
+                                            <th>Programme Level</th>
+                                            <th>Qualification</th>
+                                            <th>Course of Study</th>
+                                            <th>Seat Fee Waiver</th>
+                                            <th>Scholarship</th>
+
+                                            <th>Required Skype Interview?</th>
+                                            <th>Approve</th>
+                                            <th>Reject</th>
+                                            <th>Approve / Reject Remarks</th>
+                                            <th>Upload Allotment Letter</th>
+                                            <th>Student Action</th>
+                                            <th>Student Status</th>
+                                            <th>Student Travel Documentation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                        @{
+                                            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                            System.Data.DataSet _ds = _objRepository.SELECT_PHASE2_ALLOTED_STUDENTS_FOR_INSTITUTES(Session["InstituteID"].ToString(), "PrgList", ViewBag.id, ViewBag.StartIndex, ViewBag.PageSize, ViewBag.SearchByText);
+                                            if (_ds != null)
+                                            {
+
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                    {
+                                                        <tr>
+                                                            @*<td>@(i++)</td>*@
+                                                            <td>@_dr["Srno"].ToString()</td>
+                                                            <td>
+                                                                <a href="~/Institute/PreviewStudent/ViewDetails/@_dr["Studentid"].ToString()?d=ChoiceFilling" target="_blank">
+                                                                    @_dr["Studentid"].ToString()
+                                                                </a>
+                                                            </td>
+                                                            <td>@_dr["StudentName"].ToString()</td>
+                                                            <td>@_dr["Country_Name"].ToString()</td>
+                                                            <td>@_dr["StudentGender"].ToString()</td>
+                                                            <td>@_dr["Mobile"].ToString()</td>
+                                                            <td>@_dr["Email"].ToString()</td>
+                                                            <td>@_dr["Discipline"].ToString()</td>
+                                                            <td>@_dr["ProgrammeLevel"].ToString()</td>
+                                                            <td>@_dr["Qualification"].ToString()</td>
+                                                            <td>@_dr["CourseOfStudy"].ToString()</td>
+                                                            <td>@_dr["FeeWaiver"].ToString()</td>
+                                                            <td>
+                                                                @if (_dr["FeeWaiverRemarks"].ToString() == "" || _dr["FeeWaiverRemarks"].ToString() == "Institute")
+                                                                {
+                                                                    <span>---</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span>@_dr["FeeWaiverRemarks"].ToString()</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["SkypeInterviewStatus"].ToString().ToLower() == "required")
+                                                                {
+                                                                    <span>
+                                                                        @_dr["SkypeInterviewStatus"].ToString() [ Interview Date: @Convert.ToDateTime(_dr["SkypeInterviewDate"].ToString()).ToString("dd-MMM-yyyy") ]
+                                                                    </span>
+                                                                    <a class="btn btn-sm btn-info" href="~/Institute/AdmittedStudent/SkypeInterview?id=@_dr["Studentid"].ToString()&u=@SII.Models.StringCipher.Encrypt(_dr["ID"].ToString())">Skype Interview</a>
+                                                                }
+                                                                else if (_dr["SkypeInterviewStatus"].ToString().ToLower() == "completed")
+                                                                {
+                                                                    <span>
+                                                                        <span class="label label-success">@_dr["SkypeInterviewStatus"].ToString()</span>
+                                                                    </span>
+                                                                }
+                                                                else if (_dr["SkypeInterviewStatus"].ToString().ToLower() == "not-required")
+                                                                {
+                                                                    <span>
+                                                                        @_dr["SkypeInterviewStatus"].ToString()
+                                                                    </span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a class="btn btn-sm btn-info" href="~/Institute/AdmittedStudent/SkypeInterview?id=@_dr["Studentid"].ToString()&u=@SII.Models.StringCipher.Encrypt(_dr["ID"].ToString())">Skype Interview</a>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["ISApprovebyInstitute"] == DBNull.Value || _dr["ISApprovebyInstitute"] == null)
+                                                                {
+                                                                    <a data-cid="@_dr["InstituteCourseID_Alloted"].ToString()" data-sid="@_dr["Studentid"].ToString()" data-cmrid="@_dr["ID"].ToString()" class="btn btn-sm btn-success btnApprove">Approve</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (_dr["ISApprovebyInstitute"].ToString() == "")
+                                                                    {
+                                                                        <a data-cid="@_dr["InstituteCourseID_Alloted"].ToString()" data-sid="@_dr["Studentid"].ToString()" data-cmrid="@_dr["ID"].ToString()" class="btn btn-sm btn-success btnApprove">Approve</a>
+                                                                    }
+                                                                    else if (_dr["ISApprovebyInstitute"].ToString().ToLower() == "true")
+                                                                    {
+                                                                        <span class="label label-success">Approved</span>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["ISApprovebyInstitute"] == DBNull.Value || _dr["ISApprovebyInstitute"] == null)
+                                                                {
+                                                                    <a data-cid="@_dr["InstituteCourseID_Alloted"].ToString()" data-sid="@_dr["Studentid"].ToString()" data-cmrid="@_dr["ID"].ToString()" class="btn btn-sm btn-danger btnReject">Reject</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (_dr["ISApprovebyInstitute"].ToString() == "")
+                                                                    {
+                                                                        <a data-cid="@_dr["InstituteCourseID_Alloted"].ToString()" data-sid="@_dr["Studentid"].ToString()" data-cmrid="@_dr["ID"].ToString()" class="btn btn-sm btn-danger btnReject">Reject</a>
+                                                                    }
+                                                                    else if (_dr["ISApprovebyInstitute"].ToString().ToLower() == "false")
+                                                                    {
+                                                                        <span class="label label-danger">Rejected</span>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>@_dr["ApprovebyInstituteRemarks"].ToString()</td>
+                                                            <td>
+                                                                @if (_dr["Doc_AllotmentLetter"].ToString() == "")
+                                                                {
+                                                                    <a class="btn btn-sm btn-info" href="~/Institute/AdmittedStudent/UploadAllotmentLatter?id=@_dr["Studentid"].ToString()&u=@SII.Models.StringCipher.Encrypt(_dr["ID"].ToString())">Upload</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a class="btn btn-sm btn-warning" href="~/@_dr["Doc_AllotmentLetter"].ToString()" target="_blank"><i class="fa fa-download"></i> View</a>
+                                                                    <a class="btn btn-sm btn-success" href="~/Institute/AdmittedStudent/UploadAllotmentLatter?id=@_dr["Studentid"].ToString()&u=@SII.Models.StringCipher.Encrypt(_dr["ID"].ToString())">Change Document</a>
+                                                                }
+
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["StudentStatus"].ToString() == "Reject")
+                                                                {
+                                                                    <span class="label label-danger"> @_dr["StudentStatus"].ToString()ed  </span>
+                                                                    <br /> <br /> @_dr["StudentStatusRemarks"].ToString()
+                                                                }
+                                                                else if (_dr["StudentStatus"].ToString() == "Accept")
+                                                                {
+                                                                    <span class="label label-success"> @_dr["StudentStatus"].ToString()ed  </span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["ISApprovebyInstitute"].ToString().ToLower() == "true")
+                                                                {
+                                                                    if (_dr["IsAdmittedByInstitute"] != null)
+                                                                    {
+                                                                        if (_dr["IsAdmittedByInstitute"].ToString() != "")
+                                                                        {
+                                                                            <span class="label label-@(_dr["IsAdmittedByInstitute"].ToString()=="On-boarding Completed"?"success": (_dr["IsAdmittedByInstitute"].ToString()=="Students refused to come"?"danger":"info"))">@_dr["IsAdmittedByInstitute"].ToString()</span>
+                                                                            if (Session["IsAdminEdit"] != null && Session["IsAdminFLag"] != null)
+                                                                            {
+                                                                                if (Session["IsAdminEdit"].ToString() == "True" && Session["IsAdminFLag"].ToString() == "True")
+                                                                                {
+                                                                                    <br><br>
+                                                                                    <select class="form-control drpStudentAdmitted" data-sid="@_dr["StudentID"].ToString()" data-pl="@ViewBag.id">
+                                                                                        <option value="">--Select--</option>
+                                                                                        <option value="On-boarding Completed">On-boarding Completed</option>
+                                                                                        <option value="Students refused to come">Student dropped out</option>
+                                                                                        <option value="Travel Formalities in process">Travel Formalities in process</option>
+                                                                                    </select>
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <select class="form-control drpStudentAdmitted" data-sid="@_dr["StudentID"].ToString()" data-pl="@ViewBag.id">
+                                                                                <option value="">--Select--</option>
+                                                                                <option value="On-boarding Completed">On-boarding Completed</option>
+                                                                                <option value="Students refused to come">Student dropped out</option>
+                                                                                <option value="Travel Formalities in process">Travel Formalities in process</option>
+                                                                            </select>
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <select class="form-control drpStudentAdmitted" data-sid="@_dr["StudentID"].ToString()" data-pl="@ViewBag.id">
+                                                                            <option value="">--Select--</option>
+                                                                            <option value="On-boarding Completed">On-boarding Completed</option>
+                                                                            <option value="Students refused to come">Student dropped out</option>
+                                                                            <option value="Travel Formalities in process">Travel Formalities in process</option>
+                                                                        </select>
+                                                                    }
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (_dr["StudentStatus"].ToString() == "Accept")
+                                                                {
+                                                                    <a class="btn btn-sm btn-primary" target="_blank" href="~/Institute/AdmittedStudent/TravelDocumentation?id=@_dr["Studentid"].ToString()&a=@SII.Models.StringCipher.Encrypt(_dr["ApplicationNo"].ToString())&p=@ViewBag.id">View Student Travel Documentation</a>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                                if (_ds.Tables[1].Rows.Count > 0)
+                                                {
+                                                    TotalRecords = _ds.Tables[1].Rows[0]["TotalRecords"].ToString();
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        Showing @ViewBag.StartIndex to @(((Convert.ToInt32(ViewBag.StartIndex) + Convert.ToInt32(ViewBag.PageSize)) - 1) >= Convert.ToInt32(TotalRecords) ? TotalRecords : ((Convert.ToInt32(ViewBag.StartIndex) + Convert.ToInt32(ViewBag.PageSize)) - 1)) of @TotalRecords entries
+                                    </div>
+                                    <div class="col-md-6 text-right pull-right" id="pagination">
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+    <link href="~/assets/lib/simplePagination/simplePagination.css" rel="stylesheet" />
+    <style>
+        .simple-pagination ul {
+            float: right;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/simplePagination/jquery.simplePagination.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#pagination').pagination({
+                items: @TotalRecords,
+                itemsOnPage: @ViewBag.PageSize,
+                cssStyle: 'light-theme',
+                currentPage: @ViewBag.StartPage,
+                onPageClick(pageNumber, event) {
+                    event.preventDefault();
+                    var newPageStart = pageNumber * @(Convert.ToInt32(ViewBag.PageSize));
+                    var diff = @(Convert.ToInt32(ViewBag.StartIndex) - Convert.ToInt32(ViewBag.PageSize));
+                    var startIndex = newPageStart - @(Convert.ToInt32(ViewBag.PageSize)- 1);
+                    window.location.href = $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/Student/@ViewBag.id?i=' + startIndex + '&ps=@ViewBag.PageSize&sbt=' + $('#hdfSearchText').val();
+                }
+            });
+
+            $('#drpPerPage').val('@ViewBag.PageSize');
+            $('#drpPerPage').on('change', function () {
+                var pages = $(this).val();
+                window.location.href = $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/Student/@ViewBag.id?i=1&ps=' + pages +'&sbt=' + $('#txtSearch').val();
+            });
+
+            $('#btnSearch').on('click', function (e) {
+                e.preventDefault();
+                window.location.href = $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/Student/@ViewBag.id?i=1&ps=@ViewBag.PageSize&sbt=' + $('#txtSearch').val();
+            });
+            $('#tbody').on('click', '.btnApprove', function (e) {
+                e.preventDefault();
+                var cmr = $(this).attr('data-cmrid');
+                var s = $(this).attr('data-sid');
+                var c = $(this).attr('data-cid');
+                var ar = 1;
+                PromtMessage('Approve', 'Remarks, If any', function () {
+                    var reason = this.$content.find('.textarea').val();
+                    save(s, c, ar, reason, cmr);
+                });
+            });
+            $('#tbody').on('click', '.btnReject', function (e) {
+                e.preventDefault();
+
+                var cmr = $(this).attr('data-cmrid');
+                var s = $(this).attr('data-sid');
+                var c = $(this).attr('data-cid');
+                var ar = 0;
+                PromtMessage('Reject', 'Reason for Rejection', function () {
+                    var reason = this.$content.find('.textarea').val();
+                    if (!reason) {
+                        $.alert('provide a valid reason');
+                        return false;
+                    }
+                    save(s, c, ar, reason, cmr);
+                });
+            });
+            $('#tbody').on('change', '.drpStudentAdmitted', function () {
+                var drp = $(this);
+                var sid = drp.attr('data-sid');
+                var pl = drp.attr('data-pl');
+                var status = drp.val();
+                if (status != '') {
+                    ConfirmCallBack('Are you sure, ' + sid + ' has ' + status + '?', function () {
+                        $.ajax({
+                            method: 'POST',
+                            url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/StudentAdmitted',
+                            data: { 'StudentID': sid, 'ProgramLevel': pl, 'Admitted': status,'__RequestVerificationToken': $('input[name="__RequestVerificationToken"]', $('#frm')).val() }
+                        }).done(function (data) {
+                            if (data['c'] == 'success') {
+                                SuccessMessageCallBack(data['m'], function () {
+                                    if ($('#hdfIsAdminFLag').val().toLowerCase() == 'true' && $('#hdfIsAdminEdit').val().toLowerCase() == 'true') {
+                                        drp.parent().html('<span class="label label-' + (status == 'On-boarding Completed' ? 'success' : (status == 'Students refused to come' ? 'danger' : 'info')) + '">' + status + '</span><br><br><select class="form-control drpStudentAdmitted" data-sid="' + sid+'" data-pl="@ViewBag.id"><option value="">--Select--</option><option value="On-boarding Completed">On-boarding Completed</option><option value="Students refused to come">Student dropped out</option><option value="Travel Formalities in process">Travel Formalities in process</option></select>');
+                                    } else {
+                                        drp.parent().html('<span class="label label-' + (status == 'On-boarding Completed' ? 'success' : (status == 'Students refused to come' ? 'danger' : 'info')) + '">' + status + '</span>');
+                                    }
+                                });
+                            } else if (data['c'] == 'alreadyexists') {
+                                ErrorMessage(data['m']);
+                            } else if (data['c'] == 'sessionexpired') {
+                                ErrorMessage(data['m']);
+                            } else if (data['c'] == 'servererror') {
+                                ErrorMessage(data['m']);
+                            }
+                        }).error(function () {
+                            ErrorMessage('Processing error. Kindly refresh page and try again!');
+                        });
+                    });
+                    drp.val('');
+                }
+            });
+        });
+        function save(s, c, ar, r, cmr) {
+            $.ajax({
+                method: "POST",
+                url: $("#hdfBaseUrl").val() + "Institute/AdmittedStudent/ARAction",
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]', $('#frm')).val(),
+                    'Approve': ar,
+                    'StudentID': s,
+                    'CourseID': c,
+                    'Remarks': r,
+                    'CMRID' :cmr
+                }
+            }).done(function (r) {
+                "success" == r.c ?
+                    SuccessMessageCallBack(r.m, function () {
+                        window.location.href = window.location.href;
+                    })
+                    :
+                    "alreadyexists" == r.c ?
+                        (ErrorMessage(r.m))
+                        :
+                        "sessionexpired" == r.c ?
+                            (ErrorMessage(r.m))
+                            :
+                            "servererror" == r.c ?
+                                (ErrorMessage(r.m))
+                                :
+                                (ErrorMessage(r.m));
+            }).error(function () {
+                ErrorMessage("Processing error. Kindly refresh page and try again!");
+            });
+        }
+    </script>
+}
+

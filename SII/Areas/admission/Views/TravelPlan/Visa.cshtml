@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewBag.Title = "Passport";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Visa - Travel Plan
+            </h3>
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" id="frm">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Do you have a valid Indian student visa?</label>
+                                <select class="form-control" required id="HaveIndianStudentVisa" name="HaveIndianStudentVisa">
+                                    <option value="">--Select--</option>
+                                    <option>Yes, I have received the visa</option>
+                                    <option>I have applied for the visa. It is in-process</option>
+                                    <option>My visa was rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divShowHide" id="divYes" style="display:none;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Visa Number</label>
+                                <input type="text" class="form-control ctrlAll ctrlYes" placeholder="Visa Number" name="VisaNumber" id="VisaNumber" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" class="form-control ctrlAll ctrlYes" placeholder="DD-MM-YYYY" name="ExpiryDate" id="ExpiryDate" readonly="" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Visa Type</label>
+                                <select class="form-control ctrlAll ctrlYes" id="VisaType" name="VisaType">
+                                    <option value="">--Select--</option>
+                                    <option>Student Visa</option>
+                                    <option>Research Visa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Upload Visa</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" class="ctrlAll ctrlYes" name="VisaDocument" id="VisaDocument" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a id="btnVisaDocument" target="_blank" class="btn btn-primary btndoc" data-href="" href="" style="display:none">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divShowHide" id="divInProcess" style="display:none;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Visa Application Number</label>
+                                <input type="text" class="form-control ctrlAll ctrlInProcess" placeholder="Visa Application Number" name="VisaApplicationNumber" id="VisaApplicationNumber" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Upload supporting docs</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" class="ctrlAll ctrlInProcess" name="VisaApplicationDocument" id="VisaApplicationDocument" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a id="btnVisaApplicationDocument" target="_blank" class="btn btn-primary btndoc" data-href="" href="" style="display:none">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                                <a class="btn btn-default" href="~/admission/travelplan">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ExpiryDate").datepicker({
+                orientation: "left",
+                autoclose: !0,
+                dateFormat: "dd-mm-yy",
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date()
+            });
+            $('#HaveIndianStudentVisa').on('change', function (e) {
+                var text = $(this).val();
+                $('.divShowHide').hide();
+                $('.ctrlAll').removeAttr('required');
+                $('.ctrlAll').val('');
+                if (text == 'Yes, I have received the visa') {
+                    $('#divYes').show();
+                    $('.ctrlYes').attr('required', true);
+                    if ($('#btnVisaDocument').attr('data-href') != '') {
+                        $('#VisaDocument').removeAttr('required');
+                    }
+                } else if (text == 'I have applied for the visa. It is in-process') {
+                    $('#divInProcess').show();
+                    $('.ctrlInProcess').attr('required', true);
+                    if ($('#btnVisaApplicationDocument').attr('data-href') != '') {
+                        $('#VisaApplicationDocument').removeAttr('required');
+                    }
+                } else {
+
+                }
+            });
+            fill_data()
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault()
+                var frm = $('#frm');
+                var frmParsley = frm.parsley();
+                frmParsley.validate();
+                if (!frm.parsley().isValid()) {
+                    return false;
+                }
+                var btn = $(this);
+                if (btn.hasClass('disabled')) {
+                    return false;
+                }
+                var oldText = btn.text();
+                btn.text('Processing.....');
+                btn.attr('disabled', true);
+                btn.addClass('disabled');
+
+                var fileControl;
+                var textToBeCheck = $('#HaveIndianStudentVisa').val();
+                if (textToBeCheck == 'Yes, I have received the visa') {
+                    fileControl = $("#VisaDocument");
+                    fileUpload = $("#VisaDocument").get(0);
+                } else if (textToBeCheck == 'I have applied for the visa. It is in-process') {
+                    fileControl = $("#VisaApplicationDocument");
+                    fileUpload = $("#VisaApplicationDocument").get(0);
+                }
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                if (window.FormData !== undefined) {
+                    if (fileControl.get(0).files.length > 0) {
+                        var FileSize = fileControl.get(0).files[0].size;
+                        var fileExtension = ['png', 'jpg', 'jpeg', 'pdf'];
+                        if ($.inArray(fileControl.val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                            ErrorMessageCallBack("Only formats are allowed : " + fileExtension.join(', '), function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                        if ("3145728" >= FileSize) {
+
+                        } else {
+                            ErrorMessageCallBack("Only 3 Mb file size allow!", function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                    } else {
+                        if (textToBeCheck == 'Yes, I have received the visa') {
+                            fileData.append('VisaDocument', $('#btnVisaDocument').attr('data-href'));
+                        } else if (textToBeCheck == 'I have applied for the visa. It is in-process') {
+                            fileData.append('VisaApplicationDocument', $('#btnVisaApplicationDocument').attr('data-href'));
+                        }
+                    }
+                } else {
+                    if (textToBeCheck == 'Yes, I have received the visa') {
+                        fileData.append('VisaDocument', $('#btnVisaDocument').attr('data-href'));
+                    } else if (textToBeCheck == 'I have applied for the visa. It is in-process') {
+                        fileData.append('VisaApplicationDocument', $('#btnVisaApplicationDocument').attr('data-href'));
+                    }
+                }
+                if (files.length > 0) {
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+                }
+                fileData.append('HaveIndianStudentVisa', $('#HaveIndianStudentVisa').val());
+                if (textToBeCheck == 'Yes, I have received the visa') {
+                    fileData.append('VisaNumber', $('#VisaNumber').val());
+                    fileData.append('ExpiryDate', $('#ExpiryDate').val());
+                    fileData.append('VisaType', $('#VisaType').val());
+                } else if (textToBeCheck == 'I have applied for the visa. It is in-process') {
+                    fileData.append('VisaApplicationNumber', $('#VisaApplicationNumber').val());
+                }
+                fileData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]', $('#frm')).val());
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'admission/TravelPlan/SaveVisa',
+                    data: fileData,
+                    async: true,
+                    cache: false,
+                    contentType: false, // Not to set any content header
+                    processData: false
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        SuccessMessageCallBack(data['m'], function () {
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        });
+                        fill_data();
+                    } else if (data['c'] == 'alreadyexists') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'sessionexpired') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'servererror') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(oldText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+            });
+        });
+        function fill_data() {
+            $.ajax({
+                url: $('#hdfBaseUrl').val() + 'admission/TravelPlan/SelectVisa'
+            }).done(function (data) {
+                if (data['c'] == 'success') {
+                    $.each(data['List'], function (i, item) {
+                        $('#HaveIndianStudentVisa').val(item['HaveIndianStudentVisa']).trigger('change');
+                        var text = item['HaveIndianStudentVisa'];
+                        if (text == 'Yes, I have received the visa') {
+                            $('#VisaNumber').val(item['VisaNumber']);
+                            $('#ExpiryDate').val(item['ExpiryDate']);
+                            $('#VisaType').val(item['VisaType']);
+                            $('#btnVisaDocument').attr('href', $('#hdfBaseUrl').val() + item['VisaDocument']);
+                            $('#btnVisaDocument').attr('data-href', item['VisaDocument']);
+                            $('#btnVisaDocument').show();
+                            if ($('#btnVisaDocument').attr('data-href') != '') {
+                                $('#VisaDocument').removeAttr('required');
+                            }
+                        } else if (text == 'I have applied for the visa. It is in-process') {
+                            $('#VisaApplicationNumber').val(item['VisaApplicationNumber']);
+                            $('#btnVisaApplicationDocument').attr('href', $('#hdfBaseUrl').val() + item['VisaApplicationDocument']);
+                            $('#btnVisaApplicationDocument').attr('data-href', item['VisaApplicationDocument']);
+                            $('#btnVisaApplicationDocument').show();
+                            if ($('#btnVisaApplicationDocument').attr('data-href') != '') {
+                                $('#VisaApplicationDocument').removeAttr('required');
+                            }
+                        }
+                    });
+                } else if (data['c'] == 'servererror') {
+
+                }
+            }).error(function () {
+
+                btn.text(oldText);
+                btn.removeAttr('disabled');
+                btn.removeClass('disabled');
+            });
+        }
+    </script>
+}

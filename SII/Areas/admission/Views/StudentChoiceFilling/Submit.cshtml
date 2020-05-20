@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+@*@section PageHead{
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Course of Study Mapping</h3>
+            </div>
+        </div>
+    }*@
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <h3 class="text-center">Regular Courses Choice Filling <a href="~/admission/Dashboard" class="btn btn-sm btn-info pull-right"><i class="fa fa-arrow-left"></i> Home</a></h3>
+    </div>
+    <div class="col-md-12">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="100" data-number-of-steps="6" style="width: 100%;"></div>
+            </div>
+            @Html.Partial("_ProgressBar")
+        </div>
+    </div>
+    <hr />
+    <fieldset class="col-md-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+
+                <h4>Submit<span class="pull-right blink" style="color:red"></span></h4>
+                <hr />
+                <h5>Declaration</h5>
+                <p>I understand that Study In India course registration data gathered may be stored, published or made available to the applied institutes. </p>
+                <p>All the information uploaded is accurate to the best of my knowledge and any misrepresentation of facts will lead to disqualification from the admission process. </p>
+                <form id="frmUpload">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Upload Photo</label><br />
+                                <input type="file" id="fuPhoto" data-value="Photo" class="fuUploadImage" /><br />
+                                <small id="lblPhoto" style="display:none;"></small><br />
+                                @if (Session["Photo"].ToString() == "")
+                                {
+                                    <img src="data:image/jpeg;base64," style="width: 250px; min-height: 100px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3); display:none;" id="imgPhoto" />
+                                }
+                                else
+                                {
+                                    <img src="data:image/jpeg;base64,@Session["Photo"].ToString()" style="width: 250px; min-height: 100px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" />
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Upload Signature</label><br />
+                                <input type="file" id="fuSignature" data-value="Signature" class="fuUploadImage" /><br />
+                                <small id="lblSignature" style="display:none;"></small><br />
+                                @if (Session["Signature"].ToString() == "")
+                                {
+                                    <img src="data:image/jpeg;base64," style="width: 250px; min-height: 100px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3); display:none;" id="imgSignature" />
+                                }
+                                else
+                                {
+                                    <img src="data:image/jpeg;base64,@Session["Signature"].ToString()" style="width: 250px; min-height: 100px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgSignature" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <label><input type="checkbox" id="iATC" /> I agree</label>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="col-md-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+                <p style="color:red;"><strong>Note: Once you submit your choices, you will not able to edit anymore.</strong></p>
+                <hr />
+                <form id="frm">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @if (Session["Photo"].ToString() != "" && Session["Signature"].ToString() != "")
+                        {
+                            <button type="submit" id="btnSave" class="btn btn-success">Submit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" id="btnSaveDisabled" disabled="" class="btn btn-success">Submit</button>
+                            <button type="submit" id="btnSave" class="btn btn-success" style="display:none;">Submit</button>
+                        }
+                        <a href="~/admission/StudentChoiceFilling/UploadDocs" class="btn btn-primary">Previous</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_NodalHeadDetails")*@
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_Completed")*@
+    </fieldset>
+</div>
+@section styles{
+    <link href="~/assets/lib/wizard/style.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/wizard/retina-1.1.0.min.js"></script>
+    <script src="~/assets/lib/wizard/scripts.js"></script>
+    <script src="~/Scipts/Areas/admission/StudentChoiceFilling/Submit.js"></script>
+
+}

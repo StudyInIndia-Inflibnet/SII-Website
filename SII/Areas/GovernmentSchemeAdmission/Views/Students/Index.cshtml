@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutgovschemeAdmissions.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Student Profile</h2>
+        </div>
+    </div>
+}
+
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_MainTabs")
+        </div>*@
+    <div class="col-md-12">
+        <input type="hidden" id="hdnstudentid" value="@TempData.Peek("Studentid").ToString()" name="studentid" />
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#_Basicinformationgov" data-toggle="tab">Basic Information</a></li>
+                    @*<li><a href="#_Academicinformationgov" data-toggle="tab">Academic information</a></li>
+                    <li><a href="#_Documentinformationgov" data-toggle="tab">Document infomation</a></li>*@
+                    <li><a href="#_BackgroundInformationgov" data-toggle="tab">Background Information</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Basic Information*@
+                    <div id="_Basicinformationgov" class="tab-pane active cont">
+                        @Html.Partial("_Basicinformationgov")
+                    </div>
+                    @*Academic information*@
+                    @*<div id="_Academicinformationgov" class="tab-pane">
+                    </div>*@
+                    @*Document infomation*@
+                    @*<div id="_Documentinformationgov" class="tab-pane">
+                    </div>*@
+                    @*Background Information*@
+                    <div id="_BackgroundInformationgov" class="tab-pane">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($('#hdnstudentid').val() == '0') {
+                    window.location.href = '/GovernmentSchemeAdmission/Students';
+                    return;
+                }
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+                var tabName = $(this).attr("href").substr(1);
+                $(".tab-pane").each(function () {
+                    $(this).empty();
+                });
+                $.ajax({
+                    url: "/GovernmentSchemeAdmission/Students/" + tabName,
+                    cache: false,
+                    type: "get",
+                    dataType: "html",
+                    success: function (result) {
+                        $("#" + tabName).html(result);
+                    }
+                });
+                $(this).tab('show')
+            });
+            //$(".js-example-basic-single").select2();
+        });
+    </script>
+}
+

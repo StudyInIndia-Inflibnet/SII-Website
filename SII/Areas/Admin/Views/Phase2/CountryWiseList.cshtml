@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Student Merit List of @ViewBag.Country
+                <a class="btn btn-primary pull-right" href="~/Admin/Phase2/CountryWise/@ViewBag.Value?c=@ViewBag.Country">Back</a>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-info panel-border-color panel-border-color-primary">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="panel-body in table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Merit Rank</th>
+                                    <th>Merit Marks</th>
+                                    <th>StudentID</th>
+                                    <th>Student Name</th>
+                                    <th>DOB</th>
+                                    <th>Country</th>
+                                    <th>Gender</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Passport</th>
+                                    <th>Citizenship</th>
+                                    <th>InstituteID</th>
+                                    <th>Institute Name</th>
+                                    <th>Institute Type</th>
+                                    <th>Discipline</th>
+                                    <th>Programme Level</th>
+                                    <th>Qualification</th>
+                                    <th>Course of Study</th>
+                                    <th>Seat Fee Waiver</th>
+                                    <th>Eligibility Criteria</th>
+                                    <th>Aditional Exam</th>
+                                    <th>Scholarship</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    SIIRepository.Adminservice.ReportsRepository _objRepo = new SIIRepository.Adminservice.ReportsRepository();
+                                    System.Data.DataSet _ds = _objRepo.SELECT_PHASE2_RESULT_MERIT_ALLOTED("CountryWiseList", ViewBag.ProgrammeLevel, ViewBag.Value, ViewBag.Alloted);
+                                    if (_ds != null)
+                                    {
+                                        if (_ds.Tables[0].Rows.Count > 0)
+                                        {
+                                            int i = 1;
+                                            foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                            {
+                                                <tr>
+                                                    <td>@_dr["MeritRank"].ToString()</td>
+                                                    <td>@_dr["MeritMarks"].ToString()</td>
+                                                    <td>
+                                                        <a href="~/Admin/PreviewStudent/ViewDetails/@_dr["Studentid"].ToString()?d=ChoiceFilling" target="_blank">
+                                                            @_dr["Studentid"].ToString()
+                                                        </a>
+                                                    </td>
+                                                    <td>@_dr["StudentName"].ToString()</td>
+                                                    <td>@Convert.ToDateTime(_dr["DateOfBirth"].ToString()).ToString("dd-MM-yyyy")</td>
+                                                    <td>@_dr["Country_Name"].ToString()</td>
+                                                    <td>@_dr["StudentGender"].ToString()</td>
+                                                    <td>@_dr["Mobile"].ToString()</td>
+                                                    <td>@_dr["Email"].ToString()</td>
+                                                    <td>@_dr["PassportNo"].ToString() (@_dr["PassportIssueCountry"].ToString())</td>
+                                                    <td>@_dr["CitizenshipNumber"].ToString()</td>
+                                                    <td>@_dr["InstituteID_Alloted"].ToString()</td>
+                                                    <td>@_dr["InstituteName"].ToString()</td>
+                                                    <td>@_dr["InstituteType"].ToString()</td>
+                                                    <td>@_dr["Discipline"].ToString()</td>
+                                                    <td>@_dr["ProgrammeLevel"].ToString()</td>
+                                                    <td>@_dr["Qualification"].ToString()</td>
+                                                    <td>@_dr["CourseOfStudy"].ToString()</td>
+                                                    <td>@_dr["FeeWaiver"].ToString()</td>
+                                                    <td>@_dr["EC_DISPLAY_STR"].ToString()</td>
+                                                    <td>@_dr["AE_DISPLAY_STR"].ToString()</td>
+                                                    <td>
+                                                        @if (_dr["FeeWaiverRemarks"].ToString() == "Institute")
+                                                        {
+                                                            <span>Tuition Fee Waiver</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>@_dr["FeeWaiverRemarks"].ToString()</span>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.flash.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.print.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.colVis.js" type="text/javascript"></script>
+    <script src="/assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $("#mainToggle").addClass("be-wrapper be-collapsible-sidebar be-collapsible-sidebar-collapsed");
+
+            $(".dataTable").DataTable({
+                searching: true,
+                paging: true,
+                info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
+                lengthMenu: [[25, 50, -1], [25, 50, "All"]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csvHtml5',
+                        text: 'Export',
+                        titleAttr: 'CSV'
+                    },
+                ],
+                columnDefs: [{
+                    "targets": 5,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}

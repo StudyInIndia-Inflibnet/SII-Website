@@ -1,0 +1,524 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Profile <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#navInstituteDetails" data-toggle="tab">Institute Details</a></li>
+                    <li><a href="#navInternationalCollaboration" data-toggle="tab">International Collaboration</a></li>
+                    <li><a href="#navKeyStatistics" data-toggle="tab">Key Statistics</a></li>
+                    <li><a href="#navIndustryAss" data-toggle="tab">Industry Associations</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Institute Details*@
+                    <div id="navInstituteDetails" class="tab-pane active cont">
+                        <form id="frmInstituteDetails" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" id="hdfID" value="0" />
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Institute Name&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtInstituteName" type="text" class="form-control" placeholder="Name" name="InstituteName" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtEmail" type="email" class="form-control" placeholder="Email" name="Email" required="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address&nbsp;<span style="color:red">*</span></label>
+                                        <textarea id="txtAddress" class="form-control" rows="5" name="Address" placeholder="Address" required=""></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>State / Union Territory&nbsp;<span style="color:red">*</span></label>
+                                        <select id="drpstate" name="State" required="" class="form-control"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>City&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtCity" type="text" class="form-control" name="City" placeholder="City" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Pin&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtPin" data-parsley-type="number" data-parsley-length="[6,6]" data-parsley-length-message="Pin number should be 6 digit long." type="text" class="form-control allow_only_number" name="Pin" placeholder="Pin" required="" maxlength="6" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Year of Establishment&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtYOE" data-parsley-type="number" data-parsley-length="[4,4]" data-parsley-length-message="Year of Establishment should be 4 digit long." type="text" class="form-control allow_only_number" name="YOE" placeholder="YYYY" required="" maxlength="4" />
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>History</label>
+                                            <textarea class="form-control" required="" name="History" id="txtHistory" placeholder="History"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Awards and Accolades</label>
+                                            <textarea class="form-control" required="" name="Awards" id="txtAwards" placeholder="Awards and Accolades"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fellows</label>
+                                            <textarea class="form-control" required="" name="Fellows" id="txtFellows" placeholder="Fellows"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>News</label>
+                                            <textarea class="form-control" required="" id="txtNewsArea" name="NewsArea" placeholder="News"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Area</label>
+                                            <textarea class="form-control" required="" id="txtNewsArea" name="NewsArea" placeholder="Area"></textarea>
+                                        </div>
+                                    </div>*@
+                            </div>
+                            <hr />
+                            @*<div class="row hide">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Select program(s) offering Study in India</label>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkENGG" value="ENGG" class="ProgramOffered" /> ENGINEERING</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkMGMT" value="MGMT" class="ProgramOffered" /> MANAGEMENT</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkARCH" value="ARCH" class="ProgramOffered" /> ARCHITECTURE</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkLAW" value="LAW" class="ProgramOffered" /> LAW</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkMEDI" value="MEDI" class="ProgramOffered" /> MEDICAL</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label><input type="checkbox" id="chkPHRM" value="PHRM" class="ProgramOffered" /> PHARMACY</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label><input type="checkbox" id="chkARTS" value="ARTS" class="ProgramOffered" /> ARTS / HUMANITIES / SCIENCE / COMMERCE</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Academic Courses&nbsp;<span style="color:red">*</span></label>
+                                        <textarea class="form-control" required="" id="txtAcademicCourses" name="AcademicCourses" rows="4" placeholder="Academic Courses"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Area of excellence&nbsp;<span style="color:red">*<small>(Maximum 50 Words)</small></span></label>
+                                        <textarea class="form-control word-limits-check" required="" id="txtAreaOfExcellence" name="AreaOfExcellence" rows="4" placeholder="Area of excellence" data-parsley-word-limit="50"></textarea>
+                                        <small class="word-counts" style="display:none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Research capability and focus area&nbsp;<span style="color:red">*<small>(Maximum 50 Words)</small></span></label>
+                                        <textarea class="form-control word-limits-check" required="" id="txtResearchCapability" name="ResearchCapability" rows="4" placeholder="Research capability and focus area" data-parsley-word-limit="50"></textarea>
+                                        <small class="word-counts" style="display:none;"></small>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Faculty overview</label>
+                                            <textarea class="form-control" required="" id="txtFacultyOverview" name="FacultyOverview" placeholder="Faculty overview"></textarea>
+                                        </div>
+                                    </div>*@
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Notable research/publication&nbsp;<span style="color:red">*</span></label>
+                                        <textarea class="form-control" id="txtNotableResearchPublication" name="NotableResearchPublication" rows="4" placeholder="Notable research/publication" required=""></textarea>
+                                        <small class="word-counts" style="display:none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About Institution&nbsp;<span style="color:red">*<small>(Maximum 150 Words)</small></span></label>
+                                        <textarea id="txtDescription" class="form-control word-limits-check" placeholder="Description regarding History,Award,Fellows,News,Area" rows="5" name="Description" required="" data-parsley-word-limit="150"></textarea>
+                                        <small class="word-counts" style="display:none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Institute Website URL<span style="color:red">*</span></label>
+                                        <input type="url" id="txtURL" name="instituteweburl" class="form-control" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 table-bordered">
+                                    <div class="form-group" style="padding-top:10px; padding-left:40px">
+                                        <br />
+                                        <label><input type="checkbox" id="chkNIRFRanking" /> NIRF Participation</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 table-bordered">
+                                    <div class="form-group" style="padding-top:10px; padding-left:40px">
+                                        <br />
+                                        <label><input type="checkbox" id="chkNBANAACAccreditation" /> NBA / NAAC Accreditation</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    @*International Collaboration*@
+                    <div id="navInternationalCollaboration" class="tab-pane">
+                        <form id="frmInternationalCollaboration" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" id="hdfinternationnal_collaboration" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewCollobration" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Name of program/Scheme/Events&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtnameofprogram" type="text" class="form-control" placeholder="Name of program/Scheme/Events" name="NameOfProgram" required="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Collaborative Institute&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtCollaborativeInstitute" type="text" class="form-control" placeholder="Collaborative Institute" name="CollaborateInstitute" required="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Collaborative Country&nbsp;<span style="color:red">*</span></label>
+                                        <input id="txtCollaborativeCountry" type="text" class="form-control" placeholder="Collaborative Country" name="Collaborate_country" required="" />
+                                        @*@Html.DropDownList("Collaboratecountry", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpCountry",
+                                                @required = ""
+                                            })*@
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address&nbsp;<span style="color:red">*</span></label>
+                                        <textarea class="form-control" required="" id="txtaddress" name="CollaborateAddress" placeholder="Address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Remarks&nbsp;<span style="color:red">*</span></label>
+                                        <textarea class="form-control" required="" id="txtremarks" name="Remarks" placeholder="Remarks"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSaveInternationalCollaboration" type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr>
+                                            <th>Srno</th>
+                                            <th>Name of program/Scheme/Events</th>
+                                            <th>Collaborative Institute</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    @*Key Statistics*@
+                    <div id="navKeyStatistics" class="tab-pane">
+                        <form id="frmKeyStatistics" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" id="hdnnavKeyStatistics" value="0" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Total number of degree awarded(For single academic year)&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfStudentDegreeAward" id="txttotalnumberdegree" type="text" class="form-control allow_only_number" placeholder="Total number of degree awarded" required="" maxlength="6" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Students Strength (Per Year)&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfStudentStrength" id="txtstudentStrength" type="text" class="form-control allow_only_number" maxlength="6" placeholder="Total numner of students awarded" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>International student intake per year&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfInterStudentIntake" id="txtInternationalstudentintake" type="text" class="form-control allow_only_number" maxlength="6" placeholder="International student intake" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Number of research paper produced&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfResearch" id="txtNumberofresearchpaperproduced" type="text" class="form-control allow_only_number" placeholder="Number of research paper produced" maxlength="6" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Number of patents registered&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfPatents" id="txtNumberofpatentsregistered" type="text" class="form-control allow_only_number" maxlength="6" placeholder="Number of patents registered" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Strength of staff (Full time)&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfFullTimeStafStrength" id="txtStrengthofstaff_fulltime" type="text" class="form-control allow_only_number" maxlength="6" placeholder="Strength of staff (Full time)" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Strength of staff (Part time)&nbsp;<span style="color:red">*</span></label>
+                                        <input name="NoOfPartTimeStafStrength" id="txtStrengthofstaff_Parttime" type="text" class="form-control allow_only_number" placeholder="Strength of staff (Part time)" maxlength="6" required="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSaveKeyStatistics" type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Industry Associations*@
+                    <div id="navIndustryAss" class="tab-pane">
+                        <form id="frmIndustryAss" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="ID" id="hdnIndustryAssociations" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Famous Corporate Projects&nbsp;<span style="color:red">*<small>(Maximum 20 Words)</small></span></label>
+                                        <table class="table">
+                                            <tr>
+                                                <td style="width:10px;">1</td>
+                                                <td>
+                                                    <input name="FamousProject" type="text" class="form-control" placeholder="Famous Corporate Projects" id="txtCorporateProjects" required="" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <input name="FamousProject2" type="text" class="form-control" placeholder="(Optional)" id="txtCorporateProjects2" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <input name="FamousProject3" type="text" class="form-control" placeholder="(Optional)" id="txtCorporateProjects3" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    <input name="FamousProject4" type="text" class="form-control" placeholder="(Optional)" id="txtCorporateProjects4" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    <input name="FamousProject5" type="text" class="form-control" placeholder="(Optional)" id="txtCorporateProjects5" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Sponsored Researches&nbsp;<span style="color:red">*<small>(Maximum 20 Words)</small></span></label>
+                                        <table class="table">
+                                            <tr>
+                                                <td style="width:10px;">1</td>
+                                                <td>
+                                                    <input name="Researches" type="text" class="form-control" placeholder="Famous Corporate Projects" id="txtSponsoredresearches" required="" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <input name="Researches2" type="text" class="form-control" placeholder="(Optional)" id="txtSponsoredresearches2" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <input name="Researches3" type="text" class="form-control" placeholder="(Optional)" id="txtSponsoredresearches3" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                    <input name="Researches4" type="text" class="form-control" placeholder="(Optional)" id="txtSponsoredresearches4" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                    <input name="Researches5" type="text" class="form-control" placeholder="(Optional)" id="txtSponsoredresearches5" data-parsley-word-limit="20" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Placement Offerings (Overview)&nbsp;<span style="color:red">*<small>(Maximum 150 Words)</small></span></label>
+                                        @*<input name="PlacementOffering" type="text" class="form-control" placeholder="Placement Offerings" id="txtPlacementOfferings" required />*@
+                                        <textarea name="PlacementOffering" type="text" class="form-control" placeholder="Placement Offerings" rows="3" id="txtPlacementOfferings" required="" data-parsley-word-limit="150"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Summer internship opportunities (Overview)&nbsp;<span style="color:red">*<small>(Maximum 150 Words)</small></span></label>
+                                        @*<input name="SummerInternship" type="text" class="form-control" placeholder="Summer internship opportunities" id="txtinternshipopportunities" required />*@
+                                        <textarea name="SummerInternship" type="text" class="form-control" placeholder="Summer internship opportunities" rows="3" id="txtinternshipopportunities" required="" data-parsley-word-limit="150"></textarea>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Sponsored researches</label>
+                                            <textarea class="form-control" required="" id="txtNewsArea" name="Address" placeholder="Address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Placement Offerings</label>
+                                            <textarea class="form-control" required="" id="txtNewsArea" name="Address" placeholder="Address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Summer internship opportunities</label>
+                                            <textarea class="form-control" required="" id="txtNewsArea" name="Address" placeholder="Address"></textarea>
+                                        </div>
+                                    </div>*@
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSaveIndustryAssociations" type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <style>
+        .word-counts{
+            color:red;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/validations/frmvalidations.js"></script>
+    <script src="~/Scipts/Areas/Institute/Details.js"></script>
+    <script src="~/Scipts/Areas/Institute/InternationalCollaboration.js"></script>
+    <script src="~/Scipts/Areas/Institute/navKeyStatistics.js"></script>>
+    <script src="~/Scipts/Areas/Institute/IndustryAssociations.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+
+            window.Parsley
+                .addValidator('wordLimit', {
+                    validateString: function (value, requirement) {
+                        var valueLen = value.split(/\b[\s,\.-:;]*/);
+                        return false === valueLen.length > requirement;
+                    },
+                    messages: {
+                        en: 'Maximum %s words allowed.'
+                    }
+                });
+        });
+    </script>
+}
+

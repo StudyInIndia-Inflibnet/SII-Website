@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "Conversion of Coefficient, Grades, GPA, Marks etc.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags {
+    <link rel="canonical" href="https://www.studyinindia.gov.in/GradesConversion" />
+}
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Conversion of Coefficient, Grades, GPA, Marks etc.</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")events">Grade Conversion Document</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 wow fadeInLeft">
+                <div class="section-title">
+                    <h3>Conversion of Coefficient, Grades, GPA, Marks etc. system(as followed in different countries) to Percentage system for Study in India programme</h3>
+                    <h3 class="inner-title"><span>Instructions:</span></h3>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>I.</td>
+                                <td class="text-justify">An indicative equivalence of Coefficient, Grades, GPA, Marks etc. as followed in different countries, to Percentage as recommended for Study in India programme, can be assessed as follow in the reference conversion table.</td>
+                            </tr>
+                            <tr>
+                                <td>II.</td>
+                                <td class="text-justify">Students can consult their respective Education board for the exact Grade/GPA conversions and in case of non-availability, kindly refer the reference table.</td>
+                            </tr>
+                            <tr>
+                                <td>III.</td>
+                                <td class="text-justify">The formula given in the reference conversion table, are only an approximation and not exact.</td>
+                            </tr>
+                            <tr>
+                                <td>IV.</td>
+                                <td class="text-justify">The submitted scores in percentage would be first verified by the Indian Authorities and their decision in this regard would be binding on student.</td>
+                            </tr>
+                            <tr>
+                                <td>V.</td>
+                                <td class="text-justify">The home country as mentioned in the following reference table is the country of the participating student.</td>
+                            </tr>
+                            <tr>
+                                <td>VI.</td>
+                                <td class="text-justify">In-case of any help is required, please contact us at toll free helpline at <a href="tel:+919899450350">+919899450350</a>  or email at <a href="mailto:help.studyinindia@gov.in">help.studyinindia@gov.in</a> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="single-service-tab-items">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        <h3 class="inner-title"><span>Reference Table:</span></h3>
+                                        <table class="table table-bordered table-striped">
+                                            <thead style="background-color:#7f7bd5; color:#fff">
+                                                <tr>
+                                                    <th rowspan="2" style="width:10%">srno</th>
+                                                    <th rowspan="2" style="width:15%">Country</th>
+                                                    <th rowspan="2">Coefficient, Grades, GPA, Marks (as applicable) for the home country</th>
+                                                    <th rowspan="2" style="width:15%">Percentage conversion as per Study in India Programme</th>
+                                                    <th colspan="4" style="width:30%">For e.g.</th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="width:15%">Score of the student as per home country</th>
+                                                    <th style="width:15%">Score of the student as per Study in India Programme</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align:center">
+                                                @{
+                                                    SIIRepository.FrontPanel.InstituteSearchRepository r_grade = new SIIRepository.FrontPanel.InstituteSearchRepository();
+                                                    System.Data.DataSet _ds = r_grade.SELECT_TBL_GRADE();
+
+                                                    if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                            {
+                                                                <tr>
+                                                                    <td>@_dr["counts"].ToString()</td>
+                                                                    <td>@_dr["Country_Name"].ToString()</td>
+                                                                    <td colspan="4">
+                                                                        <table class="table table-bordered table-hover">
+                                                                            <tbody>
+                                                                                @{
+                                                                                    System.Data.DataSet _ds1 = r_grade.SELECT_TBL_GRADE(_dr["Country"].ToString());
+                                                                                    if (_ds1 != null)
+                                                                                    {
+                                                                                        if (_ds1.Tables[0].Rows.Count > 0)
+                                                                                        {
+                                                                                            foreach (System.Data.DataRow _drSub1 in _ds1.Tables[1].Rows)
+                                                                                            {
+                                                                                                <tr>
+                                                                                                    <td style="width:30%; text-align:left">@_drSub1["Coefficient_Grades_GPA"].ToString()</td>
+                                                                                                    <td style="width:15%">@_drSub1["Percentage_conversion"].ToString()</td>
+                                                                                                    <td style="width:15%">@_drSub1["Score_student_home"].ToString()</td>
+                                                                                                    <td style="width:15%">@_drSub1["Score_student_sii"].ToString()</td>
+                                                                                                </tr>
+                                                                                            }
+                                                                                        }
+                                                                                    }}
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <tr><td colspan="6">No Data Available.</td></tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr><td colspan="6">No Data Available.</td></tr>
+                                                    }
+
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

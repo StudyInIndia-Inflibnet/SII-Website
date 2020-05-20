@@ -1,0 +1,80 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "ExtendedAssistant");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Facilities for International Students</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                    <table class="table table-bordered">
+                        <tr>
+                            <td colspan="4">
+                                International Student Cell/Office In Charge.| International Student Cell/Office Committee Head/Members.| Buddy/mentor program/international committee.: <strong>
+                                    @(_dr["HasCellOffice"].ToString().ToLower() == "true" ? "Yes" : "No")
+                                </strong>
+                            </td>
+                        </tr>
+                        @if (_dr["HasCellOffice"].ToString().ToLower() == "true")
+                        {
+                            <tr>
+                                <td colspan="4">
+                                    Brief: <br /><strong>@_dr["CellOfficeDesc"].ToString()</strong>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4">
+                                International Students Visa Assistance Facilities.: <strong>
+                                    @(_dr["HasVisaAssistance"].ToString().ToLower() == "true" ? "Yes" : "No")
+                                </strong>
+                            </td>
+                        </tr>
+                        @if (_dr["HasVisaAssistance"].ToString().ToLower() == "true")
+                        {
+                            <tr>
+                                <td colspan="4">
+                                    Brief: <br /><strong>@_dr["VisaAssistanceDesc"].ToString()</strong>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <th colspan="4">Other Facility</th>
+                        </tr>
+                        <tr>
+                            <td>International Students Cultural Engagement facilities: <strong>@(_dr["HasCulturalEngagement"].ToString().ToLower()=="true"?"Yes":"No")</strong></td>
+                            <td>International Student On Boarding: <strong>@(_dr["HasStudentBoarding"].ToString().ToLower() == "true" ? "Yes" : "No")</strong></td>
+                            <td>Arrival & welcome: <strong>@(_dr["HasArrival"].ToString().ToLower() == "true" ? "Yes" : "No")</strong></td>
+                            <td>Induction program for International Students: <strong>@(_dr["HasMentor"].ToString().ToLower() == "true" ? "Yes" : "No")</strong></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">Contact person for above mention facilities</th>
+                        </tr>
+                        <tr>
+                            <td>Name : <br /><strong>@_dr["ContactPersonName"].ToString()</strong></td>
+                            <td>Email : <br /><strong>@_dr["ContactPersonEmail"].ToString()</strong></td>
+                            <td>Mobile : <br /><strong>@_dr["ContactPersonMobile"].ToString()</strong></td>
+                            <td>Phone : <br /><strong>@_dr["ContactPersonPhone"].ToString()</strong></td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

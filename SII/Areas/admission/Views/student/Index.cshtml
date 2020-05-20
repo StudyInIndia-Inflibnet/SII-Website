@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Student Profile</h2>
+        </div>
+    </div>
+}
+
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_MainTabs")
+        </div>*@
+    <div class="col-md-12">
+        <input id="hdnCustid" type="hidden" name="CUSTOMER_ID" value="0" />
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#_Basicinformation" data-toggle="tab">Basic Information</a></li>
+                    <li><a href="#_Academicinformation" data-toggle="tab">Academic information</a></li>
+                    <li><a href="#_Documentinformation" data-toggle="tab">Document infomation</a></li>
+                    <li><a href="#_BackgroundInformation" data-toggle="tab">Background Information</a></li>
+                    <li><a href="#_Declaration" data-toggle="tab">Declaration</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Basic Information*@
+                    <div id="_Basicinformation" class="tab-pane active cont">
+                        @Html.Partial("_Basicinformation")
+                    </div>
+                    @*Academic information*@
+                    <div id="_Academicinformation" class="tab-pane">
+                    </div>
+                    @*Document infomation*@
+                    <div id="_Documentinformation" class="tab-pane">
+                    </div>
+                    @*Background Information*@
+                    <div id="_BackgroundInformation" class="tab-pane">
+                    </div>
+                    @*Declaration*@
+                    <div id="_Declaration" class="tab-pane">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$(".datetimepicker").datepicker({
+            //    orientation: "left",
+            //    autoclose: !0,
+            //    dateFormat: "dd-mm-yy",
+            //    yearRange: '1900:' + (new Date().getFullYear() + 20),
+            //    // yearRange: (new Date().getFullYear() - 20),
+            //    todayHighlight: false,
+            //    changeMonth: true,
+            //    changeYear: true
+            //});
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                //if ($('#hdnCustid').val() == '0') {
+                //    window.location.href = '/admission/student';
+                //    return;
+                //}
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+                var tabName = $(this).attr("href").substr(1);
+                $(".tab-pane").each(function () {
+                    $(this).empty();
+                });
+                $.ajax({
+                    url: "/admission/student/" + tabName,
+                    cache: false,
+                    type: "get",
+                    dataType: "html",
+                    success: function (result) {
+                        $("#" + tabName).html(result);
+                    }
+                });
+                $(this).tab('show')
+            });
+            //$(".js-example-basic-single").select2();
+        });
+    </script>
+}
+

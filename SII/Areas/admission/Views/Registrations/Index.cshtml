@@ -1,0 +1,443 @@
+﻿@{
+    ViewBag.Title = "Student Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags {
+    <link rel="canonical" href="https://www.studyinindia.gov.in/admission/Registrations" />
+}
+
+
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="studentRegMain">
+    <div class="col-md-6 col-lg-6 col-xs-12 p0 leftRegImg">
+        <img src="~/img/studentReg.jpg" class="img-responsive" />
+        <div class="clearfix"></div>
+        <div class="pl60 counter-area studentRegCounter">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stdRegCount01">
+                        <img src="~/img/stdReg01.png" class="img-responsive" />
+                        <div class="regRightText">
+                            <small>Scholarships worth</small><br />
+                            $ <span class="counter-active">3500</span> <br />
+                            <small>per annum</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stdRegCount01">
+                        <img src="~/img/stdReg02.png" class="img-responsive" />
+                        <div class="regRightText">
+                            <span class="counter-active">100</span> + <br />
+                            <small>
+                                Premiere <br />
+                                Institutes
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stdRegCount01">
+                        <img src="~/img/stdReg03.png" class="img-responsive" />
+                        <div class="regRightText">
+                            <small>Choose From</small><br />
+                            <span class="counter-active">2600</span> + <br />
+                            <small>Courses</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-xs-12 p0 rightRegForm">
+        <h5>Please fill in your details to register</h5>
+        <form id="frmRegistration">
+            @Html.AntiForgeryToken()
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" required="" placeholder="First Name" name="FirstName" class="form-control allow_only_alphabet">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" required="" placeholder="Last Name" name="LastName" class="form-control allow_only_alphabet">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                @Html.DropDownList("CountryCode", new SelectList(ViewBag.CountryCode, "Country_id", "country_code"),
+                "--Select--",
+                new
+                {
+                    @class = "form-control",
+                    @id = "drpcountrycode",
+                    @required = ""
+                })
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <input type="text" required="" placeholder="Mobile No." name="Mobile" class="form-control allow_only_alphabet" data-parsley-maxlength="12" data-parsley-minlength-message="Invalid mobile number entered.">
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 mb15">
+                <input type="checkbox" checked="checked" id="whatsapp_consent" />
+                <small class="smalllabel">
+                    I would like to receive updates, reminders and notifications about Study in India program on my WhatsApp contact number.
+                </small>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <input type="email" required="" placeholder="Email" name="Email" class="form-control allow_only_alphabet" id="txtemailreg" oncopy="return false" onpaste="return false" oncut="return false">
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <input type="email" required placeholder="Enter Confirm Email" name="Email" class="form-control" id="txtconfirmemail" data-parsley-equalto="#txtemailreg" data-parsley-error-message="Confirm email should be same as email." oncopy="return false" onpaste="return false" oncut="return false">
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12 pr0">
+                <label class="linehight40">Date of Birth:</label>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <select id="drpDates" name="Date" class="form-control" required="">
+                    <option value="" selected="selected">DD</option>
+                    @{
+                        for (int i = 1; i <= 31; i++)
+                        {
+                            if (i < 10)
+                            {
+                                <option>0@(i)</option>
+                            }
+                            else
+                            {
+                                <option>@i</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <select name="Month" class="form-control" id="drpMonths" required="">
+                    <option value="" selected="selected">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                @Html.DropDownList("Year", new SelectList(ViewBag.Year, "Year", "Year"),
+                "YYYY",
+                new
+                {
+                    @class = "form-control",
+                    @id = "drpYear",
+                    @required = ""
+                })
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="password" required="" placeholder="Enter Password" class="form-control" id="txtpassword" name="ActualPassword">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="password" required="" placeholder="Enter Confirm Password" class="form-control" id="txtconfirmpassord" data-parsley-equalto="#txtpassword" data-parsley-error-message="Confirm password should be same as password.">
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <input class="form-control" type="text" required="" autocomplete="off" placeholder="Enter Captcha" name="CaptchaStr" id="txtCaptcha">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4"> <img id="imgLoginCaptcha" src="@Url.Content("~/")Captcha/GetCaptchaImage" tabindex="-1" style="height:44px; width:250px;"></div>
+            <div class="col-md-2 col-sm-2 col-xs-2 pr0"> <a href="javascript:;" tabindex="-1" class="btn btn-warning" id="btnRefreshCaptcha"><i class="fa fa-refresh"></i></a> </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <input type="checkbox" id="IAccept" checked="checked">
+                <small class="pLabel"> I accept the terms of <a href="https://www.studyinindia.gov.in/Privacypolicy" target="_blank">privacy policy</a> and would like to receive further updates about Study in India program. </small>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12 mt15">
+                <center>
+                    <a class="signup_OrangeBtn" id="btnRegister" href="javascript:;">Register</a>
+                </center>
+            </div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+            <div class="clearfix"></div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12 mt25">
+                <center>
+                    <p>Already have an account? <a class="green-text" href="@Url.Content("~/")admission/Login">Login</a> </p>
+                </center>
+            </div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="studentRegMainTab">
+            <div class="tabbable-panel">
+                <div class="tabbable-line">
+                    <ul class="nav nav-tabs ">
+                        <li class="active"> <a href="#tab_default_1" data-toggle="tab"> About Study in India</a> </li>
+                        <li class=""> <a href="#tab_default_2" data-toggle="tab"> FAQs</a> </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_default_1">
+                            <p class="text-justify">Study in India is a collaborative project under the Ministry of Human Resource Development by the Government of India. Study in India was put together to encourage the foreign student community to study in India’s top institutes and further India’s global identity as a student destination. </p>
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default studentRegAccordian">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#about1"><span class="fa fa-chevron-down"></span> What is Study in India?</a>
+                                        </h4>
+                                    </div>
+                                    <div id="about1" class="panel-collapse collapse in">
+                                        <div class="panel-body b0">
+                                            <p class="text-justify">With India ranked as the third largest higher education system, home to 39,931 colleges and 993 universities, Study in India is built to facilitate the student fraternity from all across the globe to come and experience the best of academic learning from the top institutions in India.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default studentRegAccordian">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#about2"><span class="fa fa-chevron-down"></span> What does Study in India offer?</a>
+                                        </h4>
+                                    </div>
+                                    <div id="about2" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p class="text-justify">In an abundant and extensive higher education system such as India, ranked as the third largest higher education system, the Study in India interface is a prime intermediary for students to explore, connect and apply to various top-ranked institutions in the country.</p>
+                                            <p class="text-justify">Students get to choose from a diverse set of more than 2600 courses and 120 top-ranked institutes. Some institutions also offer niche courses in Yoga, Buddhism, Ayurveda and more.</p>
+                                            <p class="text-justify">For the academic year 2020-21, the program avails 2,000 scholarships across the globeto inbound graduates and postgraduates, with each scholarship valued at $3,500. The program also offers approximately 25,000 seats with more than 9,500 fee waivers.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default studentRegAccordian">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#about3"><span class="fa fa-chevron-down"></span> What makes Study in India unique?</a>
+                                        </h4>
+                                    </div>
+                                    <div id="about3" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p class="text-justify">Study in India aims to provide international students with a unique blend of quality education and enterprising culture, to make the student feel at home away from home.</p>
+                                            <p class="text-justify">We’ve realized that students are in search of practical knowledge, personal and societal development within and outside the four walls of classrooms. It is with this objective that Study in India has built the program based on the following pillars - Culture of Diversity, Innovation & Creativity, Best Value Education, Enterprising Gene and Advanced Developing Economy.</p>
+                                            <p class="text-justify">‘Study in India’ Initiative has partnered with NIRF and NAAC certified institutions in the country, ensuring commitment to quality. By pursuing a course with our top institutes in India, students will have the following advantages -</p>
+                                            <ul>
+                                                <li>Internationally renowned degree, making you employable not only locally but globally;</li>
+                                                <li>Expertise in popular courses as well as niche disciplines, ranging from - Virtual and Augmented Reality, Artificial Intelligence and Cognitive Computing to traditional subjects, such as Ayurveda, yoga & classical dance.</li>
+                                                <li>Higher Institutions in India offer degrees that are competitive in the world market in terms of quality but are delivered at ~1/4th the cost hence guaranteeing value for money, making it high on ROI.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="tab_default_2">
+                            <div class="bs-example">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq1"><span class="fa fa-chevron-down"></span> What are the eligibility criteria to apply for the Study in India Scholarship?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq1" class="panel-collapse collapse in">
+                                            <div class="panel-body b0">
+                                                <p class="text-justify">To be eligible for the Study in India Scholarship, students should have registered with Study in India, completed an application on our website - www.studyinindia.gov.in and been inducted into a tufy in India partner institute. The scholarships are awarded on the basis of the following.</p>
+                                                <ul>
+                                                    <li>Students should have had a meritorious academic history in his / her secondary school, higher secondary school, and / or latest academic qualification.</li>
+                                                    <li>Students from the given list of countries on the website may appear for the Ind-SAT exam that is conducted by the Study in India team, and a merit list would be generated for the second-wave of shortlisting.</li>
+                                                    <li>The final shortlisted will be contacted by the Study in India team.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq2"><span class="fa fa-chevron-down"></span> What costs are covered under the Study in India Scholarship?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq2" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">The Study in India  Scholarship would ideally cover the following costs - admission fees, tuition fees, accommodation and food (canteen) expenses. However, if the annual fees is more than USD3500, then the scholarship would cover a part of the mentioned costs. Please note, the scholarship will not provide for a stipend or any out-of-pocket expenses.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq3"><span class="fa fa-chevron-down"></span> How much is the average tuition fees in India?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq3" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">Tuition fees vary across private and public institutes. However, the average cost of tuition fees in India would be an approximate USD3000, taking into account various factors.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq4"><span class="fa fa-chevron-down"></span> Are Indian institutes recognized globally?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq4" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">While, all Indian institutes in the premier category under the University Grants Commission (UGC) regulations are assessed and accredited by NAAC (National Assessment and Accreditation Council), the NIRF or the National Institute Ranking Framework ranks Indian universities and colleges.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq5"><span class="fa fa-chevron-down"></span> How many courses and institutes are covered under Study in India?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq5" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">India has the world’s third largest higher education network, with around 40,000 colleges and an approximate 1000 universities, which include both public and private institutes. Study in India has partnered with India’s top ranked 114 institutes, offering an approximate 2600 courses, which include mainstream courses and niche disciplines.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq6"><span class="fa fa-chevron-down"></span> How can I apply to Indian institutes through Study in India?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq6" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">To join the Study in India programme, you’d need to register on our website (www.studyinindia.gov.in), where you can directly apply to the best Indian institutes of your choice and preference. All you’d need to do is follow our five step process, which is as follows:</p>
+                                                <ul>
+                                                    <li>Explore Courses - Find a course of your interest.</li>
+                                                    <li>Register with Study in India - Register on the Study in India portal to be able to access our institutes.</li>
+                                                    <li>Fill Application - Fill in the basic details and proceed to choose your preferences.</li>
+                                                    <li>Complete Application - Submit application with preferred courses and institutes.</li>
+                                                    <li>Prepare to Study in India - We are excited to see you in India!</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq7"><span class="fa fa-chevron-down"></span> Is there a screening process to register with Study in India?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq7" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">There is no screening process to register with Study in India. But we do recommend that you register with us, if you are interested in pursuing an undergraduate, postgraduate or a doctorate degree with top-ranked Indian institutes. We review your eligibility for a scholarship after you have submitted the application form.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default studentRegAccordian">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#faq8"><span class="fa fa-chevron-down"></span> Is there anyway I could receive counselling about the Study in India program?</a>
+                                            </h4>
+                                        </div>
+                                        <div id="faq8" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <p class="text-justify">Our website, <a href="www.studyinindia.gov.in">www.studyinindia.gov.in</a> , is the bedrock of our operations and what we have to offer to the international student community. You can also get in touch with us on our Toll Free Number (+919899450350), message and call us on our Whatsapp Number (+918130013265) and email us on help.studyinindia@gov.in. Also find us on our official facebook group - <a href="https://www.facebook.com/groups/StudyInIndiaMHRDIndiaGovermentOfIndia/">https://www.facebook.com/groups/StudyInIndiaMHRDIndiaGovermentOfIndia/</a>. We’d be glad to have you join the Study in India community !</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="another-story-area quote-area testmonialsPart" style="display:none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 wow fadeInLeft">
+                    <div class="section-title">
+                        <center>
+                            <h2 class="middle-white-title white_text">Testimonials</h2>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                <div class="testmonialsTop">
+                    <div class="another-story-slide">
+                        <div class="another-story-single-slide">
+                            <div class="story-single-item">
+                                <div class="quote-text">
+                                    <i class="fa fa-quote-left"></i><span>While searching for funding opportunities, I chanced upon the Study in India program. The application process was pretty smooth, and the SII officials were very supportive. Also studying in India has been a remarkable experience, especially since I learnt their culture, language and have been with a diverse set of people.</span>
+                                    <i class="fa fa-quote-right"></i>
+                                </div>
+                                <div class="story-text">
+                                    <h4>Arifa Orfan</h4>
+                                    <span>Country: Afghanistan </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="another-story-single-slide">
+                            <div class="story-single-item">
+
+                                <div class="quote-text">
+                                    <i class="fa fa-quote-left"></i><span>While searching for funding opportunities, I chanced upon the Study in India program. The application process was pretty smooth, and the SII officials were very supportive. Also studying in India has been a remarkable experience, especially since I learnt their culture, language and have been with a diverse set of people.</span>
+                                    <i class="fa fa-quote-right"></i>
+                                </div>
+                                <div class="story-text">
+                                    <h4>Arifa Orfan</h4>
+                                    <span>Country: Afghanistan </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="another-story-single-slide">
+                            <div class="story-single-item">
+
+                                <div class="quote-text">
+                                    <i class="fa fa-quote-left"></i><span>While searching for funding opportunities, I chanced upon the Study in India program. The application process was pretty smooth, and the SII officials were very supportive. Also studying in India has been a remarkable experience, especially since I learnt their culture, language and have been with a diverse set of people.</span>
+                                    <i class="fa fa-quote-right"></i>
+                                </div>
+                                <div class="story-text">
+                                    <h4>Arifa Orfan</h4>
+                                    <span>Country: Afghanistan </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+</div>
+@section styles{
+    @*<link rel="stylesheet" type="text/css" href="~/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+        <link rel="stylesheet" type="text/css" href="~/assets/lib/material-design-icons/css/material-design-iconic-font.min.css" />*@
+    @*<link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />*@
+    <link href="~/css/pages/registration.css" rel="stylesheet" />
+}
+@section scripts{
+    @*<script src="~/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>*@
+    @*<script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>*@
+    @*<script src="~/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>*@
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/admission/StudentRegistrations.js"></script>
+    <script src="~/Scipts/CommonJS.js"></script>
+}
+
+

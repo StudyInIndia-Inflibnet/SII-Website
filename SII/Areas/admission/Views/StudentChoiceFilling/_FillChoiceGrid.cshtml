@@ -1,0 +1,84 @@
+﻿@model SIIModel.StudentRegister.mStudent_ch_choiceFilling
+@{
+
+    SIIRepository.StudentRegService.ChoiceFillingRepository _objRepository = new SIIRepository.StudentRegService.ChoiceFillingRepository();
+    SIIModel.StudentRegister.mStudent_ch_choiceFilling obj = new SIIModel.StudentRegister.mStudent_ch_choiceFilling();
+    obj.Discipline = Model.Discipline;
+    obj.ProgramLevel = Model.ProgramLevel;
+    obj.NameofCourse = Model.NameofCourse;
+    obj.Specialization = Model.Specialization;
+    obj.ip = Request.ServerVariables["REMOTE_ADDR"].ToString();
+    obj.studentID = Session["studentid"].ToString();
+    obj.Type = "Fill_choicefilling";
+    System.Data.DataSet _ds = _objRepository.Student_Ch_Choice_Filling_From(obj);
+    if (_ds != null)
+    {
+        <table class="table table-striped table-hover table-bordered table-fw-widget datatable-grid choice-table data-grid2" id="tbl2">
+            <thead>
+                <tr>
+                    <th>Srno</th>
+                    <th>Institute Name</th>
+                    <th>Institute Type</th>
+                    <th>Discipline</th>
+                    <th>Program</th>
+                    <th>Course</th>
+                    <th>Specialization</th>
+                    <th>Eligibility</th>
+                    <th>Apply</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyFill">
+                @if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int index = 1;
+                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                    {
+                        <tr id="trStChGrid@_dr["ID"].ToString()">
+                            <td>@(index++)</td>
+                            <td>@_dr["InstituteName"].ToString()</td>
+                            <td>@_dr["InstituteType"].ToString()</td>
+                            <td>@_dr["Discipline"].ToString()</td>
+                            <td>@_dr["ProgramLevel"].ToString()</td>
+                            <td>@_dr["Coursename"].ToString()</td>
+                            <td>@_dr["Specialization"].ToString()</td>
+                            <td>
+                                @_dr["Eligibility"].ToString()
+                                @if (_dr["AdditionalEligibility"].ToString() != "")
+                                {
+                                    <hr /><strong>Additional Qualification:</strong><br />
+                                    @_dr["AdditionalEligibility"].ToString()
+                                }
+                                else
+                                {
+                                    <hr /><strong>Additional Qualification:</strong> <span>---</span>
+                                }
+                            </td>
+                            <td>
+                                <button data-id="@_dr["ID"].ToString()" data-instid="@_dr["InstituteID"].ToString()" type="button" class="btn btn-space btn-success btnapply"> Apply</button>
+                                @* data-toggle="modal" data-target="#md-default" *@
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}
+<div id="md-fullWidth" tabindex="-1" role="dialog" class="modal fade" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog full-width">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="eligible">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btnsavechoice">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.loading').hide();
+</script>
+@*<script src="~/Scipts/Areas/admission/StudentChoiceFilling/SaveChoice.js"></script>*@

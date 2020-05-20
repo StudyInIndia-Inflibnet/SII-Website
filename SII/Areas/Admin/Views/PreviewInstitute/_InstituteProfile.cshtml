@@ -1,0 +1,193 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "InstituteProfile");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Institute Profile</h2>
+                <h4>Institute Details</h4>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Institute Name : <strong>@_dr["InstituteName"].ToString()</strong></td>
+                                @if (_dr["Email"].ToString() != "" && _dr["OtherEmail"].ToString() != "")
+                                {
+                                <td colspan="2">Email  : <strong>@_dr["Email"].ToString(),@_dr["OtherEmail"].ToString()</strong></td>
+                                }
+                                else if (_dr["Email"].ToString() != "" && _dr["OtherEmail"].ToString() == "")
+                                {
+                                <td colspan="2">Email  : <strong>@_dr["Email"].ToString()</strong></td>
+                                }
+                                else
+                                {
+                                <td colspan="2">Email  : <strong>--</strong></td>
+                                }
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Address: <strong>@_dr["Address"].ToString()</strong></td>
+                                <td>State: <strong>@_dr["State"].ToString()</strong></td>
+                                <td>City: <strong>@_dr["City"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Pin: <strong>@_dr["Pin"].ToString()</strong></td>
+                                <td>Year of Establishment: <strong>@_dr["YOE"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Academic Courses: <br /><strong>@_dr["AcademicCourses"].ToString()</strong></td>
+                                <td colspan="2">Area of excellence: <br /><strong>@_dr["AreaOfExcellence"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Research capability and focus area: <br /><strong>@_dr["ResearchCapability"].ToString()</strong></td>
+                                <td colspan="2">Notable research/publication: <br /><strong>@_dr["NotableResearchPublication"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    About Institution(Maximum Words 400): <br /><strong>@_dr["Description"].ToString()</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Institute URL: <strong>@_dr["instituteweburl"].ToString()</strong></td>
+                                <td>
+                                    NIRF Participation: <strong>
+                                        @(_dr["NIRFRanking"].ToString().ToLower() == "true" ? "Yes" : "No")
+                                    </strong>
+                                </td>
+                                <td>
+                                    NBA / NAAC Accreditation:
+                                    <strong>
+                                        @(_dr["NBANAACAccreditation"].ToString().ToLower() == "true" ? "Yes" : "No")
+                                    </strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                <h4>International Collaboration</h4>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    int indexInternationalCollaboration = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Name of program/Scheme/Events</th>
+                                <th>Collaborative Institute</th>
+                                <th>Collaborative Country</th>
+                                <th>Address</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                        {
+                        <tr>
+                            <td>
+                                @(indexInternationalCollaboration++)
+                            </td>
+                            <td>@_dr["NameOfProgram"].ToString()</td>
+                            <td>@_dr["CollaborateInstitute"].ToString()</td>
+                            <td>@_dr["Country_Name"].ToString()</td>
+                            <td>@_dr["CollaborateAddress"].ToString()</td>
+                            <td>@_dr["Remarks"].ToString()</td>
+                        </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Key Statistics</h4>
+                if (_ds.Tables[2].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[2].Rows[0];
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Total number of degree awarded(For single academic year) : <strong>@_dr["NoOfStudentDegreeAward"].ToString()</strong></td>
+                                <td>Students Strength : <strong>@_dr["NoOfStudentStrength"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>International student intake : <strong>@_dr["NoOfInterStudentIntake"].ToString()</strong></td>
+                                <td>Number of research paper produced : <strong>@_dr["NoOfResearch"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Number of patents registered : <strong>@_dr["NoOfPatents"].ToString()</strong></td>
+                                <td>Strength of staff (Full time) : <strong>@_dr["NoOfFullTimeStafStrength"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Strength of staff (Part time) : <strong>@_dr["NoOfPartTimeStafStrength"].ToString()</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Industry Associations</h4>
+                if (_ds.Tables[3].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[3].Rows[0];
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Famous Corporate Projects : <br /><strong>@_dr["FamousProject"].ToString()</strong></td>
+                                <td>Sponsored Researches : <br /><strong>@_dr["Researches"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Famous Corporate Projects : <br /><strong>@_dr["PlacementOffering"].ToString()</strong></td>
+                                <td>Sponsored Researches : <br /><strong>@_dr["SummerInternship"].ToString()</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

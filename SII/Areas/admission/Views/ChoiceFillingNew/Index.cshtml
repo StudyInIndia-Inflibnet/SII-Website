@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Choice Filling <span style="color: red">
+                    ( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )
+                </span>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row ">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider">Choice Filling</div>
+            <div class="panel-body">
+                <div role="alert" class="alert alert-primary alert-icon alert-icon-border alert-dismissible">
+                    <div class="icon"><span class="mdi mdi-info-outline"></span></div>
+                    <div class="message">
+                        <button type="button" data-dismiss="alert" aria-label="Close" class="close"></button><strong>Dear candidate, thank you for showing interest in Study in India initiative. The deadline for choice filling of preferences in Indian colleges has been over. The results will be declared shortly.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

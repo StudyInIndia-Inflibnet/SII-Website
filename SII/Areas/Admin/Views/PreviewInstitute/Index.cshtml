@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Details<span style="color: red">(@TempData["InstituteID"].ToString()&nbsp;&nbsp;@TempData["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12 col-md-6 ">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider xs-pb-15">Head Officer</div>
+            <div class="panel-body xs-pt-25">
+                <table class="table  table-bordered">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <i class="mdi mdi-account"></i> @ViewBag.HeadName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <i class="mdi mdi-email nodalheadicon"></i> @ViewBag.HeadEmail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="mdi mdi-cellphone-iphone nodalheadicon"></i> @ViewBag.HeadMobile
+                            </td>
+                            <td>
+                                <i class="mdi mdi-phone nodalheadicon"></i> @ViewBag.HeadPhone
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-heading panel-heading-divider xs-pb-15">Nodal Officer</div>
+            <div class="panel-body xs-pt-25">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <i class="mdi mdi-account nodalheadicon"></i> @ViewBag.NodalName
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <i class="mdi mdi-email nodalheadicon"></i> @ViewBag.NodalEmail
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="mdi mdi-cellphone-iphone nodalheadicon"></i> @ViewBag.NodalMobile
+                            </td>
+                            <td>
+                                <i class="mdi mdi-phone nodalheadicon"></i> @ViewBag.NodalPhone
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6 ">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider xs-pb-15">Overall Progress </div>
+            <div class="panel-body xs-pt-25">
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Institute Profile</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.InstituteProfile%" class="progress-bar @(ViewBag.InstituteProfile=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.InstituteProfile%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Details" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=InstituteProfile" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Courses</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.Courses%" class="progress-bar @(ViewBag.Courses=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.Courses%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Courses" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=Courses" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Niche Courses</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.NicheCourses%" class="progress-bar @(ViewBag.NicheCourses=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.NicheCourses%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Courses" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=NicheCourses" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Campus</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.Campus%" class="progress-bar @(ViewBag.Campus=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.Campus%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Campus" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=Campus" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Cost of Living</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.CostOfLiving%" class="progress-bar @(ViewBag.CostOfLiving=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.CostOfLiving%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Fees" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=CostOfLiving" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Extended Assistant</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.InternationalStudents%" class="progress-bar @(ViewBag.InternationalStudents=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.InternationalStudents%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/InternationalStudents" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=ExtendedAssistant" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Faculty / Alumni</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.FacultyAlumni%" class="progress-bar @(ViewBag.FacultyAlumni=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.FacultyAlumni%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/FacultyAlumni" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=FacultyAlumni" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">How to Reach</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.HowToReach%" class="progress-bar @(ViewBag.HowToReach=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.HowToReach%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/HowToReach" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=HowToReach" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><a href="javascript:void(0)"><span class="title">Gallery</span></a></div>
+                    <div class="col-md-5">
+                        <div class="progress">
+                            <div style="width: @ViewBag.Gallery%" class="progress-bar @(ViewBag.Gallery=="100"?"progress-bar-success":"progress-bar-info")">@ViewBag.Gallery%</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @*<a href="@Url.Content("~/")Institute/Gallery" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>*@
+                        <a href="@Url.Content("~/")Admin/PreviewInstitute/ViewDetails?d=Gallery" class="btn btn-warning btn-sm" target="_blank" title="View"><i class="mdi mdi-desktop-mac"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalInstituteProfile" tabindex="-1" role="dialog" class="modal modal-lg fade colored-header colored-header-primary">
+    <div class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-body" id="modalInstituteBody">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" placeholder="username@example.com" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Your name</label>
+                    <input type="text" placeholder="John Doe" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Your birth date</label>
+                    </div>
+                </div>
+                <div class="row no-margin-y">
+                    <div class="form-group col-xs-3">
+                        <input type="text" placeholder="DD" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <input type="text" placeholder="MM" class="form-control">
+                    </div>
+                    <div class="form-group col-xs-3">
+                        <input type="text" placeholder="YYYY" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="be-checkbox">
+                            <input id="check2" type="checkbox">
+                            <label for="check2">Send me notifications about new products and services.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+                @*<button type="button" data-dismiss="modal" class="btn btn-primary md-close">Print</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <style>
+        .nodalheadicon {
+            font-size: 16px;
+        }
+
+        .modal-content {
+            border-radius: 3px;
+            margin: 30px auto;
+            max-width: 80%;
+            min-width: 320px;
+            position: relative;
+        }
+
+        .modal-dialog {
+            margin: 30px auto;
+            width: 100%;
+        }
+
+        .modal-lg {
+            width: 100%;
+        }
+    </style>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.btn-view-modal').on('click', function (e) {
+                e.preventDefault();
+                $('#modalInstituteBody').html("<h2 class='text-center'>Loading data...</h2><br>");
+                $('#modalInstituteProfile').modal('show');
+                var btn = $(this);
+                var modalFor = btn.attr('data-modal-for');
+                $.ajax({
+                    method: 'GET',
+                    url: $('#hdfBaseUrl').val() + 'Admin/PreviewInstitute/_' + modalFor,
+                    data: { flag_faculty: $('#hdfAlumnitype').val() },
+                    dataType: 'html'
+                }).done(function (response) {
+                    $('#modalInstituteBody').html(response);
+                }).error(function () {
+                    swal("Oops...!", "Please try after some time");
+
+                });
+            });
+        });
+    </script>
+}
+

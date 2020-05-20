@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags {
+    <link rel="canonical" href="https://www.studyinindia.gov.in/blogs" />
+
+}
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Study in India Blogs</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")">Home</a> / Blogs</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            @{
+                SIIRepository.Adminservice.BlogPost_Repository _objRepo = new SIIRepository.Adminservice.BlogPost_Repository();
+                SIIModel.Admin.mBlogPost _obj = new SIIModel.Admin.mBlogPost();
+                System.Data.DataSet _ds = _objRepo.SELECT_BLOGPOST_FOR_LIST();
+                if (_ds != null)
+                {
+                    if (_ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+
+                            <div class="col-sm-4 wow fadeInRight">
+                                <div class="single-blog">
+                                    <div class="blog-img"> <img src="@Url.Content("~/")@_dr["BlogImage"].ToString()" alt=""> <span>@(Convert.ToDateTime(_dr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy | hh:mm tt"))</span> </div>
+                                    <div class="blog-box">
+                                        <h4>@_dr["BlogTitle"].ToString()</h4>
+                                        <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/@_dr["UniqueCode"].ToString().Replace("?","***")" class="blog-readmore">Read more</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-sm-4 wow fadeInRight">
+                                    <div class="center-box">
+                                        <div class="upcoming-single">
+                                            <div class="upcoming-img">
+                                                <div class="blog-img-hover">
+                                                    <div class="blog-img-ifc">
+                                                        <img src="@Url.Content("~/")@_dr["BlogImage"].ToString()" class="img-responsive" />
+                                                        <div class="upcoming-link">
+                                                            <a href="@Url.Content("~/")blog/Page/@_dr["UniqueCode"].ToString()" class="">
+                                                                <p class=""><span class="borderB-2">Read More</span></p>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="image-caption whyIndia-title">
+                                                <h4 class="text-center"><a href="@Url.Content("~/")blog/Page/@_dr["UniqueCode"].ToString()">@_dr["BlogTitle"].ToString()</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        }
+                    }
+                    else
+                    {
+                        <h3 class="text-center">No blog has been posted yet.</h3>
+                    }
+                }
+                else
+                {
+                    <h3 class="text-center">No blog has been posted yet.</h3>
+                }
+            }
+        </div>
+    </div>
+</div>

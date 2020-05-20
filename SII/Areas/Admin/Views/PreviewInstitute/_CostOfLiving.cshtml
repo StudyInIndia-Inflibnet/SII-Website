@@ -1,0 +1,50 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "CostOfLiving");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Cost of Living</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int index = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Nature of cost category</th>
+                                <th>Approx. Cost (in Rs.)</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+                            <tr>
+                                <td>
+                                    @(index++)
+                                </td>
+                                <td>@_dr["Natureofcostcategoryname"].ToString()</td>
+                                <td>@_dr["ApproximatCost"].ToString()</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

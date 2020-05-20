@@ -1,0 +1,621 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section metatags {
+    @if (ViewBag.For != "")
+    {
+        <link rel="canonical" href="https://www.studyinindia.gov.in/NICHE/CourseSearch?For=@ViewBag.For" />
+    }
+    else
+    {
+        <link rel="canonical" href="https://www.studyinindia.gov.in/NICHE/CourseSearch" />
+    }
+}
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="niche_coursesHeader_main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="inner-title-left NicheCoursesTitle">
+                    <h3>Explore our NICHE Courses</h3>
+                    <p>Check out the best courses result here</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="mainNicheCourses_part">
+                <div class="NicheCoursesBredbump01 main col-md-7 col-xs-12 p0">
+                    <div class="form-group has-search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" id="SearchCourse" class="form-control btlr8" placeholder="Search for Courses">
+                    </div>
+                </div>
+                <div class="NicheCoursesBredbump01 main col-md-3 col-xs-12 p0">
+                    <div class="form-group has-search">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                        <input type="text" class="form-control btrr8 bl1 datepicker" name="daterange" placeholder="Select date and Duration">
+                        <input type="hidden" id="duration" value="" />
+                        <input type="hidden" id="StartDate" value="" />
+                        <input type="hidden" id="EndDate" value="" />
+                    </div>
+                </div>
+                <div class="NicheCoursesBredbump03 main col-md-2 col-xs-12 p0">
+                    <div class="form-group institutesDropdown_slider">
+                        <a href="" class="additionalFilterSearch_btn"> Search</a>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+c
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <style type="text/css">
+        .loading {
+            position: fixed;
+            z-index: 99999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-results .panel.panel-niche-course {
+            position: initial;
+            min-height: 222px;
+            border-color: #c1986f;
+            border-radius: 0;
+            float: left;
+        }
+
+        .search-results img.courseImg {
+            width: 300px;
+            height: 220px;
+            float: left;
+        }
+
+        .panel-img {
+            width: 30%;
+            float: left;
+        }
+
+            .panel-img img {
+                height: 100%;
+            }
+
+        .panel-details {
+            width: 45%;
+            float: left;
+            padding: 15px;
+            border-right: 1px solid #cccccc;
+            min-height: 220px;
+        }
+
+            .panel-details .institute-name {
+                margin-bottom: 5px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .panel-details p, .panel-buttons p {
+                margin-bottom: 0px;
+            }
+
+        .panel-buttons {
+            padding: 15px 10px;
+            /*border-left: 1px solid #969696;*/
+            width: 25%;
+            float: left;
+            height: 100%;
+        }
+
+            .panel-buttons .institute-rattings i {
+                font-size: 20px;
+                margin-right: 5px;
+                color: #efb726;
+            }
+
+            .panel-buttons .total-fees {
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+
+            .panel-buttons .total-fees-label, panel-buttons .total-fees-value {
+                vertical-align: middle;
+                height: 100%;
+            }
+
+            .panel-buttons .total-fees-label {
+                padding-right: 0;
+            }
+
+            .panel-buttons .total-fees-value {
+                padding-left: 0;
+            }
+
+            .panel-buttons .total-fees-value {
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+                .panel-buttons .total-fees-value small {
+                    font-size: 50%;
+                    font-weight: bold;
+                }
+
+            .panel-buttons .btn-more-details {
+                background-color: #5e5e5e;
+                border-color: #5e5e5e;
+                color: #fff;
+            }
+
+            .panel-buttons .btn-apply-now {
+                background-color: #f18a37;
+                border-color: #f18a37;
+                color: #fff;
+            }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            border-top-width: 0;
+            padding: 0;
+        }
+
+        #datatable-grid_length, #datatable-grid_info {
+            display: none;
+        }
+
+        .niche_coursesHeader_main {
+            background: url(../img/Banner1.jpg) center no-repeat;
+            background-size: auto;
+            background-size: auto;
+            background-size: auto;
+            /*background-size: cover;*/
+            background-size: 100%;
+            /*margin-top: 0px;*/
+            margin-top: 89px;
+            padding: 100px 0 40px;
+            z-index: 1;
+        }
+
+        .NicheCoursesTitle {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+            .NicheCoursesTitle h3 {
+                color: #fff;
+                font-weight: 800;
+                font-size: 33px;
+                margin-bottom: 8px;
+                text-shadow: 0px 0px 5px #000;
+            }
+
+            .NicheCoursesTitle p {
+                color: #ffffff;
+                font-size: 18px;
+                text-shadow: 0px 0px 5px #000;
+            }
+
+        .has-search .form-control {
+            padding-left: 2.375rem;
+        }
+
+        .has-search .form-control-feedback {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+            margin-bottom: -37px;
+            margin-left: 12px;
+            font-size: 16px;
+        }
+
+        .NicheCoursesBredbump01 .form-control {
+            height: 70px;
+            font-size: 16px;
+            padding-left: 40px;
+            float: left;
+            margin-top: -22px;
+            border: 0px;
+            border-radius: 0px;
+        }
+
+        .NicheCoursesBredbump02 .form-control {
+            height: 70px;
+            font-size: 16px;
+            padding-left: 30px;
+            float: left;
+            margin-top: -22px;
+        }
+
+        .NicheCoursesBredbump03 {
+            margin-left: -20px;
+            margin-top: -4px;
+        }
+
+        .mainNicheCourses_part {
+            float: left;
+            width: 100%;
+            margin-bottom: 70px;
+        }
+
+        .btlr8 {
+            border-top-left-radius: 8px !important;
+            border-bottom-left-radius: 8px !important;
+        }
+
+        .btrr8 {
+            border-top-right-radius: 8px !important;
+            border-bottom-right-radius: 8px !important;
+        }
+
+        @@media only screen and (min-width:1330px) and (max-width:3300px) {
+        }
+
+        @@media only screen and (min-width:992px) and (max-width:1200px) {
+        }
+
+        @@media only screen and (min-width:768px) and (max-width:991px) {
+        }
+
+        @@media only screen and (max-width:767px) {
+        }
+
+        @@media only screen and (min-width:310px) and (max-width:767px) {
+        }
+
+        @@media (max-width:640px) {
+        }
+
+        @@media (max-width:480px) {
+        }
+
+        @@media (min-width:250px) and (max-width:766px) {
+
+            .panel-img, .search-results img.courseImg, .panel-details, .panel-buttons {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .small-currency {
+            font-size: 0.6em;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/moment.js/min/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        var filterCity = [];
+        var strfilterProgramLevel = ''; //"@ViewBag.For";
+        var filterDiscipline = strfilterProgramLevel.split(',');
+        var filterNatureOfCourse = [];
+        var filterBranch = [];
+        var filterDuration = [];
+
+        $(document).ready(function () {
+            $('#myBtn').remove();
+            top_search();
+            page_init();
+            page_click();
+        });
+        function page_click() {
+            $('#ulCity').on('click', '.chkCity', function () {
+                filterCity = [];
+                $('#ulCity').find('.chkCity').each(function (index, item) {
+                    var chk = $(this);
+                    if (chk.is(':checked')) {
+                        filterCity.push(chk.val());
+                    }
+                });
+                console.log(filterCity);
+                FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration);
+            });
+            $('#ulDiscipline').on('click', '.chkDiscipline', function () {
+                filterDiscipline = [];
+                $('#ulDiscipline').find('.chkDiscipline').each(function (index, item) {
+                    var chk = $(this);
+                    if (chk.is(':checked')) {
+                        filterDiscipline.push(chk.val());
+                    }
+                });
+                FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration);
+            });
+            $('#ulCourseType').on('click', '.chkCourse', function () {
+                filterBranch = [];
+                $('#ulCourseType').find('.chkCourse').each(function (index, item) {
+                    var chk = $(this);
+                    if (chk.is(':checked')) {
+                        filterBranch.push(chk.val());
+                    }
+                });
+                FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch,  filterDuration);
+            });
+            $('#ulDuration').on('click', '.chkDuration', function () {
+                filterDuration = [];
+                var duration = 0;
+                $('#ulDuration').find('.chkDuration').each(function (index, item) {
+                    var chk = $(this);
+                    if (chk.is(':checked')) {
+                        //duration = chk.val();
+                        filterDuration.push(chk.val());
+                    }
+                });
+
+                FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration);
+            });
+            $('.additionalFilterSearch_btn').on('click', function (e) {
+                e.preventDefault();
+                if ($('#duration').val() != '') {
+                    filterDuration = [];
+                    filterDuration.push($('#duration').val());
+                }
+                if ($('#SearchCourse').val() != '' || $('#duration').val() != '') {
+                    FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration, $('#SearchCourse').val(), $('#StartDate').val(), $('#EndDate').val());
+                }
+            });
+            $('#btnClearAll').on('click', function (e) {
+                e.preventDefault();
+                filterCity = [];
+                strfilterProgramLevel = '';
+                filterDiscipline = strfilterProgramLevel.split(',');
+                filterNatureOfCourse = [];
+                filterBranch = [];
+                filterDuration = [];
+                FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration, $('#SearchCourse').val());
+            });
+        }
+        function page_init() {
+            FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration, );
+        }
+        function FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, filterDuration, TopSearch = '', StartDate = '', EndDate = '', token = $('input[name="__RequestVerificationToken"]', $('#frm')).val()) {
+            $('.loading').show();
+            $('#datatable-grid').DataTable().clear().destroy();
+            $('#tbody').empty();
+            if ($.fn.DataTable.isDataTable("#datatable-grid")) {
+                $('#datatable-grid').DataTable().clear().destroy();
+            }
+            $.ajax({
+                method: 'POST',
+                url: $('#hdfBaseUrl').val() + 'NICHE/SearchCourseList',
+                data: { __RequestVerificationToken: token, City: filterCity.join(','), Discipline_ID: filterDiscipline.join(','), CourseOfStudy_ID: filterBranch.join(','), Duration: filterDuration.join(','), Type: 'InstituteWise', TopSearch: TopSearch, StartDate: StartDate, EndDate: EndDate },
+                async: true,
+                success: function (data) {
+                }
+            }).done(function (data) {
+                //$('.search-results').empty();
+                $.each(data["List"], function (index, item) {
+                    var tr = $('<tr></tr>');
+                    var td = $('<td></td>');
+                    var panelDiv = $('<div class="panel panel-default panel-niche-course"></div>');
+                    var panelImgDiv = '<div class="panel-img"><img class="courseImg" src="' + $('#hdfBaseUrl').val() + item['Photo'] + '" /></div>';
+                    var panelDetailsDiv = '<div class="panel-details"><h3 class="institute-name">' + item['InstituteName'] + ',' + item['City'] + '</h3><p><strong>Discpline</strong>: ' + item['Discipline'] + '</p><p><strong>Course of Study</strong>: ' + item['CourseOfStudy'] + '</p><p><strong>Programme Level</strong>: ' + item['ProgramLevel'] + '</p><div class="row"><div class="col-lg-6 col-md-6 col-sm-12"><p><strong>Start Date</strong></p><p>' + item['StartDate'] + '</p></div><div class="col-lg-6 col-md-6 col-sm-12"><p><strong>End Date</strong></p><p>' + item['EndDate'] +'</p></div></div></div>';
+                    var panelButtonDiv = '<div class="panel-buttons"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12"></div><div class="col-lg-12 col-md-12 col-sm-12"><div class="row"><div class="total-fees-label col-lg-12 col-md-12 col-sm-12 col-xs-12"><p><strong style="font-size:1.3em;">Total Fees 1 Person</span></div><div class="col-lg-12 col-md-12 col-sm-12 text-left"><strong style="font-size:2em;">' + item['TotalFees'] + ' <small class="small-currency">' + item['TotalFeesCurrency'] + '</small></strong></div></div></div><div class="col-lg-12 col-md-12 col-sm-12"><a class="btn btn-default btn-more-details btn-block" href="/Explore/ViewNicheDetails?instituteid=' + item['InstituteID'] + '&For=NICHECourse&NicheCourseId=' + item['ID'] + '" href="' + $('#hdfBaseUrl').val() + 'Explore/ViewDetails?instituteid=' + item['InstituteID'].toString() + '&For=Courses' + '" >More Details</a><a class="btn btn-primary btn-apply-now btn-block"href="/admission/RegistrationsNiche?instituteid=' + item['InstituteID'] + '&For=NICHECourse&NicheCourseId=' + item['ID'] + '">Apply Now</a></div></div></div>';
+                    panelDiv.append(panelImgDiv);
+                    panelDiv.append(panelDetailsDiv);
+                    panelDiv.append(panelButtonDiv);
+                    td.append(panelDiv);
+                    tr.append(td);
+                    $('#tbody').append(tr);
+                    //$('.search-results').append(panelDiv);
+                });
+                $('#datatable-grid').DataTable({
+                    ordering: false,
+                    searching: false,
+                    pageLength: 5,
+                    "bDestroy": true
+                });
+                $('#ulCity').empty()
+                $('#ulDiscipline').empty()
+                $('#ulCourseType').empty()
+                $.each(data["ListCity"], function (index, item) {
+                    $('#ulCity').append('<li>' + item['Value'] + ' <span><input name="City" type="checkbox" class="chkCity" value="' + item['Id'] +'"></span></li>')
+                });
+                $.each(data["ListDiscipline"], function (index, item) {
+                    $('#ulDiscipline').append('<li>' + item['Value'] + ' <span><input type="checkbox" class="chkDiscipline" value="' + item['Id'] + '"></span></li>')
+                });
+                $.each(data["ListCourseOfStudy"], function (index, item) {
+                    $('#ulCourseType').append('<li>' + item['Value'] + ' <span><input type="checkbox" class="chkCourse" value="' + item['Id'] + '"></span></li>')
+                });
+
+                $('#ulCity').find('.chkCity').each(function (index, item) {
+                    var chk = $(this);
+                    if ($.inArray(chk.val(), filterCity) >= 0) {
+                        chk.prop('checked', true);
+                    }
+                });
+                $('#ulDiscipline').find('.chkDiscipline').each(function (index, item) {
+                    var chk = $(this);
+                    if ($.inArray(chk.val(), filterDiscipline) >= 0) {
+                        chk.prop('checked', true);
+                    }
+                });
+                $('#ulCourseType').find('.chkCourse').each(function (index, item) {
+                    var chk = $(this);
+                    if ($.inArray(chk.val(), filterBranch) >= 0) {
+                        chk.prop('checked', true);
+                    }
+                });
+                $('.loading').hide();
+            }).error(function () {
+                $('.loading').hide();
+            });
+        }
+
+        function top_search() {
+            $('input[name="daterange"]').daterangepicker({locale: { format: 'DD/MM/YYYY' }});
+            $('input[name="daterange"]').on('change', function () {
+                var dates = $(this).val().split(' - ');
+                $('#StartDate').val(dates[0]);
+                $('#EndDate').val(dates[1]);
+
+                var splitStartDate = dates[0].split("/");
+                var splitEndDate = dates[1].split("/");
+
+                var newStartDate = moment([splitStartDate[2], splitStartDate[0] - 1, splitStartDate[1]]);
+                var newEndDate = moment([splitEndDate[2], splitEndDate[0] - 1, splitEndDate[1]]);
+                $('#duration').val(Date.getFormattedDateDiff(newStartDate, newEndDate));
+            });
+        }
+        Date.getFormattedDateDiff = function (date1, date2) {
+            var b = moment(date1),
+                a = moment(date2),
+                intervals = ['days'],
+                out = [];
+
+            for (var i = 0; i < intervals.length; i++) {
+                var diff = a.diff(b, intervals[i]);
+                b.add(diff, intervals[i]);
+                if (diff != 0) {
+                    out.push(diff);
+                }
+            }
+            var result = parseInt(out.join(', '));
+            var finalResult = 0;
+            if (result <= 30) {
+                finalResult = 30;
+            } else if (result <= 60) {
+                finalResult = 60;
+            } else if (result <= 90) {
+                finalResult = 90;
+            } else if (result <= 120) {
+                finalResult = 120;
+            } else if (result <= 150) {
+                finalResult = 150;
+            } else if (result <= 180) {
+                finalResult = 180;
+            }
+            return finalResult;
+        };
+    </script>
+}

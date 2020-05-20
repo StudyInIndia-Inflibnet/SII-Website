@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Search</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")home">Home</a> / Search</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-3">
+                <div class="box search-page">
+                    <form method="get" action="~/Search/">
+                        <div class="input-group line-height">
+                            <input name="id" type="text" class="form-control br0 mb10" placeholder="Enter Search Term" value="@ViewBag.SearchString" >
+                            <div class="input-group-btn search-btn">
+                                <input type="submit" value="Website Search" class="btn btn-primary background-red mb10"><br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- single blog right start -->
+            <div class="col-md-12">
+                <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+                    <script>
+                        (function () {
+                            window.__gcse = { callback: searchCallback };
+                            function searchCallback() { $('#gsc-i-id1').focus(); $('#gsc-i-id1').val('@ViewBag.SearchString'); $(".gsc-search-button").trigger('click'); }
+                            //var cx = '004240336039673129456:e_xc4i36zzi';
+                            var cx = 'AIzaSyDSJy89bVPGHVRygp_2WBWckzToYK0Qyw';
+                            var gcse = document.createElement('script');
+                            gcse.type = 'text/javascript';
+                            gcse.async = true;
+                            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(gcse, s);
+                        })();
+                    </script>
+                    <gcse:searchresults-only></gcse:searchresults-only>
+                </div>
+                <div id="content"></div>
+                <script>
+                    function hndlr(response) {
+                        for (var i = 0; i < response.items.length; i++) {
+                            var item = response.items[i];
+                            // in production code, item.htmlTitle should have the HTML entities escaped.
+                            document.getElementById("content").innerHTML += "<br>" + item.htmlTitle;
+                        }
+                    }
+                </script>
+                <script src="https://www.googleapis.com/customsearch/v1?key=YOUR-KEY&cx=AIzaSyDSJy89bVPGHVRygp_2WBWckzToYK0Qyw:omuauf_lfve&q=cars&callback=hndlr">
+                </script>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <style>
+        .input-group {
+            z-index: 1 !important;
+        }
+    </style>
+}
+@section scripts{
+
+}

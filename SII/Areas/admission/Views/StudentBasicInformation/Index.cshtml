@@ -1,0 +1,281 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Basic Information&nbsp;<span style="color: red">( @Session["studentid"].ToString()-<span style="color: red" id="spanstudentname"></span>)</span>
+            </h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body table-responsive">
+                            <br />
+                            <form id="frmStudentBasic">
+                                <input type="hidden" id="hdnstudentid" value="@Session["studentid"].ToString()" name="studentid" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name <span style="color: red"> *</span></label>
+                                            <input type="text" id="txtFname" class="form-control allow_only_alphabet" data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-pattern-message="Only alphabets allowed." maxlength="20" required name="FirstName" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" id="txtMname" class="form-control allow_only_alphabet" maxlength="20" data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-pattern-message="Only alphabets allowed." name="MiddleName" placeholder="Middle Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Last Name<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtLname" class="form-control allow_only_alphabet" maxlength="20" data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-pattern-message="Only alphabets allowed." required name="LastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Date of Birth<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtdateofbirth" class="form-control datetimepicker" required name="DateOfBirth" placeholder="Date of Birth" readonly style="background-color:white;">
+                                            <input type="text" id="txtYear" class="form-control" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Gender<span style="color: red"> *</span></label>
+                                            <select id="drpGender" class="form-control" required name="Gender">
+                                                <option value="">-Select-</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Email<span style="color: red"> *</span></label>
+                                            <input type="email" id="txtemail" class="form-control" readonly required name="Email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Contact Number<span style="color: red"> *</span></label>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    @Html.DropDownList("CountryCode", new SelectList(ViewBag.Country, "Country_id", "country_code"),
+                                                "--Select--",
+                                                new
+                                                {
+                                                    @class = "form-control",
+                                                    @id = "drpcountrycode",
+                                                    @required = ""
+                                                })
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="txtMobile" maxlength="12" class="form-control allow_only_number" placeholder="Mobile" name="Mobile" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Country <small>(Nationality)</small><span style="color: red"> *</span></label>
+                                            @Html.DropDownList("Country", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                             "--Select--",
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 @id = "drpCountry",
+                                                 @required = ""
+                                             })
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Nationality<span style="color: red"> *</span></label>
+                                            @Html.DropDownList("Nationality", new SelectList(ViewBag.Nationality, "Nationality_id", "Nationality_Name"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpNationality",
+                                                @required = ""
+
+                                            })
+                                        </div>
+                                    </div>*@
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Applying For Course<span style="color: red"> *</span></label>
+                                            <select class="form-control" id="ApplyingForCourse" name="ApplyingForCourse" required="">
+                                                <option value="">--Select--</option>
+                                                <option value="Full Term Courses">Full Term Courses (UG, PG and PhD)</option>
+                                                <option value="Short Term Niche Courses">Short Term Niche Courses (Yoga, Ayurveda etc.)</option>
+                                                <option value="Both">Both</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Country of Stay<span style="color: red"> </span></label>
+                                            @Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpCountryofStay"
+                                            })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Address</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Residential<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtResidential" class="form-control" maxlength="150" required name="FIRST_NAME" placeholder="Residential">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Country<span style="color: red"> *</span></label>
+                                                    @Html.DropDownList("Country_id", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                                    "--Select--",
+                                                    new
+                                                    {
+                                                        @class = "form-control drpCountryresi",
+                                                        @id = "drpCountryResi",
+                                                        @required = ""
+
+                                                    })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>State<span style="color: red"> *</span></label>
+                                                    <input type="text" id="txtStateResi" class="form-control allow_only_alphabet" data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-pattern-message="Only alphabets allowed." maxlength="50" required placeholder="State">
+                                                    @*<select class="form-control drpstateresi" id="drpstateResidential">
+                                                            <option>-select-</option>
+                                                        </select>*@
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>City<span style="color: red"> *</span></label>
+                                                    <input type="text" id="txtCityResi" class="form-control  allow_only_alphabet" data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-pattern-message="Only alphabets allowed." maxlength="50" required placeholder="City">
+                                                    @*<select class="form-control drpcityresi" id="drpcityResidential">
+                                                            <option>-select-</option>
+                                                        </select>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Zip Code<span style="color: red"> *</span></label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <input type="text" id="txtAreaResi" class="form-control allow_only_number" required name="pincode" placeholder="Pincode" data-parsley-type="number">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @*<a class="btn btn-info" id="btnCopyAddress">Copy</a>*@
+                                                    <input type="checkbox" id="btnCopyAddress" onclick="Checkdata(this.form)">&nbsp;&nbsp;<strong>Permanent address is same as residential address.</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Permanent<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtPermanent" class="form-control" required maxlength="150" name="FIRST_NAME" placeholder="Permanent">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Country<span style="color: red"> *</span></label>
+                                                    @Html.DropDownList("Country_id", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                                    "--Select--",
+                                                    new
+                                                    {
+                                                        @class = "form-control drpCountryper",
+                                                        @id = "drpCountryPermanent",
+                                                        @required = ""
+                                                    })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>State<span style="color: red"> *</span></label>
+                                                    <input type="text" id="txtStatePermanent" class="form-control" maxlength="50" required placeholder="State">
+                                                    @*<select class="form-control drpstateper" id="drpstatePermanent">
+                                                            <option>-select-</option>
+                                                        </select>*@
+                                                </div>
+                                                <div class="col-md-4">
+
+                                                    <label>City<span style="color: red"> *</span></label>
+                                                    <input type="text" id="txtCityPermanent" class="form-control" maxlength="50" required placeholder="City">
+
+                                                    @*<select class="form-control drpcityper" id="drpcityPermanent">
+                                                            <option>-select-</option>
+                                                        </select>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Zip Code<span style="color: red"> *</span></label>
+                                                    <input type="text" id="txtAreaPer" class="form-control allow_only_number" required data-parsley-type="number" name="pincode" placeholder="Pincode">
+                                                </div>
+                                                @*<div class="col-md-4">
+                                                        <label>Pincode<span style="color: red"> *</span></label>
+                                                        <input type="text" id="txtpincode" class="form-control" required name="pincode" placeholder="Pincode">
+                                                    </div>*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if (Session["IsAllowEditData"] != null)
+                                        {
+                                            if (Session["IsAllowEditData"].ToString() != "False")
+                                            {
+                                                <button class="btn btn-space btn-primary btn-lg" type="submit" id="btnStudentBasicSave">Submit</button>
+                                            }
+                                        }
+                                        <a class="btn btn-warning btn-lg pull-right" href="@Url.Content("~/")admission/StudentBackgroundInformation">Next</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/admission/Studentbasic.js"></script>
+}
+
+
+

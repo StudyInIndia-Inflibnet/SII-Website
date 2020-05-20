@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>REPORTS</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @{
+                                    SIIRepository.Adminservice.Phase3_Repository _objRepoDashboard = new SIIRepository.Adminservice.Phase3_Repository();
+                                    System.Data.DataSet _ds = _objRepoDashboard.KPIReport_ParameterGridDetails("Details", "", @TempData.Peek("ParameterCode").ToString(), @TempData.Peek("SubParameterLevel1Code").ToString(), @TempData.Peek("SubParameterLevel2Code").ToString());
+                                    <div class="breadcumb-area bg-img-1 black-opacity" id="divid">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="breadcumb-wrap text-center">
+                                                        <h2>Post-DCS</h2>
+                                                        <ul>
+                                                            <li><a href="~/PostDCS/Dashboard">Home</a></li>
+                                                            <li><a>/</a></li>
+
+                                                            @if (TempData.Peek("ParameterCode").ToString() != "")
+                                                            {
+                                                                <li>
+                                                                    <a>
+                                                                        @TempData.Peek("ParameterCode").ToString() /
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                            @if (TempData.Peek("SubParameterLevel1Code").ToString() != "")
+                                                            {
+                                                                <li>
+                                                                    <a>
+                                                                        @TempData.Peek("SubParameterLevel1Code").ToString()/
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                            @if (TempData.Peek("SubParameterLevel2Code").ToString() != "")
+                                                            {
+                                                                <li>
+                                                                    <a>
+                                                                        @TempData.Peek("SubParameterLevel2Code").ToString()
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ptb-15">
+                                        <div class="container">
+                                            @*@Html.Partial("_UserName")*@
+                                            <div class="row">
+                                                <br />
+                                                <div class="col-md-10">
+                                                    <h3 data-toggle="tooltip" data-placement="top" title="@_ds.Tables[2].Rows[0]["HelpText"].ToString()">
+                                                        @if (_ds.Tables[2].Rows[0]["SubParameterLevel2"].ToString() != "")
+                                                        {
+                                                            @_ds.Tables[2].Rows[0]["SubParameterLevel2"].ToString();
+                                                            <input type="hidden" id="hdfExcelname" value=@_ds.Tables[2].Rows[0]["SubParameterLevel2Code"].ToString() />
+                                                        }
+                                                        else if (_ds.Tables[2].Rows[0]["SubParameterLevel1"].ToString() != "")
+                                                        {
+                                                            @_ds.Tables[2].Rows[0]["SubParameterLevel1"].ToString();
+                                                            <input type="hidden" id="hdfExcelname" value=@_ds.Tables[2].Rows[0]["SubParameterLevel1Code"].ToString() />
+                                                        }
+                                                        else if (_ds.Tables[2].Rows[0]["Parameter"].ToString() != "")
+                                                        {
+                                                            @_ds.Tables[2].Rows[0]["Parameter"].ToString();
+                                                            <input type="hidden" id="hdfExcelname" value=@_ds.Tables[2].Rows[0]["ParameterCode"].ToString() />
+                                                        }
+
+                                                    </h3>
+                                                    <br />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h3>
+
+                                                        <span style="color:red"> | Total - @_ds.Tables[2].Rows[0]["Score"].ToString()  </span>
+
+                                                    </h3>
+                                                    <br />
+                                                </div>
+
+
+
+                                                <div class="col-md-12 table-responsive">
+                                                    <table class="table table-bordered table-hover datatable" id="tbl">
+                                                        <thead>
+                                                            <tr>
+                                                                @if (_ds != null)
+                                                                {
+                                                                    if (_ds.Tables[0].Rows.Count > 0)
+                                                                    {
+                                                                        foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                                        {
+                                                                            if (_dr["ColVisibility"].ToString() == "True")
+                                                                            {
+                                                                                <th data-toggle="tooltip" data-placement="top" title="@_dr["ColToolTip"].ToString()" style="width:5% ; background-color:@_dr["ColColor"].ToString() ">@_dr["ColDisplayName"].ToString()</th>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            @if (_ds != null)
+                                                            {
+                                                                if (_ds.Tables[1].Rows.Count > 0)
+                                                                {
+                                                                    foreach (System.Data.DataRow _drData in _ds.Tables[1].Rows)
+                                                                    {
+                                                                        <tr>
+                                                                            @if (_ds.Tables[0].Rows.Count > 0)
+                                                                            {
+                                                                                foreach (System.Data.DataRow _drCol in _ds.Tables[0].Rows)
+                                                                                {
+                                                                                    if (_drCol["ColVisibility"].ToString() == "True")
+                                                                                    {
+                                                                                        if (_drCol["ColHighlight_Case1"].ToString() != "" && _drCol["ColHighlight_Case2"].ToString() != "" && _drCol["ColHighlight_Operator"].ToString() != "")
+                                                                                        {
+                                                                                            bool CASE = false;
+                                                                                            {
+                                                                                                var a = _drData[_drCol["ColHighlight_Case1"].ToString()].ToString();
+                                                                                                var b = _drCol["ColHighlight_Operator"].ToString();
+                                                                                                var c = _drData[_drCol["ColHighlight_Case2"].ToString()].ToString();
+                                                                                                if (b == ">=")
+                                                                                                {
+                                                                                                    CASE = a.AsDecimal() >= c.AsDecimal();
+                                                                                                }
+                                                                                                else if (b == "<=")
+                                                                                                {
+                                                                                                    CASE = a.AsDecimal() <= c.AsDecimal();
+                                                                                                }
+                                                                                                else if (b == "<")
+                                                                                                {
+                                                                                                    CASE = a.AsDecimal() < c.AsDecimal();
+                                                                                                }
+                                                                                                else if (b == ">")
+                                                                                                {
+                                                                                                    CASE = a.AsDecimal() > c.AsDecimal();
+                                                                                                }
+                                                                                            }
+                                                                                            if (CASE == true)
+                                                                                            {
+                                                                                                <td style="width:5% ; background-color:red">
+                                                                                                    @_drData[@_drCol["ColCode"].ToString()].ToString()
+                                                                                                </td>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <td style="width:5% ; background-color:@_drCol["ColColor"].ToString()">
+                                                                                                    @_drData[@_drCol["ColCode"].ToString()].ToString()
+                                                                                                </td>
+
+                                                                                            }
+
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <td style="width:5% ; background-color:@_drCol["ColColor"].ToString()">
+                                                                                                @_drData[@_drCol["ColCode"].ToString()].ToString()
+                                                                                            </td>
+
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    .table .table {
+        background-color: transparent !important;
+    }
+</style>
+
+<style>
+    .container {
+        width: 90% !important;
+    }
+
+    .Level-1 {
+        color: red;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .Level-2 {
+        color: blue;
+        font-size: 13px;
+    }
+
+    .Level-3 {
+        color: black;
+        font-size: 13px;
+    }
+
+    .FinalScore {
+        color: #8B4513;
+        font-size: 14px;
+    }
+
+
+    .table {
+        margin-bottom: 0px;
+    }
+
+    .btn-not-filled {
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    .table-declaration > tbody > tr > th {
+        background-color: #002147;
+        border-color: #002147;
+        color: #fff;
+    }
+
+    .table-declaration > tbody > tr > td {
+        border-color: #002147;
+    }
+</style>

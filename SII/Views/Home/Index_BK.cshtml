@@ -1,0 +1,646 @@
+﻿@{
+    ViewBag.Title = "Study in India | Explore Higher Education Courses | Plan Your Stay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section metatags {
+    <meta name='Title' content='Study in India | Explore Higher Education Courses | Plan Your Stay' />
+    <meta name='description' content='Official Government of India website to find everything you need to know about studying and living in India. Simply sign up and apply to the top colleges of India offering quality education at affordable costs. Know about courses, colleges, fee waivers, admission fees, visa requirements for Studying in India.' />
+}
+
+<div class="slider_mt">
+    <div id="slider1_container" style="visibility: hidden; position: relative; margin: 0 auto;top: 0px; left: 0px; width: 1920px; height: 600px; overflow: hidden;">
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;
+                top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+        </div>
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1920px; height: 600px; overflow: hidden;">
+            <div>
+                <img u="image" src2="img/slider_images/06.jpg" />
+            </div>
+            <div>
+                <img u="image" src2="img/slider_images/slider.jpg" />
+                <div class="carousel_caption_01 first_slideText"> <a href="~/admission/Registrations">Apply Now</a> </div>
+            </div>
+            <div>
+                <img u="image" src2="img/slider_images/slider2.jpg" />
+                <div class="carousel_caption_02 first_slideText"> <a href="~/admission/Registrations">Apply Now</a> </div>
+            </div>
+            <div>
+                <button class="Slider_video video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/PA1zBm_rEhk" data-target="#myVideo"> <img u="image" src2="~/img/slider_images/slider3.jpg" /> </button>
+            </div>
+            <div>
+                <img u="image" src2="img/slider_images/slider4.jpg" />
+                <div class="carousel_caption_03 first_slideText"> <a href="~/admission/Registrations">Apply Now</a> </div>
+            </div>
+        </div>
+        <div u="navigator" class="jssorb21" style="bottom: 26px; right: 6px;">
+            <div u="prototype"></div>
+        </div>
+        <!-- Arrow Left right -->
+        <!--<span u="arrowleft" class="jssora21l" style="top: 123px; left: 8px;">
+        </span> <span u="arrowright" class="jssora21r" style="top: 123px; right: 8px;"> </span> -->
+    </div>
+</div>
+<div class="modal fade" id="myVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog video_popupBox" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="step-area cta5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                <div class="section-title mt20 mb20">
+                    <center>
+                        <p>Study in india</p>
+                        <h2 class="middle-title">Your 5 Step to Study in India </h2>
+                        <div class="underline"></div>
+                    </center>
+                </div>
+            </div>
+            <a href="@Url.Content("~/")InstituteSearch">
+                <div class="step_box box_one wow fadeInRight">
+                    <div class="step_left">
+                        <h5>RESEARCH</h5>
+                        <p>your option</p>
+                    </div>
+                    <div class="step_right"> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </div>
+                </div>
+            </a>
+            <a href="@Url.Content("~/")admission/Registrations">
+                <div class="step_box box_two wow fadeInRight">
+                    <div class="step_left">
+                        <h5>register</h5>
+                        <p>your self</p>
+                    </div>
+                    <div class="step_right"> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </div>
+                </div>
+            </a>
+            <a href="@Url.Content("~/")admission/login">
+                <div class="step_box box_one wow fadeInRight">
+                    <div class="step_left">
+                        <h5>fill your</h5>
+                        <p>application</p>
+                    </div>
+                    <div class="step_right"> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </div>
+                </div>
+            </a>
+            <a href="@Url.Content("~/")admission/login">
+                <div class="step_box box_two wow fadeInRight">
+                    <div class="step_left">
+                        <h5>check</h5>
+                        <p>the results</p>
+                    </div>
+                    <div class="step_right"> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </div>
+                </div>
+            </a>
+            <a href="@Url.Content("~/")whyindiatravel">
+                <div class="step_box box_one wow fadeInRight">
+                    <div class="step_left">
+                        <h5>prepare</h5>
+                        <p>for departure</p>
+                    </div>
+                    <div class="step_right"> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+@*<div class="upcoming-area section-padding">
+        <div class="container">
+            <div class="row wow fadeInUp">
+                <div class="col-sm-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                    <div class="section-title mt20 mb20">
+                        <center>
+                            <h2 class="middle-title">Your Reasons to be here</h2>
+                            <div class="underline"></div>
+                        </center>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="upcoming-single">
+                        <div class="blog-img-ifc"> <img src="~/img/img-1.jpg" class="img-responsive"> </div>
+                        <div class="upcoming-event-text">
+                            <h4>Why INDIA?</h4>
+                            <p class="text-justify">whether your passion is the constructs of technology or the basis of traditional medicine-india is a land where may fields, old and new, find representation.</p>
+                            <a href="">read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="upcoming-single">
+                        <div class="blog-img-ifc"> <img src="~/img/img-2.jpg" class="img-responsive"> </div>
+                        <div class="upcoming-event-text">
+                            <h4>See what people are saying</h4>
+                            <p class="text-justify">Gain access to premier colleges in the country via yor 'Study in India' account Sign up and fill the Student registration from below.</p>
+                            <a href="@Url.Content("~/")events">read more</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="upcoming-single">
+                        <div class="blog-img-ifc"> <img src="~/img/img-3.jpg" class="img-responsive"> </div>
+                        <div class="upcoming-event-text">
+                            <h4>Participating institutions &amp; courses</h4>
+                            <p class="text-justify">Locate and interact with partner institutes across the country</p>
+                            <a href="@Url.Content("~/")InstituteSearch">read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="upcoming-area section-padding">
+    <div class="container">
+        <div class="row wow fadeInUp">
+            <div class="col-sm-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                <div class="section-title mt20 mb20">
+                    <center>
+                        <h2 class="middle-title">Your Reasons to be here</h2>
+                        <div class="underline"></div>
+                    </center>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 col-md-4">
+                <div class="upcoming-single">
+                    <div class="blog-img-ifc"> <img src="img/img-1.jpg" class="img-responsive"> </div>
+                    <div class="upcoming-event-text">
+                        <h4>Why INDIA?</h4>
+                        <p class="text-justify">whether your passion is the constructs of technology or the basis of traditional medicine-india is a land where may fields, old and new, find representation.</p>
+                        <a href="@Url.Content("~/")whyindia">read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 col-md-4">
+                <div class="upcoming-single">
+                    <div class="blog-img-ifc">
+                        <button class="Slider_video video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/2WRYsRgbkww" data-target="#myVideo">
+                            <img src="img/img-2.jpg" class="img-responsive">
+                        </button>
+                    </div>
+                    <div class="upcoming-event-text">
+                        <h4>See what people are saying</h4>
+                        <p class="text-justify">Gain access to premier colleges in the country via yor 'Study in India' account Sign up and fill the Student registration from below.</p>
+                        <button class="Slider_video video-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/2WRYsRgbkww" data-target="#myVideo"> Read more</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 col-md-4">
+                <div class="upcoming-single">
+                    <div class="blog-img-ifc"> <img src="img/img-3.jpg" class="img-responsive"> </div>
+                    <div class="upcoming-event-text">
+                        <h4>Participating institutions &amp; courses</h4>
+                        <p class="text-justify">Locate and interact with partner institutes across the country</p>
+                        <a href="@Url.Content("~/")InstituteSearch">read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog video_popupBox" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                            <!-- 16:9 aspect ratio -->
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- counter area start -->
+<div class="counter-area" style="visibility: visible; animation-name: fadeInUp;background-image:url(img/6.jpg);">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center middleWhite_title">Our institutes and Courses</h2>
+            <div class="col-md-2 hidden-xs hidden-sm"></div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="main-two-box">
+                    <div class="single-count pull-right Uni_border_right">
+                        <div class="counter-text">
+                            <h2 class=""><span class="counter-active">160</span>+</h2>
+                            <p>No. of Institutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-two-box">
+                    <div class="single-count pull-right Uni_border_right">
+                        <div class="counter-text">
+                            <h2> <span class="counter-active">1500</span>+</h2>
+                            <p>No. of Courses </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-two-box">
+                    <div class="single-count pull-right Uni_border_right b0">
+                        <div class="counter-text">
+                            <h2> <span class="counter-active">30000</span>+</h2>
+                            <p>Registrations </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- counter area end -->
+<div class="clearfix"></div>
+<!-- service area strat -->
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 wow fadeInLeft">
+                <div class="section-title mt25 mb20">
+                    <center>
+                        <h2 class="middle-title">Towards Higher Education </h2>
+                        <div class="underline"></div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeInUp mt20">
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 br1">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-1.jpg" class="img-responsive" /></span>
+                    <h4>Plan Your Finances </h4>
+                    <p>Get updated on the scope of Study in India-from the merits of each institute to the ones suited to your passion. Explore the Indian education system.</p>
+                    <span class="blog-social"><a href="@Url.Content("~/")planyourstay/moneycosts" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 br1">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-2.jpg" class="img-responsive" /></span>
+                    <h4>Explore Courses </h4>
+                    <p>Choose world class education offered by our partner institutes with courses that specialize in a number of fields. Find the perfect fit for your passion.</p>
+                    <span class="blog-social"><a href="@Url.Content("~/")InstituteSearch" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a> </span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-3.jpg" class="img-responsive" /></span>
+                    <h4>Ranking &amp; Accreditation </h4>
+                    <p>Find out how the education system works in the country with information on universities, their ranking and certifications to help your search.</p>
+                    <span class="blog-social"><a href="@Url.Content("~/")planyourstudies/Rankingandaccredidation" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 bt1">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-4.jpg" class="img-responsive" /></span>
+                    <h4>VISA </h4>
+                    <p>Plan your education in India with information on the eligibility, requirements and procedures for student visas in the country.</p>
+                    <span class="blog-social"><a href="@Url.Content("~/")planyourstudies/visaregulations" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 bt1 br1 bl1">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-5.jpg" class="img-responsive" /></span>
+                    <h4>Travel</h4>
+                    <p>From one end of the country to another or even beyond borders-India is well connected by air, road and rail at budget friendly rates.</p>
+                    <span class="blog-social"><a href="@Url.Content("~/")whyindiatravel" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a></span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xs-12 bt1">
+                <div class="blog-text">
+                    <span class="pull-left"><img src="~/img/image-6.jpg" class="img-responsive" /></span>
+                    <h4>News board </h4>
+                    <p>Keep up with the latest happenings &amp; opinions of India. Feel the pulse of the country, its people &amp; their outlook as you decide to study in India.</p>
+                    <span class="blog-social"><a href="#notice-board" class="blog-readmore">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- service area end -->
+<!-- story area start -->
+<div class="another-story-area quote-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 wow fadeInLeft">
+                <div class="section-title">
+                    <center>
+                        <div class="underline bg_white mb10"></div>
+                        <h2 class="middle-white-title white_text">Student Testimonials</h2>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="another-story-slide">
+            <div class="another-story-single-slide">
+                <div class="story-single-item">
+                    <center>
+                        <img src="~/img/testimonial_1.jpg" alt="" class="img-responsive testimonial_img mr15">
+                    </center>
+                    <div class="story-text">
+                        <h4>Arifa Orfan</h4>
+                        <span>Country: Afghanistan </span>
+                    </div>
+                    <div class="quote-text">
+                        <span>The courses are supported with projects and practical exercises.</span> <br />
+                        <i class="fa fa-quote-left testimonial_sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="another-story-single-slide">
+                <div class="story-single-item">
+                    <center>
+                        <img src="~/img/testimonial_2.jpg" alt="" class="img-responsive testimonial_img mr15">
+                    </center>
+                    <div class="story-text">
+                        <h4>Latifa Abdulatif Ahmed </h4>
+                        <span>Country: Kenya </span>
+                    </div>
+                    <div class="quote-text">
+                        <span>The teachers make sure that each and every student understands the topics well.</span> <br />
+                        <i class="fa fa-quote-left testimonial_sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="another-story-single-slide">
+                <div class="story-single-item">
+                    <center>
+                        <img src="~/img/testimonial_3.jpg" alt="" class="img-responsive testimonial_img mr15">
+                    </center>
+                    <div class="story-text">
+                        <h4>Mahamat Oumar Moussa</h4>
+                        <span>Country: Chad </span>
+                    </div>
+                    <div class="quote-text">
+                        <span>I have come to know myself and realise my skills in India.</span> <br />
+                        <i class="fa fa-quote-left testimonial_sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="another-story-single-slide">
+                <div class="story-single-item">
+                    <center>
+                        <img src="~/img/testimonial_4.jpg" alt="" class="img-responsive testimonial_img mr15">
+                    </center>
+                    <div class="story-text">
+                        <h4>Sara Husain Hammad </h4>
+                        <span>Country: Bahrain </span>
+                    </div>
+                    <div class="quote-text">
+                        <span>Studying in India means that you can guarantee getting the best career ever as the education system here is so strong and of high standard.</span> <br />
+                        <i class="fa fa-quote-left testimonial_sign"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- story area end -->
+<!-- upcoming area start -->
+<div class="upcoming-area section-padding" id="notice-board">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-xs-12">
+                <div class="">
+                    <div class="section-title notice_title">
+                        <h2 class="bb0 caps">Notice Board</h2>
+                        <p class="">
+                            The Study in India Initiative is changing the education dynamic. <br />
+                            Find out where we're pitching our roadshow next.
+                        </p>
+                    </div>
+                    <div class="noticeMain_box">
+                        <div class="notice_box">
+                            <h4>Dubai <span>12th-14th April 2018</span></h4>
+                            <p class="text-justify">The Gulf Education and Training Exhibition (GETEX) is the region's oldest education led event, supported by the UAE Ministry of Education, KHDA and the Knowledge Fund. Every year, the exhibition attracts over 35,000 local and expatriate students who are at the threshold of college life and actively looking for higher education, professional development and training options. </p>
+                        </div>
+                        <div class="notice_box">
+                            <h4>Mumbai <span>15th-18th May 2018</span></h4>
+                            <p class="text-justify">Education is one of the focus sectors at GES 2018. GES 2018 will provide a unique opportunity to Indian institutions to market themselves before over 500 international delegates. There will be a focused pavilion on education in the exhibition zone and a day-long conference which will cover both school and higher education. </p>
+                        </div>
+                        <div class="notice_box">
+                            <h4>Nepal <span>17th-19th May 2018</span></h4>
+                            <p class="text-justify">Nepal being one of the major countries with maximum outbound students to India, promotional event to be held in Kathmandu will create an opportunity to interact with Nepalese aspirants and bring them on board for "Study in India"</p>
+                        </div>
+                        <div class="notice_box">
+                            <h4>Tanzania <span>23rd-24th May 2018</span></h4>
+                            <p class="text-justify">A much anticipated education event to be held in Dar-es-Salaam which opens the doors for aspirants to Study in India.</p>
+                        </div>
+                        <div class="notice_box">
+                            <h4>USA <span>17th-19th June 2018</span></h4>
+                            <p class="text-justify">NAFSA 2018 annual conference theme, "Diverse Voices, shared commitments" will provide a platform for interaction with attendees from many professional and geographic perspectives and backgrounds.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-xs-12">
+                <div class="">
+                    <div class="section-title">
+                        <h2 class="xs-margin-top15 caps bb0">Event Updates</h2>
+                        <p><strong>Current Events</strong></p>
+                    </div>
+                </div>
+                <div class="single-blog mt34">
+                    <div class="blog-img"> <img src="~/img/event.jpg" class="img-responsive" alt=""> </div>
+                    <div class="blog-box pb0">
+                        <h4 class="mb0">Bhutan</h4>
+                        <p class="orange-text pull-left">30th - 31th Mar 2019</p>
+                        <span class="blog-btn"><a href="@Url.Content("~/")events" class="blog-readmore">Read more</a></span>
+                        <div class="clearfix"></div>
+                        <hr />
+
+                        <div class="event_list">
+                            <ul>
+                                <li>Bhutan - Date: 30th - 31th Mar 2019</li>
+                                <li class="section-title"><strong>Tentative events</strong></li>
+                                <li>NAFSA 2019 - Date: 26th - 31st May 2019 </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="more-button"> <a href="fair_schedule.php">More <i class="fa fa-angle-double-right"></i></a> </div>-->
+    </div>
+</div>
+<!-- upcoming area end -->
+<div class="blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                    <h2 class="text-center caps">Blogs</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeInUp owl-carousel" style="visibility: visible; animation-name: fadeInUp;">
+            @{
+                SIIRepository.Adminservice.BlogPost_Repository _objRepo = new SIIRepository.Adminservice.BlogPost_Repository();
+                SIIModel.Admin.mBlogPost _obj = new SIIModel.Admin.mBlogPost();
+                System.Data.DataSet _ds = _objRepo.SELECT_BLOGPOST(_obj);
+                if (_ds != null)
+                {
+                    if (_ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+                            <div class="col-sm-12 wow fadeInRight">
+                                <div class="single-blog">
+                                    <div class="blog-img"> <img src="@Url.Content("~/")@_dr["BlogImage"].ToString()" alt=""> <span>@(Convert.ToDateTime(_dr["CreatedDate"].ToString()).ToString("dd-MMM-yyyy | hh:mm tt"))</span> </div>
+                                    <div class="blog-box">
+                                        <h4>@_dr["BlogTitle"].ToString()</h4>
+                                        <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/@_dr["UniqueCode"].ToString()" class="blog-readmore">Read more</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div>
+        <div class="about-carousel-left">
+            <div class="about-carousel-left-slide">
+                <div class="about-carousel-left-single-slide">
+                    <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/useful-first-week-tips-for-new-students-in-india.jpg" alt=""> <span>31-OCT-18 | 01:02 PM</span> </div>
+                                <div class="blog-box">
+                                    <h4>Useful first week tips for new students in india</h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/useful-first-week-tips-for-new-students-in-india" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/packing-for-india-the-essentials.jpg" alt=""> <span>31-OCT-18 | 06:06 PM</span> </div>
+                                <div class="blog-box">
+                                    <h4>packing for india-the essentials</h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/packing-for-india-the-essentials" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/tips-on-how-to-travel-wonderfully-in-india.jpg" alt=""> <span>11-NOV-18 | 04:04 PM</span> </div>
+                                <div class="blog-box">
+                                    <h4>tips on how to travel wonderfully in india</h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/tips-on-how-to-travel-wonderfully-in-india" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-carousel-left-single-slide">
+                    <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/how-to-select-the-right-college-for-you!-.jpeg" alt=""> <span>22-Nov-18 | 12:51 PM</span> </div>
+                                <div class="blog-box">
+                                    <h4>How to select the right college for you! </h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/how-to-select-the-right-college-for-you!-" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/how-the-'study-in-india'-program-helps-you-find-the-right-college.jpg" alt=""> <span>14-Dec-18 | 11:45 AM</span> </div>
+                                <div class="blog-box">
+                                    <h4>Simplifying the 'Study in India' program in four easy steps</h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/simplifying-the-'study-in-india'-program-in-four-easy-steps" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="single-blog">
+                                <div class="blog-img"> <img src="@Url.Content("~/")img/blogs/india-and-stem-education.jpg" alt=""> <span>11-Jan-19 | 12:41 PM</span> </div>
+                                <div class="blog-box">
+                                    <h4>India and STEM Education</h4>
+                                    <span class="blog-btn"><a href="@Url.Content("~/")blog/Page/india-and-stem-education" class="blog-readmore">Read more</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title wow fadeInLeft mb20" style="visibility: visible; animation-name: fadeInLeft;">
+                    <center>
+                        <h2 class="middle-title caps">subscribe our newsletter</h2>
+                        <p>Type you email address for latest updates</p>
+                        <div class="underline mb10"></div>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="col-md-4 hidden-sm hidden-xs"></div>
+            <div class="col-md-4">
+                <div class="single-blog-right">
+                    <span class="single-blog-right-serach">
+                        <input type="text" placeholder="Search...">
+                        <span class="serch-icon"><a href="#"><i class="zmdi zmdi-search"></i></a></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+}
+
+@section scripts{
+
+    <script src="~/js/jssor.slider.mini.js"></script>
+    <script src="~/js/slider.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/active.js"></script>
+    <script>
+        $(window).scroll(function () {
+            if ($(window).scrollTop() >= 300) {
+                $('nav').addClass('fixed-header');
+                $('nav div').addClass('visible-title');
+            }
+            else {
+                $('nav').removeClass('fixed-header');
+                $('nav div').removeClass('visible-title');
+            }
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1200: {
+                        items: 3,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            })
+        });
+
+    </script>
+
+}

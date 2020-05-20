@@ -1,0 +1,351 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">
+                Travel Plan <span style="color: red">[ @Session["studentid"].ToString() - @Session["studentname"].ToString() ]</span>
+            </h3>
+        </div>
+    </div>
+}
+
+<div class="col-xs-12 col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <br />
+            <ul class="user-timeline user-timeline-compact">
+                <li class="@(Session["HasPassportDetails"].ToString().ToLower() == "true" ? "latest" : "")">
+                    <div class="user-timeline-date">
+                        @if (Session["HasPassportDetails"].ToString().ToLower() == "true")
+                        {
+                            <a class="btn btn-sm btn-success" href="~/admission/travelplan/passport">Edit</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-primary" href="~/admission/travelplan/passport">Add</a>
+                        }
+                    </div>
+                    <div class="user-timeline-title">Passport <i class='@(Session["HasPassportDetails"].ToString().ToLower() == "true" ? "mdi mdi-checkbox-marked-circle-outline text-success" : "")'></i></div>
+                    <div class="user-timeline-description">
+                        @if (Session["HasPassportDetails"].ToString().ToLower() == "true")
+                        {
+                            SIIRepository.StudentRegService.TravelPlanRepository _objRepo = new SIIRepository.StudentRegService.TravelPlanRepository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_StudentTravelPlanPassport(Session["studentid"].ToString(), Session["ApplicationNo"].ToString());
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            @if (_dr["HaveValidPassport"].ToString() == "Yes, I have")
+                                            {
+                                                <tr>
+                                                    <th>Passport Number</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>Copy of Passport</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@_dr["PassportNumber"].ToString()</td>
+                                                    <td>@(_dr["PassportExpiryDate"] != null ? (_dr["PassportExpiryDate"].ToString() != "" ? Convert.ToDateTime(_dr["PassportExpiryDate"].ToString()).ToString("dd-MM-yyyy") : "") : "")</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["PassportDocument"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                            else if (_dr["HaveValidPassport"].ToString() == "Applied for a passport")
+                                            {
+                                                <tr>
+                                                    <th>Application Number</th>
+                                                    <th>Copy of Passport</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@_dr["ApplicationNumber"].ToString()</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["ApplicationDocument"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                            else if (_dr["HaveValidPassport"].ToString() == "I have Nepalese citizenship document")
+                                            {
+                                                <tr>
+                                                    <th>Citizenship Number</th>
+                                                    <th>Issue Date</th>
+                                                    <th>Copy of Citizenship</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@_dr["CitizenshipNumber"].ToString()</td>
+                                                    <td>@(_dr["CitizenshipIssueDate"] != null ? (_dr["CitizenshipIssueDate"].ToString() != "" ? Convert.ToDateTime(_dr["CitizenshipIssueDate"].ToString()).ToString("dd-MM-yyyy") : "") : "")</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["CitizenshipDocument"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            <strong class="text-danger">No passport details available.</strong>
+                        }
+                    </div>
+                </li>
+                <li class="@(Session["HasAirTicketDetails"].ToString().ToLower() == "true" ? "latest" : "")">
+                    <div class="user-timeline-date">
+                        @if (Session["HasPassportDetails"].ToString().ToLower() == "true")
+                        {
+                            if (Session["HasAirTicketDetails"].ToString().ToLower() == "true")
+                            {
+                                <a class="btn btn-sm btn-success" href="~/admission/travelplan/AirTicket">Edit</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-sm btn-primary" href="~/admission/travelplan/AirTicket">Add</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-default disabled">Add</a>
+                        }
+                    </div>
+                    <div class="user-timeline-title">Air Ticket <i class='@(Session["HasAirTicketDetails"].ToString().ToLower() == "true" ? "mdi mdi-checkbox-marked-circle-outline text-success" : "")'></i></div>
+                    <div class="user-timeline-description">
+                        @if (Session["HasPassportDetails"].ToString().ToLower() == "true")
+                        {
+                            SIIRepository.StudentRegService.TravelPlanRepository _objRepo = new SIIRepository.StudentRegService.TravelPlanRepository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_StudentTravelPlanAirTicket(Session["studentid"].ToString(), Session["ApplicationNo"].ToString());
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            @if (_dr["HaveBookedTicket"].ToString() == "Yes, I have booked air ticket")
+                                            {
+                                                <tr>
+                                                    <th>Landing Date &amp; Time</th>
+                                                    <th>Origin Airport name</th>
+                                                    <th>Destination Airport name</th>
+                                                    <th>E-air ticket</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@(_dr["LandingDate"] != null ? (_dr["LandingDate"].ToString() != "" ? Convert.ToDateTime(_dr["LandingDate"].ToString()).ToString("dd-MM-yyyy") : "") : "") @_dr["LandingTime"].ToString()</td>
+                                                    <td>@(_dr["OriginAirport"].ToString() == "Other" ? _dr["OriginCountry"].ToString() + " - " + _dr["OtherOriginAirport"].ToString() : _dr["OriginAirport"].ToString())</td>
+                                                    <td>@(_dr["DestinationAirport"].ToString() == "Other" ? _dr["DestinationCountry"].ToString() + " - " + _dr["OtherDestinationAirport"].ToString() : _dr["OriginAirport"].ToString())</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["ETicket"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <strong class="text-danger">No air-ticket details available.</strong>
+                        }
+                    </div>
+                </li>
+                <li class="@(Session["HasVisaDetails"].ToString().ToLower() == "true" ? "latest" : "")">
+                    <div class="user-timeline-date">
+                        @if (Session["HasPassportDetails"].ToString().ToLower() == "true")
+                        {
+                            if (Session["HasVisaDetails"].ToString().ToLower() == "true")
+                            {
+                                <a class="btn btn-sm btn-success" href="~/admission/travelplan/Visa">Edit</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-sm btn-primary" href="~/admission/travelplan/Visa">Add</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="btn btn-sm btn-default disabled">Add</a>
+                        }
+                    </div>
+                    <div class="user-timeline-title">Visa <i class='@(Session["HasVisaDetails"].ToString().ToLower() == "true" ? "mdi mdi-checkbox-marked-circle-outline text-success" : "")'></i></div>
+                    <div class="user-timeline-description">
+                        @if (Session["HasVisaDetails"].ToString().ToLower() == "true")
+                        {
+                            SIIRepository.StudentRegService.TravelPlanRepository _objRepo = new SIIRepository.StudentRegService.TravelPlanRepository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_StudentTravelPlanVisa(Session["studentid"].ToString(), Session["ApplicationNo"].ToString());
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            @if (_dr["HaveIndianStudentVisa"].ToString() == "Yes, I have received the visa")
+                                            {
+                                                <tr>
+                                                    <th>Visa Number</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>Visa Type</th>
+                                                    <th>Visa Document</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@_dr["VisaNumber"].ToString()</td>
+                                                    <td>@(_dr["ExpiryDate"] != null ? (_dr["ExpiryDate"].ToString() != "" ? Convert.ToDateTime(_dr["ExpiryDate"].ToString()).ToString("dd-MM-yyyy") : "") : "")</td>
+                                                    <td>@_dr["VisaType"].ToString()</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["VisaDocument"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                            else if (_dr["HaveIndianStudentVisa"].ToString() == "I have applied for the visa. It is in-process")
+                                            {
+                                                <tr>
+                                                    <th>Visa Application Number</th>
+                                                    <th>Visa Application Document</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>@_dr["VisaApplicationNumber"].ToString()</td>
+                                                    <td><a class="btn btn-info" href="~/@_dr["VisaApplicationDocument"].ToString()" target="_blank">View</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <strong class="text-danger">No visa details available.</strong>
+                        }
+                    </div>
+                </li>
+                @{
+                    SIIRepository.StudentRegService.TravelPlanRepository _objRepoInstituteSpoc = new SIIRepository.StudentRegService.TravelPlanRepository();
+                    System.Data.DataSet _dsInstituteSpoc = _objRepoInstituteSpoc.SELECT_StudentTravelInstituteSpoc_ForStudents(Session["studentid"].ToString());
+
+                    <li class="@(_dsInstituteSpoc!= null ? _dsInstituteSpoc.Tables[0].Rows.Count>0? "latest" : "": "")">
+                        <div class="user-timeline-date"></div>
+                        <div class="user-timeline-title">Institute SPOC <i class='@(_dsInstituteSpoc!= null ? _dsInstituteSpoc.Tables[0].Rows.Count>0? "mdi mdi-checkbox-marked-circle-outline text-success" : "": "")'></i></div>
+                        <div class="user-timeline-description">
+                            @if (_dsInstituteSpoc != null)
+                            {
+                                if (_dsInstituteSpoc.Tables[0].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _dsInstituteSpoc.Tables[0].Rows)
+                                    {
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Name of SPOC</th>
+                                                    <td>@_dr["NameOfSpoc"].ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Mobile number of SPOC</th>
+                                                    <td>@_dr["Mobile"].ToString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Email of SPOC</th>
+                                                    <td>@_dr["Email"].ToString()</td>
+                                                </tr>
+                                                @if (_dr["DocumentName1"].ToString() != "" || _dr["DocumentName2"].ToString() != "" || _dr["DocumentName3"].ToString() != "" || _dr["DocumentName4"].ToString() != "" || _dr["DocumentName5"].ToString() != "")
+                                                {
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Document Name</th>
+                                                                        <th>View</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @for (int i = 1; i <= 5; i++)
+                                                                    {
+                                                                        if (_dr["DocumentName" + i.ToString() + ""] != null)
+                                                                        {
+                                                                            if (_dr["DocumentName" + i.ToString() + ""].ToString() != "")
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @if (_dr["DocumentName" + i.ToString() + ""].ToString() == "Other")
+                                                                                        {
+                                                                                            <span>@_dr["OtherDocumentName" + i.ToString() + ""].ToString()</span>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <span>@_dr["DocumentName" + i.ToString() + ""].ToString()</span>
+                                                                                        }
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a class="btn btn-sm btn-primary" target="_blank" href="~/@_dr["DoumentPath" + i.ToString() + ""].ToString()">View</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                }
+                                else
+                                {
+                                    <strong class="text-danger">Please be patient, Institute SPOC will be allotted to you soon.</strong>
+                                }
+                            }
+                            else
+                            {
+                                <strong class="text-danger">Please be patient, Institute SPOC will be allotted to you soon.</strong>
+                            }
+                        </div>
+                    </li>
+
+                }
+                @if (Session["IsAdmittedByInstitute"].ToString().ToLower() == "true")
+                {
+                    <li class="@(Session["IsAdmittedByInstitute"].ToString().ToLower() == "true" ? "latest" : "")">
+                        <div class="user-timeline-date"></div>
+                        <div class="user-timeline-title">
+                            @if (Session["IsAdmittedByInstitute"].ToString().ToLower() == "true")
+                            {
+                                <span>Admitted <i class='@(Session["IsAdmittedByInstitute"].ToString().ToLower() == "true" ? "mdi mdi-checkbox-marked-circle-outline text-success" : "")'></i></span>
+                            }
+                            else
+                            {
+                                <span>Not Admitted</span>
+                            }
+                        </div>
+                        <div class="user-timeline-description">
+                            @if (Session["IsAdmittedByInstitute"].ToString().ToLower() == "true")
+                            {
+
+                            }
+                            else
+                            {
+                                <strong class="text-danger">Action pending from institute.</strong>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <style>
+        .user-timeline-compact .user-timeline-title i {
+            font-size: 1.1em;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+            .table .table {
+                background-color: transparent;
+            }
+    </style>
+}

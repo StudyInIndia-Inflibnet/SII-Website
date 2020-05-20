@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+@if (ViewBag.For == "MultipleProgram" || ViewBag.For == "SecondMockMultiDiscipline")
+{
+    @Html.Partial("_MultipleDiscipline")
+}
+else if (ViewBag.For == "CountryWiseStudentApply" || ViewBag.For == "SecondMockCountrySpecific")
+{
+    @Html.Partial("_CountryWiseStudentApply")
+}
+else if (ViewBag.For == "CountryWiseStudentApplyList" || ViewBag.For == "CountrySpecific_Studentapply_In_SecondRound")
+{
+    @Html.Partial("_CountryWiseStudentApplyList")
+}
+else if (ViewBag.For == "InvalidSeatMatrix")
+{
+    @Html.Partial("_InvalidSeatMatrix")
+}
+else if (ViewBag.For == "DuplicateCourse")
+{
+    @Html.Partial("_DuplicateCourse")
+}
+else if (ViewBag.For == "ZeroMarks")
+{
+    @Html.Partial("_ZeroMarks")
+}
+else if (ViewBag.For == "AllChoice")
+{
+    @Html.Partial("_AllChoice")
+}
+else if (ViewBag.For == "FirstMockInstituteAction")
+{
+    @Html.Partial("_FirstMockInstituteAction")
+}
+else if (ViewBag.For == "SecondMockInstituteAction")
+{
+    @Html.Partial("_SecondMockInstituteAction")
+}
+else if (ViewBag.For == "ViewAllottedDetailsFirst")
+{
+    @Html.Partial("_ViewAllottedDetailsFirst")
+}
+else if (ViewBag.For == "ViewAllottedDetailsSecond")
+{
+    @Html.Partial("_ViewAllottedDetailsSecond")
+}
+else if (ViewBag.For == "FirstCountrySpecific_Report" || ViewBag.For == "SecondCountrySpecific_Report")
+{
+    @Html.Partial("_CountryWiseStudentApply1stRound")
+}
+else if (ViewBag.For == "FirstCountrySpecific_List" || ViewBag.For == "SecondCountrySpecific_List")
+{
+    @Html.Partial("_CountryWiseStudentApplyList1stRound")
+}
+else if (ViewBag.For == "FirstRoundInstituteWise")
+{
+    @Html.Partial("_InstituteWiseStudentApply1st")
+}
+else if (ViewBag.For == "FirstRoundInstituteWise_List")
+{
+    @Html.Partial("_InstituteWiseStudentApplyList1stRound")
+}

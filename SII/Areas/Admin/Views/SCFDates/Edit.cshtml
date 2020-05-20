@@ -1,0 +1,121 @@
+﻿@using System.Configuration
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+            <div class="panel-heading">
+                Edit - Student Choice Filling Dates
+                <div class="tools">
+                    <a href="@Url.Content("~/")Admin/SCFDates" class="btn btn-info btn-sm">Back</a>
+                </div>
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel-body">
+                                <form id="frm" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th>Studnet Choice Filling Closing Date</th>
+                                                <td colspan="3">
+                                                    <input type="text" id="StudentChoiceFillingDateTime" name="StudentChoiceFillingDateTime" value="@ConfigurationManager.AppSettings["StudentChoiceFillingDateTime"].ToString()" class="form-control" required="" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:25%">Programme Level</th>
+                                                <th style="width:25%">Choice Filling Close Datetime</th>
+                                                <th style="width:25%">Approve / Reject Start Datetime</th>
+                                                <th style="width:25%">Approve / Reject End Datetime</th>
+                                            </tr>
+                                            <tr>
+                                                <th>UG</th>
+                                                <td><input type="text" id="UG_ClosingDate" name="UG_ClosingDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="UG_ApproveReject_StartDate" name="UG_ApproveReject_StartDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="UG_ApproveReject_EndDate" name="UG_ApproveReject_EndDate" class="form-control" required="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th>PG</th>
+                                                <td><input type="text" id="PG_ClosingDate" name="PG_ClosingDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="PG_ApproveReject_StartDate" name="PG_ApproveReject_StartDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="PG_ApproveReject_EndDate" name="PG_ApproveReject_EndDate" class="form-control" required="" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th>PhD</th>
+                                                <td><input type="text" id="PhD_ClosingDate" name="PhD_ClosingDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="PhD_ApproveReject_StartDate" name="PhD_ApproveReject_StartDate" class="form-control" required="" /></td>
+                                                <td><input type="text" id="PhD_ApproveReject_EndDate" name="PhD_ApproveReject_EndDate" class="form-control" required="" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                method: "POST",
+                url: $("#hdfBaseUrl").val() + "Admin/SCFDates/SelectData"
+            }).done(function (a) {
+                $.each(a.List, function (a, t) {
+                    var pl = t['ProgrammeLevel'];
+                    $('#' + pl + '_ClosingDate').val(t['ClosingDate'])
+                    $('#' + pl + '_ApproveReject_StartDate').val(t['StartingDateApproveReject'])
+                    $('#' + pl + '_ApproveReject_EndDate').val(t['ClosingDateApproveReject'])
+                })
+            }).error(function () {
+
+            });
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                var frm = $('#frm');
+                var frmParsley = frm.parsley();
+                frmParsley.validate();
+                if (!frm.parsley().isValid()) {
+                    return false;
+                }
+                var btn = $(this);
+                btn.addClass('disabled');
+                btn.text('Processing...');
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'Admin/SCFDates/SaveData',
+                    data: frm.serialize(),
+                    async: false
+                }).done(function (data) {
+                    if (data.c == 'success') {
+                        alert(data.m);
+                        //SuccessMessage(r.m);
+                    } else if (data.c == 'servererror') {
+                        alert(data.m);
+                        // ErrorMessage(data.m);
+                        if (oldText != '') {
+                            btn.text(oldText);
+                        }
+                        btn.removeAttr('disabled');
+                        btn.text('Save');
+                    }
+                    btn.removeClass('disabled');
+                    btn.text('Save');
+                });
+            });
+        });
+    </script>
+}

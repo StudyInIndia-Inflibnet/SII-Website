@@ -1,0 +1,536 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Student Data<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span>
+                <a class="btn btn-warning pull-right" href="~/Institute/AdmittedStudent">Back</a>
+            </h3>
+        </div>
+    </div>
+}
+<input type="hidden" value="@ViewBag.studentid" id="hdnstudentid" />
+<input type="hidden" value="@ViewBag.Choice_ID" id="hdnChoiceID" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel-body table-responsive">
+                            <h3 class="page-header">Educational Qualification||<span style="color: red"> @ViewBag.studentname</span></h3>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:13%"></th>
+                                                    <th>Name of the Board / University</th>
+                                                    <th style="width:10%">Year</th>
+                                                    <th style="width:7%">Obtained Marks</th>
+                                                    <th style="width:7%">Maximum Marks</th>
+                                                    <th style="width:10%">Country</th>
+                                                    <th>Address</th>
+                                                    <th>Subjects Studied</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label>Secondary School / Class X / Equivalent Qualification&nbsp;<span style="color:red">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control allow_only_alphabet" data-parsley-pattern="/^[a-zA-Z][a-zA-Z ]+$/" data-parsley-pattern-message="Only alphabets allowed." required="" id="txtBUni_Matri" readonly />*@
+                                                        <label id="txtBUni_Matri"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" required="" id="txtYear_Matri" minlength="4" maxlength="7" readonly />*@
+                                                        <label id="txtYear_Matri"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" required="" id="txtMarks_Matri" readonly />*@
+                                                        <label id="txtMarks_Matri"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" required="" id="txtMMarks_Matri" readonly />*@
+                                                        <label id="txtMMarks_Matri"></label>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                                        "--Select--",
+                                                        new
+                                                        {
+                                                            @class = "form-control",
+                                                            @id = "drpCountry_Matri",
+                                                            @required = "",
+                                                            @disabled = ""
+                                                        })
+                                                    </td>
+                                                    <td>
+                                                        @*<textarea rows="2" id="txtaddress_Matri" required="" class="form-control" readonly></textarea>*@
+                                                        <label id="txtaddress_Matri"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" required="" id="txtSub_Matri" readonly />*@
+                                                        <label id="txtSub_Matri"></label>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <label>
+                                                            Grade Conversion Document(Official document to convert Grades/CGPA to Percentage Scale):
+                                                        </label>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <input type="file" id="fuGradeConversionDocument_Matri" style="display:none" />
+                                                        <input type="hidden" id="hdfGradeConversionDocument_Matri" value="" />
+                                                        <a class="btn btn-warning" id="btnUploadGradeConversionDocument_Matri" style="display:none">Upload PDF</a>
+                                                        <a class="btn btn-success" id="btnViewGradeConversionDocument_Matri" style="display:none;" target="_blank" href="">View PDF</a>
+                                                        @*<br />
+                                                            (Only PDF)*@
+                                                    </td>
+                                                    <td colspan="3">
+                                                        @*<input readonly type="text" class="form-control allow_only_decimal txtTotalMarksinPercentage_Matri" required="" id="txtTotalMarksinPercentage_Matri" max="100" placeholder="Total Marks in Percentage" />*@
+                                                        <label id="txtTotalMarksinPercentage_Matri"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="8">
+                                                        Higher Secondary / Class XII / Equivalent Qualification <input id="rbtresultawaited" type="radio" name="result" value="false" disabled /> Results Awaited
+                                                        &nbsp;&nbsp;<input id="rbtresultdeclared" type="radio" name="result" value="1" checked="checked" disabled />  Results Declared
+                                                        &nbsp;&nbsp;<input id="rbtnotapplicableresultdeclared" type="radio" name="result" value="false" style="display:none" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="trElevenIntermediate">
+                                                    <td>
+                                                        <label>Eleven Equivalent Qualification &nbsp;<span style="color:red">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control allow_only_alphabet" data-parsley-pattern="/^[a-zA-Z][a-zA-Z ]+$/" data-parsley-pattern-message="Only alphabets allowed." required="" id="txtBUni_Ele" />*@
+                                                        <label id="txtBUni_Ele"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtYear_Ele" minlength="4" maxlength="7" />*@
+                                                        <label id="txtYear_Ele"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtMarks_Ele" />*@
+                                                        <label id="txtMarks_Ele"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtMMarks_Ele" />*@
+                                                        <label id="txtMMarks_Ele"></label>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                                    "--Select--",
+                                                    new
+                                                    {
+                                                        @class = "form-control",
+                                                        @id = "drpCountry_Ele",
+                                                        @required = "",
+                                                        @disabled = ""
+                                                    })
+                                                    </td>
+                                                    <td>
+                                                        @*<textarea rows="2" id="txtaddress_Ele" required="" class="form-control" readonly></textarea>*@
+                                                        <label id="txtaddress_Ele"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" id="txtSub_Ele" required="" readonly />*@
+                                                        <label id="txtSub_Ele"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="trElevenIntermediate">
+                                                    <td colspan="2">
+                                                        <label>
+                                                            Grade Conversion Document(Official document to convert Grades/CGPA to Percentage Scale):
+                                                        </label>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <input type="file" id="fuGradeConversionDocument_Ele" style="display:none" />
+                                                        <input type="hidden" id="hdfGradeConversionDocument_Ele" value="" />
+                                                        <a class="btn btn-warning" id="btnUploadGradeConversionDocument_Ele" style="display:none">Upload PDF</a>
+                                                        <a class="btn btn-success" id="btnViewGradeConversionDocument_Ele" style="display:none;" target="_blank" href="">View PDF</a>
+                                                        @*<br />
+                                                            (Only PDF)*@
+                                                    </td>
+                                                    <td colspan="3">
+                                                        @*<input readonly type="text" class="form-control allow_only_decimal txtTotalMarksinPercentage_Ele" max="100" required="" id="txtTotalMarksinPercentage_Ele" placeholder="Total Marks in Percentage" />*@
+                                                        <label id="txtTotalMarksinPercentage_Ele"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="trHigherSecondaryIntermediate">
+                                                    <td>
+                                                        <label>Higher Secondary / Class XII / Equivalent Qualification &nbsp;<span style="color:red">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control allow_only_alphabet" data-parsley-pattern="/^[a-zA-Z][a-zA-Z ]+$/" data-parsley-pattern-message="Only alphabets allowed." required="" id="txtBUni_HSC" />*@
+                                                        <label id="txtBUni_HSC"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtYear_HSC" minlength="4" maxlength="7" />*@
+                                                        <label id="txtYear_HSC"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtMarks_HSC" />*@
+                                                        <label id="txtMarks_HSC"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input readonly type="text" class="form-control" required="" id="txtMMarks_HSC" />*@
+                                                        <label id="txtMMarks_HSC"></label>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                                    "--Select--",
+                                                    new
+                                                    {
+                                                        @class = "form-control",
+                                                        @id = "drpCountry_HSC",
+                                                        @required = "",
+                                                        @disabled = ""
+                                                    })
+                                                    </td>
+                                                    <td>
+                                                        @*<textarea rows="2" id="txtaddress_HSC" required="" class="form-control" readonly></textarea>*@
+                                                        <label id="txtaddress_HSC"></label>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" class="form-control" id="txtSub_HSC" required="" readonly />*@
+                                                        <label id="txtSub_HSC"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="trHigherSecondaryIntermediate">
+                                                    <td colspan="2">
+                                                        <label>
+                                                            Grade Conversion Document(Official document to convert Grades/CGPA to Percentage Scale):
+                                                        </label>
+                                                    </td>
+                                                    <td colspan="3">
+                                                        <input type="file" id="fuGradeConversionDocument_HSC" style="display:none" />
+                                                        <input type="hidden" id="hdfGradeConversionDocument_HSC" value="" />
+                                                        <a class="btn btn-warning" id="btnUploadGradeConversionDocument_HSC" style="display:none">Upload PDF</a>
+                                                        <a class="btn btn-success" id="btnViewGradeConversionDocument_HSC" style="display:none;" target="_blank" href="">View PDF</a>
+                                                        @*<br />
+                                                            (Only PDF)*@
+                                                    </td>
+                                                    <td colspan="3">
+                                                        @*<input readonly type="text" class="form-control allow_only_decimal txtTotalMarksinPercentage_HSC" max="100" required="" id="txtTotalMarksinPercentage_HSC" placeholder="Total Marks in Percentage" />*@
+                                                        <label id="txtTotalMarksinPercentage_HSC"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have IELTS score? <input id="rbtIELTSyes" type="radio" name="ielts" value="1" checked="checked" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtIELTSno" type="radio" name="ielts" value="0" class="rbtIELTSscore" disabled />  No
+                                                        &nbsp;&nbsp;<input id="rbtIELTSresulrawait" type="radio" name="ielts" value="2" class="rbtIELTSscore" disabled />  Results Awaited
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txtielts form-control allow_only_decimal" maxlength="3" id="tx_tielts" placeholder="Enter score" name="ieltsscore" />*@
+                                                        <label id="tx_tielts"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have JEE score? <input id="rbtJEEyes" type="radio" name="jeemain" value="1" checked="checked" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtJEEno" type="radio" name="jeemain" value="0" class="rbtJEESscore" disabled />  No
+                                                        &nbsp;&nbsp;<input id="rbtJEEresulrawait" type="radio" name="jeemain" value="2" class="rbtJEESscore" disabled />  Results Awaited
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txtJEE form-control allow_only_decimal" maxlength="3" name="jeemainscore" id="txt_JEE" placeholder="Enter score" />*@
+                                                        <label id="txt_JEE"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have GMAT score? <input id="rbtGMATyes" type="radio" name="GMAT" value="1" checked="checked" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtGMATno" type="radio" name="GMAT" value="0" class="rbtGMATSscore" disabled />  No
+                                                        &nbsp;&nbsp;<input id="rbtGMATresulrawait" type="radio" name="GMAT" value="2" class="rbtGMATSscore" disabled />  Results Awaited
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txtGMAT form-control allow_only_decimal" maxlength="3" required="" id="txt_GMAT" placeholder="Enter score" name="GMATscore" />*@
+                                                        <label id="txt_GMAT"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have TOFEL score? <input id="rbtTOFELyes" type="radio" name="TOFEL" value="1" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtTOFELno" type="radio" name="TOFEL" value="0" class="rbtTOFELscore" disabled />  No
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txttofel form-control allow_only_decimal" maxlength="3" required="" id="txt_TOFEL" placeholder="Enter score" name="TOFELscore" />*@
+                                                        <label id="txt_TOFEL"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have SAT score? <input id="rbtSATyes" type="radio" name="SAT" value="1" checked="checked" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtSATno" type="radio" name="SAT" value="0" class="rbtSATscore" disabled />  No
+                                                        &nbsp;&nbsp;<input id="rbtSATresulrawait" type="radio" name="SAT" value="2" class="rbtSATscore" disabled />  Results Awaited
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txtSAT form-control allow_only_decimal" maxlength="4" required="" id="txt_SAT" placeholder="Enter score" name="TOFELscore" />*@
+                                                        <label id="txt_SAT"></label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        Do you have work experience? <input id="rbtexperienceyes" type="radio" name="experience" value="1" checked="checked" disabled /> Yes
+                                                        &nbsp;&nbsp;<input id="rbtexperienceno" type="radio" name="experience" value="0" class="rbtexpscore" disabled />  No
+                                                    </td>
+                                                    <td colspan="2">
+                                                        @*<input readonly type="text" class="txtexperience form-control allow_only_decimal" maxlength="2" required="" id="txt_experience" placeholder="in month" name="TOFELscore" />*@
+                                                        <label id="txt_experience"></label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row hide">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Have you appeared/applied for JEE Main Exam 2018?<span style="color: red"> *</span></label>
+                                                <select id="drpjeemain" class="form-control">
+                                                    <option value="">-Select-</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Appearing">Appearing/Appeared</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Have you appeared/applied for JEE Main Advance 2018?<span style="color: red"> *</span></label>
+                                                <select id="drpjeeAdvacne" class="form-control" name="jeeadvance">
+                                                    <option value="">-Select-</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Appearing">Appearing/Appeared</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="display:none" id="divjeemainscore">
+                                            <div class="form-group">
+                                                <label>Obtained JEE Main score<span style="color: red"> *</span></label>
+                                                @*<input type="text" id="txtjeescore" class="form-control" placeholder="Obtained JEE Main score" maxlength="3">*@
+                                                <label id="txtjeescore"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="display:none" id="divjeeadvancescore">
+                                            <div class="form-group">
+                                                <label>Obtained JEE Advance score<span style="color: red"> *</span></label>
+                                                @*<input type="text" id="txtjeeAdvancescore" class="form-control" name="jeeadvancescore" placeholder="Obtained JEE Advance score" maxlength="3">*@
+                                                <label id="txtjeeAdvancescore"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="display:block" id="content">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel-body table-responsive">
+                            <h3 class="page-header">Additional Educational Qualification</h3>
+
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped" id="tblAny">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th style="width:13%">Other Qualification</th>
+                                            <th>Name of the Board / University</th>
+                                            <th>Name of Course</th>
+                                            <th>Year</th>
+                                            <th>Obtained Marks</th>
+                                            <th>Maximum Marks</th>
+                                            <th>Total Marks in Percentage</th>
+                                            <th>Country</th>
+                                            <th>Address</th>
+                                            <th>Subjects Studied</th>
+                                            <th>Document</th>
+                                            @*<th>Action</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyAddEny"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="display:block" id="content">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel-body table-responsive">
+                            @{
+                                SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+                                System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(ViewBag.studentid, "Doc");
+                                if (_ds != null)
+                                {
+                                    <h3 class="page-header">Document Information</h3>
+                                    if (_ds.Tables[1].Rows.Count > 0)
+                                    {
+                                        int indexInternationalCollaboration = 1;
+                                        <div class="col-md-6">
+                                            <h4 class="page-header">Document Information</h4>
+                                            <table class="table table-condensed table-responsive table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sr no</th>
+                                                        <th>Document Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodydocument">
+
+                                                    @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @(indexInternationalCollaboration++)
+                                                            </td>
+                                                            <td>@_dr["document_name"].ToString()</td>
+                                                            <td><a href="@_dr["document_path"].ToString()" class="btn btn-warning" target="_blank">View</a></td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    }
+                                    if (_ds.Tables[0].Rows.Count > 0)
+                                    {
+                                        System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                                        <div class="col-md-6">
+                                            <h4 class="page-header">Profile Picture</h4>
+                                            @if (_dr["student_path"].ToString() != "")
+                                            {
+                                                <img class="img-rounded xs-mr-10" id="imgProfile" src="@_dr["student_path"].ToString()" width="140" height="140" />
+                                            }
+                                            else
+                                            {
+                                                <img class="img-rounded xs-mr-10" id="imgProfile" src="~/assets/img/140x140.png" width="140" height="140" />
+                                            }
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="display:block">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <h3>Accept / Reject</h3>
+                    <form id="frmAcceptdeny" method="post">
+                        <div class="row" id="divskypeinterview">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Skype Interview </label>
+                                    <select class="form-control" name="IsRequireSkypeInterview" id="drpskypeinterview" required>
+                                        <option selected="selected" value="REQUIRE">Yes</option>
+                                        <option value="NOT-REQUIRE">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none" id="divSkypeInterviewCompleted">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Have you completed Skype interview?</label>
+                                    <select class="form-control" name="IsSkypeInterviewComplete" id="drpSkypeInterviewCompleted">
+                                        <option value="COMPLETE">Yes</option>
+                                        <option selected="selected" default value="PENDING">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none" id="divAcceptReject">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Accept / Reject&nbsp;<span style="color:red">*</span></label>
+                                    <select class="form-control" name="SeatApprove" required id="drpacceptdeny">
+                                        <option value="ACCEPT">Accept</option>
+                                        <option value="REJECT">Reject</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="display:none" id="divStudentJoinNotJoin">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Student Admission Status&nbsp;<span style="color:red"></span></label>
+                                    <select class="form-control" name="IsStudentAcceptSeat" id="drpStudentJoinNotJoined">
+                                        <option value="JOINED">Joined</option>
+                                        <option value="NOT-JOINED">Not Joined</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="display:none" id="divRemarks">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Remarks&nbsp;<span style="color:red">*</span></label>
+                                    <textarea id="textremarks" rows="3" name="SeatApproveReason" required="" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="divBtnSave">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Institute/Studentdatadisplay.js"></script>
+}

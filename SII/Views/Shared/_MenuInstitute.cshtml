@@ -1,0 +1,105 @@
+﻿<div class="left-sidebar-wrapper">
+    <a href="#" class="left-sidebar-toggle">Dashboard</a>
+    <div class="left-sidebar-spacer">
+        <div class="left-sidebar-scroll">
+            <div class="left-sidebar-content">
+                <ul class="sidebar-elements">
+                    <li class="divider">Menu</li>
+                    <li class="">
+                        <a href="@Url.Content("~/")Institute/ParticipationYears"><i class="icon mdi mdi-calendar"></i><span>Change Year</span></a>
+                    </li>
+                    <li class="">
+                        <a href="@Url.Content("~/")Institute/Dashboard"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                    </li>
+                    <li class="parent open">
+                        <a href="#"><i class="icon mdi mdi-city"></i><span>Institute</span></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="@Url.Content("~/")Institute/Details"><i class="sub-icon mdi mdi-account-card-details"></i><span>Institute Profile</span></a>
+                            </li>
+                            @if (Session["IsNicheAllowed"] != null)
+                            {
+                                if (Session["IsNicheAllowed"].ToString() == "True" && DateTime.Now <= Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["InstituteCourseNicheUpdate"].ToString()))
+                                {
+                                    <li>
+
+                                        <a href="@Url.Content("~/")Institute/Courses/NICHE"><i class="sub-icon mdi mdi-book-open-page-variant"></i><span>NICHE Courses</span></a>
+                                    </li>
+                                }
+                                else if (Session["IsAdminEdit"] != null)
+                                {
+                                    if (Session["IsAdminEdit"].ToString() != "True")
+                                    {
+                                        if (Session["IsAdminFLag"] != null)
+                                        {
+                                            if (Session["IsAdminFLag"].ToString() == "True" && DateTime.Now <= Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["InstituteCourseUpdate"].ToString()))
+                                            {
+                                                <li>
+                                                    <a href="@Url.Content("~/")Institute/Courses"><i class="sub-icon mdi mdi-book-open-page-variant"></i><span>Courses</span></a>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Content("~/")Institute/Courses"><i class="sub-icon mdi mdi-book-open-page-variant"></i><span>Courses</span></a>
+                                        </li>
+                                    }
+                                }
+                            }
+
+                            <li>
+                                <a href="@Url.Content("~/")Institute/FeeBreakup"><i class="sub-icon mdi mdi-currency-inr"></i><span>Fee Breakup</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Institute/Campus"><i class="sub-icon mdi mdi-domain"></i><span>Campus</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Institute/Fees"><i class="sub-icon mdi mdi-currency-inr"></i><span>Cost of Living</span></a>
+                            </li>
+                            <li>
+                                @*International Students*@
+                                <a href="@Url.Content("~/")Institute/InternationalStudents"><i class="sub-icon mdi mdi-account-network"></i><span>Extended Assistant</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Institute/FacultyAlumni"><i class="sub-icon mdi mdi-school"></i><span>Faculty / Alumni</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Institute/HowToReach"><i class="sub-icon mdi mdi-map-marker-radius"></i><span>How to Reach</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Institute/Gallery"><i class="sub-icon mdi mdi-folder-multiple-image"></i><span>Gallery</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    @*<li class="">
+                            <a href="@Url.Content("~/")Institute/AdmittedStudent"><i class="icon mdi mdi-home"></i><span>1st Round Admitted Student</span></a>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Content("~/")Institute/AdmittedStudentSecondRound"><i class="icon mdi mdi-home"></i><span>2nd Round Admitted Student</span></a>
+                        </li>*@
+                    @if (Session["IsNicheAllowed"] == null)
+                    {
+                        {
+                            DateTime _Today = DateTime.Now;
+                            if (Convert.ToDateTime(Session["AR_StartDate"].ToString()) <= _Today && Convert.ToDateTime(Session["AR_EndDate"].ToString()).Date >= _Today.Date)
+                            {
+                                <li class="">
+                                    <a href="@Url.Content("~/")Institute/AdmittedStudent/StudentsList"><i class="icon mdi mdi-home"></i><span>Admitted Students 2019</span></a>
+                                </li>
+                            }
+                        }
+                    }
+                    @if (Session["IsNicheAllowed"] != null)
+                    {
+                        <li class="">
+                            <a href="@Url.Content("~/")Institute/AdmittedStudentNICHECourse"><i class="icon mdi mdi-home"></i><span>Niche Course Applications</span></a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

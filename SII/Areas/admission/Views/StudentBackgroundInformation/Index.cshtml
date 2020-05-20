@@ -1,0 +1,258 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Background Information&nbsp;<span style="color: red">( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body table-responsive">
+                            <br />
+                            <form id="frmpassport">
+                                <input type="hidden" id="hdnfilesize" value="0" />
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Do you have a valid passport?</label>
+                                        <div class="col-sm-6">
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" name="IsvalidPassport" id="rad6" value="1">
+                                                <label for="rad6">Yes</label>
+                                            </div>
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" name="IsvalidPassport" id="rad7" value="0">
+                                                <label for="rad7">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" style="display:none" id="divpassport">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Name As Per Passport<span style="color:red"> *</span></label>
+                                            <input type="text" id="txtpassportname" class="form-control " data-parsley-pattern="/^[a-zA-Z .]+$/" data-parsley-pattern-message="Only alphabets allowed." placeholder="Name On Passport" name="NameasperPassport">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Passport Number<span style="color:red"> *</span></label>
+                                            @*allow_only_alphanumeric pattern="^[a-zA-Z]{2}[0-9]{7}$"*@
+                                            <input type="text" id="txtpassspoernumber" maxlength="15" class="form-control" placeholder="Passport Number" name="PassportNo">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Issuing Authority<span style="color:red"> </span></label>
+                                            @*allow_only_alphabet*@
+                                            <input type="text" id="txtIssuingAuthority" maxlength="20" class="form-control " data-parsley-pattern="/^[a-zA-Z_ ][a-zA-Z\\s_ ]+$/" data-parsley-pattern-message="Only alphabets allowed." placeholder="Issuing Authority" name="IssuingAuthority">
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-3">
+                                        <div class="form-group">
+                                        <label>Passport Issue Date <span style="color:red"> *</span></label>
+                                        <input type="text" id="txtpasssportissuedate" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="PASSPORT_ISSUE_DATE" required="" readonly>
+                                        </div>
+                                        </div>*@
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Passport Expiry Date <span style="color:red"> *</span></label>
+                                            <input type="text" id="txtpasssportexpirydate" class="form-control datetimepicker" placeholder="dd/mm/yyyy" name="PassportExpDate" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Passport Issue Country<span style="color:red"> *</span></label>
+                                            @Html.DropDownList("PassportIssueCountry", new SelectList(ViewBag.Countrywithoutindia, "Country_id", "Country_Name"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpCountryBackground"
+                                            })
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label>Passport Issue State<span style="color:red"> *</span></label>
+                                                  <select class="form-control" id="drppassportissuestate" name="PASSPORT_ISSUE_STATE" required="">
+                                                      <option value="">--Select--</option>
+                                                  </select>
+                                              </div>
+                                          </div><div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label>Passport Copy</label>
+                                                  <input type="file" id="udpPassportcopy" />
+                                                  <small class="text-danger">Only PDF/PNG/JPEG</small>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3" id="ViewPassportCopy" style="display:none">
+                                              <div class="form-group">
+                                                  <a href="" name="PASSPORT_PATH" target="_blank" class="btn btn-space btn-rounded btn-info btn-lg" id="viewCopy">Passport Copy Download</a>
+                                              </div>
+                                        </div>*@
+                                </div>
+                                <div class="row" style="display:none" id="divpassportno">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Have you applied for the passport?</label>
+                                        <div class="col-sm-6">
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" value="1" name="ApplyForPassport" id="rad8">
+                                                <label for="rad8">Yes</label>
+                                            </div>
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" value="0" name="ApplyForPassport" id="rad9">
+                                                <label for="rad9">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="divPassportFileReferenceNumber" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Passport file reference number</label>
+                                            <input type="text" class="form-control allow_only_alphanumeric" id="txtPassportFileReferenceNumber" name="PassportFileReferenceNumber" placeholder="Passport file reference number" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Do you have a Citizenship number?</label>
+                                        <div class="col-sm-6">
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" value="1" name="HaveCitizenshipNumber" id="CitizenshipNumberYes">
+                                                <label for="CitizenshipNumberYes">Yes</label>
+                                            </div>
+                                            <div class="be-radio inline">
+                                                <input type="radio" checked="" value="0" name="HaveCitizenshipNumber" id="CitizenshipNumberNo">
+                                                <label for="CitizenshipNumberNo">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="divCitizenshipNumber" style="display:none;">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Citizenship number <span style="color:red"> *</span></label>
+                                            <input type="text" id="txtCitizenshipnumber" class="form-control allow_only_alphanumeric" name="CitizenshipNumber" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3>Reference Details</h3>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-12 table-responsive">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>srno</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Contact Number</th>
+                                                        <th>Address</th>
+                                                        <th>Country</th>
+                                                        <th>State</th>
+                                                        <th>City</th>
+                                                        <th>Area</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyRefrence">
+                                                    @*<tr>
+                                                            <td>1</td>
+                                                        </tr>*@
+                                                    <tr id="1">
+                                                        <td>1</td>
+                                                        <td><input type="text" class="form-control txtname " required data-parsley-pattern="/^[a-zA-Z .]+$/" data-parsley-pattern-message="Only alphabets allowed." /></td>
+                                                        <td><input type="email" class="form-control txtEmail" required id="txtf1" /></td>
+                                                        <td><input type="text" class="form-control txtContact allow_only_number" required /></td>
+                                                        <td><input type="text" class="form-control txtAddress" required /></td>
+                                                        <td>
+                                                            @Html.DropDownList("drpRefCountry", new SelectList(ViewBag.Country, "Country_id", "Country_Name"), "--Select--",
+                                                            new
+                                                            {
+                                                                @class = "form-control drpRefCountry",
+                                                                @required = ""
+                                                            })
+                                                        </td>
+                                                        <td><input type="text" class="form-control txtState " required /></td>
+                                                        <td><input type="text" class="form-control txtCity allow_only_alphabet" required /></td>
+                                                        <td><input type="text" class="form-control txtArea allow_only_alphabet" required /></td>
+                                                        @*<td><input type="text" class="form-control txtDesignation" required /></td>
+                                                            <td><input type="text" class="form-control txtInstname" required /></td>*@
+                                                    </tr>
+                                                    <tr id="2">
+                                                        <td>2</td>
+                                                        <td><input type="text" class="form-control txtname" required data-parsley-pattern="/^[a-zA-Z .]+$/" data-parsley-pattern-message="Only alphabets allowed." data-parsley-notequalto=".txtname" data-parsley-notequalto-message="Reference name should not be same!" /></td>
+                                                        <td><input type="email" class="form-control txtEmail" required data-parsley-notequalto=".txtEmail" data-parsley-notequalto-message="Reference email should not be same!" /></td>
+                                                        <td><input type="text" class="form-control txtContact allow_only_number" required data-parsley-notequalto=".txtContact" data-parsley-notequalto-message="Reference mobile should not be same!" /></td>
+                                                        <td><input type="text" class="form-control txtAddress" required data-parsley-notequalto=".txtAddress" data-parsley-notequalto-message="Reference address should not be same!" /></td>
+                                                        <td>
+                                                            @Html.DropDownList("drpRefCountry", new SelectList(ViewBag.Country, "Country_id", "Country_Name"), "--Select--",
+                                                            new
+                                                            {
+                                                                @class = "form-control drpRefCountry",
+                                                                @required = ""
+                                                            })
+                                                        </td>
+                                                        <td><input type="text" class="form-control txtState allow_only_alphabet" required /></td>
+                                                        <td><input type="text" class="form-control txtCity allow_only_alphabet" required /></td>
+                                                        <td><input type="text" class="form-control txtArea allow_only_alphabet" required /></td>
+                                                        @*<td><input type="text" class="form-control txtDesignation" required /></td>
+                                                            <td><input type="text" class="form-control txtInstname" required /></td>*@
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <button type="submit" id="btnSubmitBackground" class="btn btn-primary btn-lg">Save</button>
+                                            @if (Session["AllowChoiceFilling"] != null)
+                                            {
+                                                if (Session["AllowChoiceFilling"].ToString().ToLower() != "false")
+                                                {
+                                                    <a class="btn btn-warning btn-lg pull-right" href="@Url.Content("~/")admission/StudentChoiceFilling/Basic">Next</a>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <style>
+        .control-label {
+            margin-bottom: 0;
+            padding-top: 11px;
+        }
+
+        input, select {
+            background-color: #fff !important;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/admission/StudentBackground.js"></script>
+}

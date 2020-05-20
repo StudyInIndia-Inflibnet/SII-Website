@@ -1,0 +1,489 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Dashboard&nbsp;<span style="color: red">( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )</span>
+            </h3>
+        </div>
+    </div>
+}
+@if (Session["CH_ERROR_FLAG"] != null)
+{
+    if (Session["CH_ERROR_FLAG"].ToString().ToLower() == "false")
+    {
+        Session.Remove("CH_ERROR_FLAG");
+        <div class="row">
+            <div class="col-md-12">
+                @if (Session["submitChoiceFill"].ToString().ToLower() != "true")
+                {
+                    <h4 style="color:red; text-align:center; font-weight:bold" class="title">Kindly fill <span style="color:black">"Basic Information" <span style="color:red">&</span> "Background Information"</span> first to proceed for choice filling. </h4>
+                }
+                else
+                {
+                    <h4 style="font-weight:bold" class="title alert alert-danger">You had already submitted your application.</h4>
+                }
+            </div>
+        </div>
+    }
+}
+@if (Session["IndSAT_ERROR_FLAG"] != null)
+{
+    if (Session["IndSAT_ERROR_FLAG"].ToString().ToLower() != "")
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 style="font-weight:bold" class="title alert alert-danger">@Html.Raw(Session["IndSAT_ERROR_FLAG"].ToString())</h4>
+            </div>
+        </div>
+        Session.Remove("IndSAT_ERROR_FLAG");
+    }
+}
+<div class="row">
+    <div class="col-xs-12 col-md-4 ">
+        <div class="panel panel-default">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget be-loading">
+                    <div class="widget-head">
+                        @*<div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync toggle-loading"></span><span class="icon mdi mdi-close"></span></div>*@
+                        <div class="title">Basic Information</div>
+                        <hr />
+                    </div>
+                    <div class="chart-legend">
+                        @*<div class="progress-bar1 position" data-percent=@ViewBag.StudentProfile data-duration="1000" data-color="@(ViewBag.StudentProfile !="100"?"#ccc,#ff6a00":"#ccc,#34a853")"></div>*@
+                        @{
+                            foreach (var item in ViewBag.StudentdDashboard)
+                            {
+                                <table class="table table-bordered w1">
+                                    <tr>
+                                        <td class="text-left"><strong>Student name</strong></td>
+                                        <td><i class="@(item.FirstName != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Mobile</strong></td>
+                                        <td><i class="@(item.Mobile != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Email</strong></td>
+                                        <td><i class="@(item.Email != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>DateOfBirth</strong></td>
+                                        <td><i class="@(item.DateOfBirth != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Country(Nationality)</strong></td>
+                                        <td><i class="@(item.Nationality != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Residential Address</strong></td>
+                                        <td><i class="@(item.Residential != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Permanent Address</strong></td>
+                                        <td><i class="@(item.Permanent != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                </table>
+                            }
+                        }
+                    </div>
+                    <div class="chart-legend">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="chart-legend-color"><span data-color="top-sales-color1" style="background-color: rgb(52, 168, 83);"></span></td>
+                                    <td>Basic Information</td>
+                                    <td class="chart-legend-value">
+                                        @if (Session["submitChoiceFill"] != null)
+                                        {
+                                            if (Session["submitChoiceFill"].ToString().ToLower() == "false")
+                                            {
+                                                <a href="@Url.Content("~/")admission/StudentBasicInformation" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                                            }
+                                        }
+                                        <a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=BasicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4 ">
+        <div class="panel panel-default">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget be-loading">
+                    <div class="widget-head">
+                        @*<div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync toggle-loading"></span><span class="icon mdi mdi-close"></span></div>*@
+                        <div class="title">Background Information</div>
+                        <hr />
+                    </div>
+                    <div class="widget-chart-container">
+                        @*<div class="progress-bar1 position" data-percent=@ViewBag.Background data-duration="1000" data-color="@(ViewBag.Background !="100"?"#ccc,#ff6a00":"#ccc,#34a853")"></div>*@
+                        @{
+                            foreach (var item in ViewBag.StudentdDashboard)
+                            {
+                                <table class="table table-bordered w1">
+                                    <tr>
+                                        <td class="text-left"><strong>Passport Details</strong></td>
+                                        <td><i class="@(item.PassportNo != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Citizenship Details</strong></td>
+                                        <td><i class="@(item.CitizenshipNumber != "1" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Student Reference Details</strong></td>
+                                        <td><i class="@(item.StudentRefrenceDetail != "2" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                </table>
+                            }
+                        }
+                    </div>
+                    <div class="chart-legend">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="chart-legend-color"><span data-color="top-sales-color1" style="background-color: rgb(52, 168, 83);"></span></td>
+                                    <td>Background Information</td>
+                                    <td class="chart-legend-value">
+                                        @if (Session["submitChoiceFill"] != null)
+                                        {
+                                            if (Session["submitChoiceFill"].ToString().ToLower() == "false")
+                                            {
+                                                <a href="@Url.Content("~/")admission/StudentBackgroundInformation" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                                            }
+                                        }
+
+                                        <a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=BackgroundInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4 ">
+        <div class="panel panel-default">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget be-loading">
+                    <div class="widget-head">
+                        @{
+                            bool OpenEditApplication = false;
+                            if (Session["SCH_UG"].ToString() == "Yes" && DateTime.Now <= Convert.ToDateTime(Session["UG_ReEdit_DateTime"].ToString()))
+                            {
+                                OpenEditApplication = true;
+                            }
+                            if (Session["SCH_PG"].ToString() == "Yes" && DateTime.Now <= Convert.ToDateTime(Session["PG_ReEdit_DateTime"].ToString()))
+                            {
+                                OpenEditApplication = true;
+                            }
+                            if (Session["SCH_PhD"].ToString() == "Yes" && DateTime.Now <= Convert.ToDateTime(Session["PhD_ReEdit_DateTime"].ToString()))
+                            {
+                                OpenEditApplication = true;
+                            }
+                        }
+                        @*<div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync toggle-loading"></span><span class="icon mdi mdi-close"></span></div>*@
+                        <div class="title">Student Choice Fill</div>
+                        <hr />
+                        @if (Session["submitChoiceFill"] != null)
+                        {
+                            if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && ViewBag.IndSATFilled != "True")
+                            {
+                                <strong style="color:red;"> Please be advised, the application can be edited only once. This Submission will be final.</strong>
+                            }
+                        }
+                    </div>
+                    <div class="widget-chart-container">
+                        @*<div class="progress-bar1 position" data-percent=@ViewBag.StdchTotal data-duration="1000" data-color="@(ViewBag.StdchTotal !="100"?"#ccc,#ff6a00":"#ccc,#34a853")"></div>*@
+
+                    </div>
+                    <div class="chart-legend">
+
+                        @{
+                            foreach (var item in ViewBag.StudentdDashboard)
+                            {
+                                <table class="table table-bordered w2">
+                                    <tr>
+                                        <td class="text-left"><strong>Select Discipline(s)</strong></td>
+                                        <td>@item.Disciplinelist</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Total course(s) selected</strong></td>
+                                        <td>@item.TotalChoicefill</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Document(s) Upload</strong></td>
+                                        <td>@item.Uploded_doc uploaded / @item.Doc_required total documents</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><strong>Final Submission</strong></td>
+                                        <td><i class="@(item.finalSubmit != "True" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                    </tr>
+                                    @if (Session["AllowChoiceFilling"] != null)
+                                    {
+                                        if (Session["AllowChoiceFilling"].ToString().ToLower() == "true" && item.finalSubmit != "True" && DateTime.Now <= Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["StudentChoiceFillingDateTime"].ToString()) && Session["RegistrationPhase"].ToString() == "PHASE-3")
+                                        {
+
+                                            <tr>
+                                                <td colspan="3" style="text-align:center"><a href="@Url.Content("~/ ")admission/StudentChoiceFilling/Basic" class="btn btn-info"><span class="title"> Choice Filling</span></a></td>
+                                            </tr>
+
+                                        }
+                                        else if (Session["submitChoiceFill"].ToString().ToLower() == "true")
+                                        {
+                                            <tr>
+                                                <td colspan="2">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="chart-legend-color"><span data-color="top-sales-color1" style="background-color: rgb(52, 168, 83);"></span></td>
+                                                                <td>Student Choice Fill</td>
+                                                                <td class="chart-legend-value">
+                                                                    <a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </table>
+                            }
+
+                            if (Session["submitChoiceFill"] != null)
+                            {
+                                if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-05-15 23:59:59") && Session["IsTestCentreCountry"].ToString().ToLower() == "true" && Session["IndSATCenter"].ToString() == "0" && Session["SCH_PhD"].ToString().ToLower() == "yes" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified")
+                                {
+                                    @*<a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                    <strong>Edit the application under following cases only:</strong>
+                                    <ul>
+                                        <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
+                                        <li>If an awaited result has now been declared</li>
+                                        <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
+                                        <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <form id="frm" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
+                                        </form>
+                                    </div>*@
+                                }
+                                else if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified" && Session["IsTestCentreCountry"].ToString().ToLower() == "false")
+                                {
+                                    @*<a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                    <strong>Edit the application under following cases only:</strong>
+                                    <ul>
+                                        <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
+                                        <li>If an awaited result has now been declared</li>
+                                        <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
+                                        <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <form id="frm" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
+                                        </form>
+                                    </div>*@
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @if (Session["submitChoiceFill"] != null)
+    {
+        if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["IsTestCentreCountry"].ToString().ToLower() == "true" && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-04-30 23:59:59") && DateTime.Now <= Convert.ToDateTime("2020-05-15 23:59:59"))
+        {
+            <div class="col-xs-12 col-md-4 ">
+                <div class="panel panel-default">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="widget be-loading">
+                            <div class="widget-head">
+                                <div class="title">Ind-SAT Center Selection</div>
+                                <hr />
+                            </div>
+                            <div class="widget-chart-container">
+                                @{
+                                    foreach (var item in ViewBag.StudentdDashboard)
+                                    {
+                                        <table class="table table-bordered w1">
+                                            <tr>
+                                                <td class="text-left"><strong>Ind-SAT Center Selection</strong></td>
+                                                <td><i class="@(item.IndSATCenter == "0" ? "fa fa-exclamation-triangle" : "fa fa-check-square-o")"></i></td>
+                                            </tr>
+                                        </table>
+                                    }
+                                }
+                            </div>
+                            <div class="chart-legend">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="chart-legend-color"><span data-color="top-sales-color1" style="background-color: rgb(52, 168, 83);"></span></td>
+                                            <td>Ind-SAT Center Selection</td>
+                                            <td class="chart-legend-value">
+                                                @foreach (var item in ViewBag.StudentdDashboard)
+                                                {
+                                                    if (item.IndSATCenter == "0")
+                                                    {
+                                                        <a href="@Url.Content("~/")admission/IndSATSelection" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                                                    }
+                                                }
+
+                                                <a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=IndSATSelection" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        if (Session["submitChoiceFill"].ToString().ToLower() == "true")
+        {
+            <div class="col-xs-12 col-md-4 ">
+                <div class="panel panel-default">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="widget be-loading">
+                            <div class="widget-head">
+                                <div class="title">Document Verification <strong>(To be done by SII Team)</strong></div>
+                                <hr />
+                            </div>
+                            <div class="widget-chart-container">
+                                @{
+                                    foreach (var item in ViewBag.StudentdDashboard)
+                                    {
+                                        <table class="table table-bordered w1">
+                                            <tr>
+                                                <td class="text-left"><strong>Document Verification</strong></td>
+                                                <td><i class="@(ViewBag.DocumentVerified == "Not Verified" ? "fa fa-exclamation-triangle" : (ViewBag.DocumentVerified == "Rejected" ? "fa fa-times" : (ViewBag.DocumentVerified == "Verified" ? "fa fa-check-square-o" : "")))"></i></td>
+                                            </tr>
+                                        </table>
+                                    }
+                                }
+                            </div>
+                            <div class="chart-legend">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="chart-legend-color"><span data-color="top-sales-color1" style="background-color: rgb(52, 168, 83);"></span></td>
+                                            <td>Document Verification</td>
+                                            <td class="chart-legend-value">
+                                                @if (ViewBag.DocumentVerified != "Verified")
+                                                {
+                                                    <a href="@Url.Content("~/")admission/Dashboard/UploadDocuments" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                                                }
+                                                else
+                                                {
+
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section styles
+{
+    <link href="~/assets/lib/morrisjs/morris.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lib/material-design-icons/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lib/jquery.vectormap/jquery-jvectormap-1.2.2.css" />
+    <link rel="stylesheet" type="text/css" href="assets/lib/jqvmap/jqvmap.min.css" />
+    <style>
+        .fa-exclamation-triangle {
+            color: #cb5705;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .fa-check-square-o {
+            color: #3da80c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .table.w1 tr td:nth-child(2) {
+            width: 20%;
+            text-align: center;
+        }
+
+        .table.w2 tr td:nth-child(2) {
+            width: 40%;
+            text-align: center;
+            font-weight: 400;
+        }
+    </style>
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnEditMyApplication').on('click', function (e) {
+                e.preventDefault();
+                var a = $(this);
+                form_save(a, function () {
+                    a.text('Redirecting...');
+                    //window.location.href = $('#hdfBaseUrl').val() + 'admission/StudentChoiceFilling/Basic';
+                    window.location.href = $('#hdfBaseUrl').val() + 'admission/Dashboard';
+                });
+            });
+        });
+
+        function form_save(e, a) {
+            ConfirmCallBack('Are you sure to edit your application? The application can be edited only once.', function () {
+                e.text("Processing....."); e.attr("disabled", !0); e.addClass("disabled"); forminuse = !0;
+                var f = $("#frm"),
+                    t = $('input[name="__RequestVerificationToken"]', f).val();
+
+                var i = e.text();
+                $.ajax({
+                    method: "POST",
+                    url: $("#hdfBaseUrl").val() + "admission/Dashboard/EditMyApp",
+                    data:
+                    {
+                        __RequestVerificationToken: t
+                    }
+                }).done(function (r) {
+                    if ("success" == r.c) {
+                        SuccessMessageCallBack(r.m, a);
+                    }
+                    else {
+                        ErrorMessage(r.m), e.text(i), e.removeAttr("disabled"), e.removeClass("disabled")
+                    }
+                }).error(function () {
+                    ErrorMessage("Processing error. Kindly refresh page and try again!"), e.text(i), e.removeAttr("disabled"), e.removeClass("disabled");
+                });
+            });
+        }
+    </script>
+}

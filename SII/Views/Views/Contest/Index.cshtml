@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Study in India Contest</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")">Home</a> / Contest</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="col-md-3 col-sm-3 col-xs-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+            <div class="course-details-right title">
+                <h4>Study in India Contest</h4>
+                <ul>
+                    <li><i class="blue-text">Step 1.</i><b style="font-weight:bold;">Basic Details Form </b></li>
+                    <li><i class="blue-text">Step 2.</i><b style="font-weight:bold;">Academic Details </b></li>
+                    <li><i class="blue-text">Step 3.</i><b style="font-weight:bold;">Upload Files </b></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 wow fadeInLeft">
+            <div class="section-title">
+                <div id="t1">
+                    <form id="frm1">
+                        <div class="contact-top">
+                            <div class="inner-title">
+                                <h3>Basic Details Form:</h3>
+                            </div>
+                            <div class="contact-top-icon">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Name<spna style="color:red">*</spna></label>
+                                            <input name="Name" type="text" placeholder="Name" class="form-control SetAlphabetOnly" pattern="/^[A-Za-z ]+$/" id="txtName" maxlength="200" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label>Institute/College<spna style="color:red">*</spna></label>
+                                            <input name="Institute" type="text" placeholder="Institute" class="form-control SetAlphaNumericOnly" id="txtInstitute" pattern="/^[a-zA-Z0-9 ,.-]+$/" maxlength="200" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Email-Id<spna style="color:red">*</spna></label>
+                                            <input name="Email" type="email" placeholder="Email" class="form-control" id="txtEmail" maxlength="200" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mobile Number<spna style="color:red">*</spna></label>
+                                            <input name="Mobile" type="text" placeholder="Mobile" class="form-control allownumberOnly" id="txtMobile" pattern="\d{10,15}" maxlength="15" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+                                    <button class="btn btn-success saveandnext2">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="t2" style="display:none">
+                    <form id="frm2">
+                        <div class="contact-top">
+                            <div class="inner-title">
+                                <h3>Academic Details:</h3>
+                            </div>
+                            <div class="contact-top-icon">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country<spna style="color:red">*</spna></label>
+                                            @Html.DropDownList("Country", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                    "--Select--",
+                                    new
+                                    {
+                                        @class = "form-control",
+                                        @id = "drpCountry",
+                                        @required = ""
+                                    })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Program Level studying in India<spna style="color:red">*</spna></label>
+                                            @Html.DropDownList("ProgramLevels", new SelectList(ViewBag.ProgramLevels, "ProgramLevel_Id", "ProgramLevel"),
+                                    "--Select--",
+                                    new
+                                    {
+                                        @class = "form-control",
+                                        @id = "drpProgramLevel",
+                                        @required = ""
+                                    })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Course studying in India<spna style="color:red">*</spna></label>
+                                            @Html.DropDownList("mCourseOfStudy", new SelectList(ViewBag.Course, "CourseOfStudy_ID", "CourseOfStudy"),
+                                    "--Select--",
+                                    new
+                                    {
+                                        @class = "form-control",
+                                        @id = "drpCourseOfStudy",
+                                        @required = ""
+                                    })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="divCourseOther" style="display:none">
+                                        <div class="form-group">
+                                            <label>Other Course <spna style="color:red">*</spna></label>
+                                            <input name="CourseOther" type="text" placeholder="Other Course" class="form-control" id="txtCourseOther" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+                                    <button class="btn btn-success saveandnext3">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="t3" style="display:none">
+                    <div class="contact-top">
+                        <div class="inner-title">
+                            <h3>Upload Files:</h3>
+                        </div>
+                        <div class="contact-top-icon">
+                            <table class="table table-striped table-bordered table-hover table-fw-widget choice-table data-grid1" id="tbl">
+                                <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Upload</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    <tr data-id="Citizenship">
+                                        <td>Upload Scanned copy of Passport/Citizenship card<spna style="color:red">*</spna></td>
+                                        <td>
+                                            <form id="frmCitizenship" method="post">
+                                                <input type="file" id="fuDocCitizenship" required="" /><br />
+                                                <button id="btnCitizenship" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-id="Citizenship" data-for="Citizenship"><i class="fa fa-upload"></i> Upload</button>
+                                                <input type="hidden" class="doc_path" id="hdfCitizenship" value="" />
+                                            </form>
+                                        </td>
+                                        <td id="tdCitizenship" style="text-align:center">
+                                            <label class="label label-danger" style="text-align:center"><i class="fa fa-times"></i> Not Uplaoded</label>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="CollegeID">
+                                        <td>Upload Scanned copy of College ID Card<spna style="color:red">*</spna></td>
+                                        <td>
+                                            <form id="frmCollegeID" method="post">
+                                                <input type="file" id="fuDocCollegeID" typeof="pdf." required="" /><br />
+                                                <button id="btnCollegeID" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-id="CollegeID" data-for="CollegeID"><i class="fa fa-upload"></i> Upload</button>
+                                                <input type="hidden" class="doc_path" id="hdfCollegeID" value="" />
+                                            </form>
+                                        </td>
+                                        <td id="tdCollegeID" style="text-align:center">
+                                            <label  class="label label-danger" style="text-align:center"><i class="fa fa-times"></i> Not Uplaoded</label>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="TestimonialVideo">
+                                        <td>Upload Testimonial Video<spna style="color:red">*</spna></td>
+                                        <td>
+                                            <form id="frmTestimonialVideo" method="post">
+                                                <input type="file" id="fuDocTestimonialVideo" typeof="mp4." required="" /><br />
+                                                <button id="btnTestimonialVideo" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-id="TestimonialVideo" data-for="TestimonialVideo"><i class="fa fa-upload"></i> Upload</button>
+                                                <input type="hidden" class="doc_path" id="hdfTestimonialVideo" value="" />
+                                            </form>
+                                        </td>
+                                        <td id="tdTestimonialVideo" style="text-align:center">
+                                            <label  class="label label-danger" style="text-align:center"><i class="fa fa-times"></i> Not Uplaoded</label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align:center">
+                                <button class="btn btn-success" id="btnsubmit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section styles{
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Layout/Layout.js"></script>
+    <script src="~/Scipts/Areas/Contest.js"></script>
+}

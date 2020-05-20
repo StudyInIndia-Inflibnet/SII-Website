@@ -1,0 +1,7 @@
+﻿
+@{
+    ViewBag.Title = "RedirectUrl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Raw(HttpUtility.HtmlDecode(ViewBag.finalValue))

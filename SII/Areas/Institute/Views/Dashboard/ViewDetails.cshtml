@@ -1,0 +1,122 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Study in India</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/material-design-icons/css/material-design-iconic-font.min.css" />
+    <link href="~/css/fonts/MaterialDesign-Webfont-master/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/style.css" type="text/css" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/css/custom-institute.css" rel="stylesheet" />
+    @Html.Partial("_GoogleTagManagerHead")
+    <style>
+        body {
+            background-color: transparent;
+        }
+
+        .be-wrapper {
+            min-height: 100%;
+            padding-top: 0;
+        }
+
+        .be-top-header .navbar-header {
+            width: 100%;
+        }
+
+        .be-nosidebar-left .be-top-header .navbar-header .navbar-brand {
+            width: 100%;
+        }
+    </style>
+    <script src="~/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+    <div class="be-wrapper be-nosidebar-left">
+        <nav class="navbar navbar-default be-top-header">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="~/Dashboard" class="navbar-brand"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="be-content">
+            <div class="main-content container-fluid">
+                @if (ViewBag.DetailsFor == "InstituteProfile")
+                {
+                    @Html.Partial("_InstituteProfile")
+                }
+                else if (ViewBag.DetailsFor == "Courses")
+                {
+                    @Html.Partial("_Courses")
+                }
+                else if (ViewBag.DetailsFor == "NicheCourses")
+                {
+                    @Html.Partial("ViewDetailsNicheCourse")
+                }
+                else if (ViewBag.DetailsFor == "Campus")
+                {
+                    @Html.Partial("_Campus")
+                }
+                else if (ViewBag.DetailsFor == "CostOfLiving")
+                {
+                    @Html.Partial("_CostOfLiving")
+                }
+                else if (ViewBag.DetailsFor == "ExtendedAssistant")
+                {
+                    @Html.Partial("_ExtendedAssistant")
+                }
+                else if (ViewBag.DetailsFor == "FacultyAlumni")
+                {
+                    @Html.Partial("_FacultyAlumni")
+                }
+                else if (ViewBag.DetailsFor == "HowToReach")
+                {
+                    @Html.Partial("_HowToReach")
+                }
+                else if (ViewBag.DetailsFor == "Gallery")
+                {
+                    @Html.Partial("_Gallery")
+                }
+                else
+                {
+                    <h3>Something went wrong! Please try again!</h3>
+                }
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_GoogleTagManagerBody")
+    <script src="~/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            $('.allow_only_number').keypress(function (e) {
+                return isNumber(e, this);
+            });
+        });
+        function isNumber(evt, element) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (
+                //(charCode != 45 || $(element).val().indexOf('-') != -1) &&      // &#8220;-&#8221; CHECK MINUS, AND ONLY ONE.
+                //(charCode != 46 || $(element).val().indexOf('.') != -1) &&  && charCode == 9 && charCode == 13    // &#8220;.&#8221; CHECK DOT, AND ONLY ONE.
+                ((charCode < 48 || charCode > 57) && charCode != 8 && charCode != 9 && charCode != 13))
+                return false;
+            return true;
+        }
+    </script>
+
+</body>
+</html>

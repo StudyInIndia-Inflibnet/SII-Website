@@ -1,0 +1,607 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Reports (Phase - 2)</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    @*Approx Cost Of living*@
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-danger">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Phase - 2 Overview</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="">1.</span></td>
+                                            <td><span class="">No of student registrations <small class="label label-danger">upto 16-06-2019 11:59:59 PM</small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Registered">@ViewBag.RegisteredStudents</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">2.</span></td>
+                                            <td><span class="">No of participating countries</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Country">@ViewBag.ParticipatedCountries</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">3.</span></td>
+                                            <td><span class="">No of student applications considered for counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Considered">@ViewBag.ConsideredStudents</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">4.</span></td>
+                                            <td><span class="">No of student applications allotted seats</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Allotted">@ViewBag.AllottedStudents</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">5.</span></td>
+                                            <td><span class="">Total students finally admitted (landed)</span></td>
+                                            <td>Under Development</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-success">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Counselling Overview</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="">6.</span></td>
+                                            <td><span class="">Students considered for counselling for U. G. level courses</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG&&c=all">@ViewBag.UG_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">7.</span></td>
+                                            <td><span class="">Students considered for counselling for P. G. level courses</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PG&&c=all">@ViewBag.PG_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">8.</span></td>
+                                            <td><span class="">Students considered for counselling for Ph.D. level courses</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PhD&&c=all">@ViewBag.PHD_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">9.</span></td>
+                                            <td><span class="">Students considered for counselling for multiple program level</span></td>
+                                            <td>Under Development</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-warning">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Allotment Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">10.</span></td>
+                                            <td><span class="">U.G. level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG&&c=all">@ViewBag.UG_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">10.A</span></td>
+                                            <td><span class="">U.G. level counselling - Students allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG&&c=1">@ViewBag.UG_SeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">10.B</span></td>
+                                            <td><span class="">U.G. level counselling - Students not allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG&&c=0">@ViewBag.UG_NoSeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">10.C</span></td>
+                                            <td><span class="">U.G. level counselling -  Students not allotted seat but were allotted either PG or Ph.D.</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG&&c=c">@ViewBag.UG_NoSeatAlloted_Common</a></td>
+                                        </tr>
+
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">10.D</span></td>
+                                            <td><span class="">U.G. (Round-2) level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG2&&c=all">@ViewBag.UG2_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">10.D.1</span></td>
+                                            <td><span class="">U.G.(Round-2) level counselling - Students allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG2&&c=1">@ViewBag.UG2_SeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">10.D.2</span></td>
+                                            <td><span class="">U.G.(Round-2) level counselling - Students not allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=UG2&&c=0">@ViewBag.UG2_NoSeatAlloted</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">11.</span></td>
+                                            <td><span class="">P.G. level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PG&&c=all">@ViewBag.PG_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">11.A</span></td>
+                                            <td><span class="">P.G. level counselling - Students allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PG&&c=1">@ViewBag.PG_SeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">11.B</span></td>
+                                            <td><span class="">P.G.  level counselling - Students not allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PG&&c=0">@ViewBag.PG_NoSeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">11.C</span></td>
+                                            <td><span class="">P.G.  level counselling -  Students not allotted seat but were allotted either UG or Ph.D.</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PG&&c=c">@ViewBag.PG_NoSeatAlloted_Common</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">12.</span></td>
+                                            <td><span class="">Ph. D. level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PHD&&c=all">@ViewBag.PHD_ConsiderStudent</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">12.A</span></td>
+                                            <td><span class="">Ph. D. level counselling - Students allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PHD&&c=1">@ViewBag.PHD_SeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">12.B</span></td>
+                                            <td><span class="">Ph. D.  level counselling - Students not allotted seat</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PHD&&c=0">@ViewBag.PHD_NoSeatAlloted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">12.C</span></td>
+                                            <td><span class="">Ph. D.  level counselling -  Students not allotted seat but were allotted either PG or UG</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/SeatAlloted?id=ConsiderStudent&&u=PHD&&c=c">@ViewBag.PHD_NoSeatAlloted_Common</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-primary">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Scholarships</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="">13.</span></td>
+                                            <td><span class="">Total scholarships allotted</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=&&c=all">@ViewBag.TotalSc</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">14.</span></td>
+                                            <td><span class="">Program-wise scholarships allotted</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=&&c=all">@ViewBag.TotalSc</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><span class="">14.A</span></td>
+                                            <td><span class="">Scholarships awarded in UG level allotments</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=UG&&c=SII">@ViewBag.TotalSIISc_UG</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><span class="">14.B</span></td>
+                                            <td><span class="">Africa free education for UG level allotments</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=UG&&c=AFRICA">@ViewBag.TotalAfricaSc_UG</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><span class="">14.C</span></td>
+                                            <td><span class="">Scholarships awarded in PG level allotments</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=PG&&c=SII">@ViewBag.TotalSIISc_PG</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">14.D</span></td>
+                                            <td><span class="">Africa Free education for PG level allotments</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship?id=Scholarship&&u=PG&&c=AFRICA">@ViewBag.TotalAfricaSc_PG</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">15.</span></td>
+                                            <td><span class="">Country-wise scholarships</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/ScholarshipCountryWiseCount?id=ScholarshipCountryWiseCount&&u=&&c=">@ViewBag.TotalCountrySc</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">15.A</span></td>
+                                            <td><span class="">Country-wise scholarships for UG level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/ScholarshipCountryWiseCount?id=ScholarshipCountryWiseCount&&u=UG&&c=">@ViewBag.TotalCountrySc_UG</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">15.B</span></td>
+                                            <td><span class="">Country-wise scholarships for PG level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/ScholarshipCountryWiseCount?id=ScholarshipCountryWiseCount&&u=PG&&c=">@ViewBag.TotalCountrySc_PG</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-dark">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Institute's Overview</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">16.</span></td>
+                                            <td><span class="">No of participating institutes</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PG&&c=">@ViewBag.Regint</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">16.A</span></td>
+                                            <td><span class="">Total Courses</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PG&&c=">@ViewBag.TotalCourse</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">16.B</span></td>
+                                            <td><span class="">Total Seats</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=">@ViewBag.TotalSeat</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span>16.C</span></td>
+                                            <td><span class=""> Institute wise Rejected students</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=16C">@ViewBag.InsRejectTotal</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">16.C-1</span></td>
+                                            <td><span class=""> Institute wise Rejected students - UG</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=16C1">@ViewBag.InsRejectUG</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">16.C-2</span></td>
+                                            <td><span class=""> Institute wise Rejected students - PG</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=16C2">@ViewBag.InsRejectPG</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">16.C-3</span></td>
+                                            <td><span class=""> Institute wise Rejected students - PHD</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=16C3">@ViewBag.InsRejectPHD</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">17.</span></td>
+                                            <td><span class="">Institutes with allotted students</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=&&c=17">@ViewBag.Allotedint</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">17.A</span></td>
+                                            <td><span class="">Total number of students allotted in UG level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=17A">@ViewBag.AllotedintUG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">17.B</span></td>
+                                            <td><span class="">Total number of students allotted in PG level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PG&&c=17B">@ViewBag.AllotedintPG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">17.C</span></td>
+                                            <td><span class="">Total number of students allotted in Ph. D. level counselling</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PHD&&c=17C">@ViewBag.AllotedintPHD</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">18.</span></td>
+                                            <td><span class="">Institute-wise approved student applications</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PG&&c=18">@ViewBag.InsApproveTotal</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">18.A</span></td>
+                                            <td><span class="">Institute-wise approved students for UG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=18A">@ViewBag.InsApproveUG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">18.B</span></td>
+                                            <td><span class="">Institute-wise approved students for PG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=18B">@ViewBag.InsApprovePG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">18.C</span></td>
+                                            <td><span class="">Institute-wise approved students for Ph. D. level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=18C">@ViewBag.InsApprovePHD</a></td>
+                                        </tr>
+
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">19.</span></td>
+                                            <td><span class="">Institute-wise accepted offer letter by students</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/ScholarshipCountryWiseCount?id=ScholarshipCountryWiseCount&&u=PG&&c=19">@ViewBag.StdApproveTotal</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.A</span></td>
+                                            <td><span class="">Institute-wise accepted students for UG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19A">@ViewBag.StdApproveUG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.B</span></td>
+                                            <td><span class="">Institute-wise accepted students for PG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19B">@ViewBag.StdApprovePG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.C</span></td>
+                                            <td><span class="">Institute-wise accepted students for Ph. D. level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19C">@ViewBag.StdApprovePHD</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">19.D</span></td>
+                                            <td><span class="">Institute-wise Rejected offer letter by students</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19D">@ViewBag.StdRejectTotal</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.D.1</span></td>
+                                            <td><span class="">Institute-wise Rejected  offer letter by students- UG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19D1">@ViewBag.StdRejectUG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.D.2</span></td>
+                                            <td><span class="">Institute-wise Rejected  offer letter by students- PG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19D2">@ViewBag.StdRejectPG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">19.D.3</span></td>
+                                            <td><span class="">Institute-wise Rejected  offer letter by students- Ph. D. level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=19D3">@ViewBag.StdRejectPHD</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">20.</span></td>
+                                            <td><span class="">Institute-wise admitted students</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=PG&&c=20">@ViewBag.StdjoinTotal</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">20.A</span></td>
+                                            <td><span class="">Institute-wise admitted students for UG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=20A">@ViewBag.StdjoinUG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">20.B</span></td>
+                                            <td><span class="">Institute-wise admitted students for PG level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=20B">@ViewBag.StdjoinPG</a></td>
+                                        </tr>
+                                        <tr style="">
+                                            <td><span class="">20.C</span></td>
+                                            <td><span class="">Institute-wise admitted students for Ph. D. level</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/InstituteList?id=InstituteList&&u=UG&&c=20C">@ViewBag.StdjoinPHD</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-danger">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Students finally admitted (landed) Overview</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span>21.</span></td>
+                                            <td><span class="">Passport <small class="label label-danger"></small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Passport?id=Passport&&u=&&c="></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>21.A</span></td>
+                                            <td><span class="">Student have a Passport <small class="label label-danger"></small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Passport?id=Passport&&u=Yes, I have&&c=all">@ViewBag.HavePassport</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>21.B</span></td>
+                                            <td><span class="">Applied For Passport <small class="label label-danger"></small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Passport?id=Passport&&u=Applied for a passport&&c=all">@ViewBag.ApplyForPassport</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>21.C</span></td>
+                                            <td><span class="">Student have nepal citizenship <small class="label label-danger"></small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Passport?id=Passport&&u=I have Nepalese citizenship document&&c=all">@ViewBag.NepalPassport</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>21.D</span></td>
+                                            <td><span class="">No passport or still not-apply <small class="label label-danger"></small></span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Passport?id=Passport&&u=&&c=all">@ViewBag.NoPassport</a></td>
+                                        </tr>
+
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">22.</span></td>
+                                            <td><span class="">Air Ticket</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Ticket?id=Ticket&&u=&&c=all"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">22.A</span></td>
+                                            <td><span class="">Air Ticket - Booked</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Ticket?id=Ticket&&u=Yes, I have booked air ticket&&c=all">@ViewBag.BookedTicket</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">22.B</span></td>
+                                            <td><span class="">Air Ticket - Not Booked yet </span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Ticket?id=Ticket&&u=&&c=all">@ViewBag.NoBookedTicket</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">22.C</span></td>
+                                            <td><span class="">Air Ticket - Book Soon</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Ticket?id=Ticket&&u=Will book air ticket soon&&c=all">@ViewBag.SoonBookedTicket</a></td>
+                                        </tr>
+                                        <tr style="background-color:lightgrey">
+                                            <td><span class="">23.</span></td>
+                                            <td><span class="">Visa</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Visa?id=Visa&&u=&&c=all"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">23.A</span></td>
+                                            <td><span class="">Visa -  Recived </span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Visa?id=Visa&&u=Yes, I have received the visa&&c=all">@ViewBag.HaveVisa</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">23.B</span></td>
+                                            <td><span class="">Visa -  Apply &Aacute; in process  </span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Visa?id=Visa&&u=I have applied for the visa. It is in-process&&c=all">@ViewBag.ApplyForVisa</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">23.C</span></td>
+                                            <td><span class="">Visa - Rejected</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Visa?id=Visa&&u=My visa was rejected&&c=all">@ViewBag.RejectedVisa</a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><span class="">24.A</span></td>
+                                            <td><span class="">Students refused to come</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/StudentsRefusedToCome?id=StudentsRefusedToCome&&u=Students refused to come&&c=all">@ViewBag.StudentsRefusedToCome</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">24.B</span></td>
+                                            <td><span class="">On-boarding Completed  </span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/OnBoardingCompleted?id=OnBoardingCompleted&&u=On-boarding Completed&&c=all">@ViewBag.OnBoardingCompleted</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">24.C</span></td>
+                                            <td><span class="">Visa - Rejected</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/TravelFormalitiesInProcess?id=TravelFormalitiesInProcess&&u=Travel Formalities in process&&c=all">@ViewBag.TravelFormalitiesInProcess</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <hr />
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-warning">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Reports - (Phase-2 || 2nd Mock Round)</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            <tr>
+                                                <td><span class="">1.</span></td>
+                                                <td><span class="">No of Students To Consider (Round 2 - PG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/PGStdParticapte">@ViewBag.PGStdParticapte_</a></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span class="">2.</span></td>
+                                                <td><span class="">No of Students Start Filling Choices (Round 2 - PG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/PGStdStartFillingChoice">@ViewBag.PGStdStartFillingChoice</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">3.</span></td>
+                                                <td><span class="">No of Students Submited (Round 2 - PG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/PGStdSubmittedChoice">@ViewBag.PGStdSubmittedChoice</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">4.</span></td>
+                                                <td><span class="">No of Students seat allotted (Round 2 - PG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/PGStdSeatAlloted">@ViewBag.PGStdSeatAlloted</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">5.</span></td>
+                                                <td><span class="">No of Students seat not allotted (Round 2 - PG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/PGStdSeatNotAlloted">@ViewBag.PGStdSeatNotAlloted</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">6.</span></td>
+                                                <td><span class="">Country Wise Scholarship Details</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship_PG">View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <hr />
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-warning">
+                                            <th width="10%">Sr.no</th>
+                                            <th width="80%">Reports - (Phase-2 || 3rd Mock Round)</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+
+                                            <tr>
+                                                <td><span class="">1.</span></td>
+                                                <td><span class="">No of Students To Consider (Round 3 - UG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/UGStdR3Particapte">@ViewBag.UGStdR3Particapte_</a></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span class="">2.</span></td>
+                                                <td><span class="">No of Students Start Filling Choices (Round 3 - UG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/UGStdR3StartFillingChoice">@ViewBag.UGStdR3StartFillingChoice</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">3.</span></td>
+                                                <td><span class="">No of Students Submited (Round 3 - UG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/UGStdR3SubmittedChoice">@ViewBag.UGStdR3SubmittedChoice</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">4.</span></td>
+                                                <td><span class="">No of Students seat allotted (Round 3 - UG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/UGStdR3SeatAlloted">@ViewBag.UGStdR3SeatAlloted</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">5.</span></td>
+                                                <td><span class="">No of Students seat not allotted (Round 3 - UG)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/UGStdR3SeatNotAlloted">@ViewBag.UGStdR3SeatNotAlloted</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">6.</span></td>
+                                                <td><span class="">Country Wise Scholarship Details</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Phase2/Report/Scholarship_UG">View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .underdevelopment i {
+            color: red;
+            font-size: 1.4em;
+        }
+    </style>
+}

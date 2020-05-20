@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard Gov. Scheme";
+    Layout = "~/Views/Shared/_LayoutgovschemeAdmissions.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12 col-md-6 ">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider xs-pb-15">Overall Progress</div>
+            <div class="panel-body xs-pt-25">
+                <div class="row">
+                    <div class="col-md-6"><a href="@Url.Content("~/")GovernmentSchemeAdmission/SearchStudent"><span class="title">Student List</span></a></div>
+                    <div class="col-md-3">
+                        <a href="@Url.Content("~/")GovernmentSchemeAdmission/SearchStudent" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6"><a href="@Url.Content("~/")GovernmentSchemeAdmission/Students"><span class="title">Add Student</span></a></div>
+                    <div class="col-md-3">
+                        <a href="@Url.Content("~/")GovernmentSchemeAdmission/Students" class="btn btn-info btn-sm" title="Edit"><i class="mdi mdi-pencil"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

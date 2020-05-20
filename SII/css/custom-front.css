@@ -1,0 +1,22 @@
+﻿
+.blog-comment-text{background:#f8f8f8;color:#666;margin-left:65px;min-height:180px;padding:35px 40px 35px 100px}.institute-img img{border:1px solid #ddd;height:128px;padding:3px;width:128px;background-color:#fff}.single-comment:hover{box-shadow:none;-moz-box-shadow:none;-webkit-box-shadow:none}.single-comment:hover .blog-comment-text{box-shadow:4px 4px 1px 0 #e8e8e8;-moz-box-shadow:4px 4px 1px 0 #e8e8e8;-webkit-box-shadow:4px 4px 1px 0 #e8e8e8}.table-borderless>tbody>tr>td,.table-borderless>tbody>tr>th,.table-borderless>tfoot>tr>td,.table-borderless>tfoot>tr>th,.table-borderless>thead>tr>td,.table-borderless>thead>tr>th{border-width:0}.panel-body .filter-ul{padding-left:0;max-height:150px;overflow:auto}.filter-accodion .panel,.filter-accodion .panel .panel-heading{border-radius:0;-moz-border-radius:0;-webkit-border-radius:0}.filter-accodion .panel .panel-heading .panel-title{font-family:Verdana;font-size:15px;font-weight:500}.no-border-radius{border-radius:0;-moz-border-radius:0;-webkit-border-radius:0}.blog-comment-text .table{margin-bottom:0}.btn-institute-name:hover{text-decoration:none;color:#ff7f26}
+.search_part input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('../img/searchicon.png');
+    background-position: 6px 5px;
+    background-repeat: no-repeat;
+    padding: 2px 10px 2px 26px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    height: 25px;
+    border-radius: 2px;
+    margin-left: 6px;
+}
+
+    .search_part input[type=text]:focus {
+        width: 100%;
+    }

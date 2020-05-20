@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Phase 2 Reports</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-success">
+                                            <th width="5%">Sr.no</th>
+                                            <th width="80%">Reports</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="">1.</span></td>
+                                            <td><span class="">Programme Wise Report</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/List/ProgrammeType">View</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">2.</span></td>
+                                            <td><span class="">Country Wise Report</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/Phase2/List/Country">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

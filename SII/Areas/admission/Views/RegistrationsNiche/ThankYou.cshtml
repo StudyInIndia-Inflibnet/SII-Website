@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "ThankYou";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Configuration
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Student Registration</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")Home">Home</a> / Student Registration</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 wow fadeInLeft">
+                <div class="section-title text-center">
+                    <h2><span>Thank you for Applying for the NICHE Course.</span></h2>
+                    <p>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-service-tab-items">
+                                <div class="tab-content">
+                                    @{
+                                        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "NicheCourses", "", ConfigurationManager.AppSettings["ParticipatedYear"].ToString(), TempData["NicheCourseId"].ToString());
+                                        if (_ds != null)
+                                        {
+                                            if (_ds.Tables[0].Rows.Count > 0)
+                                            {
+                                                <table id="datatable1" class="table table-bordered table-striped">
+                                                    <tbody>
+                                                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="course-details-right courses_box1">
+                                                                        <h3 class="course_title1">@_dr["Natureofcourse"].ToString()</h3>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <ul class="course-details-list">
+                                                                                    <li>Course type :<span>@_dr["CourseType"].ToString() </span></li>
+                                                                                    <li>Discipline :<span>@_dr["Discipline"].ToString() </span></li>
+                                                                                    <li>Program Level :<span>@_dr["ProgramLevel"].ToString() </span></li>
+
+                                                                                    @if (_dr["BranchName"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Branch/Subject :<span>@_dr["BranchName"].ToString() </span></li>
+                                                                                    }
+
+                                                                                    @if (_dr["GenderRestrictions"].ToString() != "")
+                                                                                    {
+                                                                                        <li> Gender Restrictions:<span> @_dr["GenderRestrictions"].ToString() </span></li>
+                                                                                    }
+
+                                                                                    @if (_dr["MinimumAgeRequirement"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Minimum Age Requirement :<span>@_dr["MinimumAgeRequirement"].ToString() </span></li>
+                                                                                    }
+                                                                                    @if (_dr["TutionFees"].ToString() != "")
+                                                                                    {
+                                                                                        <li> Tution fees per seat:<span>@_dr["TutionFees"].ToString()  @_dr["TutionFeesCurrency"].ToString() </span></li>
+                                                                                    }
+                                                                                    @if (_dr["TotalFees"].ToString() != "")
+                                                                                    {
+                                                                                        //  per seat with Boarding
+                                                                                        <li> TOTAL fees :<span>@_dr["TotalFees"].ToString()  @_dr["TotalFeesCurrency"].ToString()</span></li>
+                                                                                    }
+
+                                                                                </ul>
+                                                                            </div>
+                                                                            @if (_dr["EligibilityCriteria"].ToString() != "")
+                                                                            {
+                                                                                <div class="col-md-12">
+                                                                                    <ul>
+                                                                                        <li>Eligibility Criteria:<br /><label style="text-align:justify;">@_dr["EligibilityCriteria"].ToString()</label></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            }
+                                                                            <div class="col-md-12">
+                                                                                <ul class="course-details-list">
+                                                                                    @if (_dr["HostelAccommodation"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Hostel accommodation : <span>@_dr["HostelAccommodation"].ToString()</span></li>
+                                                                                    }
+                                                                                    @if (_dr["Food"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Food: <span>@_dr["Food"].ToString()</span></li>
+                                                                                    }
+                                                                                    @if (_dr["AC"].ToString() != "")
+                                                                                    {
+                                                                                        <li>AC: <span>@_dr["AC"].ToString()</span></li>
+                                                                                    }
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <ul class="course-details-list">
+                                                                                    @*@if (_dr["Credits"].ToString() != "")
+                                                                                        {
+                                                                                            <li>Credits : <span>@_dr["Credits"].ToString()</span></li>
+                                                                                        }*@
+                                                                                    @if (_dr["CourseDurations"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Course Durations: <span>@_dr["CourseDurations"].ToString() </span></li>
+                                                                                    }
+                                                                                    @if (_dr["ClassRoomHours"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Classroom Hours: <span>@_dr["ClassRoomHours"].ToString()</span></li>
+                                                                                    }
+                                                                                    @*@if (_dr["CoursePatterns"].ToString() != "")
+                                                                                        {
+                                                                                            <li>Examination Pattern: <span>@_dr["CoursePatterns"].ToString()</span></li>
+                                                                                        }*@
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <ul>
+                                                                                    @if (_dr["CourseDesc"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Course description - location and outline of course : <br /><label style="text-align:justify;">@_dr["CourseDesc"].ToString()</label></li>
+                                                                                    }
+                                                                                    @if (_dr["AdmissionReq"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Admission and Entry Requirements: <br /><label style="text-align:justify;">@_dr["AdmissionReq"].ToString()</label></li>
+                                                                                    }
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <ul class="course-details-list">
+                                                                                    @if (_dr["MinimumBatchSize"].ToString() != "")
+                                                                                    {
+                                                                                        <li>Minimum Batch Size  : <span>@_dr["MinimumBatchSize"].ToString()</span></li>
+                                                                                    }
+                                                                                    @*@if (_dr["InternationalBatchSize"].ToString() != "")
+                                                                                    {
+                                                                                        <li>International Batch Size : <span>@_dr["InternationalBatchSize"].ToString()</span></li>
+                                                                                    }*@
+                                                                                    @*@if (_dr["MedicalFitness"].ToString() != "")
+                                                                                        {
+                                                                                            <li>Need declaration from student regarding medical fitness : <span>@_dr["MedicalFitness"].ToString()</span></li>
+                                                                                        }*@
+                                                                                    @*@if (_dr["MandatoryMedicalExamination"].ToString() != "")
+                                                                                        {
+                                                                                            <li>Mandatory Medical Examination by Institute : <span>@_dr["MandatoryMedicalExamination"].ToString()</span></li>
+                                                                                        }*@
+                                                                                </ul>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <ul>
+
+                                                                                    @*@if (_dr["MedicalFitnessDocuments"].ToString() != "")
+                                                                                        {
+                                                                                            <li>Documents required from students for medical fitness : <span>@(_dr["MedicalFitnessDocuments"].ToString() == "Other" ? _dr["MedicalFitnessDocumentsOther"].ToString() : _dr["MedicalFitnessDocuments"].ToString())</span></li>
+                                                                                        }*@
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+    .course-details-right ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: left !important;
+        /*font-weight: 400;*/
+    }
+
+
+    .course-details-right li span {
+        /* float: right; */
+        font-weight: 400;
+        float: none !important;
+    }
+
+    .course-details-right li {
+        border-bottom: 1px solid #e2e2e2;
+        color: #333;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 33px;
+        padding-left: 15px;
+    }
+</style>

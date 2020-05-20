@@ -1,0 +1,166 @@
+﻿<div class="row">
+    @{
+        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "InstituteProfile", "");
+        int count = 0;
+
+        <div class="single-service-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="single-service-tab-menu">
+                            <ul class="nav category_ul" role="tablist">
+                                <li role="presentation" class="active"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                                @*<li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                                <li class="hide"  role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="single-service-tab-items">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="infrastructure">
+                                    <div class="single-tab cta">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                <div class="section-title">
+
+                                                    @if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            <h3 class="inner-title"><span>About Institute</span></h3>
+                                                            <p class="text-justify">More About Institute</p>
+                                                            <table class="table table-bordered table-striped">
+                                                                @if (_ds.Tables[0].Rows.Count > 0)
+                                                                {
+                                                                <tbody>
+                                                                    @if (_ds.Tables[0].Rows[0]["History"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> History : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["History"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["Awards"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> Awards : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["Awards"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["AcademicCourses"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> Academic Courses : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["AcademicCourses"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["AreaOfExcellence"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> Area of excellence : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["AreaOfExcellence"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["ResearchCapability"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> Research capability and focus area : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["ResearchCapability"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["NotableResearchPublication"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> Notable research/publication : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["NotableResearchPublication"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+                                                                    @if (_ds.Tables[0].Rows[0]["AcademicCourses"].ToString() != "")
+                                                                        {
+                                                                        <tr>
+                                                                            <td style="width:25%"><strong> About Institution : </strong> </td>
+                                                                            <td>@_ds.Tables[0].Rows[0]["Description"].ToString()</td>
+                                                                        </tr>
+                                                                        }
+
+                                                                </tbody>
+                                                                }
+                                                            </table>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-justify"><h4>Coming Soon...</h4>  </p>
+                                                        }
+
+                                                        if (_ds.Tables[3].Rows.Count > 0)
+                                                        {
+                                                            <p class="text-justify">Industry Associations</p>
+                                                            <table class="table table-bordered table-striped">
+                                                                <tbody>
+                                                                    @if (_ds.Tables[3].Rows[0]["FamousProject"].ToString() != "")
+                                                                    {
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Famous Corporate Projects : </strong> </td>
+                                                                        <td>@_ds.Tables[3].Rows[0]["FamousProject"].ToString()</td>
+                                                                    </tr>
+                                                                    }
+                                                                    @if (_ds.Tables[3].Rows[0]["Researches"].ToString() != "")
+                                                                    {
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Sponsored Researches: </strong> </td>
+                                                                        <td>@_ds.Tables[3].Rows[0]["Researches"].ToString()</td>
+                                                                    </tr>
+                                                                    }
+                                                                    @if (_ds.Tables[3].Rows[0]["PlacementOffering"].ToString() != "")
+                                                                    {
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Placement Offerings : </strong> </td>
+                                                                        <td>@_ds.Tables[3].Rows[0]["PlacementOffering"].ToString()</td>
+                                                                    </tr>
+                                                                    }
+                                                                    @if (_ds.Tables[3].Rows[0]["SummerInternship"].ToString() != "")
+                                                                    {
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Summer internship opportunities : </strong> </td>
+                                                                        <td>@_ds.Tables[3].Rows[0]["SummerInternship"].ToString()</td>
+                                                                    </tr>
+                                                                    }
+
+                                                                </tbody>
+
+                                                            </table>
+                                                        }
+                                                        @* if (_ds.Tables[2].Rows.Count > 0)
+                                                            {
+                                                                <p class="text-justify">Life Outside Campus</p>
+                                                            }*@
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-justify"><h4>Coming Soon...</h4> </p>
+                                                    }
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

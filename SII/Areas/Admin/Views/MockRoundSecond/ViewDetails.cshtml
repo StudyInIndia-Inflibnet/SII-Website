@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+@if (ViewBag.For == "ProgramLevelDetails")
+{
+    @Html.Partial("_ProgramLevelDetails")
+}
+@if (ViewBag.For == "CourseDetails")
+{
+    @Html.Partial("_CourseDetails")
+}
+@if (ViewBag.For == "StudentApply")
+{
+    @Html.Partial("_StudentApply")
+}
+@if (ViewBag.For == "AllottedSeat")
+{
+    @Html.Partial("_Allotted")
+}
+@if (ViewBag.For == "MeritList")
+{
+    @Html.Partial("_MeritList")
+}
+@if (ViewBag.For == "GenerateResult")
+{
+    @Html.Partial("_GenerateResult")
+}
+
+@if (ViewBag.For == "GenerateMeritGroupByDiscipline")
+{
+    @Html.Partial("_Merit")
+}
+
+@if (ViewBag.For == "GenerateMeritRank")
+{
+    @Html.Partial("_MeritRank")
+}
+
+@if (ViewBag.For == "PendingSeat")
+{
+    @Html.Partial("_PendingSeat")
+}
+
+@if (ViewBag.For == "StudentFillChoiceDisciplineWise")
+{
+    @Html.Partial("_StudentFillChoiceDisciplineWise")
+}
+@if (ViewBag.For == "ViewAllottedDetails")
+{
+    @Html.Partial("_ViewAllottedDetails")
+}
+

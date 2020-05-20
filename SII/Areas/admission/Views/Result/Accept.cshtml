@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Accept";
+    Layout = "~/Views/Shared/_LayoutportalChoiceFilling.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Accept Allotted Seat (PG / PhD)<span style="color: red">
+                    ( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )
+                </span>
+            </h3>
+        </div>
+    </div>
+}
+
+    

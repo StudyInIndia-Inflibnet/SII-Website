@@ -1,0 +1,85 @@
+﻿<div class="row">
+    @{
+        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "GalleryFront");
+        <div class="single-service-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="single-service-tab-menu">
+                            <ul class="nav category_ul" role="tablist">
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                                @*<li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                                <li  role="presentation" class="active hide"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="single-service-tab-items">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="infrastructure">
+                                    <div class="single-tab cta">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                <div class="section-title">
+                                                    <h3 class="inner-title"><span>Photo Gallery</span></h3>
+                                                    @if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            <div class="">
+                                                                @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                                {
+                                                                <a href="@Url.Content("~/")Explore/ViewDetails?instituteid=@TempData["instituteid"].ToString()&For=GalleryPhoto&Category=@_dr["CategoryID"].ToString()">
+                                                                    <div class="col-sm-4 col-md-4 col-xs-12 wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+
+                                                                        <div class="upcoming-single">
+                                                                            @*upcoming-img*@
+                                                                            <div class="">
+                                                                                <div class="blog-img-hover">
+                                                                                    <div class="blog-img-ifc">
+                                                                                        <img alt=""  src="@Url.Content("~/")@_dr["ImageCategory"].ToString()">
+                                                                                        <a class="upcoming-link" href="photo_gallery.php"><i class="zmdi zmdi-link"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="upcoming-event-text mt0 thum_title">
+                                                                                <h4>@_dr["GallaryCategory_Name"].ToString()</h4>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </a>
+                                                                }
+
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-justify">
+                                                                <h4>Coming Soon...</h4>
+                                                            </p>
+
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

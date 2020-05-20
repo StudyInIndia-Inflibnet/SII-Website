@@ -1,0 +1,32 @@
+﻿@import url(bootstrap.min.css);
+@import url(nice-select.css);
+@import url(material-design-iconic-font.min.css);
+@import url(font-awesome.css);
+@import url(style.default.css);
+@import url(style.css);
+@import url(responsive.css);
+@import url(animate.min.css);
+@import url(owl.carousel.css);
+@import url(slicknav.min.css);
+@import url(hover.min.css);
+
+.search_part input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('../img/searchicon.png');
+    background-position: 6px 5px;
+    background-repeat: no-repeat;
+    padding: 2px 10px 2px 26px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    height: 25px;
+    border-radius: 2px;
+    margin-left: 6px;
+}
+
+    .search_part input[type=text]:focus {
+        width: 100%;
+    }

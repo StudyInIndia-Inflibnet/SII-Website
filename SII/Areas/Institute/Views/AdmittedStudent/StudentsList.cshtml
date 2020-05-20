@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "StudentsList";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Admitted Student 2019 <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Programme Level</th>
+                                        <th>Allotted</th>
+                                        <th>Approved / Rejected</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @{
+                                        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                        System.Data.DataSet _ds = _objRepository.SELECT_PHASE2_ALLOTED_STUDENTS_FOR_INSTITUTES(Session["InstituteID"].ToString(), "PLCounts", "");
+                                        if (_ds != null)
+                                        {
+
+                                            if (_ds.Tables[0].Rows.Count > 0)
+                                            {
+                                                int i = 1;
+                                                foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                {
+                                                    <tr>
+                                                        <td>@(i++)</td>
+                                                        <td>@_dr["ProgrammeLevel"].ToString()</td>
+                                                        <td>@_dr["SeastAlloted"].ToString()</td>
+                                                        <td>@_dr["ActionTaken"].ToString()</td>
+                                                        <td>
+                                                            <a class="btn btn-primary" href="~/Institute/AdmittedStudent/Student/@_dr["ProgrammeLevel"].ToString()">
+                                                                Take Action (Approve / Reject)
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

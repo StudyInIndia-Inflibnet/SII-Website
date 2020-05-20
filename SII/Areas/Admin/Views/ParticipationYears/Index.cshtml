@@ -1,0 +1,105 @@
+﻿@using System.Configuration
+@using System.Data
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Study in India</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/material-design-icons/css/material-design-iconic-font.min.css" />
+    <link href="~/css/fonts/MaterialDesign-Webfont-master/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/style.css" type="text/css" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/css/custom-institute.css" rel="stylesheet" />
+    @Html.Partial("_GoogleTagManagerHead")
+    <style>
+
+        .be-wrapper {
+            min-height: 100%;
+            padding-top: 0;
+        }
+
+        .be-top-header .navbar-header {
+            width: 100%;
+        }
+
+        .be-nosidebar-left .be-top-header .navbar-header .navbar-brand {
+            width: 100%;
+        }
+
+        .panel-body {
+            border-radius: 0 0 3px 3px;
+            padding: 40px 20px 50px;
+        }
+    </style>
+    <script src="~/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+    <div class="be-wrapper be-nosidebar-left">
+        <nav class="navbar navbar-default be-top-header">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="~/Dashboard" class="navbar-brand"></a>
+                </div>
+            </div>
+        </nav>
+        <div class="be-content">
+            <div class="main-content container-fluid">
+                <h3 class="text-center">Select Councelling Year</h3>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-body text-center">
+                                    <h2><small>Academic Year</small><br />2018-19</h2>
+                                    <a class="btn btn-sm btn-danger" id="btnParticipate" href="~/Admin/Dashboard">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-body text-center">
+                                    <h2><small>Academic Year</small><br />2019-20</h2>
+                                    <a class="btn btn-sm btn-danger" id="btnParticipate" href="~/Admin/Dashboard/Phase2">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-body text-center">
+                                    <h2><small>Academic Year</small><br />@ConfigurationManager.AppSettings["ParticipatedYear"].ToString()</h2>
+                                    <a class="btn btn-sm btn-danger" id="btnParticipate" href="~/Admin/Dashboard/Phase3">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_GoogleTagManagerBody")
+    <script src="~/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+    </script>
+
+</body>
+</html>

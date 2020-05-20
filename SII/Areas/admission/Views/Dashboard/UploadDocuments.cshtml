@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Upload Documents
+            </h3>
+            <p style="color:red;font-size:16px;">The Study in India team shall review all documents submitted by students and will contact you in case if any clarification/document is required.</p>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <fieldset class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+
+                <h4 class="section-title">Document information</h4>
+                <hr />
+                <table class="table table-striped table-bordered table-hover table-fw-widget choice-table data-grid1" id="tbl">
+                    <thead>
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Reason</th>
+                            <th>Comment</th>
+                            <th colspan="2">Upload</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @{
+                            SIIRepository.StudentRegService.ChoiceFillingRepository _objRepo = new SIIRepository.StudentRegService.ChoiceFillingRepository();
+                            System.Data.DataSet _ds = _objRepo.Opr_DocumentUpload("SELECT", Session["studentid"].ToString());
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                    {
+                                        <tr data-id="@_dr["ID"].ToString()" data-uploaded="@(_dr["Path"].ToString() != "" ? "True" : "False")">
+                                            <td>
+                                                <span class="lblFileName">@_dr["EQ_AE_Name"].ToString()</span> <strong style="color:red;">@(_dr["IsGiven"].ToString() == "2" ? (_dr["EQ_AE_ID"].ToString() == "2" ? "(In case of result awaited, upload Class XI document)" : "(Upload all mark sheets/transcripts till last exam cycle)") : "")</strong>
+                                            </td>
+                                            @if (_dr["IsVerified"].ToString() == "Rejected")
+                                            {
+                                                <td>@_dr["Reason"].ToString()</td>
+                                                <td>@_dr["Comment"].ToString()</td>
+                                                <td>
+                                                    @if (_dr["Reason"].ToString() != "Percentage Mismatch")
+                                                    {
+                                                        <form id="frm@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="file" id="fuDoc@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" required="" />
+                                                        </form>
+                                                        <input type="hidden" class="doc_path" id="hdf@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" value="@_dr["Path"].ToString()" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <form id="frm@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" data-id="@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <select class="form-control drpPercentage drpPercentageMainPart" id="drpMain@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" required=""></select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <select class="form-control drpPercentage drpPercentageDeciamlPart" id="drpDecimal@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" required=""></select>
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    @if (_dr["Reason"].ToString() != "Percentage Mismatch")
+                                                    {
+                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-upload"></i> Upload</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-check-square"></i> Update</button>
+                                                    }
+
+                                                </td>
+                                            }
+                                            else if (_dr["IsVerified"].ToString() == "Verified")
+                                            {
+                                                <td colspan="4"><i class="fa fa-check-square-o"></i> Verified OK</td>
+                                            }
+                                            else
+                                            {
+                                                <td colspan="4"><i class="fa fa-exclamation-triangle"></i> Verification Pending</td>
+                                            }
+
+                                            <td id="td@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()">
+                                                @if (_dr["Path"].ToString() != "")
+                                                {
+                                                    <a class="label label-success" href="~/@_dr["Path"].ToString()" target="_blank"><i class="fa fa-download"></i> View</a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-danger"><i class="fa fa-times"></i> Not Uplaoded</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                if (_ds.Tables[1].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                                    {
+                                        <tr data-id="@_dr["EQ_AE_ID"].ToString()" data-uploaded="@(_dr["Path"].ToString() != "" ? "True" : "False")">
+                                            <td>
+                                                <span class="lblFileName">@_dr["EQ_AE_Name"].ToString()</span>
+                                                <strong style="color:red;">@(_dr["IsGiven"].ToString() == "2" ? "(Upload the Admit Card of the Examination, if appearing and results awaited)" : "")</strong>
+                                            </td>
+                                            @if (_dr["IsVerified"].ToString() == "Rejected")
+                                            {
+                                                <td>@_dr["Reason"].ToString()</td>
+                                                <td>@_dr["Comment"].ToString()</td>
+                                                <td>
+                                                    @if (_dr["Reason"].ToString() != "Percentage Mismatch")
+                                                    {
+                                                        <form id="frm@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            <input type="file" id="fuDoc@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" required="" /><br />
+
+                                                        </form>
+                                                        <input type="hidden" class="doc_path" id="hdf@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" value="@_dr["Path"].ToString()" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <form id="frm@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" data-id="@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            @if (_dr["EQ_AE_For"].ToString() == "IELTS")
+                                                            {
+                                                                <select class="form-control drpAEScore" id="txtAE@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" disabled="">
+                                                                    <option value="">--Select--</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="4.5">4.5</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="5.5">5.5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="6.5">6.5</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="7.5">7.5</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="8.5">8.5</option>
+                                                                    <option value="9">9</option>
+                                                                </select>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control drpAEScore" placeholder="@_dr["EQ_AE_Name"].ToString()" id="txtAE@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" data-parsley-pattern="\d{1,4}" maxlength="@_dr["MaxLimit"].ToString().Length" data-parsley-pattern-message="Only numeric value allowed." data-parsley-max="@_dr["MaxLimit"].ToString()" data-parsley-max-message="Max score should be @_dr["MaxLimit"].ToString()." />
+                                                            }
+
+                                                        </form>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (_dr["Reason"].ToString() != "Percentage Mismatch")
+                                                    {
+                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-upload"></i> Upload</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-check-square"></i> Update</button>
+                                                    }
+                                                </td>
+                                            }
+                                            else if (_dr["IsVerified"].ToString() == "Verified")
+                                            {
+                                                <td colspan="4"><i class="fa fa-check-square-o"></i> Verified OK</td>
+                                            }
+                                            else
+                                            {
+                                                <td colspan="4"><i class="fa fa-exclamation-triangle"></i> Verification Pending</td>
+                                            }
+                                            <td id="td@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()">
+                                                @if (_dr["Path"].ToString() != "")
+                                                {
+                                                    <a class="label label-success" href="~/@_dr["Path"].ToString()" target="_blank"><i class="fa fa-download"></i> View</a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="label label-danger"><i class="fa fa-times"></i> Not Uplaoded</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="color:red;"><strong>Disclosure :</strong> <span>Please upload a single document against each qualification in PDF, JPEG, JPG format of file size not more than 2 MB.</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+@section styles{
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        .fa-exclamation-triangle {
+            color: #cb5705;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .fa-check-square-o {
+            color: #3da80c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .table.w1 tr td:nth-child(2) {
+            width: 20%;
+            text-align: center;
+        }
+
+        .table.w2 tr td:nth-child(2) {
+            width: 40%;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .drpPercentage {
+            padding-left: 0px;
+        }
+    </style>
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/admission/UploadVerifiedDoc.js"></script>
+}

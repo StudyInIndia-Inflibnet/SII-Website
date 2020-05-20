@@ -1,0 +1,28 @@
+﻿.owl-next, .owl-prev {
+    background-color: #000;
+    float: left;
+    padding: 1px 15px;
+    color: #fff;
+    position: relative;
+    top: -25px
+}
+
+.owl-next {
+    float: right
+}
+
+.marquee_link {
+    color: #00f
+}
+
+    .marquee_link:hover {
+        text-decoration: underline
+    }
+
+#marquee {
+    overflow: hidden;
+}
+
+    #marquee a {
+        color: rgb(0,0,255)
+    }

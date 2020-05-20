@@ -1,0 +1,191 @@
+﻿<div class="row">
+    @{
+        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "Campus","");
+        int count = 0;
+
+        <div class="single-service-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="single-service-tab-menu">
+                            <ul class="nav category_ul" role="tablist">
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                                <li role="presentation" class="active"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                                @*<li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                                <li  class="hide" role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                                <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="single-service-tab-items">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="infrastructure">
+                                    <div class="single-tab cta">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                <div class="section-title">
+                                                    <h3 class="inner-title"><span>Infrastructure (Campus &amp; Library)</span></h3>
+                                                    @if (_ds != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows.Count > 0)
+                                                        {
+                                                            <p class="text-justify">Campus Details</p>
+                                                            <table class="table table-bordered table-striped">
+                                                                @if (_ds.Tables[0].Rows.Count > 0)
+                                                                {
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Campus Area : </strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["Area"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>IT Infrastructure :</strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["ITInfrastructure"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Wifi Facility :</strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["ITInfrastructureWifiFacility"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Academic Facilities :</strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["AcademicFacilities"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> <strong>Library Database : </strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["Database"].ToString()</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td> <strong>E-Library : </strong>  </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["elibrary"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Research facilities & Labs : </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["ResearchFacilitiesLabs"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Hostel/accommodation (along with the facilities provided) : </strong> </td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["Accommodation"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Hostel Wifi facility? : </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["AccommodationWifi"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Cuisine served in mess/cafe: </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["CuisineServedInMess"].ToString()</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td><strong>Cuisines of food served : </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["CuisinesOfFoodServed"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Doctors with qualification : </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["Doctors"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><strong>Pharmacy : </strong></td>
+                                                                        <td>@_ds.Tables[0].Rows[0]["Pharmacy"].ToString()</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                                }
+                                                            </table>
+                                                        }
+                                                        if (_ds.Tables[1].Rows.Count > 0)
+                                                        {
+                                                            <p class="text-justify">Life In Campus</p>
+                                                            <table class="table table-bordered table-striped">
+                                                                @if (_ds.Tables[1].Rows.Count > 0)
+                                                                {
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Sports Area : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["SportArea"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Types of sports currently played : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["TypesOfSportsCurrentlyPlayed"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Sports Accomplishments  : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["SportAccomplishments"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Instruments : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["MusicInstruments"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Music Accomplishments : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["MusicAccomplishments"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Academic bodies and their contact numbers  : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["AcademicBodie"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Festivals conducted by students  : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["FestivalsConductedByStudents"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Competitions  : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["EventsCompetitions"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong>Official Events  : </strong> </td>
+                                                                        <td>@_ds.Tables[1].Rows[0]["OfficialEvents"].ToString()</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                                }
+                                                            </table>
+                                                        }
+                                                        if (_ds.Tables[2].Rows.Count > 0)
+                                                        {
+                                                            <p class="text-justify">Life Outside Campus</p>
+                                                            <table class="table table-bordered table-striped">
+                                                                @if (_ds.Tables[2].Rows.Count > 0)
+                                                                {
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Places to visit near by : </strong> </td>
+                                                                        <td>@_ds.Tables[2].Rows[0]["PlacesToVisit"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Things To Do : </strong> </td>
+                                                                        <td>@_ds.Tables[2].Rows[0]["ThingsToDo"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Local Language  : </strong> </td>
+                                                                        <td>@_ds.Tables[2].Rows[0]["LocalLanguages"].ToString()</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width:25%"><strong> Local Culture : </strong> </td>
+                                                                        <td>@_ds.Tables[2].Rows[0]["LocalCulture"].ToString()</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                }
+                                                            </table>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

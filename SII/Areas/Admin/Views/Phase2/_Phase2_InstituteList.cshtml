@@ -1,0 +1,300 @@
+﻿
+@{
+    ViewBag.Title = "_Phase2Registered";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Institute  <small>(registered upto 16-06-2019 11:59:59 PM)</small> (Phase - 2)
+                <a class="btn btn-sm btn-primary pull-right" href="~/Admin/Phase2/Reports">Back</a>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body ">
+                <div id="checkout"></div>
+                <div class="table-responsive">
+                    <input type="hidden" id="hdf" value=@ViewBag.Value />
+                    <table class="table table-bordered table-striped dataTable" id="tbl">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>InstituteID</th>
+                                <th>Institute Name</th>
+                                <th>State</th>
+                                <th>City</th>
+                                <th>Total-Course</th>
+                                <th style="background-color:lightgreen">Total-Seat</th>
+                                <th style="background-color:#F0B27A">Seat-Allotted</th>
+                                <th style="background-color:#F0B27A">UG-Seat-Allotted</th>
+                                <th style="background-color:#F0B27A">PG-Seat-Allotted</th>
+                                <th style="background-color:#F0B27A">PHD-Seat-Allotted</th>
+                                <th style="background-color:#C6B717 ">Institute-Approve</th>
+                                <th style="background-color:#C6B717 ">UG-Institute-Approve</th>
+                                <th style="background-color:#C6B717 ">PG-Institute-Approve</th>
+                                <th style="background-color:#C6B717 ">PHD-Institute-Approve</th>
+
+                                <th style="background-color:#DAF7A6">Institute-Reject</th>
+                                <th style="background-color:#DAF7A6">UG-Institute-Reject</th>
+                                <th style="background-color:#DAF7A6">PG-Institute-Reject</th>
+                                <th style="background-color:#DAF7A6">PHD-Institute-Reject</th>
+
+                                <th style="background-color:#F7DC6F">Student-Approve</th>
+                                <th style="background-color:#F7DC6F">UG-Student-Approve</th>
+                                <th style="background-color:#F7DC6F">PG-Student-Approve</th>
+                                <th style="background-color:#F7DC6F">PHD-Student-Approve</th>
+
+                                <th style="background-color:#FFFACD">Student-reject-(offer)</th>
+                                <th style="background-color:#FFFACD">UG-Student-reject-(offer)</th>
+                                <th style="background-color:#FFFACD">PG-Student-reject-(offer)</th>
+                                <th style="background-color:#FFFACD">PHD-Student-reject-(offer)</th>
+                                
+                                <th style="background-color:#7ABCFA">Student-Join</th>
+                                <th style="background-color:#7ABCFA">UG-Student-Join</th>
+                                <th style="background-color:#7ABCFA">PG-Student-Join</th>
+                                <th style="background-color:#7ABCFA">PHD-Student-Join</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                SIIRepository.Adminservice.ReportsRepository _objRepo = new SIIRepository.Adminservice.ReportsRepository();
+                                System.Data.DataSet _ds = _objRepo.SELECT_PHASE2_KPI_Institute_Overview_("List", ViewBag.Control, ViewBag.For, ViewBag.Value, ViewBag.Value2);
+                                if (_ds != null)
+                                {
+                                    if (_ds.Tables[0].Rows.Count > 0)
+                                    {
+                                        int i = 1;
+                                        foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                        {
+                                            <tr>
+                                                <td>@(i++)</td>
+                                                <td>@_dr["InstituteID"].ToString()</td>
+                                                <td>@_dr["InstituteName"].ToString()</td>
+                                                <td>@_dr["State"].ToString()</td>
+                                                <td>@_dr["City"].ToString()</td>
+                                                <td>@_dr["TotalCourse"].ToString()</td>
+                                                <td style="background-color:lightgreen"><span class="">@_dr["TotalSeat"].ToString()</span></td>
+                                                
+                                                <td id="17" style="background-color:#F0B27A"><a  href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=17&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["AllotedintTotal"].ToString()</span></a></td>
+                                                <td id="17A" style="background-color:#F0B27A"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=17A&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["AllotedintUG"].ToString()</span></a></td>
+                                                <td id="17B" style="background-color:#F0B27A"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=17B&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["AllotedintPG"].ToString()</span></a></td>
+                                                <td id="17C" style="background-color:#F0B27A"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=17C&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["AllotedintPHD"].ToString()</span></a></td>
+
+                                                <td id="18" style="background-color:#C6B717 "> <a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=18&&c=@_dr["InstituteID"].ToString()"  target="_blank"><span class="">@_dr["InsApproveTotal"].ToString()</span></a></td>
+                                                <td id="18A" style="background-color:#C6B717 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=18A&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsApproveUG"].ToString()</span></a></td>
+                                                <td id="18B" style="background-color:#C6B717 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=18B&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsApprovePG"].ToString()</span></a></td>
+                                                <td id="18C" style="background-color:#C6B717 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=18C&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsApprovePHD"].ToString()</span></a></td>
+                                                
+                                                <td id="16C" style="background-color:#DAF7A6 "> <a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=16C&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsRejectTotal"].ToString()</span></a></td>
+                                                <td id="16C1" style="background-color:#DAF7A6 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=16C1&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsRejectUG"].ToString()</span></a></td>
+                                                <td id="16C2" style="background-color:#DAF7A6 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=16C2&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsRejectPG"].ToString()</span></a></td>
+                                                <td id="16C3" style="background-color:#DAF7A6 "><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=16C3&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["InsRejectPHD"].ToString()</span></a></td>
+
+
+                                                <td id="19" style="background-color:#F7DC6F"> <a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdApproveTotal"].ToString()</span></a></td>
+                                                <td id="19A" style="background-color:#F7DC6F"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19A&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdApproveUG"].ToString()</span></a></td>
+                                                <td id="19B" style="background-color:#F7DC6F"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19B&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdApprovePG"].ToString()</span></a></td>
+                                                <td id="19C" style="background-color:#F7DC6F"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19C&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdApprovePHD"].ToString()</span></a></td>
+
+                                                <td id="19D" style="background-color:#FFFACD"> <a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19D&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdRejectTotal"].ToString()</span></a></td>
+                                                <td id="19D1" style="background-color:#FFFACD"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19D1&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdRejectUG"].ToString()</span></a></td>
+                                                <td id="19D2" style="background-color:#FFFACD"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19D2&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdRejectPG"].ToString()</span></a></td>
+                                                <td id="19D3" style="background-color:#FFFACD"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=19D3&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdRejectPHD"].ToString()</span></a></td>
+
+
+                                                <td id="20" style="background-color:#7ABCFA"> <a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=20&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdjoinTotal"].ToString()</span></a></td>
+                                                <td id="20A" style="background-color:#7ABCFA"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=20A&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdjoinUG"].ToString()</span></a></td>
+                                                <td id="20B" style="background-color:#7ABCFA"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=20B&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdjoinPG"].ToString()</span></a></td>
+                                                <td id="20C" style="background-color:#7ABCFA"><a href="@Url.Content("~/")Admin/Phase2/Report/Student_list?id=Student_list&&u=20C&&c=@_dr["InstituteID"].ToString()" target="_blank"><span class="">@_dr["StdjoinPHD"].ToString()</span></a></td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 99999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+
+           
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $('.loading').hide();
+            //$("#tbl").DataTable();
+            var a = $("#hdf").val();
+            if (a != '')
+                {
+            $('#' + a).find('span').addClass("badge badge-pill badge-secondary");
+            $('#tbl > tbody  > tr > ' + '#' + a).find('span').addClass("badge badge-pill badge-secondary");
+            }
+            $('#tbl').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+           {
+               extend: 'csvHtml5',
+               text: 'Export',
+               titleAttr: 'CSV'
+           },
+                ],
+            });
+
+        });
+        function populateDataTable(data) {
+            console.log("populating data table...");
+            // clear the table before populating it with more data
+            //var a = $(""+"#"+@ViewBag.Value+"").html();
+
+            $("#tbl").DataTable().clear();
+            var length = Object.keys(data.List).length;
+        }
+    </script>
+}

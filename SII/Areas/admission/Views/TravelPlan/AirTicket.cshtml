@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewBag.Title = "Passport";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Air Ticket - Travel Plan
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" id="frm">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Do you have a valid air ticket?</label>
+                                <select class="form-control" required id="HaveBookedTicket" name="HaveBookedTicket">
+                                    <option value="">--Select--</option>
+                                    <option>Yes, I have booked air ticket</option>
+                                    <option>Will book air ticket soon</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divShowHide divYes" style="display:none;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Landing Date</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control ctrlAll ctrlYes" id="LandingDate" name="LandingDate" placeholder="DD-MM-YYYY" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control ctrlAll ctrlYes" id="LandingTime" name="LandingTime" placeholder="HH:MM AM/PM" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        SIIRepository.StudentRegService.TravelPlanRepository _objRepoCountry = new SIIRepository.StudentRegService.TravelPlanRepository();
+                        System.Data.DataSet _ds = _objRepoCountry.SELECT_COUNTRY_FOR_AIRPORTS();
+
+                    }
+                    <div class="row divShowHide divYes" style="display:none;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Origin Country</label>
+                                <select class="form-control ctrlAll ctrlYes" id="OriginCountry" name="OriginCountry">
+                                    <option value="">--Select--</option>
+                                    @if (_ds != null)
+                                    {
+                                        if (_ds.Tables[0].Rows.Count > 0)
+                                        {
+                                            foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                            {
+                                                if (_dr["Country_id"].ToString() != "252")
+                                                {
+                                                    <option data-id="@_dr["Country_id"].ToString()" value="@_dr["Country_Name"].ToString()">@_dr["Country_Name"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Origin Airport name</label>
+                                <select class="form-control ctrlAll ctrlYes" name="OriginAirport" id="OriginAirport">
+                                    <option value="">--Select--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="divOtherOriginAirport" style="display:none;">
+                            <div class="form-group">
+                                <label>Other Origin Airport name</label>
+                                <input type="text" class="form-control" name="OtherOriginAirport" id="OtherOriginAirport" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divShowHide divYes" style="display:none;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Destination Country</label>
+                                <input type="text" class="form-control" readonly value="India" />
+                                <input type="hidden" value="India" id="DestinationAirportCountry" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Destination Airport name</label>
+                                <select class="form-control ctrlAll ctrlYes" name="DestinationAirport" id="DestinationAirport">
+                                    <option value="">--Select--</option>
+                                    @{
+                                        SIIRepository.StudentRegService.TravelPlanRepository _objRepo = new SIIRepository.StudentRegService.TravelPlanRepository();
+                                        System.Data.DataSet _dsAirport = _objRepo.SELECT_COUNTRY_WISE_AIRPORTS("252");
+                                        if (_dsAirport != null)
+                                        {
+                                            if (_dsAirport.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsAirport.Tables[0].Rows)
+                                                {
+                                                    <option>@_dr["name"].ToString()</option>
+                                                }
+                                                <option value="Other">Other</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="divOtherDestinationAirport" style="display:none;">
+                            <div class="form-group">
+                                <label>Other Destination Airport name</label>
+                                <input type="text" class="form-control" name="OtherDestinationAirport" id="OtherDestinationAirport" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row divShowHide divYes" style="display:none;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>E-air ticket</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" class="ctrlAll ctrlYes" name="ETicket" id="ETicket" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-primary btndoc" target="_blank" href="" id="btnETicket" data-href="" style="display:none;">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                                <a class="btn btn-default" href="~/admission/travelplan">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/jquery-ui/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+
+}
+@section scripts{
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/jquery-ui/jquery-ui-timepicker-addon.js"></script>
+    <script src="~/assets/lib/jquery-ui/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+    <script src="~/assets/lib/jquery-ui/jquery-ui-sliderAccess.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#LandingDate').datetimepicker({
+                orientation: "left",
+                autoclose: !0,
+                dateFormat: "dd-mm-yy",
+                altField: "#LandingTime",
+                timeInput: true,
+                timeFormat: "hh:mm tt",
+                showHour: false,
+                showMinute: false
+            });
+            fill_data();
+            $('#HaveBookedTicket').on('change', function (e) {
+                var text = $(this).val();
+                $('.divShowHide').hide();
+                $('.ctrlAll').removeAttr('required');
+                $('.ctrlAll').val('');
+                if (text == 'Yes, I have booked air ticket') {
+                    $('.divYes').show();
+                    $('.ctrlYes').attr('required', true);
+                    if ($('#btnETicket').attr('data-href') != '') {
+                        $('#ETicket').removeAttr('required');
+                    }
+                } else {
+
+                }
+            });
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                var frm = $('#frm');
+                var frmParsley = frm.parsley();
+                frmParsley.validate();
+                if (!frm.parsley().isValid()) {
+                    return false;
+                }
+                var btn = $(this);
+                var oldText = btn.text();
+                if (btn.hasClass('disabled')) {
+                    return false;
+                }
+                btn.text('Processing.....');
+                btn.attr('disabled', true);
+                btn.addClass('disabled');
+
+                var fileControl;
+                var textToBeCheck = $('#HaveBookedTicket').val();
+                if (textToBeCheck == 'Yes, I have booked air ticket') {
+                    fileControl = $("#ETicket");
+                    fileUpload = $("#ETicket").get(0);
+                }
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                if (window.FormData !== undefined) {
+                    if (fileControl.get(0).files.length > 0) {
+                        var FileSize = fileControl.get(0).files[0].size;
+                        var fileExtension = ['png', 'jpg', 'jpeg', 'pdf'];
+                        if ($.inArray(fileControl.val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                            ErrorMessageCallBack("Only formats are allowed : " + fileExtension.join(', '), function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                        if ("3145728" >= FileSize) {
+
+                        } else {
+                            ErrorMessageCallBack("Only 3 Mb file size allow!", function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                    } else {
+                        if (textToBeCheck == 'Yes, I have booked air ticket') {
+                            fileData.append('ETicket', $('#btnETicket').attr('data-href'));
+                        }
+                    }
+                } else {
+                    if (textToBeCheck == 'Yes, I have booked air ticket') {
+                        fileData.append('ETicket', $('#btnETicket').attr('data-href'));
+                    }
+                }
+                if (files.length > 0) {
+                    for (var i = 0; i < files.length; i++) {
+                        fileData.append(files[i].name, files[i]);
+                    }
+                }
+                fileData.append('HaveBookedTicket', $('#HaveBookedTicket').val());
+                if (textToBeCheck == 'Yes, I have booked air ticket') {
+                    fileData.append('LandingDate', $('#LandingDate').val());
+                    fileData.append('LandingTime', $('#LandingTime').val());
+                    fileData.append('OriginCountry', $('#OriginCountry').val());
+                    fileData.append('OriginAirport', $('#OriginAirport').val());
+                    fileData.append('DestinationCountry', $('#DestinationAirportCountry').val());
+                    fileData.append('DestinationAirport', $('#DestinationAirport').val());
+                    fileData.append('OtherOriginAirport', $('#OtherOriginAirport').val());
+                    fileData.append('OtherDestinationAirport', $('#OtherDestinationAirport').val());
+                }
+                fileData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]', $('#frm')).val());
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'admission/TravelPlan/SaveAirTicket',
+                    data: fileData,
+                    async: true,
+                    cache: false,
+                    contentType: false, // Not to set any content header
+                    processData: false
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        SuccessMessageCallBack(data['m'], function () {
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        });
+                        fill_data();
+                    } else if (data['c'] == 'alreadyexists') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'sessionexpired') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'servererror') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(oldText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+            });
+            $('#OriginCountry').on('change', function (e) {
+                e.preventDefault();
+                var id = $(this).find('option:selected').attr('data-id');
+                fill_airpots(id, $('#OriginAirport'))
+            });
+            $('#OriginAirport').on('change', function (e) {
+                e.preventDefault();
+                var value = $(this).val();
+                if (value == 'Other') {
+                    $('#divOtherOriginAirport').show();
+                    $('#OtherOriginAirport').attr('required', true);
+                    $('#OtherOriginAirport').val('');
+                } else {
+                    $('#divOtherOriginAirport').hide();
+                    $('#OtherOriginAirport').removeAttr('required');
+                    $('#OtherOriginAirport').val('');
+                }
+            });
+            $('#DestinationAirport').on('change', function (e) {
+                e.preventDefault();
+                var value = $(this).val();
+                if (value == 'Other') {
+                    $('#divOtherDestinationAirport').show();
+                    $('#OtherDestinationAirport').attr('required', true);
+                    $('#OtherDestinationAirport').val('');
+                } else {
+                    $('#divOtherDestinationAirport').hide();
+                    $('#OtherDestinationAirport').removeAttr('required');
+                    $('#OtherDestinationAirport').val('');
+                }
+            });
+        });
+        function fill_airpots(id, drp) {
+            drp.html('');
+            drp.append('<option value="">--Select--</option>');
+            $.ajax({
+                url: $('#hdfBaseUrl').val() + 'admission/TravelPlan/SeletAirports',
+                data: { Country_id: id },
+                async: false
+            }).done(function (data) {
+                if (data['c'] == 'success') {
+                    $.each(data['List'], function (i, item) {
+                        drp.append('<option value="' + item['name'] + '">' + item['name'] + '</option>');
+                    });
+                    drp.append('<option value="Other">Other</option>');
+                } else if (data['c'] == 'servererror') {
+
+                }
+            }).error(function () {
+
+            });
+        }
+        function fill_data() {
+            $.ajax({
+                url: $('#hdfBaseUrl').val() + 'admission/TravelPlan/SelectAirTicket'
+            }).done(function (data) {
+                if (data['c'] == 'success') {
+                    $.each(data['List'], function (i, item) {
+                        $('#HaveBookedTicket').val(item['HaveBookedTicket']).trigger('change');
+                        var text = item['HaveBookedTicket'];
+                        if (text == 'Yes, I have booked air ticket') {
+                            $('#LandingDate').val(item['LandingDate']);
+                            $('#LandingTime').val(item['LandingTime']);
+                            $('#OriginCountry').val(item['OriginCountry']).trigger('change');
+                            $('#OriginAirport').val(item['OriginAirport']).trigger('change');
+                            $('#OtherOriginAirport').val(item['OtherOriginAirport']);
+                            $('#DestinationAirport').val(item['DestinationAirport']).trigger('change');
+                            $('#OtherDestinationAirport').val(item['OtherDestinationAirport']);
+                            $('#LandingTime').val(item['LandingTime']);
+                            $('#btnETicket').attr('href', $('#hdfBaseUrl').val() + item['ETicket']);
+                            $('#btnETicket').attr('data-href', item['ETicket']);
+                            $('#btnETicket').show();
+                            if ($('#btnETicket').attr('data-href') != '') {
+                                $('#ETicket').removeAttr('required');
+                            }
+                        }
+                    });
+                } else if (data['c'] == 'servererror') {
+
+                }
+            }).error(function () {
+
+                btn.text(oldText);
+                btn.removeAttr('disabled');
+                btn.removeClass('disabled');
+            });
+        }
+    </script>
+}

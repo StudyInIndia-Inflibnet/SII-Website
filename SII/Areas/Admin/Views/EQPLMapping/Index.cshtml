@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Discipline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Program Level Mapping with Qualification</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <form id="frm">
+                    <input type="hidden" name="EduSubject_ID" value="0" id="hdfEduSubject_ID" />
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Qualification</label>
+                                <select class="form-control" name="EduQualifications_Id" id="drpEduQualifications_Id" required="">
+                                    <option value="">--Select--</option>
+                                    @{
+                                        SIIRepository.Courses.CourseRepository _objRepoECQ = new SIIRepository.Courses.CourseRepository();
+                                        System.Data.DataSet _dsECQ = _objRepoECQ.SELECT_tbl_EduQualifications();
+                                        if (_dsECQ != null)
+                                        {
+                                            if (_dsECQ.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsECQ.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["EduQualifications_Id"].ToString()">@_dr["EduQualifications"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-9">
+                                <label>Programme Levels(Multi-Select)</label>
+                                <select class="form-control select2" id="drpProgramLevel" multiple required="">
+                                    @{
+                                        SIIRepository.Masterservice.ProgramLevelsRepository _objRepoPL = new SIIRepository.Masterservice.ProgramLevelsRepository();
+                                        System.Data.DataSet _dsPL = _objRepoPL.Select_ProgramLevel("1");
+                                        if (_dsPL != null)
+                                        {
+                                            if (_dsPL.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsPL.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["ProgramLevel_Id"].ToString()">@_dr["ProgramLevel"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <table id="tbl" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Srno</th>
+                            <th>Qualification</th>
+                            <th>Program Level(s)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @{
+                            SIIRepository.Adminservice.EQPL_Repository _objRepo = new SIIRepository.Adminservice.EQPL_Repository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_EQPLMapping_FOR_FORM();
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@_dr["EduQualificationsName"].ToString() [@_dr["EduQualifications"].ToString()]</td>
+                                            <td>@_dr["ProgramLevel"].ToString()</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning btnEdit" data-id="@_dr["EduQualifications_Id"].ToString()">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/select2/css/select2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/select2/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
+    </script>
+    <script src="~/Scipts/Areas/Admin/Masters/EQPLMapping.js"></script>
+}

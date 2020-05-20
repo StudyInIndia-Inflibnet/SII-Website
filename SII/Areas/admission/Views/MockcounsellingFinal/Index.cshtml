@@ -1,0 +1,329 @@
+﻿@{
+    ViewBag.Title = "Mockcounselling";
+    Layout = "~/Views/Shared/_LayoutportalChoiceFilling.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Mock Result <span style="color: red">
+                    ( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )
+
+                    <a id="btnback" href="@Url.Content("~/")admission/MockcounsellingCategory" class="btn btn-warning pull-right">Back</a>
+
+                </span>
+            </h3>
+        </div>
+    </div>
+}
+@{
+    SIIRepository.StudentRegService.MockResultRepository _objRepository = new SIIRepository.StudentRegService.MockResultRepository();
+    SIIModel.StudentRegister.Mockcounselling _obj = new SIIModel.StudentRegister.Mockcounselling();
+    _obj.Type = "AllotedSeat";
+    _obj.studentid = Session["studentid"].ToString();
+    _obj.ProgramLevel_Id = Session["ProgramlevelId"].ToString();
+    _obj.Discipline_ID = Session["Discipline_Id"].ToString();
+    System.Data.DataSet _ds = _objRepository.Select_InstituteList(_obj);
+    <div class="row">
+        <div class="loading"></div>
+        <div class="col-md-12">
+            <div class="panel panel-default panel-border-color panel-border-color-custom">
+                <div class="tab-container">
+                    <div class="tab-content">
+
+                        <div id="navPhotoGallery" class="tab-pane active cont">
+                            <input type="hidden" name="studentid" id="hdfstudentid" value=@Session["studentid"].ToString() />
+                            <input type="hidden" id="hdfsubmitChoiceFill" value=@Session["submitChoiceFill"].ToString() />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-border-color panel-border-color-primary">
+                                        <div class="panel-body">
+                                            <h4 class="text-primary">
+                                                <b>Mock Round Allottment Details:</b>
+                                            </h4>
+
+                                            @if (_ds != null)
+                                            {
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    if (_ds.Tables[0].Rows[0]["Is_RejectedByInstitute"] != null)
+                                                    {
+                                                        if (_ds.Tables[0].Rows[0]["Is_RejectedByInstitute"].ToString().ToUpper() == "REJECT")
+                                                        {
+                                                            <p><strong class="text-danger">We regret to inform you that your application has been rejected by the Institute</strong></p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p>Congratulations! You have been shortlisted for the following selected choice. Please be informed that this is a provisional result which has been shared with the institutes and the final results will be given subject to confirmation/verification by the Institutes.</p>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Congratulations! You have been shortlisted for the following selected choice. Please be informed that this is a provisional result which has been shared with the institutes and the final results will be given subject to confirmation/verification by the Institutes.</p>
+                                                    }
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th width="20%">Allotted Institute : </th>
+                                                            <td colspan="5" class="text-danger">@_ds.Tables[0].Rows[0]["AllotedInstitute"].ToString()</td>
+                                                            @*<th class="hide" width="15%">Allotted Choice No. : </th>
+                                                                <td width="5%" class="text-danger hide">@_ds.Tables[0].Rows[0]["ChoiceNumber"].ToString()</td>*@
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Allotted Discipline : </th>
+                                                            <td class="text-danger">@_ds.Tables[0].Rows[0]["AllotedDiscipline"].ToString()</td>
+                                                            <th width="15%">Allotted Program Level: </th>
+                                                            <td width="10%" class="text-danger">@_ds.Tables[0].Rows[0]["AllotedProgramLevel"].ToString() </td>
+                                                            <th width="15%">Allotted Fee Waivers: </th>
+                                                            <td width="10%" class="text-danger">@_ds.Tables[0].Rows[0]["FeeWaviousCategory"].ToString() </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Allotted Nature of Course : </th>
+                                                            <td colspan="5" class="text-danger">@_ds.Tables[0].Rows[0]["AllotedNatureOfCourse"].ToString()</td>
+
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Allotted Branch : </th>
+                                                            <td colspan="5" class="text-danger">@_ds.Tables[0].Rows[0]["AllotedBranch"].ToString() </td>
+                                                        </tr>
+                                                        @if (_ds.Tables[0].Rows[0]["Is_RejectedByInstitute"] != null)
+                                                        {
+                                                            if (_ds.Tables[0].Rows[0]["Is_RejectedByInstitute"].ToString().ToUpper() == "ACCEPT")
+                                                            {
+                                                                <tr>
+                                                                    <th>Institute Action Status: </th>
+                                                                    <th colspan="5">
+                                                                        <span class="text-success">
+                                                                            Accepted
+                                                                        </span>
+                                                                    </th>
+                                                                </tr>
+                                                            }
+                                                            else if (_ds.Tables[0].Rows[0]["Is_RejectedByInstitute"].ToString().ToUpper() == "REJECT")
+                                                            {
+                                                                <tr>
+                                                                    <th>Institute Action Status: </th>
+                                                                    <th colspan="5">
+                                                                        <span class="text-danger">
+                                                                            Rejected
+                                                                        </span>
+                                                                    </th>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </table>
+                                                }
+                                                else
+                                                { <p>We regret to inform you that you have not been shortlisted on the basis of your selected choices as per the first round of counselling process. You will get a chance to check the status of your application and reasons for rejection of your choices. You are advised to update your choices/other details in the next phase of counselling which will commence from 07th of July 2018 to 14th of July 2018, 11:59:59 P.M. IST.</p>
+                                                <p>Note: Please reach out to us at<a href="mailto:studyinindia@edcil.co.in" class="orange-text">studyinindia@edcil.co.in</a>  for any information/clarification that you may have</p>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none">
+                            <div class="col-md-12">
+                                @if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    <form id="frmStep2" method="post">
+                                        <h4> <B>Your Filled Choices List</B></h4>
+                                        <hr />
+                                        <table class="table table-striped table-hover table-bordered table-fw-widget choice-table data-grid2" id="tbl2">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">Choice No.</th>
+                                                    <th width="30%">Institute</th>
+                                                    <th width="10%">Program level</th>
+                                                    <th width="10%">Discipline</th>
+                                                    <th>Nature Of Course</th>
+                                                    <th>Branch</th>
+                                                    <th width="10%">Fee Waivers</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyFill"></tbody>
+                                        </table>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section styles{
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <style>
+        panel-body {
+            border-radius: 0 0 3px 3px;
+            padding: 8px 20px 0px !important;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            padding: 5px 5px !important;
+        }
+
+
+        .not-active {
+            pointer-events: none;
+            cursor: default;
+            background: #dddddd;
+            color: #aaaaaa;
+        }
+
+        .choice-table > tbody > tr > td, .choice-table > thead > tr > th {
+            padding: 5px;
+        }
+
+        .label-message {
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .panel-without-padding > .panel-body, .panel-without-padding > .panel-heading {
+            padding: 0;
+        }
+        /* Absolute Center Spinner */
+        .loading {
+            position: fixed;
+            z-index: 999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/admission/MockcounsellingFinal.js"></script>
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+}

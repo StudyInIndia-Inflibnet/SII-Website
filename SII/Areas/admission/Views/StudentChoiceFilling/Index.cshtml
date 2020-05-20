@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+@*@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Course of Study Mapping</h3>
+        </div>
+    </div>
+}*@
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <a href="~/admission/Dashboard" class="btn btn-sm btn-info pull-right"><i class="fa fa-arrow-left"></i> Home</a>
+    </div>
+    <div class="col-md-12">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+            </div>
+            <div class="f1-step active">
+                <div class="f1-step-icon"><i class="fa fa-university"></i></div>
+                <p>Basic Details</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon"><i class="fa fa-users"></i></div>
+                <p>Select Disciplines</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon"><i class="fa fa-users"></i></div>
+                <p>Choice Filling</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon"><i class="fa fa-users"></i></div>
+                <p>Rank</p>
+            </div>
+            <div class="f1-step">
+                <div class="f1-step-icon"><i class="fa fa-users"></i></div>
+                <p>Upload & Submit</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <fieldset class="col-md-12">
+        <div class="panel panel-default ">
+            <div class="panel-body">
+                <form id="frm">
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_NodalHeadDetails")*@
+    </fieldset>
+    <fieldset class="col-md-12">
+        @*@Html.Partial("_Completed")*@
+    </fieldset>
+</div>
+@section styles{
+    <link href="~/assets/lib/wizard/style.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/wizard/retina-1.1.0.min.js"></script>
+    <script src="~/assets/lib/wizard/scripts.js"></script>
+}

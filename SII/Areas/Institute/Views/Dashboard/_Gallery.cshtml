@@ -1,0 +1,89 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(Session["InstituteID"].ToString(), "Gallery", "");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Gallery</h2>
+                <h4>Photo Gallery</h4>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int index = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Category</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+                            <tr>
+                                <td>
+                                    @(index++)
+                                </td>
+                                <td>@_dr["GallaryCategory_Name"].ToString()</td>
+                                <td><img src="@Url.Content("~/")@_dr["ImagePath"].ToString()" style="height:60px;" /></td>
+                                <td>@_dr["Description"].ToString()</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Video Gallery</h4>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    int index = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Category</th>
+                                <th>Video URL</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                        {
+                            <tr>
+                                <td>
+                                    @(index++)
+                                </td>
+                                <td>@_dr["GallaryCategory_Name"].ToString()</td>
+                                <td>@_dr["VideoURL"].ToString()</td>
+                                <td>@_dr["Description"].ToString()</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

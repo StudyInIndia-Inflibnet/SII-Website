@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Submit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Study in India Contest</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")">Home</a> / Contest</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="panel-heading">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="title" style="text-align:center">
+                <h4>Study in India Contest</h4>
+                <hr />
+            </div>
+            <div class="title" style="text-align:center">
+                <h5 style="color:red">Thank you for your submission.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+        });
+    </script>
+    }

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+            <div class="panel-heading">
+                Institute Course Details
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @{
+                                            SIIRepository.Adminservice.DashboardRepository _objRepository = new SIIRepository.Adminservice.DashboardRepository();
+                                            System.Data.DataSet _ds = _objRepository.Select_Admin_Dashboard_Institute_SeatMatrix_Course(ViewBag.InstituteCourseID);
+                                            if (_ds != null)
+                                            {
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    <table class="table table-bordered">
+                                                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    <h4>Courses Details</h4>
+                                                                    <table class="table table-bordered">
+                                                                        <tr>
+                                                                            <td>Discipline: <strong>@_dr["Discipline"].ToString()</strong></td>
+                                                                            <td>Programme Level: <strong>@_dr["ProgramLevel"].ToString()</strong></td>
+                                                                            <td colspan="2">Name of Course: <strong>@_dr["Natureofcourse"].ToString()</strong></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Branch/Subject: <strong>@_dr["BranchName"].ToString()</strong></td>
+                                                                            <td>Eligibility Criteria: <strong>@_dr["EligibilityCriteria"].ToString()</strong></td>
+                                                                            <td colspan="2">Total seat offer to foreign student: <strong>@_dr["SeatForForeignStudent"].ToString()</strong></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <h4>Annual Fees</h4>
+                                                                    <table class="table table-bordered">
+                                                                        <tr>
+                                                                            <td>Annual tution fees per Seat: <strong>@_dr["AnnualTutionFeesCurrency"].ToString() - @_dr["AnnualTutionFees"].ToString()</strong></td>
+                                                                            <td>Annual tution fees per Seat: <strong>@_dr["AnnualBoardingFeesCurrency"].ToString() - @_dr["AnnualBoardingFees"].ToString()</strong></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Annual Tuition Fees (SAARC Country): <strong>@_dr["FeesForSAARCCountryCurrency"].ToString() - @_dr["FeesForSAARCCountry"].ToString()</strong></td>
+                                                                            <td>Annual Tuition Fees (NonSAARC Country): <strong>@_dr["FeesForNonSAARCCountryCurrency"].ToString() - @_dr["FeesForNonSAARCCountry"].ToString()</strong></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <h4>Tuition Fee Waiver seat allocation</h4>
+                                                                    <table class="table table-bordered">
+                                                                        <tr>
+                                                                            <td>100% waiver in tuition fees(G1 scheme): <strong>@_dr["G1SeatWaiver"].ToString()</strong></td>
+                                                                            <td>50% waiver in tuition fees(G2 scheme): <strong>@_dr["G2SeatWaiver"].ToString()</strong></td>
+                                                                            <td>25% waiver in tuition fees(G3 scheme): <strong>@_dr["G3SeatWaiver"].ToString()</strong></td>
+                                                                            <td>0% waiver in tuition fees(G4 scheme): <strong>@_dr["G4SeatWaiver"].ToString()</strong></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                    <h4>Other Details</h4>
+                                                                    <table class="table table-bordered">
+                                                                        <tr>
+                                                                            <td>Credits : <strong>@_dr["Credits"].ToString()</strong></td>
+                                                                            <td>Course Duration(in Months) : <strong>@_dr["CourseDurations"].ToString()</strong></td>
+                                                                            <td>Classroom Hours : <strong>@_dr["ClassRoomHours"].ToString()</strong></td>
+                                                                            <td>Examination/Course Pattern : <strong>@_dr["CoursePatterns"].ToString()</strong></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="2">Course Description : <strong>@_dr["CourseDesc"].ToString()</strong></td>
+                                                                            <td colspan="2">Admission & entry requirements : <strong>@_dr["AdmissionReq"].ToString()</strong></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>No data available.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                                
+                                            }
+                                            else
+                                            {
+                                                <h2>No data available.</h2>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Reports</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-heading">
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    @*Approx Cost Of living*@
+                    <div id="ApproxCostOfliving" class="panel-body in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-danger">
+                                            <th width="5%">Sr.no</th>
+                                            <th width="80%">Report</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            @*<tr>
+                                                    <td><span class="">1.</span></td>
+                                                    <td><span class="">No of Students Filled Choices in Multiple Program-level</span></td>
+                                                    <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=MultipleProgram">View</a></td>
+                                                </tr>*@
+                                            @*<tr>
+                                                    <td><span class="">2.</span></td>
+                                                    <td><span class="">Country Specific Student Choice Filling Details</span></td>
+                                                    <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=CountryWiseStudentApply">View</a></td>
+                                                </tr>*@
+                                            <tr>
+                                                <td><span class="">2.</span></td>
+                                                <td><span class="">Invalid Seat Matrix</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=InvalidSeatMatrix">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">3.</span></td>
+                                                <td><span class="">Duplicate Institute Courses</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=DuplicateCourse">View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-success">
+                                            <th width="5%">Sr.no</th>
+                                            <th width="80%">Reports - (1st Mock Round)</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr>
+                                                <td><span class="">1.</span></td>
+                                                <td><span class="">Choice Filling (All Details)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=AllChoice">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">2.</span></td>
+                                                <td><span class="">1st Round Institute Action (Accept/Reject)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=FirstMockInstituteAction">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">3.</span></td>
+                                                <td><span class="">1st Round Result</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=ViewAllottedDetailsFirst">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">4.</span></td>
+                                                <td><span class="">Country wise 1st Round Result</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=FirstCountrySpecific_Report">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">5.</span></td>
+                                                <td><span class="">No of Students Filled Choices in Multiple Program-level</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=MultipleProgram">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">6.</span></td>
+                                                <td><span class="">Institute 1st Round Report</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=FirstRoundInstituteWise">View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
+                                <table class="table table-bordered table-hover ">
+                                    <thead>
+                                        <tr class="panel panel-full-color panel-full-warning">
+                                            <th width="5%">Sr.no</th>
+                                            <th width="80%">Reports - (2st Mock Round)</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            @*<tr>
+                                                    <td><span class="">1.</span></td>
+                                                    <td><span class="">Student Specific 2nd Choice Filling List</span></td>
+                                                    <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=FirstMockInstituteAction">View</a></td>
+                                                </tr>*@
+                                            <tr>
+                                                <td><span class="">1.</span></td>
+                                                <td><span class="">No of Students 2nd Round Choice Filled</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=CountrySpecific_Studentapply_In_SecondRound&&ReportFor=0">View</a></td>
+                                            </tr>
+                                            @*<tr>
+                                                    <td><span class="">2.</span></td>
+                                                    <td><span class="">Country Specific 2nd Choice Filling List</span></td>
+                                                    <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=SecondMockCountrySpecific">View</a></td>
+                                                </tr>*@
+                                            <tr>
+                                                <td><span class="">2.</span></td>
+                                                <td><span class="">Country wise 2nd Round Result</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=SecondCountrySpecific_Report">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">3.</span></td>
+                                                <td><span class="">Student Filled Choice in Multi-Discipline</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=SecondMockMultiDiscipline">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">4.</span></td>
+                                                <td><span class="">2nd Round Result</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=ViewAllottedDetailsSecond">View</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="">5.</span></td>
+                                                <td><span class="">2nd Round Institute Action (Accept/Reject)</span></td>
+                                                <td><a class="" href="@Url.Content("~/")Admin/Reports/ViewDetails?For=SecondMockInstituteAction">View</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

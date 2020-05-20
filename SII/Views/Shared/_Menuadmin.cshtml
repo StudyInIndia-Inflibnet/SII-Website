@@ -1,0 +1,200 @@
+﻿
+<div class="left-sidebar-wrapper">
+    <a href="#" class="left-sidebar-toggle">Dashboard</a>
+    <div class="left-sidebar-spacer">
+        <div class="left-sidebar-scroll">
+            <div class="left-sidebar-content">
+                <ul class="sidebar-elements">
+                    @if (Session["AdminRole"].ToString() == "Super Admin" || Session["AdminRole"].ToString() == "Admin" || Session["AdminRole"].ToString() == "Niche Course" || Session["AdminRole"].ToString() == "Call Center")
+                    {
+
+
+
+                        <li class="divider">Menu</li>
+                        <li class="active">
+                            <a href="@Url.Content("~/")Admin/ParticipationYears"><i class="icon mdi mdi-home Super-Admin"></i><span>Dashboard</span></a>
+                        </li>
+
+                        if ((Session["AdminRole"].ToString() == "Super Admin" || Session["AdminRole"].ToString() == "Admin"))
+                        {
+                            <li>
+                                <a href="@Url.Content("~/")Admin/Agency"><i class="icon mdi mdi-home Super-Admin"></i><span>Agency</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Admin/Registration"><i class="icon mdi mdi-home Super-Admin"></i><span>Student Registration </span></a>
+                            </li>
+
+
+                            <li>
+                                <a href="@Url.Content("~/")Admin/InstitutePhotoUpload"><i class="icon mdi mdi-face"></i><span>Gallery</span></a>
+                            </li>
+
+                            if ((Session["Phase"].ToString() == "Phase-1"))
+                            {
+
+                                <li>
+                                    <a href="@Url.Content("~/")Admin/MockRound/Index"><i class="icon icon mdi mdi-gradient"></i><span>1st Counselling </span></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/")Admin/MockRoundSecond/Index"><i class="icon mdi mdi-filter-list"></i><span>2nd Counselling</span></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/")Admin/Reports/Index"><i class="icon mdi mdi-filter-list"></i><span>Counselling Reports (Phase-1)</span></a>
+                                </li>
+                            }
+
+                            if ((Session["Phase"].ToString() == "Phase-2"))
+                            {
+                                <li>
+                                    <a href="@Url.Content("~/")Admin/Phase2/Reports"><i class="icon mdi mdi-filter-list"></i><span>Report (Phase-2)</span></a>
+                                </li>
+
+                            }
+                            if ((Session["Phase"].ToString() == "Phase-3"))
+                            {
+                                <li>
+                                    <a href="@Url.Content("~/")Admin/Phase3/NicheReports"><i class="icon mdi mdi-filter-list"></i><span>Reports</span></a>
+                                </li>
+                            }
+                            <li>
+                                <a href="@Url.Content("~/")Admin/BlogPage"><i class="icon mdi mdi-filter-list"></i><span>Blogs</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Admin/IndSATSelection"><i class="icon mdi mdi-desktop-classic"></i><span>Ind-SAT Center Selection</span></a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Content("~/")Admin/ActivationLinkGenerator"><i class="icon mdi mdi-desktop-classic"></i><span>Activation Link Generator</span></a>
+                            </li>
+                        }
+
+
+                        if ((Session["AdminRole"].ToString() == "Super Admin" || Session["AdminRole"].ToString() == "Admin"))
+                        {
+                            <li class="parent">
+                                <a href="#"><i class="icon mdi mdi-face"></i><span>Course Masters</span></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/DisciplineMaster">Discipline</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/ProgrammeLevelMaster">Programme Level</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/ProgrammeLevelMaster/Mapping">Programme Level Mapping</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/QualificationMaster">Qualification</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/QualificationMaster/Mapping">Qualification Mapping</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/CourseOfStudyMaster">Course of Study</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/CourseOfStudyMaster/Mapping">Course of Study Mapping</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/EQPLMapping">Program Level Mapping</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        if ((Session["AdminRole"].ToString() == "Niche Course" || Session["AdminRole"].ToString() == "Super Admin") && (Session["Phase"].ToString() != "Phase-1" && Session["Phase"].ToString() != "Phase-2"))
+                        {
+                            <li class="parent">
+                                <a href="#"><i class="icon mdi mdi-face"></i><span>Niche Course Masters</span></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/DisciplineMaster?id=niche">Discipline</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/ProgrammeLevelMaster?id=niche">Programme Level</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/ProgrammeLevelMaster/Mapping?id=niche">Programme Level Mapping</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/QualificationMaster?id=niche">Qualification</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/QualificationMaster/Mapping?id=niche">Qualification Mapping</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/CourseOfStudyMaster?id=niche">Course of Study</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/CourseOfStudyMaster/Mapping?id=niche">Course of Study Mapping</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+
+                        if (Session["AdminRole"].ToString() == "Call Center" || Session["AdminRole"].ToString() == "Super Admin")
+                        {
+                            <li>
+                                <a href="@Url.Content("~/")Admin/ProfileMngt"><i class="icon mdi mdi-human-male"></i><span>Profile Management</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Admin/ChangeNodalHead"><i class="icon mdi mdi-human-male"></i><span>Nodal / Head Officer</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/")Admin/Upload"><i class="icon mdi mdi-file"></i><span>Upload Documents</span></a>
+                            </li>
+                        }
+                        if (Session["is_doc_verification"].ToString().ToLower() == "true")
+                        {
+                            <li class="parent @(ViewBag.CurrentMenu == "VerifyDocuments" ? "open":"")">
+                                <a href="#"><i class="icon mdi mdi-file-document-box"></i><span>Document Verification</span></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments"><i class="icon mdi mdi-human-male-female"></i><span>All Students</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/Verified"><i class="icon mdi mdi-checkbox-marked-outline"></i><span>Verified Students</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/Rejected"><i class="icon mdi mdi-close-box-outline"></i><span>Rejected Students</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/NotVerified"><i class="icon mdi mdi-checkbox-blank-outline"></i><span>Not Verified Students</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        if (Session["is_doc_verification"].ToString().ToLower() == "true")
+                        {
+                            <li class="parent @(ViewBag.CurrentMenu == "VerifyDocuments" ? "open":"")">
+                                <a href="#"><i class="icon mdi mdi-file-document-box"></i><span>Document Verification</span></a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments"><i class="icon mdi mdi-human-male-female"></i><span>All Students</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/Verified"><i class="icon mdi mdi-human-male"></i><span>Verified</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/Rejected"><i class="icon mdi mdi-file"></i><span>Rejected</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Content("~/")Admin/VerifyDocuments/NotVerified"><i class="icon mdi mdi-file"></i><span>Not Verified</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        }
+                    }
+                </ul>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Discipline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Eligibility Criteria Subject Master</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <form id="frm">
+                    <input type="hidden" name="EduSubject_Id" value="0" id="hdfEduSubject_Id" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Eligibility Criteria Qualification</label>
+                                <select class="form-control" name="EduQualifications_Id" id="drpEduQualifications_Id">
+                                    <option value="">--Select--</option>
+                                    @{
+                                        SIIRepository.Courses.CourseRepository _objRepoECQ = new SIIRepository.Courses.CourseRepository();
+                                        System.Data.DataSet _dsECQ = _objRepoECQ.SELECT_tbl_EduQualifications();
+                                        if (_dsECQ != null)
+                                        {
+                                            if (_dsECQ.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsECQ.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["EduQualifications_Id"].ToString()">@_dr["EduQualifications"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Eligibility Criteria Subject</label>
+                                <input type="text" name="EduSubject" id="txtEduSubject" class="form-control" required="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <table id="tbl" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Srno</th>
+                            <th>Discipline</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @{
+                            SIIRepository.Adminservice.Discipline_Repository _objRepo = new SIIRepository.Adminservice.Discipline_Repository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_DISCIPLINE_FOR_FORM();
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@_dr["Discipline"].ToString()</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning btnEdit" data-id="@_dr["Discipline_ID"].ToString()">Edit</a>
+                                                <a class="btn btn-sm btn-danger btnDelete" data-id="@_dr["Discipline_ID"].ToString()">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Admin/Masters/Discipline.js"></script>
+}

@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+            <div class="panel-heading">
+                Institute List
+                <div class="tools">
+                    <a href="@Url.Content("~/")Admin/Dashboard" class="btn btn-success">Back</a>
+                </div>
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    @*Approx Cost Of living*@
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel-body">
+                                <table id="tbl" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Srno</th>
+                                            <th>Institute ID</th>
+                                            <th>Institute Name</th>
+                                            <th>Contact Person</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            SIIRepository.Adminservice.DashboardRepository _objRepo = new SIIRepository.Adminservice.DashboardRepository();
+                                            System.Data.DataSet _ds = _objRepo.SELECT_tbl_InstituteNodalAndHeadOfficers();
+                                            if (_ds != null)
+                                            {
+                                                if (_ds.Tables[0].Rows.Count > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                    {
+                                                        <tr>
+                                                            <td>@(i++)</td>
+                                                            <td>@_dr["InstituteID"].ToString()</td>
+                                                            <td>@_dr["InstituteName"].ToString()</td>
+                                                            <td>
+                                                                <table class="table table-bordered">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th colspan="3">Nodal Officer</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Name: </strong>@_dr["NodalPrefix"].ToString() @_dr["NodalFirstName"].ToString() @_dr["NodalLastName"].ToString()</td>
+                                                                            <td colspan="2"><strong>Email: </strong>@_dr["NodalEmail"].ToString()</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Designation: </strong>@_dr["NodalDesignation"].ToString()</td>
+                                                                            <td><strong>Mobile: </strong>@_dr["NodalMobile"].ToString()</td>
+                                                                            <td><strong>Phone: </strong>@_dr["NodalPhone"].ToString()</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th colspan="3">Head of Institution</th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Name: </strong>@_dr["HeadPrefix"].ToString() @_dr["HeadFirstName"].ToString() @_dr["HeadLastName"].ToString()</td>
+                                                                            <td colspan="2"><strong>Email: </strong>@_dr["HeadEmail"].ToString()</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Designation: </strong>@_dr["HeadDesignation"].ToString()</td>
+                                                                            <td><strong>Mobile: </strong>@_dr["HeadMobile"].ToString()</td>
+                                                                            <td><strong>Phone: </strong>@_dr["HeadPhone"].ToString()</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <a class="btn btn-warning" href="~/Admin/ChangeNodalHead/Edit/@_dr["InstituteID"].ToString()">Edit</a>
+                                                                @*<a class="btn btn-warning" href="~/Admin/ChangeNodalHead/Edit/SII-I-00001">Edit Static</a>*@
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .table {
+            color: #000;
+        }
+
+            .table .table {
+                background-color: #fff;
+            }
+
+                .table .table th {
+                    text-align: center;
+                    font-weight: 800;
+                    color: #000;
+                }
+    </style>
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tbl').DataTable();
+        });
+    </script>
+}

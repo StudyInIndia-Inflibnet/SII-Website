@@ -1,0 +1,674 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="niche_coursesHeader_main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="inner-title-left niche_coursesHeader">
+                    <h2>NICHE Courses</h2>
+                    <p>DUMMY TEXT FOR THIS AREA</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="single-blog-area section-padding">
+    <div class="container">
+        <div class="loading"></div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="explorerNiche_Box explorerNiche_BoxImg01">
+                    <div class="overlay-black">
+                        <a href="~/NICHE/Yoga" class="custom-btn">Yoga</a>
+                        <p>Achieve state of balance between mind and body</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="explorerNiche_Box explorerNiche_BoxImg02">
+                    <div class="overlay-black">
+                        <a href="~/NICHE/Ayurvedic" class="custom-btn">Ayurveda</a>
+                        <p>The 5000-years-old medical science</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="explorerNiche_Box explorerNiche_BoxImg03">
+                    <div class="overlay-black">
+                        <a href="~/NICHE/Buddhism" class="custom-btn">Buddhism</a>
+                        <p>Influence by buddhism Inspired by nature</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="explorerNiche_Box explorerNiche_BoxImg04">
+                    <div class="overlay-black">
+                        <a href="~/NICHE/Tibetan" class="custom-btn">Tibetan</a>
+                        <p>Attain spiritual contentment through practices of monks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt50">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <h4 class="mb25"><strong>Sort by Categories</strong></h4>
+                <form id="frm" method="post">
+                    @Html.AntiForgeryToken()
+                    <div id="accordion" class="accordion">
+                        <div class="card mb-0">
+                            <div class="card-header collapsed categories_title" data-toggle="collapse" href="#collapseOne">
+                                <a class="card-title"> Sort by City</a>
+                            </div>
+                            <div id="collapseOne" class="card-body collapse categoriesOutput in" data-parent="#accordion">
+                                <ul>
+                                    <li>New Delhi <span><input type="checkbox" value=""></span></li>
+                                    <li>Gujarat <span><input type="checkbox" value=""></span></li>
+                                    <li>Mumbai <span><input type="checkbox" value=""></span></li>
+                                    <li>Bangalore <span><input type="checkbox" value=""></span></li>
+                                    <li>Rishikesh <span><input type="checkbox" value=""></span></li>
+                                    <li>Odisha <span><input type="checkbox" value=""></span></li>
+                                </ul>
+                            </div>
+                            <div class="card-header collapsed categories_title" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <a class="card-title"> Discipline </a>
+                            </div>
+                            <div id="collapseTwo" class="card-body collapse categoriesOutput" data-parent="#accordion">
+                                <ul>
+                                    <li>Yoga <span><input type="checkbox" value=""></span></li>
+                                    <li>Ayurveda <span><input type="checkbox" value=""></span></li>
+                                    <li>Buddhism <span><input type="checkbox" value=""></span></li>
+                                    <li>Tibetan <span><input type="checkbox" value=""></span></li>
+                                </ul>
+                            </div>
+                            <div class="card-header collapsed categories_title" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <a class="card-title"> Course type</a>
+                            </div>
+                            <div id="collapseThree" class="collapse" dam, ta-parent="#accordion">
+                                <div class="card-body categoriesOutput">
+                                    <ul>
+                                        <li>Yoga <span><input type="checkbox" value=""></span></li>
+                                        <li>Ayurveda <span><input type="checkbox" value=""></span></li>
+                                        <li>Buddhism <span><input type="checkbox" value=""></span></li>
+                                        <li>Tibetan <span><input type="checkbox" value=""></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-header collapsed categories_title" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <a class="card-title"> Course type</a>
+                            </div>
+                            <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                <div class="card-body categoriesOutput">
+                                    <ul>
+                                        <li>Yoga <span><input type="checkbox" value=""></span></li>
+                                        <li>Ayurveda <span><input type="checkbox" value=""></span></li>
+                                        <li>Buddhism <span><input type="checkbox" value=""></span></li>
+                                        <li>Tibetan <span><input type="checkbox" value=""></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="categoriesOutput">
+                            <h4>Duration ( in Months )</h4>
+                            <ul>
+                                <li>Less than a month <span><input type="checkbox" value=""></span></li>
+                                <li>From 1 to 2 Months <span><input type="checkbox" value=""></span></li>
+                                <li>From 2 to 3 Months <span><input type="checkbox" value=""></span></li>
+                                <li>From 3 to 4 Months <span><input type="checkbox" value=""></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <h4 class="mb25"><strong>Showing</strong> Recommended Results</h4>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 search-results">
+                        <table class="table table-borderless " id="datatable-grid">
+                            <thead><tr><th></th></tr></thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                        <div class="panel panel-default panel-niche-course">
+                            <div class="panel-img">
+                                <img class="courseImg" src="~/img/noImageAvailable.png" />
+                            </div>
+                            <div class="panel-details">
+                                <h3 class="institute-name">Morarji Desai National Institute of Yoga, New Delhi</h3>
+                                <p>Discpline: <strong>Yoga</strong></p>
+                                <p>Course of Study: <strong>Traditional Yoga</strong></p>
+                                <p>Programme Level: <strong>Foundation</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>Start Date</strong></p>
+                                        <p>01-12-2019</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>End Date</strong></p>
+                                        <p>21-12-2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-buttons">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <p><strong>Institute Rating:</strong></p>
+                                        <p class="institute-rattings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 total-fees">
+                                        <div class="row">
+                                            <div class="total-fees-label col-lg-5 col-md-5 col-sm-12">
+                                                <p><strong>Total Fees</strong></p>
+                                                <span>1 Person</span>
+                                            </div>
+                                            <div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left">
+                                                <strong>880<small>USD</small></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a class="btn btn-default btn-more-details btn-block">More Details</a>
+                                        <a class="btn btn-primary btn-apply-now btn-block">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel-niche-course">
+                            <div class="panel-img">
+                                <img class="courseImg" src="~/img/noImageAvailable.png" />
+                            </div>
+                            <div class="panel-details">
+                                <h3 class="institute-name">Morarji Desai National Institute of Yoga, New Delhi</h3>
+                                <p>Discpline: <strong>Yoga</strong></p>
+                                <p>Course of Study: <strong>Traditional Yoga</strong></p>
+                                <p>Programme Level: <strong>Foundation</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>Start Date</strong></p>
+                                        <p>01-12-2019</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>End Date</strong></p>
+                                        <p>21-12-2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-buttons">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <p><strong>Institute Rating:</strong></p>
+                                        <p class="institute-rattings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 total-fees">
+                                        <div class="row">
+                                            <div class="total-fees-label col-lg-5 col-md-5 col-sm-12">
+                                                <p><strong>Total Fees</strong></p>
+                                                <span>1 Person</span>
+                                            </div>
+                                            <div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left">
+                                                <strong>880<small>USD</small></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a class="btn btn-default btn-more-details btn-block">More Details</a>
+                                        <a class="btn btn-primary btn-apply-now btn-block">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel-niche-course">
+                            <div class="panel-img">
+                                <img class="courseImg" src="~/img/noImageAvailable.png" />
+                            </div>
+                            <div class="panel-details">
+                                <h3 class="institute-name">Morarji Desai National Institute of Yoga, New Delhi</h3>
+                                <p>Discpline: <strong>Yoga</strong></p>
+                                <p>Course of Study: <strong>Traditional Yoga</strong></p>
+                                <p>Programme Level: <strong>Foundation</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>Start Date</strong></p>
+                                        <p>01-12-2019</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>End Date</strong></p>
+                                        <p>21-12-2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-buttons">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <p><strong>Institute Rating:</strong></p>
+                                        <p class="institute-rattings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 total-fees">
+                                        <div class="row">
+                                            <div class="total-fees-label col-lg-5 col-md-5 col-sm-12">
+                                                <p><strong>Total Fees</strong></p>
+                                                <span>1 Person</span>
+                                            </div>
+                                            <div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left">
+                                                <strong>880<small>USD</small></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a class="btn btn-default btn-more-details btn-block">More Details</a>
+                                        <a class="btn btn-primary btn-apply-now btn-block">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel-niche-course">
+                            <div class="panel-img">
+                                <img class="courseImg" src="~/img/noImageAvailable.png" />
+                            </div>
+                            <div class="panel-details">
+                                <h3 class="institute-name">Morarji Desai National Institute of Yoga, New Delhi</h3>
+                                <p>Discpline: <strong>Yoga</strong></p>
+                                <p>Course of Study: <strong>Traditional Yoga</strong></p>
+                                <p>Programme Level: <strong>Foundation</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>Start Date</strong></p>
+                                        <p>01-12-2019</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>End Date</strong></p>
+                                        <p>21-12-2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-buttons">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <p><strong>Institute Rating:</strong></p>
+                                        <p class="institute-rattings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 total-fees">
+                                        <div class="row">
+                                            <div class="total-fees-label col-lg-5 col-md-5 col-sm-12">
+                                                <p><strong>Total Fees</strong></p>
+                                                <span>1 Person</span>
+                                            </div>
+                                            <div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left">
+                                                <strong>880<small>USD</small></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a class="btn btn-default btn-more-details btn-block">More Details</a>
+                                        <a class="btn btn-primary btn-apply-now btn-block">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default panel-niche-course">
+                            <div class="panel-img">
+                                <img class="courseImg" src="~/img/noImageAvailable.png" />
+                            </div>
+                            <div class="panel-details">
+                                <h3 class="institute-name">Morarji Desai National Institute of Yoga, New Delhi</h3>
+                                <p>Discpline: <strong>Yoga</strong></p>
+                                <p>Course of Study: <strong>Traditional Yoga</strong></p>
+                                <p>Programme Level: <strong>Foundation</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>Start Date</strong></p>
+                                        <p>01-12-2019</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p><strong>End Date</strong></p>
+                                        <p>21-12-2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-buttons">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <p><strong>Institute Rating:</strong></p>
+                                        <p class="institute-rattings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-empty"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 total-fees">
+                                        <div class="row">
+                                            <div class="total-fees-label col-lg-5 col-md-5 col-sm-12">
+                                                <p><strong>Total Fees</strong></p>
+                                                <span>1 Person</span>
+                                            </div>
+                                            <div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left">
+                                                <strong>880<small>USD</small></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <a class="btn btn-default btn-more-details btn-block">More Details</a>
+                                        <a class="btn btn-primary btn-apply-now btn-block">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .loading {
+            position: fixed;
+            z-index: 99999;
+            height: 2em;
+            width: 2em;
+            overflow: show;
+            margin: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            /* Transparent Overlay */
+            .loading:before {
+                content: '';
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.8);
+            }
+
+            /* :not(:required) hides these rules from IE9 and below */
+            .loading:not(:required) {
+                /* hide "loading..." text */
+                font: 0/0 a;
+                color: transparent;
+                text-shadow: none;
+                background-color: transparent;
+                border: 0;
+            }
+
+                .loading:not(:required):after {
+                    content: '';
+                    display: block;
+                    font-size: 10px;
+                    width: 1em;
+                    height: 1em;
+                    margin-top: -0.5em;
+                    -webkit-animation: spinner 1500ms infinite linear;
+                    -moz-animation: spinner 1500ms infinite linear;
+                    -ms-animation: spinner 1500ms infinite linear;
+                    -o-animation: spinner 1500ms infinite linear;
+                    animation: spinner 1500ms infinite linear;
+                    border-radius: 0.5em;
+                    -webkit-box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgba(255, 255, 255, 0.5) -1.5em 0 0 0, rgba(255, 255, 255, 0.5) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                    box-shadow: rgb(255, 255, 255) 1.5em 0 0 0, rgb(255, 255, 255) 1.1em 1.1em 0 0, rgb(255, 255, 255) 0 1.5em 0 0, rgb(255, 255, 255) -1.1em 1.1em 0 0, rgb(255, 255, 255) -1.5em 0 0 0, rgb(255, 255, 255) -1.1em -1.1em 0 0, rgb(255, 255, 255) 0 -1.5em 0 0, rgb(255, 255, 255) 1.1em -1.1em 0 0;
+                }
+
+        /* Animation */
+
+        @@-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-moz-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@-o-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-results .panel.panel-niche-course {
+            position: initial;
+            min-height: 222px;
+            border-color: #c1986f;
+            border-radius: 0;
+            float: left;
+        }
+
+        .search-results img.courseImg {
+            width: 300px;
+            height: 220px;
+            float: left;
+        }
+
+        .panel-img {
+            width: 30%;
+            float: left;
+        }
+
+            .panel-img img {
+                height: 100%;
+            }
+
+        .panel-details {
+            width: 45%;
+            float: left;
+            padding: 15px;
+            border-right: 1px solid #cccccc;
+        }
+
+            .panel-details .institute-name {
+                margin-bottom: 5px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .panel-details p, .panel-buttons p {
+                margin-bottom: 0px;
+            }
+
+        .panel-buttons {
+            padding: 15px 10px;
+            /*border-left: 1px solid #969696;*/
+            width: 25%;
+            float: left;
+            height: 100%;
+        }
+
+            .panel-buttons .institute-rattings i {
+                font-size: 20px;
+                margin-right: 5px;
+                color: #efb726;
+            }
+
+            .panel-buttons .total-fees {
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+
+            .panel-buttons .total-fees-label, panel-buttons .total-fees-value {
+                vertical-align: middle;
+                height: 100%;
+            }
+
+            .panel-buttons .total-fees-label {
+                padding-right: 0;
+            }
+
+            .panel-buttons .total-fees-value {
+                padding-left: 0;
+            }
+
+            .panel-buttons .total-fees-value {
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+                .panel-buttons .total-fees-value small {
+                    font-size: 50%;
+                    font-weight: bold;
+                }
+
+            .panel-buttons .btn-more-details {
+                background-color: #5e5e5e;
+                border-color: #5e5e5e;
+                color: #fff;
+            }
+
+            .panel-buttons .btn-apply-now {
+                background-color: #f18a37;
+                border-color: #f18a37;
+                color: #fff;
+            }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myBtn').remove();
+
+            page_init();
+        });
+        function page_init() {
+            var filterCity = [];
+            var strfilterProgramLevel = "@ViewBag.Discipline";
+            var filterDiscipline = strfilterProgramLevel.split(',');
+            var filterNatureOfCourse = [];
+            var filterBranch = [];
+            FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch);
+        }
+        function FillInstitutes(filterCity, filterDiscipline, filterNatureOfCourse, filterBranch, token = $('input[name="__RequestVerificationToken"]', $('#frm')).val()) {
+            $('.loading').show();
+            $('#datatable-grid').DataTable().clear().destroy();
+            $('#tbodyCourse').empty();
+            if ($.fn.DataTable.isDataTable("#datatable-grid")) {
+                $('#datatable-grid').DataTable().clear().destroy();
+            }
+            $.ajax({
+                method: 'POST',
+                url: $('#hdfBaseUrl').val() + 'NICHE/SearchCourseList',
+                data: { __RequestVerificationToken: token, City: filterCity.join(','), Discipline_ID: filterDiscipline.join(','), CourseOfStudy_ID: filterBranch.join(','), Type: 'InstituteWise' },
+                async: true,
+                success: function (data) {
+                }
+            }).done(function (data) {
+                $('.search-results').empty();
+                $.each(data["List"], function (index, item) {
+                    var tr = $('<tr></tr>');
+                    var td = $('<td></td>');
+                    var panelDiv = $('<div class="panel panel-default panel-niche-course"></div>');
+                    var panelImgDiv = '<div class="panel-img"><img class="courseImg" src="/img/noImageAvailable.png" /></div>';
+                    var panelDetailsDiv = '<div class="panel-details"><h3 class="institute-name">' + item['InstituteName'] + '</h3><p>Discpline: <strong>' + item['Discipline'] + '</strong></p><p>Course of Study: <strong>' + item['CourseOfStudy'] + '</strong></p><p>Programme Level: <strong>' + item['ProgramLevel'] + '</strong></p><div class="row"><div class="col-lg-6 col-md-6 col-sm-12"><p><strong>Start Date</strong></p><p>' + item['StartDate'] + '</p></div><div class="col-lg-6 col-md-6 col-sm-12"><p><strong>End Date</strong></p><p>' + item['EndDate'] +'</p></div></div></div>';
+                    var panelButtonDiv = '<div class="panel-buttons"><div class="row"><div class="col-lg-12 col-md-12 col-sm-12"><p><strong>Institute Rating:</strong></p><p class="institute-rattings"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-empty"></i><i class="fa fa-star-o"></i></p></div><div class="col-lg-12 col-md-12 col-sm-12 total-fees"><div class="row"><div class="total-fees-label col-lg-5 col-md-5 col-sm-12"><p><strong>Total Fees</strong></p><span>1 Person</span></div><div class="total-fees-value col-lg-7 col-md-7 col-sm-12 text-left"><strong>' + item['TotalFees'] + '<small>' + item['TotalFeesCurrency'] + '</small></strong></div></div></div><div class="col-lg-12 col-md-12 col-sm-12"><a class="btn btn-default btn-more-details btn-block">More Details</a><a class="btn btn-primary btn-apply-now btn-block">Apply Now</a></div></div></div>';
+                    panelDiv.append(panelImgDiv);
+                    panelDiv.append(panelDetailsDiv);
+                    panelDiv.append(panelButtonDiv);
+                    td.append(panelDiv);
+                    tr.append(td);
+                    $('#tbody').append(tr);
+                    //$('.search-results').append(panelDiv);
+                });
+                $('#datatable-grid').DataTable({
+                    ordering: false,
+                    "bDestroy": true
+                });
+                $('.loading').hide();
+            }).error(function () {
+                $('.loading').hide();
+            });
+        }
+    </script>
+}

@@ -1,0 +1,81 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("studentid").ToString(), "StudentProfile");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Basic Information</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>First Name  : <strong>@_dr["FirstName"].ToString()</strong></td>
+                                <td>Middle Name : <strong>@_dr["MiddleName"].ToString()</strong> </td>
+                                <td>Last Name   : <strong>@_dr["LastName"].ToString()</strong> </td>
+
+                            </tr>
+                            <tr>
+                                <td>Date of Birth  : <strong>@_dr["DateOfBirth"].ToString()</strong></td>
+                                <td>Gender  : <strong>@_dr["Gender"].ToString()</strong> </td>
+                                <td>Email   : <strong>@_dr["Email"].ToString()</strong> </td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number  : <strong>@_dr["country_code"].ToString()  @_dr["Mobile"].ToString() </strong></td>
+                                <td>Nationality   : <strong>@_dr["Nationality"].ToString()</strong> </td>
+                                <td>@*Country of Stay   : <strong>@_dr["CountryToStay"].ToString()</strong>*@ </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                <h4 class="page-header">Address</h4>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">@_dr["AddressType"].ToString() : <strong>@_dr["Addressline1"].ToString()</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Country : <strong>@_dr["Country_Name"].ToString()</strong></td>
+                                    <td>State   : <strong>@_dr["state_name"].ToString()</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>City    : <strong>@_dr["city_name"].ToString()</strong></td>
+                                    <td>Area    : <strong>@_dr["Area"].ToString()</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+        }
+    </div>
+</div>
+
+
+

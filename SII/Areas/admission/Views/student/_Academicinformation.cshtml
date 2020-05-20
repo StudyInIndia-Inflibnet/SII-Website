@@ -1,0 +1,113 @@
+﻿<h3>
+    Academic information&nbsp;<span style="color: red">( @Session["studentname"].ToString() )</span>
+    <a href="@Url.Content("~/")PersonalDetails" id="btnPreviousAbove" class="btn btn-danger" style="float:right">Previous</a>
+</h3>
+<hr />
+<form id="frm">
+    <div class="panel-body">
+        <div class="row">
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:13%"></th>
+                        <th>Name of the Board / University</th>
+                        <th style="width:10%">Year</th>
+                        <th style="width:7%">Obtained Marks</th>
+                        <th style="width:7%">Maximum Marks</th>
+                        <th style="width:10%">Country</th>
+                        <th>Address</th>
+                        <th>Subjects studied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>Secondary School / Class X / Equivalent Qualification&nbsp;<span style="color:red">*</span></label>
+                        </td>
+                        <td><input type="text" class="form-control" required="" id="txtBUni_Matri" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtYear_Matri" minlength="4" maxlength="7" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtMarks_Matri" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtMMarks_Matri" /></td>
+                        <td>@Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                        "--Select--",
+                        new
+                        {
+                        @class = "form-control",
+                        @id = "drpCountry_Matri"
+                        })</td>
+                        <td><textarea rows="2" id="txtaddress_Matri" required="" class="form-control"></textarea></td>
+                        <td><input type="text" class="form-control" required="" id="txtSub_Matri" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Higher Secondary / Class XII / Equivalent Qualification&nbsp;<span style="color:red">*</span></label>
+                        </td>
+                        <td><input type="text" class="form-control" required="" id="txtBUni_HSC" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtYear_HSC" minlength="4" maxlength="7" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtMarks_HSC" /></td>
+                        <td><input type="text" class="form-control" required="" id="txtMMarks_HSC" /></td>
+                        <td>@Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                        "--Select--",
+                        new
+                        {
+                            @class = "form-control",
+                            @id = "drpCountry_HSC"
+                        })</td>
+                        <td><textarea rows="2" id="txtaddress_HSC" required="" class="form-control"></textarea></td>
+                        <td><input type="text" class="form-control" id="txtSub_HSC" required="" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <table class="table table-bordered table-striped" id="tblAny">
+                <thead>
+                    <tr>
+                        <th style="width:13%"><label>Any other</label></th>
+                        <th>Name of the Board / University</th>
+                        <th style="width:10%">Year</th>
+                        <th style="width:7%">Obtained Marks</th>
+                        <th style="width:7%">Maximum Marks</th>
+                        <th style="width:10%">Country</th>
+                        <th>Address</th>
+                        <th>Subjects studied</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyAddEny">
+                    <tr>
+                        <td>
+                            <select class="form-control drpDeg_Any"></select>
+                        </td>
+                        @*<td>
+                            <input type="text" class="txtDeg_Any form-control" placeholder="Name of degree" />
+                        </td>*@
+                        <td><input type="text" class="form-control txtBUni_Any" /></td>
+                        <td><input type="text" class="form-control txtYear_Any" minlength="4" maxlength="7" /></td>
+                        <td><input type="text" class="form-control txtMarks_Any" /></td>
+                        <td><input type="text" class="form-control txtMMarks_Any" /></td>
+                        @*<td>@Html.DropDownList("CountryToStay", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                        "--Select--",
+                        new
+                        {
+                            @class = "form-control drpCountry_Any",
+                            @id = ""
+                        })</td>*@
+                        <td><select class="form-control drpCountry_Any"></select></td>
+                        <td><textarea rows="2" class="form-control txtaddress_any"></textarea></td>
+                        <td><input type="text" class="form-control txtSub_Any" /></td>
+                        <td style="width:5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-warning" id="btnAddMore">Add More</a>
+        </div>
+        <hr />
+        <div class="row">
+            <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+            @*<button type="submit" id="btnPrevious" class="btn btn-danger" style="float:right">Previous</button>*@
+        </div>
+    </div>
+</form>
+<script src="~/Scipts/Areas/validations/frmvalidations.js"></script>
+<script src="~/Scipts/Areas/admission/StudentAcademicinformation.js"></script>

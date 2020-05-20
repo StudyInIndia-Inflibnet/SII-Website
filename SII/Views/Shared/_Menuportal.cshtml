@@ -1,0 +1,114 @@
+﻿<div class="left-sidebar-wrapper">
+    <a href="#" class="left-sidebar-toggle">Dashboard</a>
+    <div class="left-sidebar-spacer">
+        <div class="left-sidebar-scroll">
+            <div class="left-sidebar-content">
+                <ul class="sidebar-elements">
+                    <li class="divider">Menu</li>
+                    <li class="active">
+                        <a href="@Url.Content("~/")admission/Dashboard"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                    </li>
+                    @*<li class="active">
+            <a href="@Url.Content("~/")admission/student"><i class="icon mdi mdi-home"></i><span>Student profile</span></a>
+        </li>*@
+                    <li class="parent open">
+                        <a href="#"><i class="icon mdi mdi-face"></i><span>Student</span></a>
+                        <ul class="sub-menu">
+                            @*<li>
+                    <a href="@Url.Content("~/")admission/student">Studednt Profile</a>
+                </li>*@
+                            <li>
+                                <a href="@Url.Content("~/")admission/StudentBasicInformation"><i class="sub-icon mdi mdi-account-card-details"></i><span>Basic Information</span></a>
+                            </li>
+                            @*<li>
+                    <a href="@Url.Content("~/")admission/StudentAcademicInformation"><i class="sub-icon mdi mdi-school"></i><span>Academic Information</span></a>
+                </li>
+                <li>
+                    <a href="@Url.Content("~/")admission/StudentDocumentInformation"><i class="sub-icon mdi mdi-file-document"></i><span>Document Information</span></a>
+                </li>*@
+                            <li>
+                                <a href="@Url.Content("~/")admission/StudentBackgroundInformation"><i class="sub-icon mdi mdi-passport"></i><span>Background Information</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @if (Session["AllowChoiceFilling"] != null && Session["RegistrationPhase"].ToString() == "PHASE-3")
+                    {
+                        if ((Session["AllowChoiceFilling"].ToString().ToLower() == "true" && DateTime.Now <= Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["StudentChoiceFillingDateTime"].ToString())) || Session["isTestStudent"].ToString().ToLower() == "true")
+                        {
+                            <li>
+                                <a href="@Url.Content("~/")admission/StudentChoiceFilling/Basic"><i class="sub-icon mdi mdi-pin-help"></i><span>Choice Filling (Regular Course)</span></a>
+                            </li>
+                            @*if (Session["ApplyingForCourse"].ToString() == "Full Term Courses" || Session["ApplyingForCourse"].ToString() == "Both")
+                {
+                    <li>
+                        <a href="@Url.Content("~/")admission/StudentChoiceFilling/Basic"><i class="sub-icon mdi mdi-pin-help"></i><span>Choice Filling (Regular Course)</span></a>
+                    </li>
+                }
+                if (Session["ApplyingForCourse"].ToString() == "Short Term Niche Courses" || Session["ApplyingForCourse"].ToString() == "Both")
+                {
+                    <li>
+                        <a href="@Url.Content("~/")admission/StudentChoiceFillingNiche/Basic"><i class="sub-icon mdi mdi-pin-help"></i><span>Choice Filling (NICHE Course)</span></a>
+                    </li>
+                }*@
+                        }
+                    }
+                    @*@if (Session["IsSeatAlloted"].ToString() == "False")
+        {
+            <li>
+                <a href="@Url.Content("~/")admission/ChoiceFillingSecondRound"><i class="icon mdi mdi-checkbox-multiple-marked"></i><span>2nd Round Choice filling</span></a>
+            </li>
+        }*@
+                    @*<li>
+            <a href="@Url.Content("~/")admission/Mockcounsellingcategory"><i class="icon mdi mdi-ticket-account"></i><span>1st Mock counselling</span></a>
+        </li>
+        <li>
+            <a href="@Url.Content("~/")admission/MockcounsellingCategorySecond"><i class="icon mdi mdi-ticket-account"></i><span>2nd Mock counselling</span></a>
+        </li>
+        <li>
+            <a href="@Url.Content("~/")admission/Finalcounselling"><i class="icon mdi mdi-account-multiple-plus"></i><span>Final counselling</span></a>
+        </li>
+        <li>
+            <a href="@Url.Content("~/")admission/Allotmentletter"><i class="icon mdi mdi-email-variant"></i><span>Allotment letter</span></a>
+        </li>*@
+
+                    @if (Session["AllowChoiceFilling"] != null)
+                    {
+                        if (Session["AllowChoiceFilling"].ToString().ToLower() != "true")
+                        {
+                            <li>
+                                <a href="@Url.Content("~/")admission/Result"><i class="icon mdi mdi-email-variant"></i><span>Result (UG / PG / PhD)</span></a>
+                            </li>
+                        }
+                    }
+                    @if (Session["submitChoiceFill"] != null)
+                    {
+                        if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["IsTestCentreCountry"].ToString().ToLower() == "true")
+                        {
+                            <li>
+                                <a href="@Url.Content("~/")admission/IndSATSelection"><i class="icon mdi mdi-desktop-classic"></i><span>Ind-SAT Test Center Selection</span></a>
+                            </li>
+
+                        }
+                        if (Session["IndSATCenter"] != null)
+                        {
+                            if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["IndSATCenter"].ToString() != "0" && Session["SCH_PhD"].ToString().ToLower()=="no")
+                            {
+                                @*<li>
+                                    <a href="@Url.Content("~/")admission/IndSATCredentials" target="_blank"><i class="icon mdi mdi-desktop-classic"></i><span>Ind-SAT Credential and Instructions</span></a>
+                                </li>*@
+                            }
+                        }
+                    }
+
+                    @*<li>
+            <a href="@Url.Content("~/")admission/TravelPlan"><i class="icon mdi mdi-airplane-takeoff"></i><span>Travel Plan</span></a>
+        </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    @*<div class="progress-widget">
+            <div class="progress-data"><span class="progress-value" id="spansessiontimeout"></span><span class="name">session timeout left</span></div>
+        </div>*@
+</div>

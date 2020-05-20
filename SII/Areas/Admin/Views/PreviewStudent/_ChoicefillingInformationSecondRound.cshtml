@@ -1,0 +1,45 @@
+﻿<div class="row">
+    @{
+        SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+        System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("studentid").ToString().ToString(), "ChoiceFillingSecondRound");
+        if (_ds != null)
+        {
+            if (_ds.Tables[1].Rows.Count > 0)
+            {
+                <h2 class="text-center">Filled Choices (2nd Round) <br /> <small style="color:red;">@_ds.Tables[1].Rows[0]["Name"].ToString() (@_ds.Tables[1].Rows[0]["studentid"].ToString())</small> </h2>
+            }
+            if (_ds.Tables[0].Rows.Count > 0)
+            {
+                int indexInternationalCollaboration = 1;
+                <div class="col-md-12">
+                    <h4 class="page-header">Filled Choices</h4>
+                    <table class="table table-condensed table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>Srno</th>
+                                <th>Institute</th>
+                                <th>Courses</th>
+                                <th>Fee Waivers</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyChoicefilling">
+                            @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                            {
+                                <tr>
+                                    <td>
+                                        @(indexInternationalCollaboration++)
+                                    </td>
+                                    <td>@_dr["InstituteName"].ToString()</td>
+                                    <td>@_dr["Natureofcourse"].ToString()</td>
+                                    <td>@_dr["SeatWaivertype"].ToString()</td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+        }
+    }
+</div>

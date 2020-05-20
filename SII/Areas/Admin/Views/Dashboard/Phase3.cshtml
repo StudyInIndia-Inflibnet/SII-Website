@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-sm-6">
+        <!--Labels & badges-->
+        <div class="panel panel-full-color panel-full-success">
+            <div class="panel-heading">
+                Institute
+            </div>
+            <div class="panel-body" style="background-color: #ffffff; color: #333333;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Counts</th>
+                        </tr>
+                    </thead>
+                    @{
+                        SIIRepository.Adminservice.DashboardRepository _objRepository = new SIIRepository.Adminservice.DashboardRepository();
+                        System.Data.DataSet _ds = _objRepository.Dashboard_Institute_Phase2(Session["Phase"].ToString());
+                        if (_ds != null)
+                        {
+                            if (_ds.Tables[0].Rows.Count > 0)
+                            {
+                                <tr>
+                                    <td>No of institute</td>
+                                    <td><a href="@Url.Content("~/")Admin/InstituteData?Mode=notsubmiited" class="">@_ds.Tables[0].Rows[0]["Noofinstitute"].ToString()</a></td>
+                                </tr>
+
+                            }
+                            if (_ds.Tables[1].Rows.Count > 0)
+                            {
+                                <tr>
+                                    <td>No of course</td>
+                                    <td><a class="" href="@Url.Content("~/")Admin/CourseData/Phase2">@_ds.Tables[1].Rows[0]["Noofcourse"].ToString()</a></td>
+                                </tr>
+
+                            }
+                            if (_ds.Tables[6].Rows.Count > 0)
+                            {
+                                <tr>
+                                    <td>No of Niche course</td>
+                                    <td><a class="" href="@Url.Content("~/")Admin/CourseData/_Phase2NicheCourse">@_ds.Tables[6].Rows[0]["Noofnichecourse"].ToString()</a></td>
+                                </tr>
+
+                            }
+                            if (_ds.Tables[2].Rows.Count > 0)
+                            {
+                                <tr>
+                                    <td>No of seat</td>
+                                    <td><a class="" href="@Url.Content("~/")Admin/CourseData">@_ds.Tables[2].Rows[0]["Noofseat"].ToString()</a></td>
+                                </tr>
+
+                            }
+
+
+                            if (_ds.Tables[4].Rows.Count > 0)
+                            {
+                                <tr>
+                                    <td>No of state</td>
+                                    <td><a class="" href="@Url.Content("~/")Admin/StatewiseCount">@_ds.Tables[4].Rows[0]["Noofstate"].ToString()</a></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td><span>Seat Matrix at glance (Phase-1)</span></td>
+                                <td>
+                                    <a class="" href="@Url.Content("~/")Admin/ViewInstituteGlance">View Data</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <!--Labels & badges-->
+        <div class="panel panel-full-color panel-full-danger">
+            <div class="panel-heading">
+                Student
+            </div>
+            <div class="panel-body" style="background-color: #ffffff; color: #333333;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @*<th style="width:40%;">Type</th>*@
+                            <th>Type</th>
+                            <th>Counts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[5].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[5].Rows)
+                                    {
+                                        <tr>
+                                            <td><span class="">No of Students Registered</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2">@_dr["noofLearner"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Logged in</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=LoggedIn">@_dr["noofPartiallyLoggedin"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Not Logged in</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=NotLoggedIn">@_dr["noofNotLoggedin"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Country</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/CountrywiseStudent/Phase2">@_dr["noofcountry"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Filled Choice</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=FilledChoice">@_dr["noofFilledChoice"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Filled by agency</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=agencystudent">@_dr["noofagencystudent"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">Number of Students Submitted Application</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=submmit">@_dr["submitChoiceFill"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Re-edited Application</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=Reedit">@_dr["ReEdit"].ToString()</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="">No of Students Re-edited and Submitted Application</span></td>
+                                            <td><a class="" href="@Url.Content("~/")Admin/StudentData/Phase2?IsPartiallySubmitted=ReSubmit">@_dr["ReSubmit"].ToString()</a></td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+
+                        @*<tr>
+            <td><span class="label label-primary">No of UG</span></td>
+            <td><span class="badge badge-primary">0</span></td>
+        </tr>
+        <tr>
+
+            <td><span class="label label-success">No of PG</span></td>
+            <td><span class="badge badge-success">0</span></td>
+        </tr>*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-full-color panel-full-warning">
+            <div class="panel-heading">
+                <div class="title">Submission Institute</div>
+            </div>
+            <div class="panel-body" style="background-color: #ffffff; color: #333333;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Login Attempted</th>
+                            <th>Submitted</th>
+                            <th>Partially Submitted</th>
+                            <th>Participated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[3].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[3].Rows)
+                                    {
+                                        <tr>
+                                            <td><a href="@Url.Content("~/")Admin/InstituteData?Mode=Login">@_dr["Login_Data"].ToString()</a></td>
+                                            <td><a href="@Url.Content("~/")Admin/InstituteData?Mode=Submmited">@_dr["Submmited"].ToString()</a></td>
+                                            <td><a href="@Url.Content("~/")Admin/InstituteData?Mode=notsubmiited">@_dr["Not_submmited"].ToString()</a></td>
+                                            <td><a href="@Url.Content("~/")Admin/InstituteData?Mode=Participated">@_dr["ParticipatedInstitutes"].ToString()</a></td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3">
+                                            No data found.
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3">
+                                        No data found.
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*Phase1*@
+    
+</div>
+
+@section styles{
+    <style>
+        .badge {
+            font-size: 12px;
+        }
+
+        .panel-full-color .panel-heading {
+            color: #fff;
+            margin: 0;
+            padding: 15px 20px;
+        }
+        .pstyle {
+            /*position: absolute;
+            left: 250px;
+            top: 00px;*/
+            text-align:center;
+        }
+    </style>
+}

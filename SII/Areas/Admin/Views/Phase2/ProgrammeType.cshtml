@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Student List [ @ViewBag.For ]
+                <a class="btn btn-primary pull-right" href="~/Admin/Phase2">Back</a>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-info panel-border-color panel-border-color-primary">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="panel-body in table-responsive">
+                        <table class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Programme Type</th>
+                                    <th>Choices Filled</th>
+                                    <th>Merit</th>
+                                    <th>Seats Alloted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>UG</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/ChoiceFilling/UG">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Merit/UG">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Alloted/UG">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PG</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/ChoiceFilling/PG">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Merit/PG">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Alloted/PG">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PhD</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/ChoiceFilling/PhD">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Merit/PhD">
+                                            View
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-sm btn-primary" href="~/Admin/Phase2/Alloted/PhD">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $(".dataTable").DataTable({
+                searching: true,
+                paging: true,
+                info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'csvHtml5',
+                        text: 'Export',
+                        titleAttr: 'CSV'
+                    },
+                ],
+                columnDefs: [{
+                    "targets": 5,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+}

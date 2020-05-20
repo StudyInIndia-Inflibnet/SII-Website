@@ -1,0 +1,90 @@
+﻿
+<form id="frmpassport">
+    <input type="hidden" id="hdnfilesize" value="0" />
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Declaration&nbsp;<span style="color: red">( @Session["studentname"].ToString() )</span></h3>
+            <hr />
+            <div class="form-group">
+                <div class="">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <label><input type="checkbox" id="chkbasicdetails" class="chk-i-agree" />&nbsp;  Basic Information</label>
+                            @*<a href="Student" class="btn-preview-declarations" target="_blank" data-pview="_PersonalDetails" data-ptitle="Personal Details"><span class="badge" data-toggle="tooltip" title="Preview Tooltip">Preview</span></a>*@
+                        </li>
+                        <li class="list-group-item">
+                            <label><input type="checkbox" id="chkAcademic" class="chk-i-agree" />&nbsp;  Academic Information</label>
+                            @*<a href="Student" class="btn-preview-declarations" target="_blank" data-pview="_EducationQualifications" data-ptitle="Education Qualifications"><span class="badge" data-toggle="tooltip" title="Preview Tooltip">Preview</span></a>*@
+                        </li>
+                        <li class="list-group-item">
+                            <label><input type="checkbox" id="chkExperience" class="chk-i-agree" />&nbsp; Document Details</label>
+                            @*<a href="Student" class="btn-preview-declarations" target="_blank" data-pview="_ExperienceDetails" data-ptitle="Experience Details"><span class="badge" data-toggle="tooltip" title="Preview Tooltip">Preview</span></a>*@
+                        </li>
+                        <li class="list-group-item">
+                            <label><input type="checkbox" id="chkTrainingProgrammes" class="chk-i-agree" />&nbsp; Background Information</label>
+                            @*<a href="Student" class="btn-preview-declarations" target="_blank" data-pview="_TrainingProgrammesDetails" data-ptitle="Training Programmes Details"><span class="badge" data-toggle="tooltip" title="Preview Tooltip">Preview</span></a>*@
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <h3 class="text-center">TERMS & CONDITIONS</h3>
+                </div>
+                <div class="col-md-12" style="overflow-y:scroll; max-height:250px; border:1px solid #DDDDDD; padding:auto 10px;">
+                    <ol>
+                        <li>
+                            I agree that,
+                            <ol type="a">
+                                <li>The contents of the information I have provided are true and accurate to the best of my knowledge,</li>
+                                <li>I have not withheld any information that could affect the decision of my admission,</li>
+                                <li>I understand that if any false information is given, or any material fact is not provided in this form, I may not be eligible for admission, or may result in disciplinary action up to and including rustication from the academic institution</li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-md-12">
+                    <div class="be-checkbox inline">
+                        <input id="check6" type="checkbox" required value="1" name="AgreeTermsConditions">
+                        <label for="check6">I agree</label>
+                    </div>
+                </div>
+                @*<label><input type="checkbox" id="chkIAgree" /> </label>*@
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" id="btnSubmitBackground" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+<!-- Modal Contents -->
+<div id="myModal" class="modal fade ">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="preview-modal-title">Browser Update</h4>
+            </div>
+            <div class="modal-body" id="preview-modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnModalPrint" type="button" class="btn btn-warning" style="display:none;">Print</button>
+                <button id="btnModalSubmit" type="button" class="btn btn-warning" style="display:none;">Submit</button>
+                <button id="btnModalEdit" type="button" class="btn btn-primary" style="display:none;" data-dismiss="modal">Edit</button>
+                <button id="btnModalOk" type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="btnOpenPreviewModalPopup" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;">
+    Open Preview Modal Popup
+</a>
+
+<style>
+    .control-label {
+        margin-bottom: 0;
+        padding-top: 11px;
+    }
+</style>
+<script src="~/plugins/bower_components/parsleyjs/dist/parsley.min.js"></script>
+<script src="~/scripts/pages/Declarations/Declarations.js"></script>
+

@@ -1,0 +1,67 @@
+﻿
+<h3>Document Details&nbsp;<span style="color: red">( @Session["studentname"].ToString() )</span></h3>
+<input type="hidden" id="hdnfilesize" value="@ViewBag.Filesize" />
+<form id="frmuploadimage">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Profile Pic<span style="color: red">&nbsp;*</span></label>
+                <input type="file" id="udpFile" name="PROFILE_PIC_PATH" required />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img class="img-rounded xs-mr-10" id="imgProfile" src="~/assets/img/140x140.png" width="140" height="140" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-space btn-primary btn-lg" type="submit" id="btnprofilepic">Upload</button>
+        </div>
+    </div>
+</form>
+<hr />
+<form id="frmstudentdocumenation">
+    <h3>Other Document Details</h3>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Document Name<span style="color:red"> *</span></label>
+                <input type="text" id="txtdocumentname" class="form-control" placeholder="Document Name" required>
+            </div>
+            <div class="form-group">
+                <label>Upload Document<span style="color:red"> *</span></label>
+                <input type="file" id="uploaddocumentcustomer" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-condensed table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Document Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodydocument"></tbody>
+            </table>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-space btn-primary btn-lg" type="submit" id="btncustomerdocsave">Submit</button>
+            <button class="btn btn-space btn-default btn-lg" type="button" id="btncustdoccancel">Cancel</button>
+        </div>
+    </div>
+    <br />
+    <hr />
+    
+</form>
+<script src="~/assets/lib/parsley/parsley.min.js"></script>
+<script src="~/Scipts/Areas/admission/StudentDocument.js"></script>
+
+@*@section  scripts{
+        <script src="~/Scripts/Customer/Document/Document.js"></script>
+    }*@

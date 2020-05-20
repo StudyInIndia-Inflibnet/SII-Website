@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- FAVICON -->
+    <link rel="icon" href="~/img/favicon.ico">
+    <title>Study in India</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/material-design-icons/css/material-design-iconic-font.min.css" />
+    <link href="~/css/fonts/MaterialDesign-Webfont-master/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/style.css" type="text/css" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/css/custom-institute.css" rel="stylesheet" />
+    <style>
+        .jconfirm-box {
+            width: 90% !important;
+            max-width: 400px;
+        }
+    </style>
+    @RenderSection("styles", false)
+    @Html.Partial("_GoogleTagManagerHead")
+    <script src="~/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <input type="hidden" value="@Url.Content("~/")" id="hdfBaseUrl" />
+    <div class="be-wrapper be-collapsible-sidebar be-collapsible-sidebar-collapsed">
+        <nav class="navbar navbar-default navbar-fixed-top be-top-header">
+            @Html.Partial("_Headerportal")
+        </nav>
+        <div class="be-left-sidebar">
+            @Html.Partial("_Menuportal")
+        </div>
+        <div class="be-content">
+            <div class="page-head">
+                @RenderSection("PageHead", false)
+            </div>
+            <div class="main-content container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    @Html.Partial("_GoogleTagManagerBody")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            $('.allow_only_number').keypress(function (e) {
+                return isNumber(e, this);
+            });
+            $('.allow_only_decimal').keypress(function (e) {
+                return isNumberWithDot(e, this);
+            });
+            $('.allow_only_alphabet').keypress(function (e) {
+                return isAlphabet(e, this);
+            });
+            $('.allow_only_alphanumeric').keypress(function (e) {
+                return isAlphaNumeric(e, this);
+            });
+            DisplaySessionTimeout();
+        });
+        function isNumber(evt, element) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (
+                //(charCode != 45 || $(element).val().indexOf('-') != -1) &&      // &#8220;-&#8221; CHECK MINUS, AND ONLY ONE.
+                //(charCode != 46 || $(element).val().indexOf('.') != -1) &&  && charCode == 9 && charCode == 13    // &#8220;.&#8221; CHECK DOT, AND ONLY ONE.
+                ((charCode < 48 || charCode > 57) && charCode != 8 && charCode != 9 && charCode != 13))
+                return false;
+            return true;
+        }
+
+        function isNumberWithDot(evt, element) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (
+                //(charCode != 45 || $(element).val().indexOf('-') != -1) &&      // &#8220;-&#8221; CHECK MINUS, AND ONLY ONE.
+                (charCode != 46 || $(element).val().indexOf('.') != -1)  && ((charCode < 48 || charCode > 57) && charCode != 8 && charCode != 9 && charCode != 13))
+                return false;
+            return true;
+        }
+
+        function isAlphabet(evt, element) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (
+                //(charCode != 45 || $(element).val().indexOf('-') != -1) &&      // &#8220;-&#8221; CHECK MINUS, AND ONLY ONE.
+                //(charCode != 46 || $(element).val().indexOf('.') != -1) &&  && charCode == 9 && charCode == 13    // &#8220;.&#8221; CHECK DOT, AND ONLY ONE.
+                (((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 112)) && charCode != 8 && charCode != 32 && charCode != 9 && charCode != 13))
+                return false;
+            return true;
+        }
+        function isAlphaNumeric(evt, element) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (
+                //(charCode != 45 || $(element).val().indexOf('-') != -1) &&      // &#8220;-&#8221; CHECK MINUS, AND ONLY ONE.
+                //(charCode != 46 || $(element).val().indexOf('.') != -1) &&  && charCode == 9 && charCode == 13    // &#8220;.&#8221; CHECK DOT, AND ONLY ONE.
+                (((charCode < 48 || charCode > 57) && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 112)) && charCode != 8 && charCode != 32 && charCode != 9 && charCode != 13))
+                return false;
+            return true;
+        }
+        //session end
+        @*var sessionTimeoutWarning = @Session.Timeout -1;
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionEnd()', sTimeout);
+        function SessionEnd() {
+            window.location = "/admission/Logout";
+        }*@
+        var sessionTimeout = @Session.Timeout;
+        function DisplaySessionTimeout()
+        {
+            //assigning minutes left to session timeout to Label
+            $('.spansessiontimeout').text("Auto-logout in " + sessionTimeout + " minutes");
+            // $('#hdfsessiontimeout').val(sessionTimeout);
+            sessionTimeout = sessionTimeout - 1;
+            //if session is not less than 0
+            if (sessionTimeout >= 0)
+                //call the function again after 1 minute delay
+                window.setTimeout("DisplaySessionTimeout()", 60000);
+            else
+            {
+                //show message box
+                //alert("Your current Session is over.");
+                window.location = "/admission/Logout";
+            }
+        }
+    </script>
+
+    @RenderSection("scripts", false)
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118738693-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-118738693-1');
+    </script>
+</body>
+</html>

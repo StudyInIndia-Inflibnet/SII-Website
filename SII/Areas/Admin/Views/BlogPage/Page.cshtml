@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "Page";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
+            <div class="panel-heading">
+                Blog Page
+                <div class="tools">
+                    <a href="@Url.Content("~/")Admin/BlogPage" class="btn btn-success">Back</a>
+                </div>
+            </div>
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel-body">
+                                <form id="frm" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" id="hdfBlog_Id" name="Blog_Id" value="@ViewBag.Blog_Id" />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input type="text" class="form-control" name="BlogTitle" id="txtBlogTitle" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Unique Code</label>
+                                                <input type="text" class="form-control" name="UniqueCode" id="txtUniqueCode" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Blog Image</label>
+                                                <input type="file" id="fuBlogImage" required="" />
+                                                <img id="imgBlogImage" width="100" height="100" style="display:none;" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>BlogContent</label>
+                                                <textarea class="form-control summernote" name="BlogContent" id="txtBlogContent"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Tags</label>
+                                                <input type="text" class="form-control tagsinput" name="BlogTag" id="txtBlogTag" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Meta Tags</label>
+                                                <input type="text" class="form-control tagsinput" name="BlogMetaTags" id="txtBlogMetaTags" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Meta Description</label>
+                                                <textarea class="form-control" name="BlogMetaDescription" id="txtBlogMetaDescription" required=""></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit" id="btnSave" class="btn btn-warning">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/summernote/summernote.css" rel="stylesheet" />
+    <link href="~/assets/lib/bootstrap-tags/bootstrap-tagsinput.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/summernote/summernote.js"></script>
+    <script src="~/assets/lib/bootstrap-tags/bootstrap-tagsinput.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.summernote').summernote();
+            $('.tagsinput').tagsinput();
+            if ($('#hdfBlog_Id').val() != '0') {
+                FillDetails();
+            }
+            $('#txtBlogTitle').on('change', function (e) {
+                e.preventDefault();
+                var text = $(this).val().toLowerCase();
+                var text = text.split(' ').join('-');
+                var text = text.split('&').join('-');
+                var text = text.split(',').join('-');
+                var text = text.split('.').join('-');
+                var text = text.split('---').join('-');
+                var text = text.split('--').join('-');
+                $('#txtUniqueCode').val(text)
+            });
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                var frm = $('#frm');
+                var frmParsley = frm.parsley();
+                frmParsley.validate();
+                if (!frm.parsley().isValid()) {
+                    return false;
+                }
+                var btn = $(this);
+                btn.text('Processing...');
+                btn.addClass('disabled');
+                var fileUpload = $("#fuBlogImage").get(0);
+                if (window.FormData !== undefined) {
+                    if ($("#fuBlogImage").get(0).files.length > 0) {
+                        var FileSize = $("#fuBlogImage").get(0).files[0].size;
+                        //var fileExtension = ['png', 'jpg', 'jpeg', 'pdf', 'docx', 'doc'];
+                        var fileExtension = ['png', 'jpg', 'jpeg'];
+                        if ($.inArray($("#fuBlogImage").val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                            // $('.loading').hide();
+                            swal("", "Only formats are allowed : " + fileExtension.join(', '), 'error');
+                            btn.text('Save');
+                            btn.removeClass('disabled');
+                            return;
+                        }
+                        //if ($('#hdnfilesize').val() >= FileSize) {
+                        //}
+                        //else {
+                        //    swal("", "5 Mb file size allow", 'warning');
+                        //    btn.text('Save');
+                        //    btn.removeClass('disabled');
+                        //    return;
+                        //}
+                    }
+                    //else {
+                    //    swal("", "No file has been selected.", 'warning');
+                    //    btn.text('Save');
+                    //    btn.removeClass('disabled');
+                    //    return false;
+                    //}
+                }
+                //else {
+                //    swal("", "No file has been selected.", 'warning');
+                //    btn.text('Save');
+                //    btn.removeClass('disabled');
+                //    return false;
+                //}
+
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                fileData.append('Blog_Id', $('#hdfBlog_Id').val());
+                fileData.append('BlogTitle', $('#txtBlogTitle').val());
+                fileData.append('UniqueCode', $('#txtUniqueCode').val());
+                fileData.append('BlogContent', $('#txtBlogContent').summernote('code'));
+                fileData.append('BlogTag', $('#txtBlogTag').val());
+                fileData.append('BlogMetaTags', $('#txtBlogMetaTags').val());
+                fileData.append('BlogMetaDescription', $('#txtBlogMetaDescription').val());
+                fileData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]', frm).val());
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'Admin/BlogPage/SaveBlog',
+                    data: fileData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        swal({
+                            title: "Success!",
+                            text: data['m'],
+                            type: "success",
+                            closeOnConfirm: true,
+                            confirmButtonText: "OK",
+                            confirmButtonClass: 'btn-primary',
+                            showLoaderOnConfirm: true,
+                        }).then(function () {
+                            btn.text('Redirecting...');
+                            window.location.href = $('#hdfBaseUrl').val() + 'Admin/BlogPage';
+                        });
+                    } else {
+                        swal({
+                            title: "Error!",
+                            text: data['m'],
+                            type: "error",
+                            closeOnConfirm: true,
+                            confirmButtonText: "OK",
+                            confirmButtonClass: 'btn-primary',
+                            showLoaderOnConfirm: true,
+                        });
+                        btn.text('Save');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    swal("Oops...!", "Something went wrong! Please try again.");
+                    btn.text('Save');
+                    btn.removeClass('disabled');
+                });
+            });
+        });
+
+        function FillDetails() {
+            $.ajax({
+                method: 'POST',
+                url: $('#hdfBaseUrl').val() + 'Admin/BlogPage/SelectBlog',
+                data: { "Blog_Id": @ViewBag.Blog_Id },
+                async: false
+            }).done(function (data) {
+                $.each(data['List'], function (i, item) {
+                    $('#hdfBlog_Id').val(item['Blog_Id']);
+                    $('#txtBlogTitle').val(item['BlogTitle']);
+                    if (item['BlogTitle'] === undefined) {
+                        $('#txtBlogTitle').trigger('change');
+                    } else {
+                        $('#txtUniqueCode').val(item['UniqueCode']);
+                    }
+                    $('#txtBlogContent').summernote("code", item['BlogContent']);
+                    var BlogTag = item['BlogTag'].split(',');
+                    $.each(BlogTag, function (i, value) {
+                        $('#txtBlogTag').tagsinput('add', value);
+                    });
+                    var BlogMetaTags = item['BlogMetaTags'].split(',');
+                    $.each(BlogMetaTags, function (i, value) {
+                        $('#txtBlogMetaTags').tagsinput('add', value);
+                    });
+                    $('#txtBlogMetaDescription').val(item['BlogMetaDescription']);
+                    if (item['BlogImage'].length > 0) {
+                        $('#imgBlogImage').attr('src', $('#hdfBaseUrl').val() + item['BlogImage']);
+                        $('#imgBlogImage').show();
+                        $('#fuBlogImage').removeAttr('required');
+                    }
+                });
+            }).error(function () {
+
+            });
+        }
+    </script>
+}

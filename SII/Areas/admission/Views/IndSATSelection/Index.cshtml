@@ -1,0 +1,184 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutportal.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Ind-SAT Center Selection&nbsp;<span style="color: red">( @Session["studentid"].ToString()-<span style="color: red" id="spanstudentname"></span>)</span>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <h4><strong class="text-danger">Disclaimer: </strong> Ind-SAT Examination is only being conducated for the students who belong to the contries: <strong>Nepal, Ethiopia, Bangladesh, Bhutan, Uganda, Tanzania, Rwanda, Sri Lanka, Kenya, Zambia, Indonesia</strong> and <strong>Mauritius</strong></h4>
+        <h4 class="title alert alert-danger">Once you submit the Ind-SAT test centers, you will not be able to edit your Application</h4>
+        <div class="panel panel-default panel-border-color panel-border-color-primary border-login">
+            <div class="tab-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-body table-responsive">
+                            <br />
+                            <form id="frmStudentBasic">
+                                <input type="hidden" id="hdnstudentid" value="@Session["studentid"].ToString()" name="studentid" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>First Name <span style="color: red"> *</span></label>
+                                            <input type="text" id="txtFname" class="form-control" placeholder="First Name" disabled="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" id="txtMname" class="form-control allow_only_alphabet" disabled="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Last Name<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtLname" class="form-control allow_only_alphabet" disabled="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Date of Birth<span style="color: red"> *</span></label>
+                                            <input type="text" id="txtdateofbirth" class="form-control " disabled="">
+                                            <input type="text" id="txtYear" class="form-control" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Gender<span style="color: red"> *</span></label>
+                                            <select id="drpGender" class="form-control" disabled="">
+                                                <option value="">-Select-</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Email<span style="color: red"> *</span></label>
+                                            <input type="email" id="txtemail" class="form-control" disabled="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Country <small>(Nationality)</small><span style="color: red"> *</span></label>
+                                            @Html.DropDownList("Country", new SelectList(ViewBag.Country, "Country_id", "Country_Name"),
+                                             "--Select--",
+                                             new
+                                             {
+                                                 @class = "form-control",
+                                                 @id = "drpCountry",
+                                                 @required = "",
+                                                 @disabled = ""
+                                             })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Applying For Course<span style="color: red"> *</span></label>
+                                            <select class="form-control" id="ApplyingForCourse" name="ApplyingForCourse" required="">
+                                                <option value="">--Select--</option>
+                                                <option>UG</option>
+                                                <option>PG</option>
+                                                <option>PhD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Test Country<span style="color: red"> *</span></label>
+                                            <select class="form-control" id="TestCountry" name="TestCountry" required="">
+                                                <option value="">--Select--</option>
+                                                @{
+                                                    DataTable _dtTestCountry = (DataTable)ViewBag.TestCountry;
+                                                    foreach (DataRow _dr in _dtTestCountry.Rows)
+                                                    {
+                                                        <option value="@_dr["Country_id"].ToString()">@_dr["Country_Name"].ToString()</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Test City<span style="color: red"> *</span></label>
+                                        <select class="form-control" id="TestCity" name="TestCity" required="">
+                                            <option value="">--Select--</option>
+                                            @{
+                                                DataTable _dtTestCity = (DataTable)ViewBag.TestCity;
+                                                foreach (DataRow _dr in _dtTestCity.Rows)
+                                                {
+                                                    <option value="@_dr["ID"].ToString()" class="@_dr["CountryID"].ToString() hide-option" style="display:none;">@_dr["City"].ToString()</option>
+                                                }
+                                            }
+                                        </select>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Father's Name<span style="color: red"> *</span></label>
+                                        <input type="text" class="form-control" id="FatherName" name="FatherName" required="" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Photo</label><br />
+                                        <img src="data:image/jpeg;base64,@Session["Photo"].ToString()" style="width: 150px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Signature</label><br />
+                                        <img src="data:image/jpeg;base64,@Session["Signature"].ToString()" style="width: 150px; border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <br />
+                                        <br />
+                                        <div class="form-group">
+                                            <label><input type="checkbox" id="iagree" /> I agree</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="text-danger">Note: Once you submit your choices, you will not able to edit anymore.</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-space btn-primary btn-lg" type="submit" id="btnStudentBasicSave">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/Scipts/Areas/admission/Ind-SATSelection.js"></script>
+}
+

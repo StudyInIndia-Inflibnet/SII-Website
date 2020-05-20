@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Reject";
+    Layout = "~/Views/Shared/_LayoutportalChoiceFilling.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>
+                Reject Result (PG / PhD)<span style="color: red">
+                    ( @Session["studentid"].ToString() -  @Session["studentname"].ToString() )
+                </span>
+            </h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <form id="frm" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="hdfid" name="id" value="@ViewBag.u" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="" value="Want to study in home/residing country" /> Want to study in home/residing country</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="" value="Received better education opportunity from another country" /> Received better education opportunity from another country</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="" value="Received direct admission from any Indian institute" /> Received direct admission from any Indian institute</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="" value="Total fee of allotted course is not affordable" /> Total fee of allotted course is not affordable</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="" value="Allotted course is not preferable" /> Allotted course is not preferable</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" class="" id="chkOtherReason" value="Other reason" /> Other reason </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" id="divOtherReason" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Interview Date</label>
+                                            <textarea class="form-control" id="txtOtherReason"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-primary" id="btnSave">Set Interview</a>
+                                        <a class="btn btn-default" id="btnCancel" href="~/Institute/AdmittedStudent/Student/@TempData.Peek("ProgrammeLevel")">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿<div class="panel panel-default panel-border-color panel-border-color-custom">
+    <div class="panel-body" id="menu">
+        <br />
+        <a href="@Url.Content("~/")Institute/Details" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="Institute" ? "btn-primary" : "btn-default")">Institute Details</a>
+        <a href="@Url.Content("~/")Institute/Courses" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="Courses" ? "btn-primary" : "btn-default")">Courses</a>
+        <a href="@Url.Content("~/")Institute/Campus" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="Campus" ? "btn-primary" : "btn-default")">Campus</a>
+        <a href="@Url.Content("~/")Institute/Fees" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="Fees" ? "btn-primary" : "btn-default")">Fees</a>
+        <a href="@Url.Content("~/")Institute/InternationalStudents" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="InternationalStudents" ? "btn-primary" : "btn-default")">International Students</a>
+        <a href="@Url.Content("~/")Institute/FacultyAlumni" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="FacultyAlumni" ? "btn-primary" : "btn-default")">Faculty / Alumni</a>
+        <a href="@Url.Content("~/")Institute/HowToReach" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="HowToReach" ? "btn-primary" : "btn-default")">How To Reach</a>
+        <a href="@Url.Content("~/")Institute/Gallery" class="btn btn-lg @(TempData["ActiveMainTabInstitute"].ToString()=="Gallery" ? "btn-primary" : "btn-default")">Gallery</a>
+    </div>
+</div>
+<style>
+    .nav.aside-custom-menu a {
+        color: #40404c;
+        font-size: 14px;
+        padding: 10px;
+        float: left;
+        width: 100%;
+    }
+
+        .nav.aside-custom-menu a i {
+            color: #616161;
+            font-size: 19px;
+            margin-right: 3px;
+            min-width: 19px;
+            text-align: center;
+            vertical-align: middle;
+        }
+</style>

@@ -1,0 +1,885 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Courses<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li class="active"><a href="#navCourseDetails" data-toggle="tab">Courses Offer</a></li>
+                    <li><a href="#navAreaOfexcellence" data-toggle="tab">Bridge Courses</a></li>
+                    <li><a href="#navCalander" data-toggle="tab" style="display:none">Important Dates</a></li>
+                    <li><a href="#navStudentTestinomials" data-toggle="tab" style="display:none">Student Testimonials</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Courses Offer*@
+                    <div id="navCourseDetails" class="tab-pane active cont">
+                        <form id="frmCoursesOffer" method="post">
+                            <input type="hidden" id="hdnInstituteId" name="InstituteID" value="@Session["InstituteID"].ToString()" />
+                            <input type="hidden" name="ID" id="hdfID" value="0" />
+                            <input type="hidden" id="hdfIsGivenFromInstitute" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewCost" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div style="display:none" id="divhideshow">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Course Details</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Discipline&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("Discipline_ID", new SelectList(ViewBag.Descipline, "Discipline_ID", "Discipline"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control CourseChange",
+                                                @id = "drpDiscipline",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Programme Level&nbsp;<span style="color:red">*</span></label>
+                                            @*@Html.DropDownList("ProgramLevel_Id", new SelectList(ViewBag.ProgramLevels, "ProgramLevel_Id", "ProgramLevel"),
+                                                "--Select--",
+                                                new
+                                                {
+                                                    @class = "form-control CourseChange",
+                                                    @id = "drpProgramLevel",
+                                                    @required = ""
+                                                })*@
+                                            <select class="form-control" id="drpProgramLevel" required name="ProgramLevel_Id">
+                                                <option value="">--Select--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Qualification&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" id="drpNatureofcourse" required name="Natureofcourse_Id">
+                                                <option value="">--Select--</option>
+                                                @*<option>BE (Bachlore Of Engineering)</option>
+                                                    <option>ME (Master Of Engineering)</option>
+                                                    <option>Diploma</option>
+                                                    <option>Short Term</option>*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Course of Study</label>
+                                            <select class="form-control" id="drpBranch" name="Branch_Id" @*required*@>
+                                                <option value="">--Select--</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="Divother" style="display:none">
+                                            <label>Add New Branch/Subject&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="txtbranchnamesubject" name="Branch_Name" placeholder="Branch/Subject" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total seat offer to foreign student&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalseats" name="SeatForForeignStudent" placeholder="Total seat offer to be foreign Student" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Tuition Fee Waiver seat allocation</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>100% waiver in tuition fees(G1 scheme)<span style="color:red">*</span></label>@*No of seat for fees waiver (G1 Scheme)*@
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg1" name="G1SeatWaiver" placeholder="Fees Waiver G1" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>50% waiver in tuition fees(G2 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg2" name="G2SeatWaiver" placeholder="Fees Waiver G2" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>25% waiver in tuition fees(G3 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg3" name="G3SeatWaiver" placeholder="Fees Waiver G3" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>0% waiver in tuition fees(G4 scheme)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseat allow_only_number" maxlength="4" id="txtfeeswaiverg4" name="G4SeatWaiver" placeholder="Fees Waiver G4" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="page-header">Eligibility Criteria</h3>
+                                        <h4>Educational Qualifications&nbsp;<span style="color:red">*</span></h4>
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:25%;">Qualification</th>
+                                                    <th style="width:60%;">Subject | Percentage</th>
+                                                    <th style="width:15%;">Operator</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyEC">
+                                                <tr id="defaultECTR">
+                                                    <td>
+                                                        <select class="form-control drpECQualification">
+                                                            <option value="">--Select Qualification--</option>
+                                                            @{
+                                                                SIIRepository.Courses.CourseRepository _objRepositoryEduQuali = new SIIRepository.Courses.CourseRepository();
+                                                                System.Data.DataSet _dsRepositoryEduQuali = _objRepositoryEduQuali.SELECT_tbl_EduQualifications();
+                                                                if (_dsRepositoryEduQuali != null)
+                                                                {
+                                                                    if (_dsRepositoryEduQuali.Tables[0].Rows.Count > 0)
+                                                                    {
+                                                                        foreach (System.Data.DataRow _dr in _dsRepositoryEduQuali.Tables[0].Rows)
+                                                                        {
+                                                                            <option value="@_dr["EduQualifications_Id"].ToString()" data-for="@_dr["EduQualificationsFor"].ToString()">@_dr["EduQualifications"].ToString()</option>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <table class="table table-bordered table-striped table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Subject</th>
+                                                                    <th>Percentage</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="tbodySubjectPercentage">
+                                                                <tr class="currentSPTr">
+                                                                    <td>
+                                                                        <select class="form-control drpECSubject">
+                                                                            <option value="">--Select Subject--</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control drpECPercentageID">
+                                                                            <option value="">--Select Percentage--</option>
+                                                                            @{
+                                                                                for (int i = 35; i <= 99; i++)
+                                                                                {
+                                                                                    <option value="@i">@i</option>
+                                                                                }
+                                                                            }
+                                                                        </select>
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="3">
+                                                                        <a class="btn btn-sm btn-info" style="display:none;" id="btnAddMoreCondition">Add More Condition (OR)</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control drpECOperator">
+                                                            <option value="">--Select--</option>
+                                                            <option value="And">And</option>
+                                                            <option value="Or">Or</option>
+                                                            <option value="And">Multiple OR</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><a class="btn btn-warning" id="btnECAdd">Add</a></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="5" id="tdECCondition"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Aditional Exams / Criteria</h4>
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Exam Name</th>
+                                                    <th>Cut-off marks / Date</th>
+                                                    <th>Operator</th>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbodyAE">
+                                                <tr id="defaultAETR">
+                                                    <td>
+                                                        <select class="form-control drpAEAditionalExam">
+                                                            <option value="">--Select Exam Name--</option>
+                                                            @{
+                                                                SIIRepository.Courses.CourseRepository _objRepositoryAE = new SIIRepository.Courses.CourseRepository();
+                                                                System.Data.DataSet _dsAE = _objRepositoryAE.SELECT_tbl_AditionalExams();
+                                                                if (_dsAE != null)
+                                                                {
+                                                                    if (_dsAE.Tables[0].Rows.Count > 0)
+                                                                    {
+                                                                        foreach (System.Data.DataRow _dr in _dsAE.Tables[0].Rows)
+                                                                        {
+                                                                            <option data-aefor="@_dr["AditionalExamsFor"].ToString()" data-for="@_dr["AditionalExamsType"].ToString()" value="@_dr["AditionalExams_Id"].ToString()">@_dr["AditionalExams"].ToString()</option>
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control txtAECutOff">
+                                                            <option value="">--Select Cut-off marks--</option>
+                                                        </select>
+                                                        @*<input type="text" class="form-control txtAECutOff" placeholder="Cutt-off marks" />*@
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control drpAEOperator">
+                                                            <option value="">--Select--</option>
+                                                            <option>And</option>
+                                                            <option>Or</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-warning" id="btnAEAdd">Add</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="4" id="tdAECondition"></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Annual Fees</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("AnnualTutionFeesCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpAnnualFeesCurrency",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Tution Fees per Seat&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtAnnualFees" name="AnnualTutionFees" placeholder="Annual tution fees for Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" name="AnnualBoardingFeesCurrency" class="form-control txt-fee-currency" readonly="" value="--Select--" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Total Fees per Seat&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalBoarding" name="AnnualBoardingFees" placeholder="Annual Total Fees per Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" name="FeesForSAARCCountryCurrency" class="form-control txt-fee-currency" readonly="" value="--Select--" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>
+                                                Annual Tuition Fees (SAARC Country)&nbsp;<span style="color:red">*</span>
+                                            </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtSAARC" name="FeesForSAARCCountry" placeholder="Annual Tuition Fees (SAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" name="FeesForNonSAARCCountryCurrency" class="form-control txt-fee-currency" readonly="" value="--Select--" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Annual Tuition Fees (NonSAARC Country)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtNonSAARC" name="FeesForNonSAARCCountry" placeholder="Annual Tuition Fees (NonSAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Other Details</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Credits&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtCredits" name="Credits" placeholder="Credits" maxlength="8" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Course Duration(in Months)&nbsp;<span style="color:red">*</span> </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtcourseduration" name="CourseDurations" placeholder="Course Duration" maxlength="2" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Classroom Hours&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtClassrooms" name="ClassRoomHours" placeholder="Classroom hours" maxlength="4" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Examination/Course Pattern &nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="CoursePatterns" id="drpCoursePattern" required="">
+                                                <option value="Yearly">Yearly</option>
+                                                <option value="Trimaster">Trimaster</option>
+                                                <option value="semester">semester</option>
+                                                <option Other="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Course Description&nbsp;<span style="color:red">*</span></label>
+                                            <textarea id="txtCourseDescription" class="form-control" rows="3" name="CourseDesc" placeholder="Course Description" required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Admission & entry requirements&nbsp;<span style="color:red">*</span></label>
+                                            <textarea id="txtAdmission" class="form-control" rows="3" name="AdmissionReq" placeholder="Admission & entry requirements" required=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button id="btnSaveCourse" type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Program Level</th>
+                                                @*<th>Nature Of Course</th>*@
+                                                @*<th>Branch/Subject</th>*@
+                                                <th>Qualification</th>
+                                                <th>Course of Study</th>
+                                                <th>Total seats</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyCourse"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Bridge Courses*@
+                    <div id="navAreaOfexcellence" class="tab-pane">
+                        <form id="frmBridgeCourses" method="post">
+                            <input type="hidden" id="hdnInstituteId" name="InstituteID" value="@Session["InstituteID"].ToString()" />
+                            <input type="hidden" name="ID" id="hdfBridgeID" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewBridgeCourse" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div id="divhideshowBridgeCourses" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Bridge Courses for International Students&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="txtCourseName" name="CourseName" placeholder="Course Name" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Language&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="Language" id="DrpLanguage" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Duration&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtDuration" name="Duration" placeholder="Duration" required="" maxlength="3" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Duration Type&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="DurationType" id="DrpDurationType" required>
+                                                <option value="">-Select-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Total seats offered to foreign students <span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeNumberOfSeats" name="NumberOfSeats" required="" data-parsley-type="number" placeholder="Total seats offered to foreign students" maxlength="3" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Type of Fees&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="TypeOfFees" id="DrpTypeOfFees" required>
+                                                <option value="">--Select--</option>
+                                                <option>Week</option>
+                                                <option>Weeks</option>
+                                                <option>Month</option>
+                                                <option>Months </option>
+                                                <option>Annual</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpSAARCFeesCurrencyBridge",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>
+                                                Tuition Fees (SAARC Country)&nbsp;<span style="color:red">*</span>
+                                            </label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeSAARC" name="FeesForSAARCCountry" placeholder="Tuition Fees (SAARC Country)" required="" data-parsley-type="number" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            @Html.DropDownList("FeesForNonSAARCCountryCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                            "--Select--",
+                                            new
+                                            {
+                                                @class = "form-control",
+                                                @id = "drpNonSAARCCurrencyBridge",
+                                                @required = ""
+                                            })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Tuition Fees (NonSAARC Country)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeNonSAARC" name="FeesForNonSAARCCountry" placeholder="Tuition Fees (NonSAARC Country)" required="" data-parsley-type="number" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                            <select class="form-control" name="TotalFeesBridgeCourseCurrency" id="txttotalfeebridgecoursecurrency" required>
+                                                <option value="">--Select--</option>
+                                                <option>INR</option>
+                                                <option>USD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Total Fees&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txttotalfeebridgecourse" name="TotalFeesBridgeCourse" placeholder="Total Fees For Bridge Course" required="" maxlength="8" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Classroom Hours&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control allow_only_number" id="txtBridgeClassrooms" name="ClassRoomHours" placeholder="Classroom hours" required="" maxlength="4" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 class="page-header">Tuition Fee Waiver seat allocation</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>100% waiver in tuition fees(G1 scheme)<span style="color:red">*</span></label>@*No of seat for fees waiver (G1 Scheme)*@
+                                            <input type="text" class="form-control totalseatbridge allow_only_number " maxlength="4" id="txtBridgefeeswaiverg1" name="G1SeatWaiver" placeholder="Fees Waiver G1" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>50% waiver in tuition fees(G2 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg2" name="G2SeatWaiver" placeholder="Fees Waiver G2" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>25% waiver in tuition fees(G3 scheme)<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg3" name="G3SeatWaiver" placeholder="Fees Waiver G3" required="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>0% waiver in tuition fees(G4 scheme)&nbsp;<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control totalseatbridge allow_only_number" maxlength="4" id="txtBridgefeeswaiverg4" name="G4SeatWaiver" placeholder="Fees Waiver G4" required="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <button id="btnSaveBridgeCourse" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="btnCancelBridgeCourse" type="reset" class="btn btn-default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Language Courses for International Students</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyBridgeCourse"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Important Dates*@
+                    <div id="navCalander" class="tab-pane">
+                        <form id="frmImportantDates" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Discipline</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Engineering</option>
+                                            <option>Medical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Select Courses</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>UG-4 ||Engineering || IT(Information & Technology)</option>
+                                            <option>UG-4 ||Engineering || EC </option>
+                                            <option>UG-4 ||Engineering || Automobiles</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="text-primary"> Admission Dates :</h2>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label> Sr.</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label> Title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>End date</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Sr." disabled value="1" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Title" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button id="btnSave" type="submit" class="btn btn-danger"><i class="mdi mdi-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Sr." disabled value="2" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Title" required="" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class='input-group Datepicker' id='Datepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button id="btnSave" type="submit" class="btn btn-danger"><i class="mdi mdi-close"></i></button>
+                                                <button id="btnSave" type="submit" class="btn btn-success"><i class="mdi mdi-plus"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                                        <button id="btnCancel" type="reset" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @*Student Testimonials*@
+                    <div id="navStudentTestinomials" class="tab-pane">
+                        <form id="frmStudentTestimonials" method="post">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Discipline</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>--None--</option>
+                                            <option>Engineering</option>
+                                            <option>Medical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Course</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>UG-4 || BE (Bachlore Of Engineering)</option>
+                                            <option>UG-4 || ME (Master Of Engineering) </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Branch</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>IT(Information & Technology)</option>
+                                            <option>EC </option>
+                                            <option>Arch</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>By</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Student</option>
+                                            <option>Visiters </option>
+                                            <option>Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select class="form-control" name="DrpDiscipline" id="DrpDiscipline">
+                                            <option>Video</option>
+                                            <option>Photos </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Path (Video)</label>
+                                        <input type="text" class="form-control" id="txtCourseName" name="CourseName" placeholder="Path (Video/Photoes)" required="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Upload Image </label>
+                                        <input type="file" id="txtCourseName" name="Course Name" placeholder="Course Name" required="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" id="txtCourseName" name="Course Name" placeholder="Course Name" required="" />
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="txtCourseDescription" class="form-control" rows="3" name="CourseDescription" placeholder="Description" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                                        <button id="btnCancel" type="reset" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Course name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .tab-content {
+            min-height: 300px;
+        }
+    </style>
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Courses/CourseOffer.js"></script>
+    <script src="~/Scipts/Areas/Courses/BridgeCourse.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+        });
+    </script>
+}
+

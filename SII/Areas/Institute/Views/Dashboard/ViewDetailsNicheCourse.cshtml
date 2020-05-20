@@ -1,0 +1,82 @@
+﻿@using System.Configuration
+<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(Session["InstituteID"].ToString(), "NicheCourses", "", ConfigurationManager.AppSettings["ParticipatedYear"].ToString());
+            if (_ds != null)
+            {
+                <h2 class="text-center">Niche Courses</h2>
+                <h4>Niche Courses Offer</h4>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int indexInternationalCollaboration = 1;
+
+                    <table class="table table-bordered">
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+
+                            <tr>
+                                <td>@(indexInternationalCollaboration++)</td>
+                                <td>
+                                    <h4>Niche Courses Details</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+
+                                            <td>Course Type: <strong>@(_dr["CourseType"].ToString() == "1" ? "Long Term Course" : "Short Term Course" )</strong></td>
+                                            <td>Discipline: <strong>@_dr["Discipline"].ToString()</strong></td>
+                                            <td>Programme Level: <strong>@_dr["ProgramLevel"].ToString()</strong></td>
+                                            <td>Name of Course: <strong>@_dr["Natureofcourse"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Branch/Subject: <strong>@_dr["BranchName"].ToString()</strong></td>
+                                            <td>
+                                                Eligibility Criteria: <strong>@_dr["EligibilityCriteria"].ToString()</strong>
+                                                @if (_dr["AditionalExamsCriteria"].ToString() != "")
+                                                {
+                                                    <br /><br /><label>Additional Qualification:</label><strong>@_dr["AditionalExamsCriteria"].ToString()</strong>
+                                                }
+                                            </td>
+
+                                            <td><br /> <label>Additional Facilities:</label>  <strong>@_dr["AdditionalFacilities"].ToString()</strong> </td>
+
+                                            <td><label>Gender Restrictions:</label> <strong>@_dr["GenderRestrictions"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+
+                                    <h4>Other Details</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Credits : <strong>@_dr["Credits"].ToString()</strong></td>
+                                            <td>Course Duration: <strong>@_dr["CourseDurations"].ToString()  @_dr["CourseDurationsType"].ToString()</strong></td>
+                                            <td>Classroom Hours : <strong>@_dr["ClassRoomHours"].ToString()</strong></td>
+                                            <td>Examination/Course Pattern : <strong>@_dr["CoursePatterns"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Course Description : <strong>@_dr["CourseDesc"].ToString()</strong></td>
+                                            <td colspan="2">Admission & entry requirements : <strong>@_dr["AdmissionReq"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

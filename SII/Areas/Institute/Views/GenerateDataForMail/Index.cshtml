@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutOther.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Generate Data for Mail Sending</h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <table>
+                    <thead class="table">
+                        <tr>
+                            <th>Srno</th>
+                            <th>Name</th>
+                            <th>Institute ID</th>
+                            <th>Default Password</th>
+                            <th>Access Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int index = 1;
+                            foreach (System.Data.DataRow _dr in ((System.Data.DataSet)ViewBag.Data).Tables[0].Rows)
+                            {
+                                <tr>
+                                    <td>@(index++)</td>
+                                    <td>@_dr["InstituteName"].ToString()</td>
+                                    <td>@_dr["InstituteID"].ToString()</td>
+                                    <td>@_dr["DefaultPassword"].ToString()</td>
+                                    <td>@_dr["AccessURL"].ToString()</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+﻿<div class="row">
+
+    <div class="single-service-tab">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft mt20" style="visibility: visible; animation-name: fadeInLeft;"> </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="single-service-tab-menu">
+                        <ul class="nav category_ul" role="tablist">
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AboutInstitute"})"><i class="fa fa-bank"></i> About Institute</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Courses"})"><i class="fa fa-book"></i> Courses &amp; Programme</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Campus"})"><i class="fa fa-building"></i> Infrastructure (Campus &amp; Library)</a></li>
+                            @*<li role="presentation" class="active"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Fees"})"><i class="fa fa-rupee"></i> Fees</a></li>*@
+                            <li class="hide" role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "Gallery"})"><i class="fa fa-image"></i> Photo Gallery</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "HowToReach"})"><i class="fa fa-location-arrow"></i> How to Reach?</a></li>
+                            <li role="presentation"><a href="@Url.Action("Index", "Explore/ViewDetails", new {instituteid = TempData.Peek("instituteid").ToString(),For = "AreaOfExpert"})"><i class="fa fa-tasks"></i> Area of Expertise</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="single-service-tab-items">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-content">
+                                @{
+                                    SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                    System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "CoursesFees","");
+                                    if (_ds != null)
+                                    {
+                                        if (_ds.Tables[0].Rows.Count > 0)
+                                        {
+
+                                            <div role="tabpanel" class="tab-pane active" id="courses">
+                                                <div class="single-tab">
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-xs-12 col-md-12 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                                                            <div class="section-title">
+                                                                <h3 class="inner-title"><span>Fees</span></h3>
+                                                                <table id="datatable" class="table table-bordered table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                                        {
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="course-details-right courses_box1">
+                                                                                        <h3 class="course_title1">@_dr["Natureofcourse"].ToString()</h3>
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12">
+                                                                                                <ul class="course-details-list">
+                                                                                                    <li>Discipline :<span>@_dr["Discipline"].ToString() </span></li>
+                                                                                                    <li>Program Level :<span>@_dr["ProgramLevel"].ToString() </span></li>
+                                                                                                </ul>
+                                                                                                <ul>
+                                                                                                    @if (_dr["BranchName"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>Branch/Subject : <label>@_dr["BranchName"].ToString() </label></li>
+                                                                                                    }
+                                                                                                </ul>
+                                                                                                <ul class="course-details-list">
+                                                                                                    @if (_dr["AnnualTutionFees"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>Annual tution fees per Seat :<span>@_dr["AnnualTutionFees"].ToString()  @_dr["AnnualTutionFeesCurrency"].ToString() </span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["AnnualBoardingFees"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>Annual TOTAL fees :<span>@_dr["AnnualBoardingFees"].ToString()  @_dr["AnnualBoardingFeesCurrency"].ToString()</span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["FeesForSAARCCountry"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>Fees for SAARC Country per Seat  :<span>@_dr["FeesForSAARCCountry"].ToString()  @_dr["FeesForSAARCCountryCurrency"].ToString()</span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["FeesForNonSAARCCountry"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>Fees for NonSAARC Country per seat :<span>@_dr["FeesForNonSAARCCountry"].ToString()  @_dr["FeesForNonSAARCCountryCurrency"].ToString()</span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["G1SeatWaiver"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>100% waiver in tuition fees(G1 scheme) :<span>@_dr["G1SeatWaiver"].ToString()   </span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["G2SeatWaiver"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>50% waiver in tuition fees(G2 scheme) :<span>@_dr["G2SeatWaiver"].ToString()   </span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["G3SeatWaiver"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>25% waiver in tuition fees(G3 scheme) :<span>@_dr["G3SeatWaiver"].ToString()  </span></li>
+                                                                                                    }
+                                                                                                    @if (_dr["G4SeatWaiver"].ToString() != "")
+                                                                                                    {
+                                                                                                        <li>0% waiver in tuition fees(G4 scheme) :<span>@_dr["G4SeatWaiver"].ToString()   </span></li>
+                                                                                                    }
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-justify">
+                                                <h4>Coming Soon...</h4>
+                                            </p>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .courses_box1 {
+        background: #ffffff none repeat scroll 0 0;
+        border-color: #39aade;
+        border-style: solid;
+        border-width: 1px 1px 4px;
+        margin-top: 0;
+    }
+
+    .course_title1 {
+        background: #39aade none repeat scroll 0 0 !important;
+        border-color: #39aade !important;
+        color: #ffffff !important;
+        padding: 2px 7px;
+        font-size: 20px;
+        margin-bottom: 3px;
+    }
+
+    .course-details-list > li:nth-child(odd) {
+        width: 49.5%;
+        position: relative;
+        float: left;
+    }
+
+    .course-details-list > li:nth-child(even) {
+        width: 49.5%;
+        position: relative;
+        float: right;
+    }
+</style>

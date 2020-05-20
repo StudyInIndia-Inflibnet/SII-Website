@@ -1,0 +1,539 @@
+﻿
+@{
+    ViewBag.Title = "InstituteSpoc";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12 ">
+            <h3>Institute Spoc for @ViewBag.id  <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="post" id="frm">
+                    <input type="hidden" id="ID" name="ID" value="0" />
+                    <input type="hidden" id="ProgramLevel" name="ProgramLevel" value="@ViewBag.id" />
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name of Spoc <span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="NameOfSpoc" name="NameOfSpoc" required="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Assign Student(s) <span style="color:red;">*</span></label>
+                                <select class="form-control select2" id="StudentIDs" multiple required="">
+                                    @{
+                                        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                                        System.Data.DataSet _ds = _objRepository.SELECT_PHASE2_ALLOTED_STUDENTS_FOR_INSTITUTES(Session["InstituteID"].ToString(), "PLList", ViewBag.id);
+                                        if (_ds != null)
+                                        {
+                                            if (_ds.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["StudentID"].ToString()">@_dr["StudentID"].ToString() - @_dr["StudentName"].ToString()  | @_dr["Country_Name"].ToString() </option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mobile number of Spoc <span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="Mobile" name="Mobile" required="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email of Spoc <span style="color:red;">*</span></label>
+                                <input type="email" class="form-control" id="Email" name="Email" required="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Upload Aditional Documents</label>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Srno</th>
+                                            <th>Document Name</th>
+                                            <th>Upload Document</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                        <tr data-id="1">
+                                            <td>1</td>
+                                            <td>
+                                                <select class="form-control DocumentName" id="DocumentName1" name="DocumentName1">
+                                                    <option value="">--Select--</option>
+                                                    <option>Orientation Itinerary</option>
+                                                    <option>Class Time-table</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input type="text" class="form-control OtherDocument" id="OtherDocumentName1" name="OtherDocumentName1" style="display:none;" placeholder="Other Document Name" />
+                                            </td>
+                                            <td>
+                                                <input type="file" id="fuDoc1" />
+                                                <input type="hidden" id="DoumentPath1" name="DoumentPath1" />
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info UploadDocument" id="btnDocumentUpload1">Upload</a>
+                                                <a class="btn btn-sm btn-warning ViewDocument" target="_blank" href="" id="btnDocumentView1" style="display:none;">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr data-id="2">
+                                            <td>2</td>
+                                            <td>
+                                                <select class="form-control DocumentName" id="DocumentName2" name="DocumentName2">
+                                                    <option value="">--Select--</option>
+                                                    <option>Orientation Itinerary</option>
+                                                    <option>Class Time-table</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input type="text" class="form-control OtherDocument" id="OtherDocumentName2" name="OtherDocumentName2" style="display:none;" placeholder="Other Document Name" />
+                                            </td>
+                                            <td>
+                                                <input type="file" id="fuDoc2" />
+                                                <input type="hidden" id="DoumentPath2" name="DoumentPath2" />
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info UploadDocument" id="btnDocumentUpload2">Upload</a>
+                                                <a class="btn btn-sm btn-warning ViewDocument" target="_blank" href="" id="btnDocumentView2" style="display:none;">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr data-id="3">
+                                            <td>3</td>
+                                            <td>
+                                                <select class="form-control DocumentName" id="DocumentName3" name="DocumentName3">
+                                                    <option value="">--Select--</option>
+                                                    <option>Orientation Itinerary</option>
+                                                    <option>Class Time-table</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input type="text" class="form-control OtherDocument" id="OtherDocumentName3" name="OtherDocumentName3" style="display:none;" placeholder="Other Document Name" />
+                                            </td>
+                                            <td>
+                                                <input type="file" id="fuDoc3" />
+                                                <input type="hidden" id="DoumentPath3" name="DoumentPath3" />
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info UploadDocument" id="btnDocumentUpload3">Upload</a>
+                                                <a class="btn btn-sm btn-warning ViewDocument" target="_blank" href="" id="btnDocumentView3" style="display:none;">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr data-id="4">
+                                            <td>4</td>
+                                            <td>
+                                                <select class="form-control DocumentName" id="DocumentName4" name="DocumentName4">
+                                                    <option value="">--Select--</option>
+                                                    <option>Orientation Itinerary</option>
+                                                    <option>Class Time-table</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input type="text" class="form-control OtherDocument" id="OtherDocumentName4" name="OtherDocumentName4" style="display:none;" placeholder="Other Document Name" />
+                                            </td>
+                                            <td>
+                                                <input type="file" id="fuDoc4" />
+                                                <input type="hidden" id="DoumentPath4" name="DoumentPath4" />
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info UploadDocument" id="btnDocumentUpload4">Upload</a>
+                                                <a class="btn btn-sm btn-warning ViewDocument" target="_blank" href="" id="btnDocumentView4" style="display:none;">View</a>
+                                            </td>
+                                        </tr>
+                                        <tr data-id="5">
+                                            <td>5</td>
+                                            <td>
+                                                <select class="form-control DocumentName" id="DocumentName5" name="DocumentName5">
+                                                    <option value="">--Select--</option>
+                                                    <option>Orientation Itinerary</option>
+                                                    <option>Class Time-table</option>
+                                                    <option>Other</option>
+                                                </select>
+                                                <input type="text" class="form-control OtherDocument" id="OtherDocumentName5" name="OtherDocumentName5" style="display:none;" placeholder="Other Document Name" />
+                                            </td>
+                                            <td>
+                                                <input type="file" id="fuDoc5" />
+                                                <input type="hidden" id="DoumentPath5" name="DoumentPath5" />
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-info UploadDocument" id="btnDocumentUpload5">Upload</a>
+                                                <a class="btn btn-sm btn-warning ViewDocument" target="_blank" href="" id="btnDocumentView5" style="display:none;">View</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                                <a class="btn btn-default" href="~/Institute/AdmittedStudent/Student/@ViewBag.id">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-bordered" id="tbl">
+                    <thead>
+                        <tr>
+                            <th>Srno</th>
+                            <th>Name of Spoc</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Assign Student(s) </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @{
+                            SIIRepository.StudentRegService.TravelPlanRepository _objRepositoryTable = new SIIRepository.StudentRegService.TravelPlanRepository();
+                            System.Data.DataSet _dsTable = _objRepositoryTable.SELECT_StudentTravelInstituteSpoc("0", Session["InstituteID"].ToString(), ViewBag.id);
+                            if (_dsTable != null)
+                            {
+                                if (_dsTable.Tables[0].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (System.Data.DataRow _dr in _dsTable.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@_dr["NameOfSpoc"].ToString()</td>
+                                            <td>@_dr["Mobile"].ToString()</td>
+                                            <td>@_dr["Email"].ToString()</td>
+                                            <td>@_dr["StudentIDs"].ToString()</td>
+                                            <td>
+                                                <a data-id="@_dr["ID"].ToString()" class="btn btn-sm btn-warning btnEdit">Edit</a>
+                                                <a data-id="@_dr["ID"].ToString()" class="btn btn-sm btn-danger btnDelete">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    
+                                }
+                            }
+                            else
+                            {
+                               
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/assets/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/assets/lib/select2/js/select2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tbl").DataTable({
+                searching: true,
+                paging: true,
+                info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            });
+            $('.select2').select2();
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                var frm = $('#frm');
+                var frmParsley = frm.parsley();
+                frmParsley.validate();
+                if (!frm.parsley().isValid()) {
+                    return false;
+                }
+                var btn = $(this);
+                var oldText = btn.text();
+                if (btn.hasClass('disabled')) {
+                    return false;
+                }
+                btn.text('Processing.....');
+                btn.attr('disabled', true);
+                btn.addClass('disabled');
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/SaveInstituteSpoc',
+                    data: $('#frm').serialize() + '&StudentIDs=' + $('#StudentIDs').val().join(',')
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        SuccessMessageCallBack(data['m'], function () {
+                            btn.text('Refreshing Data...');
+                            window.location.href = window.location.href;
+                        });
+                    } else if (data['c'] == 'alreadyexists') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'sessionexpired') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'servererror') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(oldText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+
+            });
+            $('#tbody').on('change', '.DocumentName', function (e) {
+                e.preventDefault();
+                var drp = $(this);
+                var txt = drp.next();
+                if (drp.val() == 'Other') {
+                    txt.show();
+                    txt.attr('required', true);
+                } else {
+                    txt.hide();
+                    txt.removeAttr('required');
+                }
+            });
+            $('#tbody').on('click', '.UploadDocument', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var uploadFor = btn.parent().parent().attr('data-id');
+                var oldText = btn.text();
+                if (btn.hasClass('disabled')) {
+                    return false;
+                }
+
+                if ($('#DocumentName' + uploadFor).val() == '') {
+                    ErrorMessage('Provide document name.');
+                    return false;
+                } else if ($('#DocumentName' + uploadFor).val() == 'Other') {
+                    if ($('#OtherDocumentName' + uploadFor).val() == '') {
+                        ErrorMessage('Provide other document name.');
+                        return false;
+                    }
+                }
+                btn.text('Processing.....');
+                btn.attr('disabled', true);
+                btn.addClass('disabled');
+
+                var fileControl;
+
+
+                fileControl = $("#fuDoc" + uploadFor);
+                fileUpload = $("#fuDoc" + uploadFor).get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                if (window.FormData !== undefined) {
+                    if (fileControl.get(0).files.length > 0) {
+                        var FileSize = fileControl.get(0).files[0].size;
+                        var fileExtension = ['png', 'jpg', 'jpeg', 'pdf'];
+                        if ($.inArray(fileControl.val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                            ErrorMessageCallBack("Only formats are allowed : " + fileExtension.join(', '), function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                        if ("2097152" >= FileSize) {
+
+                        } else {
+                            ErrorMessageCallBack("Only 2 Mb file size allow!", function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                    } else {
+                        ErrorMessageCallBack("Select file to upload!", function () {
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        });
+                        return;
+                    }
+                } else {
+                    ErrorMessageCallBack("Select file to upload!", function () {
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    });
+                    return;
+                }
+                if (files.length > 0) {
+                    for (var i = 0; i < files.length; i++) {
+                        formData.append(files[i].name, files[i]);
+                    }
+                }
+                formData.append('ProgramLevel', $('#ProgramLevel').val());
+                formData.append('DocumentName', $('#DocumentName' + uploadFor).val());
+                formData.append('OtherDocumentName', $('#OtherDocumentName' + uploadFor).val());
+                formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]', $('#frm')).val());
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/UploadDocs',
+                    data: formData,
+                    async: true,
+                    cache: false,
+                    contentType: false, // Not to set any content header
+                    processData: false,
+                    xhr: function () {
+                        var xhr = $.ajaxSettings.xhr();
+                        xhr.upload.onprogress = function (evt) {
+                            var percentComplete = Math.round(evt.loaded / evt.total * 100);
+                            if (percentComplete < 100)
+                                btn.text('' + percentComplete + '% Uploaded');
+                            else
+                                btn.text('Saving file...');
+
+                        };
+                        return xhr;
+                    }
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        SuccessMessageCallBack(data['m'], function () {
+                            $('#btnDocumentView' + uploadFor).show();
+                            $('#btnDocumentView' + uploadFor).attr('href', $('#hdfBaseUrl').val() + data['p']);
+                            $('#DoumentPath' + uploadFor).val(data['p']);
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        });
+                    } else if (data['c'] == 'alreadyexists') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'sessionexpired') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'servererror') {
+                        ErrorMessage(data['m']);
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(oldText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+            });
+            $('#tbl').on('click', '.btnEdit', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.attr('data-id');
+                $.ajax({
+                    url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/SelectInstituteSpoc',
+                    data: { id: id, ProgramLevel: $('#ProgramLevel').val() }
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        $.each(data['List'], function (index, item) {
+                            $('#ID').val(item['ID']);
+                            $('#NameOfSpoc').val(item['NameOfSpoc']);
+                            $('#StudentIDs').val(item['StudentIDs']).trigger('change');
+                            $('#Mobile').val(item['Mobile']);
+                            $('#Email').val(item['Email']);
+                            for (var i = 1; i <= 5; i++) {
+                                $('#btnDocumentView' + i + '').removeAttr('href').hide();
+                                if (item['DocumentName' + i + ''] != '') {
+                                    $('#DocumentName' + i + '').val(item['DocumentName' + i + '']).trigger('change');
+                                    $('#OtherDocumentName' + i + '').val(item['OtherDocumentName' + i + '']);
+                                    $('#DoumentPath' + i + '').val(item['DoumentPath' + i + '']);
+                                    $('#btnDocumentView' + i + '').attr('href', $('#hdfBaseUrl').val() +item['DoumentPath' + i + '']).show();
+                                }
+                            }
+                            $('#NameOfSpoc').focus();
+                        });
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(oldText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+            });
+            $('#tbl').on('click', '.btnDelete', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.attr('data-id');
+                ConfirmCallBack('Are you sure you want to delete this record?', function () {
+                    $.ajax({
+                        url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/DeleteInstituteSpoc',
+                        data: { id: id, ProgramLevel: $('#ProgramLevel').val() }
+                    }).done(function (data) {
+                        if (data['c'] == 'success') {
+                            SuccessMessageCallBack(data['m'], function () {
+                                btn.text('Refreshing Data...');
+                                window.location.href = window.location.href;
+                            });
+                        } else if (data['c'] == 'alreadyexists') {
+                            ErrorMessage(data['m']);
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        } else if (data['c'] == 'sessionexpired') {
+                            ErrorMessage(data['m']);
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        } else if (data['c'] == 'servererror') {
+                            ErrorMessage(data['m']);
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        }
+                    }).error(function () {
+                        ErrorMessage('Processing error. Kindly refresh page and try again!');
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    });
+                });
+                
+            });
+        });
+    </script>
+}

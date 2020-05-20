@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <style type="text/css">
+
+
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #error-page-container {
+            position: relative;
+            height: 100vh;
+        }
+
+            #error-page-container .notfound {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+
+        .notfound {
+            max-width: 610px;
+            width: 100%;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+            .notfound .notfound-404 {
+                position: relative;
+                width: 150px;
+                height: 150px;
+                margin: 0px auto 50px;
+            }
+
+                .notfound .notfound-404 > div:first-child {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    background: #f68522;
+                    -webkit-transform: rotate(45deg);
+                    -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    border: 5px dashed #000;
+                    border-radius: 5px;
+                }
+
+                    .notfound .notfound-404 > div:first-child:before {
+                        content: '';
+                        position: absolute;
+                        left: -5px;
+                        right: -5px;
+                        bottom: -5px;
+                        top: -5px;
+                        -webkit-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1) inset;
+                        box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1) inset;
+                        border-radius: 5px;
+                    }
+
+                .notfound .notfound-404 h1 {
+                    font-family: 'Cabin', sans-serif;
+                    color: #000;
+                    font-weight: 700;
+                    margin: 0;
+                    font-size: 60px;
+                    position: absolute;
+                    top: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    -ms-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                    left: 50%;
+                    text-align: center;
+                    height: 40px;
+                    line-height: 40px;
+                }
+
+            .notfound h2 {
+                font-family: 'Cabin', sans-serif;
+                font-size: 33px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 7px;
+            }
+
+            .notfound p {
+                font-family: 'Cabin', sans-serif;
+                font-size: 16px;
+                color: #000;
+                font-weight: 400;
+            }
+
+            .notfound img {
+                margin-bottom: 70px;
+            }
+
+            .notfound a {
+                font-family: 'Cabin', sans-serif;
+                display: inline-block;
+                padding: 10px 25px;
+                background-color: #8f8f8f;
+                border: none;
+                border-radius: 40px;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                text-decoration: none;
+                -webkit-transition: 0.2s all;
+                transition: 0.2s all;
+            }
+
+                .notfound a:hover {
+                    background-color: #2c2c2c;
+                }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KJH4KJJ');</script>
+    <!-- End Google Tag Manager -->
+    <title>
+        ARIIA - 404 Page Not Found!
+    </title>
+</head>
+<body>
+    <div id="error-page-container">
+
+        <div class="notfound">
+            <img src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAABECAMAAACBO+i5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Q0VFOEFGMTU3ODQwMTFFODhBMThEQThDNkEzNDk0MTciIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Q0VFOEFGMTY3ODQwMTFFODhBMThEQThDNkEzNDk0MTciPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDRUU4QUYxMzc4NDAxMUU4OEExOERBOEM2QTM0OTQxNyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDRUU4QUYxNDc4NDAxMUU4OEExOERBOEM2QTM0OTQxNyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjdFr3gAAAFEUExURf/MmfaKK7TZxguAQFCic/ibS8bi1P7t4P3dwf7s3P7w49JRaPeFIv+ZM/u7g/3avP727////6jRufeNMdvt5CiRWjOZZvqqZfzSrcENK/3hyNHn3PzXtvihVHa5lhOERonEp+Tx6vqta/3p1vimXfmwb/eZRvmzdv3m0fq2eprLspPGqfq+ifaGJf738eaisfmlWPzQqebm1fq4f/zVstpufvHFxeKIjsYjRv748vP28fmbR/eWQfmxc9WaTVSofb4GKvP59v3kzv7y5xuKT/3fxvuFIf+2c+OTpGewif706/+NLP3jy//XtYC+n2GthPmIJfqXQfmeT/7TsPPP0ev18PmnYfrSufaHItzgzGu1kfaIJ/aFIvmjWPm0ePfe3vjm6vidTf3UquTQrvrj2u22uvbHtO7fyO/v5d9/jOTInv///6BgejMAAABsdFJOU///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AJZTWVQAAAnFSURBVHja5Jvrdxo3FsA1xtgwjgBljPED7NgM2LGBQiBtSHCdgB9bQpLWiamTEd64bXY3q///+94raZ5Ae3LOfukgn+PxzEgz+uk+dHU1JmIBC5l7pzsy2cJBpwu1wcJBjyyrv2jQDcI5aSwYdLnAeam/YNCkzkHUiwW9WgFmXigvFPQmRWhKFgmaSUFzfsAWCLpFFXRvc3GgWZPrYrNFgWaEutC0xRYEerXHvVJdXQzoYcbxoeu14UJAZwPMQF1cBOi+zUOltB1/aJbhkdJmsYf2PbdbDBJ36PI1nyrJi3hD5yZ8RkmacYbOtY1Z0MZpLr7QjPiz1YPLywc+NsnFFjpreZSXzo8/WpfeqVOMK3R/7Mv5+r8nJ783ferJdjyh2amvzlfP1/N76yzja/hhI5bQxFPuOmHiOJF4xFjLiOFs7ZOwbNVbT77vip13icTyClz1VlzV1KzIjK2W/98q0PqrTYbt1rc+sshmQw/uXboe0oGgE3snADV64QXhuRkr76pTpzW4kbKhjOHHti/EBf5STx3b+IoLvHFwR1JdebUzsfWL2WO7eeQ+rWPbIzgUrv0usopdC7zuQJ5d1LP+tU3ViMDbx5U2cVOZ8OC2V8e0sjOhh94MnXwDpyhoEPUO/Jkq6RtWLUrd0Lfuh4IEpjc80cJIc15B4XkDKmeBARiS6h3cSHqINc47cDjkBe8Ss3gpEEY4fIKS5o4fIxLVqOJa5oFKADDKq4E69kzolOPlSvD0UUKWt1I3XL03oh78DkeCgIoUoFK1ClE7hUNWbHKuk2tphx/C4Td5R/qMjO5pAY/dHq8fBftflND81KWGvgf6m1Nn28GueI3qvSpFwVE5IKzKr90qXcrr5RnQuKHhygnKyoaCzi9JandAKulwtsHgFK6wUhK6wBjrgIDhwALQqwoaLhDGhtsV/QKW5DyrZHsgZkDzOx+6GYIeK2hOj6KNjFXGzA4IyEor6FLgufx0BrSnnRn0IuwsocvyK6H2tQIj4i9O6qpzQy2Xosvaikp6023acbiDg57iHCzXtLg1mAmtFGJK0pYraaAuR6EHyuzB+bCQpBlqqmFOQR/psMSxseWrR+cu9PknpB6eaoM/CG15mA7vBT1t0TXllrIzH7rjjZer2DZeOQgPo9d/x3FvAPRkFjRYUm81Aq2wGFhbKgQNL793gi9yu1LXfqaPg7Syl/DK3kMUo5nUgxIWNXS62spNQ2/OlbRgPU5xjivDgGXrvMdmQVstSzeYZ9PkMdcDHoXGXmSC0GBKdLXKaS4CbWqLpnJ62NlIBIoy6009XRdCacJBT+79mN8Ajc6vrI+GVy2qqY2UoY1/jqQJA928Hs6CBk/TlND36vyC8zbWIhHolkYa42isv1OKvbyslPxsBavoELUajgtyFdR7qxWx6T+DJlL7oG90ai8h2H/QAhzBeTZNBAMDmeRmQAMuZQFHZqPrhpb+7K+60lbuWe3XvVUCPvk3OVEi35ULMBW7OO1opkWml8iUTYe9dycEfeH+4YQ3wEP9hya3rfmSVkFCk82GbviS7nPZg7aq5kObOl1yhepynEfQjZ3u1evyf5YVv44cZFg2lUQZwh1lMPPVOwANb++7algS86HloBTFPJvGM5DDeBo6J+MZz6ZPeX0E02jZ8kdPdkXH107LM+iNHbF9+YCw9TMvMNOVep3pyBY8wvYcSafrUUdW5ZZyKQ0ajpOmNBVODQiM5qg3uhSYi+6moFNowx40TKv1KhbHD1BIIAE6hvmevUPPnd8RJjiaX7JiHcdg7wzMwXwc8HVatTcJ04wkBF30GPuyB+Epyw4RzIeW1EZIvUOShiHFUCQ6ZU3kBVe924Gs10EQ+kDNwkDAHqJy51eYilYqpqLO47z1XoWiY78P15y7IsmGHFnZI9Ne05N01uC32x5B88+hVSfCkh4HocUfUlzBRpi2TzIvIhtQTg9Vof5j8VdJ+jELOrOPRpw/Zui3wH0+qAm2BMOwt7wPAYwMwev3fh9q2rZ63BmEJM2udbe2DYgOPWhmklsv1kKCv4IWuPHQnC9pGF7LhwaPxHB7xjkSnqRrIQ9KAtCKZgwh6xIq9xkMUIE71TaVq49dvLYEMeOpHJteKAzlp51WVa2kApIWI1SmTqetZ1uErtp2EjXqkH0DNIakzbk2LWNJw1twNMcl9DtG0V9wgPOn7vuGlhugyMZUBVtDsb6LTmxFBrCwkIRR+6UspAt/ty5yKlVKw70MrrQ73opSbLprlAzT0Hp5SoIEkynojvK3/hRRCam3jDsw3PAfMzIktJfqKpXdyC8pn1iLKmYIutVVi6tdtSl/n0YH9/NkIE70SLyXpm+FMhL3t+jbdISXotTz7X10FLcTPTcWKZSefUgCoXqjSg+iO0oU45aMFYjoWSEZaoI61afBL4CyDqpXBt9wP85ktWDZhI5h/WdV/fFLU1qIQBspJpbOZdjZpypQyVVQAdjHMwzBpYFGoQUrX4y8yJQ1GoEIa3X7Iu3f6Xa70WxTqHagPRyCtQgL1pAVuqGWmyn3DaGH5VikQ6KrHyyh5QyMC9SHINNPz4dXdenKQXWacP2JjNGOcaSi6v13TgwmcY3VS6vE2IkYAdzVH+LDd59F0eAPiFhKYGZUmC/iBG2j3vZMmSTaWxLkElMu321trX1ATzAe7IDW7zIxSIIB15MxgX6Mkx2uyUHS5zsMvNxv4ssWlLXPn5u39COGpgAtF9XGJCbQMgzF9AtA58vsjl8P/rmG0C+fivfW648YlYF6y4+OrMOYQPeTOiCD2CT/hF3dttnXl1svgfrZ9w36+vf9jcQeOLIjGpPPRSVCFxMnznuYsjYS5yuC/EyGT7dkefaV3TefrOfR1BlmM/iLo7hs66B+OyQnkyZL4s1r8kFp99bLNXZ9xVbOca3ZlRFZHD6RVdCpe9waSMMiC/P76cLd92svt5RRf75+g6b+dl8M2vWYfAytE62weK7TkcCF5Nm6yDY/PNU2/fXXjMk+odKLMoaczaPYQIsOVevpV8d7EHsx8usPz6Sg174QUyzl93Zv5HIiJv/goCGGuHC1+5g5SZw9B6n+66nU7x9yEFh/Smzs68yJ3Y8RNCyQQMFxXQgK/khmi//x9enXL+i1HuZl6rtIY/OfLMTbaEbPbMrMYH4n6KFvNiSz/HrybjVW0GJQMPQXFis/nd34FV79tCyT/Z0quLqY/PNO4EuEEuclKcmbFV/UbH/pxt0MpCkWN2hWLnHjbm49ynuduHwNHPRMZXueMFm5x6vx+Xwu5I7NU56c6aqGNp8ciXhCC9ayDmdQDzJWjL8NFcyszfi2e0TSsfq4/38CDAAa4zs/cY4r8AAAAABJRU5ErkJggg==" alt="" />
+            <div class="notfound-404">
+                <div></div>
+                <h1>404</h1>
+            </div>
+            <h2>Page not found</h2>
+            <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+            <a class="btn btn-primary" href="/">go back to home page</a>
+        </div>
+    </div>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJH4KJJ"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+</body>
+</html>  

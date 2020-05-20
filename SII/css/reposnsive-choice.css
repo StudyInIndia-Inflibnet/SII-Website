@@ -1,0 +1,14 @@
+﻿
+@media (min-width:250px) and (max-width:790px) {
+    .f1-step {
+        width: 50%;
+    }
+
+    .f1-steps {
+        overflow: inherit;
+    }
+
+    .f1-progress {
+        display: none;
+    }
+}

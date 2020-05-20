@@ -1,0 +1,86 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.StudentRegService.DashboardRepository _objRepository = new SIIRepository.StudentRegService.DashboardRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(Session["studentid"].ToString(), "Background");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Background Information</h2>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    System.Data.DataRow _dr = _ds.Tables[0].Rows[0];
+                    <table class="table table-bordered">
+
+                        @if (_dr["IsvalidPassport"].ToString().ToLower() == "true")
+                        {
+                            <tr>
+                                <td>Do you have a valid passport?  : <strong>Yes</strong></td>
+                                <td>Name As Per Passport  : <strong>@_dr["NameasperPassport"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                               
+                                <td>Passport Number   : <strong>@_dr["PassportNo"].ToString()</strong></td>
+                                <td>Issuing Authority  : <strong>@_dr["IssuingAuthority"].ToString()</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Passport Expiry Date  : <strong>@_dr["PassportExpDate"].ToString()</strong></td>
+                                <td>Passport Issue Country  : <strong>@_dr["PassportIssueCountry"].ToString()</strong></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Do you have a valid passport?  : <strong>No</strong></td>
+                            </tr>
+                            <tr>
+                                @if (_dr["ApplyForPassport"].ToString().ToLower() == "true")
+                                {
+                                    <td>Have you applied for the passport?  : <strong>Yes</strong></td>
+                                }
+                                else
+                                {
+                                    <td>Have you applied for the passport?  : <strong>No</strong></td>
+                                }
+                            </tr>
+                        }
+
+                    </table>
+                }
+                <h2 class="page-header">Reference Details</h2>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    int indexid = 1;
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>srno</th>
+                                <th>Name</th>
+                                @*<th>Designation</th>
+                                <th>Institue name/employer</th>*@
+                                <th>Email</th>
+                                <th>Contact Number</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyRefrence">
+                            @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                            {
+
+                                <tr>
+                                    <td>@(indexid++)</td>
+                                    <td>@_dr["Name"].ToString()</td>
+                                    @*<td>@_dr["Designation"].ToString()</td>
+                                    <td>@_dr["Institute_employer_name"].ToString()</td>*@
+                                    <td>@_dr["Email"].ToString()</td>
+                                    <td>@_dr["ContactNo"].ToString()</td>
+                                    <td>@_dr["RefAddress"].ToString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    }
+                }
+            }
+</div>
+</div>

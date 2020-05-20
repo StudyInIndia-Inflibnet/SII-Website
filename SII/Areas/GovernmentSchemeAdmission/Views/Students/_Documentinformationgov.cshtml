@@ -1,0 +1,24 @@
+﻿
+<form id="frmuploadimage">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="hdnfilesize" value="@ViewBag.Filesize" />
+    <input type="hidden" id="hdnstudentid" value="@TempData.Peek("Studentid").ToString()" name="studentid" />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Profile Pic<span style="color: red">&nbsp;*</span></label>
+                <input type="file" id="udpFile" name="PROFILE_PIC_PATH" required />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img class="img-rounded xs-mr-10" id="imgProfile" src="~/assets/img/140x140.png" width="140" height="140" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-space btn-primary btn-lg" type="submit" id="btnprofilepic">Upload</button>
+        </div>
+    </div>
+</form>
+<script src="~/Scipts/Areas/Govermentscheme/GOVStudentDocument.js"></script>
+@*<script src="~/Scipts/Areas/admission/StudentDocument.js"></script>*@

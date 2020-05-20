@@ -1,0 +1,574 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Institute Courses<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    @*<div class="col-md-12" style="">
+            @Html.Partial("_InstituteMenus")
+        </div>*@
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <ul id="ulMainTab" class="nav nav-tabs">
+                    <li><a href="~/Institute/Courses/" class="tabCourse">Courses Offer</a></li>
+                    <li><a href="~/Institute/Courses/" class="tabCourse">Bridge Courses</a></li>
+                    @if (Session["InstituteID"].ToString() == "SII-I-00001")
+                    {
+                        <li class="active"><a href="~/Institute/Courses/NICHE" >Niche Courses</a></li>
+                    }
+                    <li><a href="#navCalander" data-toggle="tab" style="display:none">Important Dates</a></li>
+                    <li><a href="#navStudentTestinomials" data-toggle="tab" style="display:none">Student Testimonials</a></li>
+                </ul>
+                <div class="tab-content">
+                    @*Niche Courses*@
+                    <div id="navNicheCourse" class="tab-pane active cont">
+                        <form id="frmNicheCourses" method="post">
+                            <input type="hidden" id="hdnInstituteId" name="InstituteID" value="@Session["InstituteID"].ToString()" />
+                            <input type="hidden" name="ID" id="hdfNIcheID" value="0" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button id="btnNewNicheCourse" type="button" class="btn btn-primary pull-right">Add New</button>
+                                </div>
+                            </div>
+                            <div id="divhideshowNicheCourses" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="page-header">NICHE Course Details</h3>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Course type</label>
+                                                        <select class="form-control" id="drpCoursetype" name="Coursetype" required>
+                                                            <option value="0">--Select--</option>
+                                                            <option value="1">Long term course</option>
+                                                            <option value="2">Short term course</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Discipline&nbsp;<span style="color:red">*</span></label>
+                                                        @Html.DropDownList("DisciplineNiche_ID", new SelectList(ViewBag.DesciplineNiche, "Discipline_ID", "Discipline"),
+                                                        "--Select--",
+                                                        new
+                                                        {
+                                                            @class = "form-control CourseChange",
+                                                            @id = "drpDisciplineNiche",
+                                                            @required = ""
+                                                        })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Programme Level&nbsp;<span style="color:red">*</span></label>
+                                                        <select class="form-control" id="drpProgramLevelNiche" required name="ProgramLevelNiche_Id">
+                                                            <option value="">--Select--</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Qualification&nbsp;<span style="color:red">*</span></label>
+                                                        <select class="form-control" id="drpNatureofcourseNiche" required name="NatureofcourseNiche_Id">
+                                                            <option value="">--Select--</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Course of Study</label>
+                                                        <select class="form-control" id="drpBranchNiche" name="BranchNiche_Id">
+                                                            <option value="">--Select--</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group" id="Divother" style="display:none">
+                                                        <label>Add New Branch/Subject&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control" id="txtbranchnamesubject" name="Branch_Name" placeholder="Branch/Subject" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Gender Restrictions</label>
+                                                        <select class="form-control" id="GenderRestrictions" required name="GenderRestrictions">
+                                                            <option value="">--Select--</option>
+                                                            <option value="1">Only Male</option>
+                                                            <option value="2">Only Female</option>
+                                                            <option value="2">No Restriction</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="page-header">Eligibility Criteria</h3>
+                                                    <h4>Educational Qualifications&nbsp;<span style="color:red">*</span></h4>
+                                                    <table class="table table-bordered table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width:25%;">Qualification</th>
+                                                                <th style="width:60%;">Subject | Percentage</th>
+                                                                <th style="width:15%;">Operator</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbodyECNiche">
+                                                            <tr id="defaultECTR">
+                                                                <td>
+                                                                    <select class="form-control drpECQualificationNiche">
+                                                                        <option value="">--Select Qualification--</option>
+                                                                        @{
+                                                                            SIIRepository.Courses.CourseRepository _objRepositoryEduQuali = new SIIRepository.Courses.CourseRepository();
+                                                                            System.Data.DataSet _dsRepositoryEduQuali = _objRepositoryEduQuali.SELECT_tbl_EduQualifications();
+                                                                            if (_dsRepositoryEduQuali != null)
+                                                                            {
+                                                                                if (_dsRepositoryEduQuali.Tables[0].Rows.Count > 0)
+                                                                                {
+                                                                                    foreach (System.Data.DataRow _dr in _dsRepositoryEduQuali.Tables[0].Rows)
+                                                                                    {
+                                                                                        <option value="@_dr["EduQualifications_Id"].ToString()" data-for="@_dr["EduQualificationsFor"].ToString()">@_dr["EduQualifications"].ToString()</option>
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Subject</th>
+                                                                                <th>Percentage</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="tbodySubjectPercentageNiche">
+                                                                            <tr class="currentSPTrNiche">
+                                                                                <td>
+                                                                                    <select class="form-control drpECSubjectNiche">
+                                                                                        <option value="">--Select Subject--</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <select class="form-control drpECPercentageIDNiche">
+                                                                                        <option value="">--Select Percentage--</option>
+                                                                                        @{
+                                                                                            for (int i = 35; i <= 99; i++)
+                                                                                            {
+                                                                                                <option value="@i">@i</option>
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <td colspan="3">
+                                                                                    <a class="btn btn-sm btn-info" style="display:none;" id="btnAddMoreConditionNiche">Add More Condition (OR)</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <select class="form-control drpECOperatorNiche">
+                                                                        <option value="">--Select--</option>
+                                                                        <option value="And">And</option>
+                                                                        <option value="Or">Or</option>
+                                                                        <option value="And">Multiple OR</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td><a class="btn btn-warning" id="btnECAddNiche">Add</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="5" id="tdECConditionNiche"></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4>Aditional Exams / Criteria</h4>
+                                                    <table class="table table-bordered table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Exam Name  /  Cut-off marks / Date</th>
+                                                                <th>Operator</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbodyAENiche">
+                                                            <tr id="defaultAETR">
+                                                                <td>
+                                                                    <table class="table table-bordered table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Exam</th>
+                                                                                <th>Score</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="tbodyAEScoreNiche">
+                                                                            <tr class="currentAEPTrNiche">
+                                                                                <td>
+                                                                                    <select class="form-control drpAEAditionalExamNiche">
+                                                                                        <option value="">--Select Exam Name--</option>
+                                                                                        @{
+                                                                                            SIIRepository.Courses.CourseRepository _objRepositoryAE = new SIIRepository.Courses.CourseRepository();
+                                                                                            System.Data.DataSet _dsAE = _objRepositoryAE.SELECT_tbl_AditionalExams();
+                                                                                            if (_dsAE != null)
+                                                                                            {
+                                                                                                if (_dsAE.Tables[0].Rows.Count > 0)
+                                                                                                {
+                                                                                                    foreach (System.Data.DataRow _dr in _dsAE.Tables[0].Rows)
+                                                                                                    {
+                                                                                                        <option data-aefor="@_dr["AditionalExamsFor"].ToString()" data-for="@_dr["AditionalExamsType"].ToString()" value="@_dr["AditionalExams_Id"].ToString()">@_dr["AditionalExams"].ToString()</option>
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <select class="form-control txtAECutOffNiche">
+                                                                                        <option value="">--Select Cut-off marks--</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <td colspan="3">
+                                                                                    <a class="btn btn-sm btn-info" style="display:none;" id="btnAddMoreConditionAENiche">Add More Condition (OR)</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <select class="form-control drpAEOperatorNiche">
+                                                                        <option value="">--Select--</option>
+                                                                        <option value="And">And</option>
+                                                                        @*<option value="Or">Or</option>*@
+                                                                        <option value="And">Multiple OR</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <a class="btn btn-sm btn-warning" id="btnAEAddNiche">Add</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="4" id="tdAEConditionNiche"></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="page-header">Additional Facilities</h4>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th>Hostel accommodation</th>
+                                                                    <td><input type="checkbox" id="chkaccommodation" name="accommodation" /></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>A/C available</th>
+                                                                    <td><input type="checkbox" id="chkacavailable" name="acavailable" /></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Food</th>
+                                                                    <td><input type="checkbox" id="chkFood" name="Food" /></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="Additionalaccommodation" style="display:none">
+                                                    <div class="form-group">
+                                                        <table class="table table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th>Shared room</th>
+                                                                    <td><input type="checkbox" id="chkSharedroom" name="Sharedroom" /></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Independent room</th>
+                                                                    <td><input type="checkbox" id="chkIndependentroom" name="Independentroom" /></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="page-header" id="txtLabelfee">Total Fees</h4>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                                        @Html.DropDownList("AnnualTutionFeesCurrency", new SelectList(ViewBag.Currency, "CurrencyCode", "CurrencyCode"),
+                                                        "--Select--",
+                                                        new
+                                                        {
+                                                            @class = "form-control",
+                                                            @id = "drpAnnualFeesCurrency1",
+                                                            @required = ""
+                                                        })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label id="F1">Tuition Fees per seat&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtAnnualFees" name="AnnualTutionFees" placeholder="Annual tution fees for Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" name="AnnualBoardingFeesCurrency" class="form-control txt-fee-currency1" readonly="" value="--Select--" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label id="F2">Total Fees per seat&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control allow_only_number" id="txttotalBoarding" name="AnnualBoardingFees" placeholder="Annual Total Fees per Seat" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" name="FeesForSAARCCountryCurrency" class="form-control txt-fee-currency1" readonly="" value="--Select--" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label id="F3">
+                                                            Tuition Fees (SAARC Country)&nbsp;<span style="color:red">*</span>
+                                                        </label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtSAARC" name="FeesForSAARCCountry" placeholder="Annual Tuition Fees (SAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Currency&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" name="FeesForNonSAARCCountryCurrency" class="form-control txt-fee-currency1" readonly="" value="--Select--" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label id="F4">Tuition Fees (NonSAARC Country)&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtNonSAARC" name="FeesForNonSAARCCountry" placeholder="Annual Tuition Fees (NonSAARC Country)" required="" maxlength="8" data-parsley-min="1" data-parsley-min-message="Fee cannot be zero (0)" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="page-header">Other Details</h4>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Credits&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtCredits" name="Credits" placeholder="Credits" maxlength="8" required="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Course Duration(in Months)&nbsp;<span style="color:red">*</span> </label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtnicheduration" name="CourseDurations" placeholder="Course Duration" maxlength="2" required="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Classroom Hours&nbsp;<span style="color:red">*</span></label>
+                                                        <input type="text" class="form-control allow_only_number" id="txtClassrooms" name="ClassRoomHours" placeholder="Classroom hours" maxlength="4" required="" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Examination/Course Pattern &nbsp;<span style="color:red">*</span></label>
+                                                        <select class="form-control" name="CoursePatterns" id="drpCoursePattern" required="">
+                                                            <option value="Yearly">Yearly</option>
+                                                            <option value="Trimaster">Trimaster</option>
+                                                            <option value="semester">semester</option>
+                                                            <option Other="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="divdateshrt" style="display:none">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Start Date</label>
+                                                        <input type="text" class="form-control datepicker" id="txtStartDate" name="StartDate" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>End date</label>
+                                                        <input type="text" class="form-control datepicker" id="txtEndDate" name="EndDate" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label><input type="checkbox" class="form-control" id="chktobedecided" name="tobedecided" />To be decided</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Course Description&nbsp;<span style="color:red">*</span></label>
+                                                        <textarea id="txtCourseDescription" class="form-control" rows="3" name="CourseDesc" placeholder="Course Description" required=""></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Admission & entry requirements&nbsp;<span style="color:red">*</span></label>
+                                                        <textarea id="txtAdmission" class="form-control" rows="3" name="AdmissionReq" placeholder="Admission & entry requirements" required=""></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <button id="btnSaveNicheCourse" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="btnCancelNicheCourse" type="reset" class="btn btn-default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>Srno</th>
+                                                <th>Language Courses for International Students</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyNicheCourse"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .tab-content {
+            min-height: 300px;
+        }
+    </style>
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Courses/NicheCourse.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.tabCourse').on('click', function (e) {
+                e.preventDefault();
+                window.location.href = $(this).attr('href');
+            });
+            $('#ulMainTab').on('click', 'a', function (e) {
+                e.preventDefault();
+                if ($(this).parent().hasClass("active")) {
+                    return false;
+                }
+            });
+            $("#drpDiscipline").on("change", function (t) {
+                $("#drpProgramLevel").html(""), $("#drpProgramLevel").append('<option value="">--Select--</option>');
+                var e = $(this).val();
+                $.ajax({
+                    method: "POST",
+                    async: !1,
+                    url: $("#hdfBaseUrl").val() + "Institute/Courses/SelectPL",
+                    data: {
+                        Discipline_ID: e
+                    }
+                }).done(function (t) {
+                    $.each(t.List, function (t, e) {
+                        $("#drpProgramLevel").append('<option value="' + e.ProgramLevel_Id + '">' + e.ProgramLevel + "</option>")
+                    })
+                }).error(function () {
+                    swal("error", "Somthing went wrong. Please try again.", "error")
+                })
+            });
+            $("#drpProgramLevel").on("change", function (t) {
+                $("#drpNatureofcourse").html(""), $("#drpNatureofcourse").append('<option value="">--Select--</option>');
+                var e = $(this).val();
+                "" == $("#drpDiscipline").val() || $("#drpDiscipline").val();
+                $.ajax({
+                    method: "POST",
+                    async: !1,
+                    url: $("#hdfBaseUrl").val() + "Institute/Courses/SelectQ",
+                    data: {
+                        Discipline_ID: $("#drpDiscipline").val(),
+                        ProgramLevel_Id: e
+                    }
+                }).done(function (t) {
+                    $.each(t.List, function (t, e) {
+                        $("#drpNatureofcourse").append('<option value="' + e.Qualification_ID + '">' + e.Qualification + "</option>")
+                    })
+                }).error(function () {
+                    swal("error", "Somthing went wrong. Please try again.", "error")
+                })
+            });
+            $("#drpNatureofcourse").on("change", function () {
+                $(this).val();
+                $.ajax({
+                    method: "POST",
+                    url: "/Institute/Courses/SelectCS",
+                    async: !1,
+                    data: {
+                        Discipline_ID: $("#drpDiscipline").val(),
+                        ProgramLevel_Id: $("#drpProgramLevel").val(),
+                        Qualification_ID: $("#drpNatureofcourse").val()
+                    }
+                }).done(function (t) {
+                    $("#drpBranch").html(""), $("#drpBranch").prepend('<option value="">--Select--</option>'), $.each(t.List, function (t, e) {
+                        $("#drpBranch").append('<option value="' + e.CourseOfStudy_ID + '">' + e.CourseOfStudy + "</option>")
+                    })
+                }).error(function () {
+                    $("#drpBranch").html(""), $("#drpBranch").append('<option value="">-Select-</option>')
+                })
+            });
+        });
+    </script>
+}
+

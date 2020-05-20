@@ -1,0 +1,397 @@
+﻿@using System.Configuration
+@{
+    ViewBag.Title = "ViewNicheDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="niche_coursesHeader_main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <div class="inner-title-left niche_coursesHeader">
+                    <h2>NICHE Courses</h2>
+                    <p>DUMMY TEXT FOR THIS AREA</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="single-blog-area section-padding">
+    <div class="container">
+        <div class="row">
+            @{
+                SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+                System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData["instituteid"].ToString(), "NicheCourses", "", ConfigurationManager.AppSettings["ParticipatedYear"].ToString(), TempData["NicheCourseId"].ToString());
+                if (_ds != null)
+                {
+                    string Natureofcourse = "";
+                    <!-- single service tab start -->
+                    <div class="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <h2 class="nicheCourseBorder_title">@_ds.Tables[0].Rows[0]["InstituteName"].ToString()</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-4">
+                                    <div class="single-service-tab-menu nicheCourse_tab">
+                                        <ul class="nav" role="tablist">
+                                            <li role="presentation">
+                                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-graduation-cap"></i> About the Course
+                                                </a>
+                                            </li>
+                                            <li role="presentation" class="active">
+                                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-book"></i> Course Details
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-sitemap"></i> Infrastructure
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+                                                    <i class="fa fa-location-arrow"></i> How to Reach
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <div class="single-service-tab-items">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            @if (_ds.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                {
+                                                    Natureofcourse = _dr["Natureofcourse"].ToString();
+                                                    <div role="tabpanel" class="tab-pane " id="home">
+                                                        <div class="tabOut_title">
+                                                            <h4>
+                                                                <span>About the Course</span>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <h5 class="blackBG_title">@_dr["Natureofcourse"].ToString()</h5>
+                                                        <div class="single-tab p0">
+                                                            <table class="nicheCourse_table">
+                                                                <tr>
+                                                                    <td><strong>Hostel accommodation</strong> : @_dr["HostelAccommodation"].ToString()</td>
+                                                                    <td><strong>Food</strong> : @_dr["Food"].ToString()</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Gender Restrictions</strong> : @_dr["GenderRestrictions"].ToString()</td>
+                                                                    <td><strong>Minimum Batch Size</strong> : @_dr["MinimumBatchSize"].ToString()</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>AC</strong> : @_dr["AC"].ToString()</td>
+                                                                    <td><strong>Classroom Hours</strong> : @_dr["ClassRoomHours"].ToString()</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2"><strong>Course description - location and outline of course</strong> : <br /> <label style="text-align:justify;">@_dr["CourseDesc"].ToString()</label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2"><strong>Admission and Entry Requirements</strong> : <br /> <label style="text-align:justify;">@_dr["AdmissionReq"].ToString()</label></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane active" id="profile">
+                                                        <div class="tabOut_title">
+                                                            <h4>
+                                                                <span>Course Details</span>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                        <h5 class="blackBG_title">@_dr["Natureofcourse"].ToString()</h5>
+                                                        <div class="single-tab p0">
+                                                            <div class="">
+                                                                <div class="">
+                                                                    <table class="nicheCourse_table">
+                                                                        <tr>
+                                                                            <td><strong>Discipline</strong> : @_dr["Discipline"].ToString()</td>
+                                                                            <td><strong>Course Durations</strong> : @_dr["CourseDurations"].ToString()</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Branch / Subject</strong> : @_dr["BranchName"].ToString()</td>
+                                                                            <td><strong>Programme Level</strong> : @_dr["ProgramLevel"].ToString()</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Eligibility Criteria</strong> : @(_dr["EligibilityCriteria"].ToString() == "" ? "Not Requried" : _dr["EligibilityCriteria"].ToString())</td>
+                                                                            <td><strong>Location</strong>: @(_dr["Address"].ToString() == "" ? "Not Available" : _dr["Address"].ToString())</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong>Examination Pattern</strong> : @_dr["CoursePatterns"].ToString()</td>
+                                                                            <td><strong>Total Fees</strong> : @_dr["TotalFees"].ToString() @_dr["TutionFeesCurrency"].ToString()</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            <div role="tabpanel" class="tab-pane" id="messages">
+                                                <div class="tabOut_title">
+                                                    <h4>
+                                                        <span>Infrastructure</span>
+                                                    </h4>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <h5 class="blackBG_title">@Natureofcourse</h5>
+                                                <div class="single-tab p0">
+                                                    <table class="nicheCourse_table">
+                                                        @if (_ds.Tables[2].Rows.Count > 0)
+                                                        {
+                                                            foreach (System.Data.DataRow _dr in _ds.Tables[2].Rows)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="panel panel-primary " style="margin-bottom:0;">
+                                                                            <div class="panel-heading">
+                                                                                Campus Details
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <table class="table table-bordered table-striped">
+                                                                                    <tr>
+                                                                                        <td style="width:25% !important"><strong> Campus Area : </strong> </td>
+                                                                                        <td>@_dr["Area"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>IT Infrastructure :</strong> </td>
+                                                                                        <td>@_dr["ITInfrastructure"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Wifi Facility :</strong> </td>
+                                                                                        <td>@_dr["ITInfrastructureWifiFacility"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Academic Facilities :</strong> </td>
+                                                                                        <td>@_dr["AcademicFacilities"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td> <strong>Library Database : </strong> </td>
+                                                                                        <td>@_dr["Database"].ToString()</td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td> <strong>E-Library : </strong>  </td>
+                                                                                        <td>@_dr["elibrary"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Research facilities & Labs : </strong></td>
+                                                                                        <td>@_dr["ResearchFacilitiesLabs"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Hostel/accommodation (along with the facilities provided) : </strong> </td>
+                                                                                        <td>@_dr["Accommodation"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Hostel Wifi facility? : </strong></td>
+                                                                                        <td>@_dr["AccommodationWifi"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Cuisine served in mess/cafe: </strong></td>
+                                                                                        <td>@_dr["CuisineServedInMess"].ToString()</td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td><strong>Cuisines of food served : </strong></td>
+                                                                                        <td>@_dr["CuisinesOfFoodServed"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Doctors with qualification : </strong></td>
+                                                                                        <td>@_dr["Doctors"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><strong>Pharmacy : </strong></td>
+                                                                                        <td>@_dr["Pharmacy"].ToString()</td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        @if (_ds.Tables[3].Rows.Count > 0)
+                                                        {
+                                                            foreach (System.Data.DataRow _dr in _ds.Tables[3].Rows)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="panel panel-primary " style="margin-bottom:0;">
+                                                                            <div class="panel-heading">
+                                                                                Life In Campus
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <table class="table table-bordered table-striped">
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Sports Area : </strong> </td>
+                                                                                        <td>@_dr["SportArea"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Types of sports currently played : </strong> </td>
+                                                                                        <td>@_dr["TypesOfSportsCurrentlyPlayed"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Sports Accomplishments  : </strong> </td>
+                                                                                        <td>@_dr["SportAccomplishments"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Instruments : </strong> </td>
+                                                                                        <td>@_dr["MusicInstruments"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Music Accomplishments : </strong> </td>
+                                                                                        <td>@_dr["MusicAccomplishments"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Academic bodies and their contact numbers  : </strong> </td>
+                                                                                        <td>@_dr["AcademicBodie"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Festivals conducted by students  : </strong> </td>
+                                                                                        <td>@_dr["FestivalsConductedByStudents"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Competitions  : </strong> </td>
+                                                                                        <td>@_dr["EventsCompetitions"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong>Official Events  : </strong> </td>
+                                                                                        <td>@_dr["OfficialEvents"].ToString()</td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                        @if (_ds.Tables[4].Rows.Count > 0)
+                                                        {
+                                                            foreach (System.Data.DataRow _dr in _ds.Tables[4].Rows)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="panel panel-primary " style="margin-bottom:0;">
+                                                                            <div class="panel-heading">
+                                                                                Life Outside Campus
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <table class="table table-bordered table-striped">
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Places to visit near by : </strong> </td>
+                                                                                        <td>@_dr["PlacesToVisit"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Things To Do : </strong> </td>
+                                                                                        <td>@_dr["ThingsToDo"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Local Language  : </strong> </td>
+                                                                                        <td>@_dr["LocalLanguages"].ToString()</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td style="width:25%"><strong> Local Culture : </strong> </td>
+                                                                                        <td>@_dr["LocalCulture"].ToString()</td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            @if (_ds.Tables[1].Rows.Count > 0)
+                                            {
+
+                                                <div role="tabpanel" class="tab-pane" id="settings">
+                                                    <div class="tabOut_title">
+                                                        <h4>
+                                                            <span>How to Reach</span>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <h5 class="blackBG_title">@Natureofcourse</h5>
+                                                    <div class="single-tab p0">
+                                                        <div class="">
+                                                            <div class="">
+                                                                <table class="nicheCourse_table">
+                                                                    @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div class="panel panel-primary " style="margin-bottom:0;">
+                                                                                    <div class="panel-heading">
+                                                                                        <span class="@_dr["ReachByIcon"].ToString()"></span> @_dr["ReachBy"].ToString()
+                                                                                    </div>
+                                                                                    <div class="panel-body">
+                                                                                        <p class="text-justify">
+                                                                                            <b>Nearest Airport/Station :</b>
+                                                                                            @_dr["NearByStationName"].ToString()
+                                                                                        </p>
+                                                                                        <p class="text-justify">
+                                                                                            <b>Approx time to reach  :</b> @_dr["ApproxTime"].ToString() - @_dr["ApproxTimeType"].ToString()
+                                                                                        </p>
+                                                                                        <p class="text-justify">
+                                                                                            <b>Distance  : </b>@_dr["Distance"].ToString() - @_dr["DistanceType"].ToString()
+                                                                                        </p>
+                                                                                        <p class="text-justify">
+                                                                                            <b>
+                                                                                                Remarks:
+                                                                                            </b>
+                                                                                            @_dr["remarks"].ToString()
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <br />
+                                        <div class="text-right">
+                                            <a href="~/admission/RegistrationsNiche?instituteid=@TempData.Peek("instituteid")&For=NICHECourse&NicheCourseId=@TempData.Peek("NicheCourseId")" class="orange-btn">Apply Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <style>
+        .panel-primary {
+            border-color: #f68522;
+            border-radius: 0;
+        }
+
+            .panel-primary > .panel-heading {
+                background-color: #f68522;
+                border-color: #f68522;
+                color: #fff;
+                border-radius: 0;
+            }
+    </style>
+}

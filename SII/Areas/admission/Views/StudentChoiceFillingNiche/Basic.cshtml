@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+@*@section PageHead{
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Course of Study Mapping</h3>
+            </div>
+        </div>
+    }*@
+<input type="hidden" id="hdfBaseUrl" value="@Url.Content("~/")" />
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <h3 class="text-center">Regular Courses Choice Filling <a href="~/admission/Dashboard" class="btn btn-sm btn-info pull-right"><i class="fa fa-arrow-left"></i> Home</a></h3>
+
+    </div>
+    <div class="col-md-12">
+        <div class="f1-steps">
+            <div class="f1-progress">
+                <div class="f1-progress-line" data-now-value="20" data-number-of-steps="5" style="width: 16.66%;"></div>
+            </div>
+            @Html.Partial("_ProgressBar")
+        </div>
+    </div>
+    <hr />
+    <form id="frm" method="post">
+        @Html.AntiForgeryToken()
+        <fieldset class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <strong>Qualification</strong><br />
+                                    <i class="mdi mdi-file-pdf-box" style="color:red;font-size:30px!important"></i> <a style="margin-bottom:15px" class="btn btn-danger" href="@Url.Content("~/")Uploads/SII_Conversion_of_Grades.pdf" target="_blank">Grade Conversion Document</a>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <strong>Percentage Main</strong>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <strong>Percentage Decimal</strong>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <strong class="text-danger">Total Percentage</strong>
+                                </div>
+                            </div>
+                        </div>
+                        @{
+                            SIIRepository.Courses.CourseRepository _objRepoCourse = new SIIRepository.Courses.CourseRepository();
+                            System.Data.DataSet _dsRepoCourse = _objRepoCourse.SELECT_tbl_EduQualifications();
+                            if (_dsRepoCourse != null)
+                            {
+                                if (_dsRepoCourse.Tables[0].Rows.Count > 0)
+                                {
+                                    foreach (System.Data.DataRow _dr in _dsRepoCourse.Tables[0].Rows)
+                                    {
+                                        if (_dr["EduQualifications"].ToString() == "10th")
+                                        {
+                                            <div class="list-group-item listEQ" data-for="@_dr["EduQualifications"].ToString()" data-id="@_dr["EduQualifications_Id"].ToString()" data-EQD="@_dr["EduQualificationDependancy"].ToString()">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        @_dr["EduQualificationsName"].ToString() Score
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageMainPart" id="drpMain@_dr["EduQualifications_Id"].ToString()" required=""></select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageDeciamlPart" id="drpDecimal@_dr["EduQualifications_Id"].ToString()" required=""></select>
+                                                    </div>
+                                                    <div class="col-md-2" style="text-align:center">
+                                                        <strong id="lblEC@_dr["EduQualifications_Id"].ToString()"></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else if (_dr["EduQualifications"].ToString() == "10+2")
+                                        {
+                                            <div class="list-group-item listEQ" data-for="@_dr["EduQualifications"].ToString()" data-id="@_dr["EduQualifications_Id"].ToString()" data-EQD="@_dr["EduQualificationDependancy"].ToString()">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @_dr["EduQualificationsName"].ToString() Score
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkYesEQ" id="rbYesEQ@_dr["EduQualifications_Id"].ToString()" value="1">
+                                                            <label for="rbYesEQ@_dr["EduQualifications_Id"].ToString()">Yes</label>
+                                                        </div>
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" checked="" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkNoEQ" id="rbNoEQ@_dr["EduQualifications_Id"].ToString()" value="0">
+                                                            <label for="rbNoEQ@_dr["EduQualifications_Id"].ToString()">No</label>
+                                                        </div>
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkYesEQ" id="rbRAEQ@_dr["EduQualifications_Id"].ToString()" value="2">
+                                                            <label for="rbRAEQ@_dr["EduQualifications_Id"].ToString()">Result Awaited</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageMainPart drp@_dr["EduQualifications_Id"].ToString()" id="drpMain@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageDeciamlPart drp@_dr["EduQualifications_Id"].ToString()" id="drpDecimal@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                                                    </div>
+                                                    <div class="col-md-2" style="text-align:center">
+                                                        <strong id="lblEC@_dr["EduQualifications_Id"].ToString()" name="Dis_per@_dr["EduQualifications_Id"].ToString()"></strong>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <strong id="lbl11th" style="color:red;">(In case of result awaited, fill Class XI score)</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="list-group-item listEQ" data-for="@_dr["EduQualifications"].ToString()" data-id="@_dr["EduQualifications_Id"].ToString()" data-EQD="@_dr["EduQualificationDependancy"].ToString()">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @_dr["EduQualificationsName"].ToString() Score
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkYesEQ" id="rbYesEQ@_dr["EduQualifications_Id"].ToString()" value="1">
+                                                            <label for="rbYesEQ@_dr["EduQualifications_Id"].ToString()">Yes</label>
+                                                        </div>
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" checked="" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkNoEQ" id="rbNoEQ@_dr["EduQualifications_Id"].ToString()" value="0">
+                                                            <label for="rbNoEQ@_dr["EduQualifications_Id"].ToString()">No</label>
+                                                        </div>
+                                                        <div class="be-radio inline">
+                                                            <input type="radio" name="Is@_dr["EduQualifications_Id"].ToString()" class="chkYesEQ" id="rbRAEQ@_dr["EduQualifications_Id"].ToString()" value="2">
+                                                            <label for="rbRAEQ@_dr["EduQualifications_Id"].ToString()">Result Awaited</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageMainPart drp@_dr["EduQualifications_Id"].ToString()" id="drpMain@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <select class="form-control drpPercentage drpPercentageDeciamlPart drp@_dr["EduQualifications_Id"].ToString()" id="drpDecimal@_dr["EduQualifications_Id"].ToString()" disabled=""></select>
+                                                    </div>
+                                                    <div class="col-md-2" style="text-align:center">
+                                                        <strong id="lblEC@_dr["EduQualifications_Id"].ToString()" name="Dis_per@_dr["EduQualifications_Id"].ToString()"></strong>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <strong id="lblResultAwaited@_dr["EduQualifications_Id"].ToString()" style="color:red;display:none;">(In case of result awaited, fill @_dr["EduQualificationsName"].ToString() score, till consolidated of last marksheet)</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <div class="form-group" style="margin:20px;">
+                        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                        <a id="btnSaveAndContinue" href="~/admission/StudentChoiceFillingNiche/SelectDisciplines" class="btn btn-primary">Save &amp; Next</a>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@section styles{
+    <link href="~/assets/lib/wizard/style.css" rel="stylesheet" />
+    <style>
+        .f1-step {
+            width: 20%;
+        }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/lib/wizard/retina-1.1.0.min.js"></script>
+    <script src="~/assets/lib/wizard/scripts.js"></script>
+}

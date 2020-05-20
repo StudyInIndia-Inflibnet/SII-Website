@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Discipline";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Programme Level Mapping</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="loading"></div>
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <form id="frm">
+                    <input type="hidden" name="isNicheCourse" id="isNicheCourse" value="@ViewBag.isNicheCourse" />
+                    <input type="hidden" name="Mpng_ID" value="0" id="hdfMpng_ID" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Discipline</label>
+                                <select class="form-control" name="Discipline_ID" id="drpDiscipline_ID" required="">
+                                    <option value="">--Select--</option>
+                                    @{
+                                        SIIRepository.Adminservice.Discipline_Repository _objRepoD = new SIIRepository.Adminservice.Discipline_Repository();
+                                        System.Data.DataSet _dsD = _objRepoD.SELECT_DISCIPLINE_FOR_FORM("0", ViewBag.isNicheCourse.ToString());
+                                        if (_dsD != null)
+                                        {
+                                            if (_dsD.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsD.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["Discipline_ID"].ToString()">@_dr["Discipline"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Programme Level</label>
+                                <select class="form-control" name="ProgramLevel_Id" id="drpProgramLevel_Id" required="">
+                                    <option value="">--Select--</option>
+                                    @{
+                                        SIIRepository.Adminservice.ProgrammeLevel_Repository _objRepoP = new SIIRepository.Adminservice.ProgrammeLevel_Repository();
+                                        System.Data.DataSet _dsP = _objRepoP.SELECT_PROGRAMMELEVEL_FOR_FORM("0", ViewBag.isNicheCourse.ToString());
+                                        if (_dsP != null)
+                                        {
+                                            if (_dsP.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _dsP.Tables[0].Rows)
+                                                {
+                                                    <option value="@_dr["ProgramLevel_Id"].ToString()">@_dr["ProgramLevel"].ToString()</option>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="btnSave" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="panel-body">
+                <table id="tbl" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Srno</th>
+                            <th>Discipline</th>
+                            <th>Programme Level</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        @{
+                            SIIRepository.Adminservice.ProgrammeLevel_Repository _objRepo = new SIIRepository.Adminservice.ProgrammeLevel_Repository();
+                            System.Data.DataSet _ds = _objRepo.SELECT_Discipline_Programme_Mapping_FOR_FORM("0", ViewBag.isNicheCourse.ToString());
+                            if (_ds != null)
+                            {
+                                if (_ds.Tables[0].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@_dr["Discipline"].ToString()</td>
+                                            <td>@_dr["ProgramLevel"].ToString()</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-warning btnEdit" data-id="@_dr["Mpng_ID"].ToString()">Edit</a>
+                                                <a class="btn btn-sm btn-danger btnDelete" data-id="@_dr["Mpng_ID"].ToString()">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/Scipts/Areas/Admin/Masters/ProgramLevelMapping.js"></script>
+}

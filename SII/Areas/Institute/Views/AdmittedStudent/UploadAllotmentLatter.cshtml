@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "StudentsList";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Upload Admission Letter for @ViewBag.id <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <form id="frm" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="hdfid" name="id" value="@ViewBag.u" />
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Admission Letter</label>
+                                            <input id="fu" type="file" />
+                                            <small class="text-danger">Only PDF file is allowed with 3MB size.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-primary" id="btnSave">Upload</a>
+                                        <a class="btn btn-default" id="btnCancel" href="~/Institute/AdmittedStudent/Student/@TempData.Peek("ProgrammeLevel")">Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/jQueryConfirm/jquery-confirm.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+    <script src="~/assets/lib/jQueryConfirm/jcFunctions.js"></script>
+    <script src="~/assets/lib/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnSave').on('click', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var oldText = btn.text();
+
+                btn.text('Processing.....');
+                btn.attr('disabled', true);
+                btn.addClass('disabled');
+                var fileControl = $('#fu')
+                var fileUpload = $("#fu").get(0);
+                if (window.FormData !== undefined) {
+                    if (fileControl.get(0).files.length > 0) {
+                        var FileSize = fileControl.get(0).files[0].size;
+                        var fileExtension = ['pdf','jpg','jpeg'];
+                        if ($.inArray(fileControl.val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                            ErrorMessageCallBack("Only formats are allowed : " + fileExtension.join(', '), function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                        if ("3145728" >= FileSize) {
+                        }else {
+                            ErrorMessageCallBack("Only 3 Mb file size allow!", function () {
+                                btn.text(oldText);
+                                btn.removeAttr('disabled');
+                                btn.removeClass('disabled');
+                            });
+                            return;
+                        }
+                    } else {
+                        ErrorMessageCallBack("Please select file!", function () {
+                            btn.text(oldText);
+                            btn.removeAttr('disabled');
+                            btn.removeClass('disabled');
+                        });
+                        return;
+                    }
+                } else {
+                    ErrorMessageCallBack("Please select file!", function () {
+                        btn.text(oldText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    });
+                    return;
+                }
+
+
+                var files = fileUpload.files;
+                var fileData = new FormData();
+                fileData.append('id', $('#hdfid').val())
+                // Looping over all files and add it to FormData object  
+                for (var i = 0; i < files.length; i++) {
+                    fileData.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    method: 'POST',
+                    url: $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/UploadAllotmentLatterDoc',
+                    data: fileData,
+                    async: false,
+                    cache: false,
+                    contentType: false, // Not to set any content header
+                    processData: false
+                }).done(function (data) {
+                    if (data['c'] == 'success') {
+                        SuccessMessageCallBack(data['m'], function () {
+                            btn.text('Redirecting...');
+                            window.location.href = $('#hdfBaseUrl').val() + 'Institute/AdmittedStudent/Student/@TempData.Peek("ProgrammeLevel")';
+                        });
+                    } else if (data['c'] == 'sessionexpired') {
+                        ErrorMessage(data['m']);
+                        btn.text(btnText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    } else if (data['c'] == 'servererror') {
+                        ErrorMessage(data['m']);
+                        btn.text(btnText);
+                        btn.removeAttr('disabled');
+                        btn.removeClass('disabled');
+                    }
+                }).error(function () {
+                    ErrorMessage('Processing error. Kindly refresh page and try again!');
+                    btn.text(btnText);
+                    btn.removeAttr('disabled');
+                    btn.removeClass('disabled');
+                });
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Travel Guide | Foreign Students | India";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section metatags {
+    <meta name='Title' content='Travel Guide | Foreign Students | India' />
+    <meta name='description' content='Our travel guide helps international students to travel comfortably in India. This travel guide will reduce the challenges of the foreign students travelling in India for the first time or who are not frequent visitors.' />
+    <link rel="canonical" href="https://www.studyinindia.gov.in/planyourstay/travelguide" />
+
+}
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Plan Your Stay</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")planyourstay/travelguide">Plan Your Stay</a> / Travel Guide</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-xs-9 col-md-9 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+                <div class="section-title">
+                    <h3 class="inner-title"><span>Travel Guide</span></h3>
+                    <p class="text-justify">Depending on where and how you want to travel, India's wide infrastructure and transport connects each corner of the country to another. Be it by Air, Road, or Rail. </p>
+                    <p class="text-justify">India's rail network is the 4<sup>th</sup> longest and the most heavily used system in the world, according to World Bank Report, transporting 8.225 billion passengers and over 970 million tonnes of freight annually, as of 2015. Rail Tickets can be booked on Indian Railway's official booking website : <a href="https://www.irctc.co.in/" target="_blank">https://www.irctc.co.in/</a> </p>
+                    <p class="text-justify">Road travel can be booked via various state road transport portals online or aggregators like <a href="https://www.redbus.in/" target="_blank">www.RedBus.in</a></p>
+                    <p class="text-justify">Air tickets can be booked on <a href="https://www.air.irctc.co.in/" target="_blank">www.air.irctc.co.in/</a> or many travel aggregators like Yatra, MakeMyTrip, GoIbibo etc. </p>
+                    <p class="text-justify">Here is the list of state-wise international airports in India: </p>
+                    <ul class="list-style">
+                        <li><i class="fa fa-plane"></i> Veer Savarkar International Airport, Port Blair, Andaman and Nicobar Islands</li>
+                        <li><i class="fa fa-plane"></i> Lokpriya Gopinath Bordoloi International Airport, Guwahati, Assam</li>
+                        <li><i class="fa fa-plane"></i> Gaya Airport, Gaya, Bihar</li>
+                        <li><i class="fa fa-plane"></i> Indira Gandhi International Airport, New Delhi, Delhi</li>
+                        <li><i class="fa fa-plane"></i> Sardar Vallabhbhai Patel International Airport, Ahmedabad, Gujarat</li>
+                        <li><i class="fa fa-plane"></i> Kempegowda International Airport, Bengaluru, Karnataka</li>
+                        <li><i class="fa fa-plane"></i> Mangalore Airport, Mangalore, Karnataka</li>
+                        <li><i class="fa fa-plane"></i> Trivandrum International Airport, Thiruvananthapuram, Kerala</li>
+                        <li><i class="fa fa-plane"></i> Cochin International Airport, Kochi, Kerala</li>
+                        <li><i class="fa fa-plane"></i> Calicut International Airport, Kozhikode, Kerala</li>
+                        <li><i class="fa fa-plane"></i> Raja Bhoj Airport, Bhopal, Madhya Pradesh</li>
+                        <li><i class="fa fa-plane"></i> Devi Ahilyabai Holkar Airport, Indore, Madhya Pradesh</li>
+                        <li><i class="fa fa-plane"></i> Chhatrapati Shivaji International Airport, Mumbai, Maharashtra</li>
+                        <li><i class="fa fa-plane"></i> Dr. Babasaheb Ambedkar International Airport, Nagpur, Maharashtra</li>
+                        <li><i class="fa fa-plane"></i> Pune Airport, Pune, Maharashtra</li>
+                        <li><i class="fa fa-plane"></i> Zaruki International Airport, Shillong, Meghalaya</li>
+                        <li><i class="fa fa-plane"></i> Biju Patnaik International Airport, Bhubaneshwar, Odisha</li>
+                        <li><i class="fa fa-plane"></i> Sri Guru Ram Dass Jee International Airport, Amritsar, Punjab</li>
+                        <li><i class="fa fa-plane"></i> Jaipur International Airport, Jaipur, Rajasthan</li>
+                        <li><i class="fa fa-plane"></i> Tiruchirapalli International Airport, Tiruchirappalli, Tamil Nadu</li>
+                        <li><i class="fa fa-plane"></i> Chennai International Airport, Chennai, Tamil Nadu</li>
+                        <li><i class="fa fa-plane"></i> Civil Aerodrome, Coimbatore, Tamil Nadu</li>
+                        <li><i class="fa fa-plane"></i> Rajiv Gandhi International Airport, Hyderabad, Telangana</li>
+                        <li><i class="fa fa-plane"></i> Rajiv Gandhi International Airport, Hyderabad, Telangana</li>
+                        <li><i class="fa fa-plane"></i> Lal Bahadur Shastri International Airport, Varanasi, Uttar Pradesh</li>
+                        <li><i class="fa fa-plane"></i> Chaudhary Charan Singh Airport, Lucknow, Uttar Pradesh</li>
+                        <li><i class="fa fa-plane"></i> Netaji Subhash Chandra Bose International Airport, Kolkata, West Bengal</li>
+                    </ul>
+                    @*<table class="table table-bordered travel-table">
+                            <thead class="th-title">
+                                <tr>
+                                    <th>Name of the Airport</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Veer Savarkar International Airport </td>
+                                    <td>Port Blair </td>
+                                    <td>Andaman and Nicobar Islands</td>
+                                </tr>
+                                <tr>
+                                    <td>Lokpriya Gopinath Bordoloi International Airport </td>
+                                    <td>Guwahati </td>
+                                    <td>Assam</td>
+                                </tr>
+                                <tr>
+                                    <td>Gaya Airport </td>
+                                    <td>Gaya </td>
+                                    <td>Bihar</td>
+                                </tr>
+                                <tr>
+                                    <td>Indira Gandhi International Airport </td>
+                                    <td>New Delhi </td>
+                                    <td>Delhi</td>
+                                </tr>
+                                <tr>
+                                    <td>Sardar Vallabhbhai Patel International Airport </td>
+                                    <td>Ahmedabad </td>
+                                    <td>Gujarat</td>
+                                </tr>
+                                <tr>
+                                    <td>Kempegowda International Airport </td>
+                                    <td>Bengaluru </td>
+                                    <td>Karnataka</td>
+                                </tr>
+                                <tr>
+                                    <td>Mangalore Airport</td>
+                                    <td>Mangalore </td>
+                                    <td>Karnataka</td>
+                                </tr>
+                                <tr>
+                                    <td>Trivandrum International Airport </td>
+                                    <td>Thiruvananthapuram </td>
+                                    <td>Kerala</td>
+                                </tr>
+                                <tr>
+                                    <td>Cochin International Airport</td>
+                                    <td>Kochi </td>
+                                    <td>Kerala</td>
+                                </tr>
+                                <tr>
+                                    <td>Calicut International Airport </td>
+                                    <td>Kozhikode </td>
+                                    <td>Kerala</td>
+                                </tr>
+                                <tr>
+                                    <td>Raja Bhoj Airport
+                                    <td>Bhopal
+                                    <td>Madhya Pradesh</td>
+                                </tr>
+                                <tr>
+                                    <td>Devi Ahilyabai Holkar Airport </td>
+                                    <td>Indore </td>
+                                    <td>Madhya Pradesh </td>
+                                </tr>
+                                <tr>
+                                    <td>Chhatrapati Shivaji International Airport </td>
+                                    <td>Mumbai </td>
+                                    <td>Maharashtra </td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Babasaheb Ambedkar International Airport </td>
+                                    <td>Nagpur </td>
+                                    <td>Maharashtra </td>
+                                </tr>
+                                <tr>
+                                    <td>Pune Airport</td>
+                                    <td>Pune </td>
+                                    <td>Maharashtra </td>
+                                </tr>
+                                <tr>
+                                    <td>Zaruki International Airport</td>
+                                    <td>Shillong </td>
+                                    <td>Meghalaya </td>
+                                </tr>
+                                <tr>
+                                    <td>Biju Patnaik International Airport </td>
+                                    <td>Bhubaneshwar </td>
+                                    <td>Odisha </td>
+                                </tr>
+                                <tr>
+                                    <td>Sri Guru Ram Dass Jee International Airport </td>
+                                    <td>Amritsar </td>
+                                    <td>Punjab </td>
+                                </tr>
+                                <tr>
+                                    <td>Jaipur International Airport</td>
+                                    <td>Jaipur </td>
+                                    <td>Rajasthan </td>
+                                </tr>
+                                <tr>
+                                    <td>Tiruchirapalli International Airport </td>
+                                    <td>Tiruchirappalli </td>
+                                    <td>Tamil Nadu </td>
+                                </tr>
+                                <tr>
+                                    <td>Chennai International Airport </td>
+                                    <td>Chennai </td>
+                                    <td>Tamil Nadu </td>
+                                </tr>
+                                <tr>
+                                    <td>Civil Aerodrome </td>
+                                    <td>Coimbatore</td>
+                                    <td>Tamil Nadu</td>
+                                </tr>
+                                <tr>
+                                    <td>Rajiv Gandhi International Airport </td>
+                                    <td>Hyderabad</td>
+                                    <td>Telangana</td>
+                                </tr>
+                                <tr>
+                                    <td>Rajiv Gandhi International Airport </td>
+                                    <td>Hyderabad </td>
+                                    <td>Telangana</td>
+                                </tr>
+                                <tr>
+                                    <td>Lal Bahadur Shastri International Airport </td>
+                                    <td>Varanasi </td>
+                                    <td>Uttar Pradesh</td>
+                                </tr>
+                                <tr>
+                                    <td>Chaudhary Charan Singh Airport </td>
+                                    <td>Lucknow </td>
+                                    <td>Uttar Pradesh</td>
+                                </tr>
+                                <tr>
+                                    <td>Netaji Subhash Chandra Bose International Airport </td>
+                                    <td>Kolkata </td>
+                                    <td>West Bengal</td>
+                                </tr>
+                            </tbody>
+                        </table>*@
+
+                    <p class="text-justify">From high terrain mountains to beaches, from holy places of worship to avenues for spiritual learning, India's rich glorious past and promising future has lots to offer, be it historical monuments or modern commercial hubs.  </p>
+                    <p class="text-justify">For proper travel guidance and planning, follow the link: <A href="https://incredibleindia.org/" target="_blank">https://incredibleindia.org/</A> - The Incredible India Project by the Ministry of Culture and Tourism and plan your journey across the vast expanse of the nation.  </p>
+
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 wow fadeInRight" style="visibility: visible; animation-name: fadeInLeft;">
+                <div class="course-details-right">
+                    <h4>Plan Your Stay</h4>
+                    <ul>
+                        <li><i class="fa fa-caret-right blue-text" aria-hidden="true"></i> <a href="@Url.Content("~/")planyourstay/moneycosts">Money &amp; Costs </a></li>
+                        <li><i class="fa fa-caret-right blue-text" aria-hidden="true"></i> <a href="@Url.Content("~/")planyourstay/dosanddonts">Dos and Donts </a></li>
+                        <li><i class="fa fa-caret-right blue-text" aria-hidden="true"></i> <a href="@Url.Content("~/")planyourstay/travelguide">Travel Guide </a></li>
+                        <li><i class="fa fa-caret-right blue-text" aria-hidden="true"></i> <a href="@Url.Content("~/")planyourstay/accomodation">Accommodation </a></li>
+                        <li><i class="fa fa-caret-right blue-text" aria-hidden="true"></i> <a href="@Url.Content("~/")planyourstay/helplinenos">Help-line Nos </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

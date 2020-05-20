@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section metatags {
+    <meta name='Title' content='@ViewBag.BlogTitle' />
+    <meta name='keywords' content='@ViewBag.BlogMetaTags' />
+    <meta name='description' content='@ViewBag.BlogMetaDescription' />
+    <link rel="canonical" href="https://www.studyinindia.gov.in/blog/Page/@ViewBag.UniqueCode" />
+
+}
+<div class="inner-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="inner-title-left">
+                    <h2>Study in India Blogs</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inner-ttile-right text-right">
+                    <h4><a href="@Url.Content("~/")">Home</a> / Blogs</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="service-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 wow fadeInRight">
+                <h2 class="text-center">@ViewBag.BlogTitle</h2>
+                <div class="blog-header-image">
+                    <img src="@Url.Content("~/")@ViewBag.BlogImage" style="" />
+                </div>
+                <div class="col-md-2">
+                    <small class="blog-datetime"><i class="fa fa-calendar"></i> @ViewBag.CreatedDate</small>
+                    <small class="blog-datetime"><i class="fa fa-clock-o"></i> @ViewBag.CreatedTime</small>
+                    <hr />
+                    <h4>Tags</h4>
+                    @foreach (string str in (string[])ViewBag.BlogTag)
+                    {
+                        <label class="badge badge-custom">#@str</label>
+                    }
+                </div>
+                <div class="col-md-10 blog-content">
+                    @(new HtmlString(ViewBag.BlogContent))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <style>
+        .blog-content {
+            width: 80%;
+            position: inherit;
+            padding: 25px;
+            background: #fff;
+            /*border:1px solid #dddddd;*/
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+            margin-top: -100px;
+            margin-right: 20px;
+            font-family: 'Roboto Slab',serif;
+            font-size: 15px;
+        }
+
+            .blog-content img {
+                width: 100%;
+            }
+
+        .blog-datetime {
+            color: #1f3486;
+            float: left;
+            font-size: 15px;
+            padding: 9px 0 4px 35px;
+            width: 100%;
+        }
+
+            .blog-datetime i {
+                color: #f68522;
+                font-size: 30px;
+                margin-left: -35px;
+                margin-right: 0;
+                margin-top: -2px;
+                position: absolute;
+            }
+
+        .blog-header-image {
+            height: 450px;
+            overflow: hidden;
+        }
+
+            .blog-header-image img {
+                margin-top: -50px;
+                width: 100%;
+                margin-bottom: 3px;
+            }
+
+        .blog-left {
+            float: left;
+        }
+
+            .blog-left hr {
+                width: 100%;
+                float: left;
+            }
+
+        .badge-custom {
+            background-color: #C10C2A;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .blog-content p span {
+            font-family: 'Roboto Slab',serif !important;
+            line-height: 22px;
+        }
+    </style>
+}

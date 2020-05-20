@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Admitted Student<span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-custom">
+            <div class="tab-container">
+                <div class="tab-content">
+                    <h3>Admitted Student </h3>
+                    <div class="row">
+                        <div class="col-md-12 table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr No</th>
+                                        <th>Student ID</th>
+                                        <th>Status</th>
+                                        <th>Student Admission Status</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Country</th>
+                                        <th>Program Level</th>
+                                        <th>Discpline</th>
+                                        <th>Qualification</th>
+                                        <th>Course of Study</th>
+                                        <th>Fee Waivers</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @*Session["InstituteID"].ToString()*@
+                                    @{
+                                        SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository(); //
+                                                                                                                                                        System.Data.DataSet _ds = _objRepository.Addmiited_Student_List("0", "SeatAllocated", "SeatAllocated", "0", "", "", Session["InstituteID"].ToString());
+                                        if (_ds != null)
+                                        {
+
+                                            if (_ds.Tables[0].Rows.Count > 0)
+                                            {
+                                                foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                                                {
+                                                    <tr>
+                                                        <td>@_dr["RowNo"].ToString()</td>
+                                                        <td><a href="@Url.Action("Index", "ViewStudentData", new { Area = "Institute" , studentid = @_dr["Student_ID"].ToString(), Name = _dr["FirstName"].ToString() + " " + _dr["LastnAME"].ToString(), Choice_ID = _dr["Choice_ID"].ToString() })" @*target="_blank"*@>@_dr["Student_ID"].ToString()</a></td>
+                                                        <td>@_dr["SeatApprove"].ToString()</td>
+                                                        <td>@_dr["IsStudentAcceptSeat"].ToString()</td>
+                                                        <td>@_dr["FirstName"].ToString()  @_dr["LastnAME"].ToString()</td>
+                                                        <td>@_dr["Email"].ToString()</td>
+                                                        <td>@_dr["Mobile"].ToString()</td>
+                                                        <td>@_dr["Studentcountry_name"].ToString()</td>
+                                                        <td>@_dr["ProgramLevel"].ToString()</td>
+                                                        <td>@_dr["Discipline"].ToString()</td>
+                                                        <td>@_dr["NatureOfCourse"].ToString()</td>
+                                                        <td>@_dr["BranchName"].ToString()</td>
+                                                        <td>@_dr["AllocateSeatIn"].ToString()</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section styles{
+    <link href="~/assets/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/assets/lib/parsley/parsley.min.js"></script>
+}

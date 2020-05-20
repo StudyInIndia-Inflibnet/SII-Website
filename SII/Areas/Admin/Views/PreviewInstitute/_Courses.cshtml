@@ -1,0 +1,142 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        @{
+            SIIRepository.Institute.InstituteRepository _objRepository = new SIIRepository.Institute.InstituteRepository();
+            System.Data.DataSet _ds = _objRepository.Get_Dashboard_Modal_Data(TempData.Peek("InstituteID").ToString(), "Courses");
+            if (_ds != null)
+            {
+                <h2 class="text-center">Courses</h2>
+                <h4>Courses Offer</h4>
+                if (_ds.Tables[0].Rows.Count > 0)
+                {
+                    int indexInternationalCollaboration = 1;
+
+                    <table class="table table-bordered">
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[0].Rows)
+                        {
+
+                            <tr>
+                                <td>@(indexInternationalCollaboration++)</td>
+                                <td>
+                                    <h4>Courses Details</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Discipline: <strong>@_dr["Discipline"].ToString()</strong></td>
+                                            <td>Program Level: <strong>@_dr["ProgramLevel"].ToString()</strong></td>
+                                            <td colspan="2">Name of Course: <strong>@_dr["Natureofcourse"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Branch/Subject: <strong>@_dr["BranchName"].ToString()</strong></td>
+                                            <td>Eligibility Criteria: <strong>@_dr["EligibilityCriteria"].ToString()</strong></td>
+                                            <td colspan="2">Total seat offer to foreign student: <strong>@_dr["SeatForForeignStudent"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                    <h4>Annual Fees</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Annual tution fees per Seat: <strong>@_dr["AnnualTutionFeesCurrency"].ToString() - @_dr["AnnualTutionFees"].ToString()</strong></td>
+                                            <td>Annual total fees per Seat: <strong>@_dr["AnnualBoardingFeesCurrency"].ToString() - @_dr["AnnualBoardingFees"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Annual Tuition Fees (SAARC Country): <strong>@_dr["FeesForSAARCCountryCurrency"].ToString() - @_dr["FeesForSAARCCountry"].ToString()</strong></td>
+                                            <td>Annual Tuition Fees (NonSAARC Country): <strong>@_dr["FeesForNonSAARCCountryCurrency"].ToString() - @_dr["FeesForNonSAARCCountry"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                    <h4>Tuition Fee Waiver seat allocation</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>100% waiver in tuition fees(G1 scheme): <strong>@_dr["G1SeatWaiver"].ToString()</strong></td>
+                                            <td>50% waiver in tuition fees(G2 scheme): <strong>@_dr["G2SeatWaiver"].ToString()</strong></td>
+                                            <td>25% waiver in tuition fees(G3 scheme): <strong>@_dr["G3SeatWaiver"].ToString()</strong></td>
+                                            <td>0% waiver in tuition fees(G4 scheme): <strong>@_dr["G4SeatWaiver"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                    <h4>Other Details</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Credits : <strong>@_dr["Credits"].ToString()</strong></td>
+                                            <td>Course Duration(in Months) : <strong>@_dr["CourseDurations"].ToString()</strong></td>
+                                            <td>Classroom Hours : <strong>@_dr["ClassRoomHours"].ToString()</strong></td>
+                                            <td>Examination/Course Pattern : <strong>@_dr["CoursePatterns"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Course Description : <strong>@_dr["CourseDesc"].ToString()</strong></td>
+                                            <td colspan="2">Admission & entry requirements : <strong>@_dr["AdmissionReq"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+                <h4>Bridge Courses</h4>
+                if (_ds.Tables[1].Rows.Count > 0)
+                {
+                    int indexInternationalCollaboration = 1;
+                    <table class="table table-bordered">
+                        @foreach (System.Data.DataRow _dr in _ds.Tables[1].Rows)
+                        {
+                            <tr>
+                                <td>
+                                    @(indexInternationalCollaboration++)
+                                </td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td colspan="4">Language Courses for International Students: <strong>@_dr["CourseName"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Language : <strong>@_dr["CourseName"].ToString()</strong></td>
+                                            <td>Duration : <strong>@_dr["Duration"].ToString() - @_dr["DurationType"].ToString()</strong></td>
+                                            <td>Total seat offer to foreign student : <strong>@_dr["NumberOfSeats"].ToString()</strong></td>
+                                            <td>Classroom Hours : <strong>@_dr["ClassRoomHours"].ToString()</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Fees for SAARC Country per Seat: <strong>@_dr["FeesForSAARCCountryCurrency"].ToString() - @_dr["FeesForSAARCCountry"].ToString()</strong></td>
+                                            <td colspan="2">Fees for NonSAARC Country per seat: <strong>@_dr["FeesForNonSAARCCountryCurrency"].ToString() - @_dr["FeesForNonSAARCCountry"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                    <h4>Tuition Fee Waiver seat allocation</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>100% waiver in tuition fees(G1 scheme): <strong>@_dr["G1SeatWaiver"].ToString()</strong></td>
+                                            <td>50% waiver in tuition fees(G2 scheme): <strong>@_dr["G2SeatWaiver"].ToString()</strong></td>
+                                            <td>25% waiver in tuition fees(G3 scheme): <strong>@_dr["G3SeatWaiver"].ToString()</strong></td>
+                                            <td>0% waiver in tuition fees(G4 scheme): <strong>@_dr["G4SeatWaiver"].ToString()</strong></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>No data available.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+
+            }
+            else
+            {
+                <h2>No data available.</h2>
+            }
+        }
+    </div>
+</div>

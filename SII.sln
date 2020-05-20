@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SII", "SII\SII.csproj", "{76F8D403-5F9F-46D5-B05D-6520CD828847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIIModel", "SIIModel\SIIModel.csproj", "{45A0924F-CEA9-47AF-BC19-F3F3C748E4FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIIRepository", "SIIRepository\SIIRepository.csproj", "{2D411E00-41B0-4A45-A90B-33931C5A2BB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76F8D403-5F9F-46D5-B05D-6520CD828847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F8D403-5F9F-46D5-B05D-6520CD828847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F8D403-5F9F-46D5-B05D-6520CD828847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F8D403-5F9F-46D5-B05D-6520CD828847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A0924F-CEA9-47AF-BC19-F3F3C748E4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A0924F-CEA9-47AF-BC19-F3F3C748E4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A0924F-CEA9-47AF-BC19-F3F3C748E4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A0924F-CEA9-47AF-BC19-F3F3C748E4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D411E00-41B0-4A45-A90B-33931C5A2BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D411E00-41B0-4A45-A90B-33931C5A2BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D411E00-41B0-4A45-A90B-33931C5A2BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D411E00-41B0-4A45-A90B-33931C5A2BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+﻿
+
+
+
+@if (ViewBag.For == "All")
+{
+    @Html.Partial("All")
+}
+else if (ViewBag.For == "ProgrammeType")
+{
+    @Html.Partial("ProgrammeType")
+}
+else if (ViewBag.For == "Country")
+{
+    @Html.Partial("Country")
+}
