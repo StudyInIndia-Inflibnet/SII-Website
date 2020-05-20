@@ -34,7 +34,10 @@
                     <tbody id="tbody">
                         @{
                             SIIRepository.StudentRegService.ChoiceFillingRepository _objRepo = new SIIRepository.StudentRegService.ChoiceFillingRepository();
-                            System.Data.DataSet _ds = _objRepo.Opr_DocumentUpload("SELECT", Session["studentid"].ToString());
+                            System.Data.DataSet _ds = _objRepo.Opr_DocumentUpload(new SIIModel.StudentRegister.StudentDocumentVerification {
+                                Type = "SELECT",
+                                studentid = Session["studentid"].ToString()
+                            });
                             if (_ds != null)
                             {
                                 if (_ds.Tables[0].Rows.Count > 0)
@@ -78,13 +81,12 @@
                                                 <td>
                                                     @if (_dr["Reason"].ToString() != "Percentage Mismatch")
                                                     {
-                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-upload"></i> Upload</button>
+                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()" data-type="Upload" data-recordid="@_dr["EC_ID"].ToString()" ><i class="fa fa-upload"></i> Upload</button>
                                                     }
                                                     else
                                                     {
-                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-check-square"></i> Update</button>
+                                                        <button id="btn@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()" data-type="EQ"  data-recordid="@_dr["EC_ID"].ToString()"><i class="fa fa-check-square"></i> Update</button>
                                                     }
-
                                                 </td>
                                             } 
                                             else if (_dr["IsVerified"].ToString() == "Verified")
@@ -164,11 +166,11 @@
                                                 <td>
                                                     @if (_dr["Reason"].ToString() != "Percentage Mismatch")
                                                     {
-                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-upload"></i> Upload</button>
+                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()" data-type="Upload"  data-recordid="@_dr["AE_ID"].ToString()"><i class="fa fa-upload"></i> Upload</button>
                                                     }
                                                     else
                                                     {
-                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()"><i class="fa fa-check-square"></i> Update</button>
+                                                        <button type="submit" class="btn btn-sm btn-info btn-upload-doc" data-docid="@_dr["ID"].ToString()" data-id="@_dr["EQ_AE_ID"].ToString()" data-for="@_dr["EQ_AE_For"].ToString()" data-type="AE"  data-recordid="@_dr["AE_ID"].ToString()"><i class="fa fa-check-square"></i> Update</button>
                                                     }
                                                 </td>
                                             }
@@ -197,10 +199,6 @@
                         }
                     </tbody>
                 </table>
-                @*Hello Work Text Changed*@  
-
-
-
                 <div class="row">
                     <div class="col-md-12">
                         <p style="color:red;"><strong>Disclosure :</strong> <span>Please upload a single document against each qualification in PDF, JPEG, JPG format of file size not more than 2 MB.</span></p>

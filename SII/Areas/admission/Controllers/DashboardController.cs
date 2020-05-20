@@ -284,72 +284,60 @@ namespace SII.Areas.admission.Controllers
             }
             return View();
         }
-        [CloseStudentChoiceFilling]
         [SessionExpireStudent]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult UploadDocs(string id = "", string name = "", string docid = "", string MainPart = "0", string DeciamlPart = "0", string Score = "")
+        public JsonResult UploadDocs(StudentDocumentVerification _obj)
         {
-            mStudent_Ch_Doc_Upload _obj = new mStudent_Ch_Doc_Upload();
+            // mStudent_Ch_Doc_Upload _obj = new mStudent_Ch_Doc_Upload();
             string Message = string.Empty, Code = string.Empty, Error = string.Empty;
             try
             {
                 string path = "";
                 string filename = "";
                 string fname = "";
-                if (Request.Files.Count > 0)
+                if (_obj.For == "Upload")
                 {
-                    if (Request.Files[0].ContentLength > 0)
+                    if (Request.Files.Count > 0)
                     {
-                        HttpFileCollectionBase files = Request.Files;
-                        path = AppDomain.CurrentDomain.BaseDirectory + "Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/";
-                        filename = Path.GetFileName(Request.Files[0].FileName);
-                        HttpPostedFileBase file = files[0];
-                        name = name.Trim().Replace(" / ", "_");
-                        name = name.Trim().Replace("/", "");
-                        name = name.Trim().Replace(" ", "");
-                        name = name.Trim().Replace("//", "_");
-                        name = name.Trim().Replace("(", "_");
-                        name = name.Trim().Replace(")", "_");
-                        name = name.Trim().Replace(",", "");
-                        filename = name + "_" + Session["ApplicationNo"].ToString() + Path.GetExtension(file.FileName);
-                        if (!Directory.Exists(path))
+                        if (Request.Files[0].ContentLength > 0)
                         {
-                            Directory.CreateDirectory(path);
-                        }
-                        else
-                        {
-                            string[] curentfiles = Directory.GetFiles(path);
-                            foreach (string curentfile in curentfiles)
+                            HttpFileCollectionBase files = Request.Files;
+                            path = AppDomain.CurrentDomain.BaseDirectory + "Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/";
+                            filename = Path.GetFileName(Request.Files[0].FileName);
+                            HttpPostedFileBase file = files[0];
+                            _obj.name = _obj.name.Trim().Replace(" / ", "_");
+                            _obj.name = _obj.name.Trim().Replace("/", "");
+                            _obj.name = _obj.name.Trim().Replace(" ", "");
+                            _obj.name = _obj.name.Trim().Replace("//", "_");
+                            _obj.name = _obj.name.Trim().Replace("(", "_");
+                            _obj.name = _obj.name.Trim().Replace(")", "_");
+                            _obj.name = _obj.name.Trim().Replace(",", "");
+                            filename = _obj.name + "_" + Session["ApplicationNo"].ToString() + Path.GetExtension(file.FileName);
+                            if (!Directory.Exists(path))
                             {
-                                if (curentfile.IndexOf(filename) >= 0)
-                                    System.IO.File.Delete(curentfile);
-                            }
-                        }
-
-                        fname = Path.Combine(Server.MapPath("~/Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/"), filename);
-                        file.SaveAs(fname);
-                        _obj.Path = "Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/" + filename;
-
-                        ChoiceFillingRepository _objRepo = new ChoiceFillingRepository();
-                        DataSet _ds = _objRepo.Opr_DocumentUpload("UPDATE", Session["studentid"].ToString(), docid, _obj.Path);
-                        if (_ds != null)
-                        {
-                            if (_ds.Tables[0].Rows.Count > 0)
-                            {
-                                Message = "Document uploaded successfully!";
-                                Code = "success";
+                                Directory.CreateDirectory(path);
                             }
                             else
                             {
-                                Message = "Error from server side. Kindly refresh the page and try again.";
-                                Code = "servererror";
+                                string[] curentfiles = Directory.GetFiles(path);
+                                foreach (string curentfile in curentfiles)
+                                {
+                                    if (curentfile.IndexOf(filename) >= 0)
+                                        System.IO.File.Delete(curentfile);
+                                }
                             }
+
+                            fname = Path.Combine(Server.MapPath("~/Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/"), filename);
+                            file.SaveAs(fname);
+                            _obj.Path = "Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/" + filename;
+                            
                         }
                         else
                         {
                             Message = "Error from server side. Kindly refresh the page and try again.";
                             Code = "servererror";
+                            _obj.Path = "";
                         }
                     }
                     else
@@ -359,11 +347,35 @@ namespace SII.Areas.admission.Controllers
                         _obj.Path = "";
                     }
                 }
+                else if (_obj.For == "EQ")
+                {
+
+                }
+                else if (_obj.For == "AE")
+                {
+
+                }
+                _obj.Type = "UPDATE";
+                _obj.studentid = Session["studentid"].ToString();
+                ChoiceFillingRepository _objRepo = new ChoiceFillingRepository();
+                DataSet _ds = _objRepo.Opr_DocumentUpload(_obj);
+                if (_ds != null)
+                {
+                    if (_ds.Tables[0].Rows.Count > 0)
+                    {
+                        Message = "Document uploaded successfully!";
+                        Code = "success";
+                    }
+                    else
+                    {
+                        Message = "Error from server side. Kindly refresh the page and try again.";
+                        Code = "servererror";
+                    }
+                }
                 else
                 {
                     Message = "Error from server side. Kindly refresh the page and try again.";
                     Code = "servererror";
-                    _obj.Path = "";
                 }
             }
             catch (NullReferenceException)

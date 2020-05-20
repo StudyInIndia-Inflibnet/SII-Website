@@ -805,16 +805,22 @@ namespace SIIRepository.StudentRegService
             }
         }
 
-        public DataSet Opr_DocumentUpload(string Type= "", string studentid="", string ID = "", string Path = "")
+        public DataSet Opr_DocumentUpload(StudentDocumentVerification _obj)
         {
             try
             {
                 _cn.Open();
                 SqlCommand _cmd = new SqlCommand("Opr_DocumentUpload", _cn);
-                _cmd.Parameters.AddWithValue("@studentid", studentid);
-                _cmd.Parameters.AddWithValue("@Type", Type);
-                _cmd.Parameters.AddWithValue("@ID", ID);
-                _cmd.Parameters.AddWithValue("@Path", Path);
+
+                _cmd.Parameters.AddWithValue("@Type", _obj.Type);
+                _cmd.Parameters.AddWithValue("@For", _obj.For);
+                _cmd.Parameters.AddWithValue("@studentid", _obj.studentid);
+                _cmd.Parameters.AddWithValue("@ID", _obj.ID);
+                _cmd.Parameters.AddWithValue("@Path", _obj.Path);
+                _cmd.Parameters.AddWithValue("@MainPart", _obj.MainPart);
+                _cmd.Parameters.AddWithValue("@DeciamlPart", _obj.DeciamlPart);
+                _cmd.Parameters.AddWithValue("@EQ_AE_ID", _obj.EQ_AE_ID);
+                _cmd.Parameters.AddWithValue("@Score", _obj.Score);
                 _cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter _adp = new SqlDataAdapter(_cmd);
                 DataSet _ds = new DataSet();

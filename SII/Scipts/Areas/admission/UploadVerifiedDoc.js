@@ -15,29 +15,35 @@ function page_click() {
             r = a.attr("data-id"),
             docid = a.attr("data-docid"),
             s = a.attr("data-for"),
-            t = $("#frm" + s + "_" + r);
+            t = $("#frm" + s + "_" + r),
+            For = a.attr('data-type'),
+            rid = a.attr('data-recordid');
         if (t.parsley().validate(), !t.parsley().isValid()) return !1;
         var i = a.html();
         if (a.hasClass("disabled")) return !1;
         a.text("Processing....."), a.attr("disabled", !0), a.addClass("disabled");
-        var o = $("#fuDoc" + s + "_" + r).get(0);
-        if (void 0 !== window.FormData && $("#fuDoc" + s + "_" + r).get(0).files.length > 0) {
-            var l = $("#fuDoc" + s + "_" + r).get(0).files[0].size,
-                d = ["pdf", "jpeg", "jpg"];
-            if (-1 == $.inArray($("#fuDoc" + s + "_" + r).val().split(".").pop().toLowerCase(), d)) return void ErrorMessageCallBack("Only formats are allowed : " + d.join(", "), function () {
-                a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
-            });
-            if (!("2097152" >= l)) return void ErrorMessageCallBack("Only 2 Mb file size allow!", function () {
-                a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
-            })
+        var c = new FormData();
+        if (For == 'Upload') {
+            var o = $("#fuDoc" + s + "_" + r).get(0);
+            if (void 0 !== window.FormData && $("#fuDoc" + s + "_" + r).get(0).files.length > 0) {
+                var l = $("#fuDoc" + s + "_" + r).get(0).files[0].size,
+                    d = ["pdf", "jpeg", "jpg"];
+                if (-1 == $.inArray($("#fuDoc" + s + "_" + r).val().split(".").pop().toLowerCase(), d)) return void ErrorMessageCallBack("Only formats are allowed : " + d.join(", "), function () {
+                    a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
+                });
+                if (!("2097152" >= l)) return void ErrorMessageCallBack("Only 2 Mb file size allow!", function () {
+                    a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
+                })
+            }
+            for (var n = o.files, f = 0; f < n.length; f++) c.append(n[f].name, n[f]);
         }
-        for (var n = o.files, c = new FormData, f = 0; f < n.length; f++) c.append(n[f].name, n[f]);
-        c.append("id", r);
-        c.append('docid', docid);
+        c.append('ID', docid);
+        c.append('EQ_AE_ID', rid);
         c.append("name", a.parent().parent().parent().find("td:eq(0)").find('.lblFileName').text());
-        c.append("MainPart", a.parent().parent().parent().find("td:eq(0)").find('.drpPercentageMainPart').text());
-        c.append("DeciamlPart", a.parent().parent().parent().find("td:eq(0)").find('.drpPercentageDeciamlPart').text());
-        c.append("Score", a.parent().parent().parent().find("td:eq(0)").find('.drpAEScore').text());
+        c.append("MainPart", a.parent().prev().find('.drpPercentageMainPart').val());
+        c.append("DeciamlPart", a.parent().prev().find('.drpPercentageDeciamlPart').val());
+        c.append("Score", a.parent().prev().find('.drpAEScore').val());
+        c.append("For", For);
         c.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]', t).val());
         $.ajax({
             method: "POST",
@@ -46,10 +52,12 @@ function page_click() {
             async: !1,
             cache: !1,
             contentType: !1,
-            processData: !1
+            processData: !1,
         }).done(function (e) {
             "success" == e.c ? SuccessMessageCallBack(e.m, function () {
-                $("#td" + s + "_" + r).html('<a class="label label-success" href="' + $("#hdfBaseUrl").val() + e.p + '" target="_blank"><i class="fa fa-download"></i> View</a>'), $("#hdf" + s + "_" + r).val(e.p), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
+                $("#td" + s + "_" + r).html('<a class="label label-success" href="' + $("#hdfBaseUrl").val() + e.p + '" target="_blank"><i class="fa fa-download"></i> View</a>'), $("#hdf" + s + "_" + r).val(e.p), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled");
+                a.parent().next().find('a.label').attr('href', $("#hdfBaseUrl").val() + e.p)
+                //window.location.href = window.location.href;
             }, function () {
                 a.text(i), a.removeAttr("disabled"), a.removeClass("disabled")
             }) : "alreadyexists" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "sessionexpired" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "servererror" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "DSPClosed" == e.c && ErrorMessageCallBack(e.m, function () {

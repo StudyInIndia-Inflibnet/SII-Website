@@ -25,4 +25,17 @@
         public string IndSATCenter { get; set; }
         public string DocumentVerified { get; set; }
     }
+    public class StudentDocumentVerification
+    {
+        public string ID { get; set; }
+        public string name { get; set; }
+        public string For { get; set; }
+        public string Type { get; set; }
+        public string studentid { get; set; }
+        public string Path { get; set; }
+        public string MainPart { get; set; }
+        public string DeciamlPart { get; set; }
+        public string EQ_AE_ID { get; set; }
+        public string Score { get; set; }
+    }
 }

@@ -11,7 +11,7 @@ namespace SII.Areas.Admin.Controllers
         {
             Session["Phase"] = "Phase-1";
             Session["ParticipatedYear"] = ConfigurationManager.AppSettings["ParticipatedYear"].ToString();
-            if (Session["is_doc_verification"].ToString().ToLower() == "true")
+            if (Session["is_doc_verification"].ToString().ToLower() == "true" && Session["is_admin"].ToString().ToLower() == "false")
             {
                 return Redirect("~/Admin/VerifyDocuments");
             }
@@ -25,7 +25,7 @@ namespace SII.Areas.Admin.Controllers
         {
             Session["Phase"] = "Phase-2";
             Session["ParticipatedYear"] = ConfigurationManager.AppSettings["ParticipatedYear"].ToString();
-            if (Session["is_doc_verification"].ToString().ToLower() == "true")
+            if (Session["is_doc_verification"].ToString().ToLower() == "true" && Session["is_admin"].ToString().ToLower() == "false")
             {
                 return Redirect("~/Admin/VerifyDocuments");
             }
@@ -39,7 +39,7 @@ namespace SII.Areas.Admin.Controllers
         {
             Session["Phase"] = "Phase-3";
             Session["ParticipatedYear"] = ConfigurationManager.AppSettings["ParticipatedYear"].ToString();
-            if (Session["is_doc_verification"].ToString().ToLower() == "true")
+            if (Session["is_doc_verification"].ToString().ToLower() == "true" && Session["is_admin"].ToString().ToLower() == "false")
             {
                 return Redirect("~/Admin/VerifyDocuments");
             }
