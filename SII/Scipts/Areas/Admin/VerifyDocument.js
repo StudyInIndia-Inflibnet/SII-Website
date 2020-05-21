@@ -99,19 +99,19 @@ function page_change() {
             r.find('.rejected').show();
             r.find('.verified').hide();
             r.attr('required', true).trigger('change');
-            //c.removeAttr('disabled').val(c.attr('data-value'));
+            c.removeAttr('disabled').val(c.attr('data-value'));
         } else if (chk.val() == 'Verified') {
             r.find('.rejected').hide();
             r.find('.verified').show();
             r.removeAttr('required');
             r.attr('disabled', true).val('Verified').trigger('change');
-            //c.attr('disabled', true).val('Verified');
+            c.attr('disabled', true).val('Verified');
         } else {
             r.find('.rejected').hide();
             r.find('.verified').show();
             r.removeAttr('required');
             r.attr('disabled', true).val(r.attr('data-value')).trigger('change');
-            //c.attr('disabled', true).val(c.attr('data-value'));
+            c.attr('disabled', true).val(c.attr('data-value'));
         }
     });
     $(document).on('change', '.Reason', function (e) {
@@ -130,10 +130,7 @@ function page_change() {
 }
 
 function trigger_isverified() {
-    $(".listEQ").find('.IsVerified').each(function () {
-        $(this).trigger('change');
-    });
-    $(".listAE").find('.IsVerified').each(function () {
+    $(document).find('.IsVerified').each(function () {
         $(this).trigger('change');
     });
 }
