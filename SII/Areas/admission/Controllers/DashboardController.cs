@@ -331,7 +331,7 @@ namespace SII.Areas.admission.Controllers
                             fname = Path.Combine(Server.MapPath("~/Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/"), filename);
                             file.SaveAs(fname);
                             _obj.Path = "Uploads/studentDocument/" + Session["studentid"].ToString() + "/" + Session["ApplicationNo"].ToString() + "/" + filename;
-                            
+
                         }
                         else
                         {
@@ -363,8 +363,21 @@ namespace SII.Areas.admission.Controllers
                 {
                     if (_ds.Tables[0].Rows.Count > 0)
                     {
-                        Message = "Document uploaded successfully!";
-                        Code = "success";
+                        if (_ds.Tables[0].Rows[0]["COUNTS"].ToString() == "1")
+                        {
+                            Message = "Document uploaded successfully!";
+                            Code = "success";
+                        }
+                        else if (_ds.Tables[0].Rows[0]["COUNTS"].ToString() == "-1")
+                        {
+                            Message = "Timeout!";
+                            Code = "timeout";
+                        }
+                        else
+                        {
+                            Message = "Error from server side. Kindly refresh the page and try again.";
+                            Code = "servererror";
+                        }
                     }
                     else
                     {

@@ -54,15 +54,49 @@ function page_click() {
             contentType: !1,
             processData: !1,
         }).done(function (e) {
-            "success" == e.c ? SuccessMessageCallBack(e.m, function () {
-                $("#td" + s + "_" + r).html('<a class="label label-success" href="' + $("#hdfBaseUrl").val() + e.p + '" target="_blank"><i class="fa fa-download"></i> View</a>'), $("#hdf" + s + "_" + r).val(e.p), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled");
-                a.parent().next().find('a.label').attr('href', $("#hdfBaseUrl").val() + e.p)
-                //window.location.href = window.location.href;
-            }, function () {
-                a.text(i), a.removeAttr("disabled"), a.removeClass("disabled")
-            }) : "alreadyexists" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "sessionexpired" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "servererror" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "DSPClosed" == e.c && ErrorMessageCallBack(e.m, function () {
-                window.location.href = $("#hdfBaseUrl").val() + "admission/Dashboard"
-            })
+            if ("success" == e.c) {
+                SuccessMessageCallBack(e.m, function () {
+                    $("#td" + s + "_" + r).html('<a class="label label-success" href="' + $("#hdfBaseUrl").val() + e.p + '" target="_blank"><i class="fa fa-download"></i> View</a>');
+                    $("#hdf" + s + "_" + r).val(e.p); a.html(i);
+                    a.removeAttr("disabled");
+                    a.removeClass("disabled");
+                    a.parent().next().find('a.label').attr('href', $("#hdfBaseUrl").val() + e.p);
+                    window.location.href = window.location.href;
+                }, function () {
+                    a.text(i), a.removeAttr("disabled"), a.removeClass("disabled")
+                })
+            } else if ("timeout" == e.c) {
+                ErrorMessageCallBack(e.m, function () {
+                    window.location.href = window.location.href;
+                });
+                a.html(i);
+                a.removeAttr("disabled");
+                a.removeClass("disabled");
+            } else if ("alreadyexists" == e.c) {
+                ErrorMessage(e.m);
+                a.html(i);
+                a.removeAttr("disabled");
+                a.removeClass("disabled");
+            } else if ("sessionexpired" == e.c) {
+                ErrorMessage(e.m);
+                a.html(i);
+                a.removeAttr("disabled");
+                a.removeClass("disabled");
+            } else if ("servererror" == e.c) {
+                ErrorMessage(e.m);
+                a.html(i);
+                a.removeAttr("disabled");
+                a.removeClass("disabled");
+            }
+            //"success" == e.c ? SuccessMessageCallBack(e.m, function () {
+            //    $("#td" + s + "_" + r).html('<a class="label label-success" href="' + $("#hdfBaseUrl").val() + e.p + '" target="_blank"><i class="fa fa-download"></i> View</a>'), $("#hdf" + s + "_" + r).val(e.p), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled");
+            //    a.parent().next().find('a.label').attr('href', $("#hdfBaseUrl").val() + e.p)
+            //    //window.location.href = window.location.href;
+            //}, function () {
+            //    a.text(i), a.removeAttr("disabled"), a.removeClass("disabled")
+            //}) : "alreadyexists" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "sessionexpired" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "servererror" == e.c ? (ErrorMessage(e.m), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")) : "DSPClosed" == e.c && ErrorMessageCallBack(e.m, function () {
+            //    window.location.href = $("#hdfBaseUrl").val() + "admission/Dashboard"
+            //})
         }).error(function () {
             ErrorMessage("Processing error. Kindly refresh page and try again!"), a.html(i), a.removeAttr("disabled"), a.removeClass("disabled")
         })

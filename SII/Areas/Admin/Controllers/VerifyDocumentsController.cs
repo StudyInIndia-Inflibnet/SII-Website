@@ -34,6 +34,12 @@ namespace SII.Areas.Admin.Controllers
             ViewBag.CurrentMenu = "VerifyDocuments";
             return View();
         }
+        public ActionResult Timeouts()
+        {
+            ViewBag.CurrentMenu = "VerifyDocuments";
+            return View();
+        }
+        
         public ActionResult StudentData(string id)
         {
             ViewBag.CurrentMenu = "VerifyDocuments";

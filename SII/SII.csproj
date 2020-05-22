@@ -540,6 +540,7 @@
     <Content Include="Areas\Admin\Views\ActivationLinkGenerator\Index.cshtml" />
     <Content Include="Areas\admission\Views\IndSATCredentials\Index.cshtml" />
     <Content Include="Areas\admission\Views\Registrations\Index - Copy.cshtml" />
+    <Content Include="Areas\Admin\Views\VerifyDocuments\Timeouts.cshtml" />
     <None Include="css\responsive.css1" />
     <Content Include="css\responsive - Copy.css" />
     <Content Include="css\responsive.css" />
