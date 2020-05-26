@@ -22,7 +22,8 @@ namespace SII.Areas.Admin.Controllers
         }
         public ActionResult Verified()
         {
-            ViewBag.CurrentMenu = "VerifyDocuments"; return View();
+            ViewBag.CurrentMenu = "VerifyDocuments";
+            return View();
         }
         public ActionResult Rejected()
         {
@@ -66,7 +67,7 @@ namespace SII.Areas.Admin.Controllers
                         {
                             SendEmail _objseedemail = new SendEmail();
                             string strform = "";
-                            string Subject = "Study in India- Data Verification";
+                            string Subject = "Study in India - Data Verification";
                             #region Code to send mails simultaneously in a loop (By Amit: 15-05-2020 10:11 AM)
                             if (System.Web.HttpContext.Current.Application["UserCountForMail"] == null)
                             {
