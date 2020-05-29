@@ -541,6 +541,8 @@
     <Content Include="Areas\admission\Views\IndSATCredentials\Index.cshtml" />
     <Content Include="Areas\admission\Views\Registrations\Index - Copy.cshtml" />
     <Content Include="Areas\Admin\Views\VerifyDocuments\Timeouts.cshtml" />
+    <Content Include="Areas\Institute\Views\CourseSelected\Index.cshtml" />
+    <Content Include="Areas\Institute\Views\CourseSelected\StudentData.cshtml" />
     <None Include="css\responsive.css1" />
     <Content Include="css\responsive - Copy.css" />
     <Content Include="css\responsive.css" />
@@ -696,6 +698,7 @@
     <Content Include="img\slider_images\23.jpg" />
     <Content Include="img\slider_images\24.png" />
     <Content Include="img\slider_images\25.jpg" />
+    <Content Include="img\slider_images\26.jpg" />
     <Content Include="img\slider_images\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\02_Banner.jpg" />
     <Content Include="img\slider_images\mobile\09.jpg" />
@@ -710,6 +713,7 @@
     <Content Include="img\slider_images\mobile\23.jpg" />
     <Content Include="img\slider_images\mobile\24.png" />
     <Content Include="img\slider_images\mobile\25.jpg" />
+    <Content Include="img\slider_images\mobile\26.jpg" />
     <Content Include="img\slider_images\mobile\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\result-banner.jpg" />
     <Content Include="img\slider_images\mobile\slider7.jpg" />
@@ -1003,6 +1007,7 @@
     <Compile Include="Areas\Institute\Controllers\CampusController.cs" />
     <Compile Include="Areas\Institute\Controllers\ChangePasswordController.cs" />
     <Compile Include="Areas\Institute\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Institute\Controllers\CourseSelectedController.cs" />
     <Compile Include="Areas\Institute\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Institute\Controllers\DetailsController.cs" />
     <Compile Include="Areas\Institute\Controllers\FacultyAlumniController.cs" />

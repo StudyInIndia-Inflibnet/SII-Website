@@ -82,6 +82,7 @@ namespace SII.Areas.Institute.Controllers
                                 Session["IsAdminFLag"] = dr["IsAdminFLag"].ToString();
                                 Session["IsAdminEdit"] = dr["IsAdminEdit"].ToString();
                                 Session["IsNicheAllowed"] = dr["IsNicheAllowed"].ToString();
+                                Session["InstituteType"] = dr["InstituteType"].ToString();
                                 Session["ParticipatedYear"] = ConfigurationManager.AppSettings["ParticipatedYear"].ToString();
                                 flagLogin = true;
                             }

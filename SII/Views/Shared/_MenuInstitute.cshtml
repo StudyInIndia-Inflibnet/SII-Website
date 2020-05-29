@@ -73,12 +73,24 @@
                             </li>
                         </ul>
                     </li>
+                    @if (Session["InstituteType"] != null)
+                    {
+                        if (Session["InstituteType"].ToString().ToLower() == "public")
+                        {
+                            <li class="">
+                                <a href="@Url.Content("~/")Institute/CourseSelected"><i class="icon mdi mdi-home"></i><span>Student List @System.Configuration.ConfigurationManager.AppSettings["CurrentPhase"].ToString()</span></a>
+                            </li>
+                        }
+                        /**/
+                    }
+
+
                     @*<li class="">
-                            <a href="@Url.Content("~/")Institute/AdmittedStudent"><i class="icon mdi mdi-home"></i><span>1st Round Admitted Student</span></a>
-                        </li>
-                        <li class="">
-                            <a href="@Url.Content("~/")Institute/AdmittedStudentSecondRound"><i class="icon mdi mdi-home"></i><span>2nd Round Admitted Student</span></a>
-                        </li>*@
+            <a href="@Url.Content("~/")Institute/AdmittedStudent"><i class="icon mdi mdi-home"></i><span>1st Round Admitted Student</span></a>
+        </li>
+        <li class="">
+            <a href="@Url.Content("~/")Institute/AdmittedStudentSecondRound"><i class="icon mdi mdi-home"></i><span>2nd Round Admitted Student</span></a>
+        </li>*@
                     @if (Session["IsNicheAllowed"] == null)
                     {
                         {

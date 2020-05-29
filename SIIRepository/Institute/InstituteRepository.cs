@@ -774,5 +774,30 @@ namespace SIIRepository.Institute
                 _cn.Close();
             }
         }
+        public DataSet Opr_Select_First_Priority_StudentsList(string InstituteID = "", string RegistrationPhase = "")
+        {
+            try
+            {
+                _cn.Open();
+                SqlCommand _cmd = new SqlCommand("Opr_Select_First_Priority_StudentsList", _cn);
+                _cmd.Parameters.AddWithValue("@InstituteID", InstituteID);
+                _cmd.Parameters.AddWithValue("@RegistrationPhase", RegistrationPhase);
+                _cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter _adp = new SqlDataAdapter(_cmd);
+                DataSet _ds = new DataSet();
+                _adp.Fill(_ds);
+                _adp.Dispose();
+                _cmd.Dispose();
+                return _ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _cn.Close();
+            }
+        }
     }
 }

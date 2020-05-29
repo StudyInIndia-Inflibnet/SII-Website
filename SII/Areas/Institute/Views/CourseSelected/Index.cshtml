@@ -1,0 +1,89 @@
+﻿@using System.Configuration;
+@using System.Data
+@using SIIRepository.Institute
+@{
+    ViewBag.Title = "InstituteSpoc";
+    Layout = "~/Views/Shared/_LayoutInstitute.cshtml";
+}
+
+@section PageHead{
+    <div class="row">
+        <div class="col-md-12 ">
+            <h3>Institute Spoc for @ViewBag.id  <span style="color: red"> (@Session["InstituteID"].ToString()&nbsp;&nbsp;@Session["InstituteName"].ToString())</span></h3>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-bordered" id="tbl">
+                    <thead>
+                        <tr>
+                            <th>Srno</th>
+                            <th>Name of Spoc</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Assign Student(s) </th>
+                            <th>Veiw Documents</th>
+                        </tr>
+                    </thead>
+                   <tbody id="tbody">
+                        @{
+                            InstituteRepository _objRepositoryTable = new InstituteRepository();
+                            System.Data.DataSet _dsTable = _objRepositoryTable.Opr_Select_First_Priority_StudentsList(Session["InstituteID"].ToString(), ConfigurationManager.AppSettings["CurrentPhase"].ToString());
+                            if (_dsTable != null)
+                            {
+                                if (_dsTable.Tables[0].Rows.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (System.Data.DataRow _dr in _dsTable.Tables[0].Rows)
+                                    {
+                                        <tr>
+                                            <td>@(i++)</td>
+                                            <td>@_dr["studentid"].ToString()</td>
+                                            <td>@_dr["FullName"].ToString()</td>
+                                            <td>@_dr["ProgramLevel"].ToString()</td>
+                                            <td>@_dr["CourseOfStudy"].ToString()</td>
+                                            <td>
+                                                <a href="~/Institute/CourseSelected/StudentData/@_dr["studentid"].ToString()" target="_blank" class="btn btn-sm btn-warning">Veiw</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/assets/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/lib/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tbl").DataTable({
+                searching: true,
+                paging: true,
+                info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            });
+        });
+    </script>
+}

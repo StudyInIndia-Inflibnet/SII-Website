@@ -266,36 +266,36 @@
                                 if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-05-15 23:59:59") && Session["IsTestCentreCountry"].ToString().ToLower() == "true" && Session["IndSATCenter"].ToString() == "0" && Session["SCH_PhD"].ToString().ToLower() == "yes" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified")
                                 {
                                     @*<a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
-                                    <strong>Edit the application under following cases only:</strong>
-                                    <ul>
-                                        <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
-                                        <li>If an awaited result has now been declared</li>
-                                        <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
-                                        <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
-                                    </ul>
-                                    <div class="text-center">
-                                        <form id="frm" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
-                                        </form>
-                                    </div>*@
+                                        <strong>Edit the application under following cases only:</strong>
+                                        <ul>
+                                            <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
+                                            <li>If an awaited result has now been declared</li>
+                                            <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
+                                            <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
+                                        </ul>
+                                        <div class="text-center">
+                                            <form id="frm" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
+                                            </form>
+                                        </div>*@
                                 }
                                 else if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified" && Session["IsTestCentreCountry"].ToString().ToLower() == "false")
                                 {
                                     @*<a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
-                                    <strong>Edit the application under following cases only:</strong>
-                                    <ul>
-                                        <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
-                                        <li>If an awaited result has now been declared</li>
-                                        <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
-                                        <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
-                                    </ul>
-                                    <div class="text-center">
-                                        <form id="frm" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
-                                        </form>
-                                    </div>*@
+                                        <strong>Edit the application under following cases only:</strong>
+                                        <ul>
+                                            <li>If you want to upload valid documents(Marksheet/Transcripts/Scorecard)</li>
+                                            <li>If an awaited result has now been declared</li>
+                                            <li>If an awaited result is still awaited but you have not uploaded the documents up till last semester/year</li>
+                                            <li>If you've filled less than 3 choices and you would like to increase choices or modify your preferance.</li>
+                                        </ul>
+                                        <div class="text-center">
+                                            <form id="frm" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <a id="btnEditMyApplication" class="btn btn-info"><i class="fa fa-pencil"></i> Edit My Application</a>
+                                            </form>
+                                        </div>*@
                                 }
                             }
                         }
@@ -364,7 +364,25 @@
                     <div class="col-xs-12 col-md-12">
                         <div class="widget be-loading">
                             <div class="widget-head">
-                                <div class="title">Document Verification <strong>(To be done by SII Team)</strong></div>
+                                <div class="title">
+                                    Document Verification
+                                    @if (ViewBag.DocumentVerified == "Not Verified")
+                                    {
+                                        <strong class="">[To be done by SII Team]</strong>
+                                    }
+                                    else if (ViewBag.DocumentVerified == "Rejected")
+                                    {
+                                        <strong class="text-danger blink">[Rejected]</strong>
+                                    }
+                                    else if (ViewBag.DocumentVerified == "Verified")
+                                    {
+                                        <strong class="text-success ">[Verified]</strong>
+                                    }
+                                    else
+                                    {
+                                        <strong class="">[To be done by SII Team]</strong>
+                                    }
+                                </div>
                                 <hr />
                             </div>
                             <div class="widget-chart-container">
@@ -429,6 +447,12 @@
             font-weight: bold;
         }
 
+        .fa-times {
+            color: #cb5705;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
         .table.w1 tr td:nth-child(2) {
             width: 20%;
             text-align: center;
@@ -438,6 +462,20 @@
             width: 40%;
             text-align: center;
             font-weight: 400;
+        }
+        .blink {
+          animation: blink-animation 2s steps(5, start) infinite;
+          -webkit-animation: blink-animation 2s steps(5, start) infinite;
+        }
+        @@keyframes blink-animation {
+          to {
+            visibility: hidden;
+          }
+        }
+        @@-webkit-keyframes blink-animation {
+          to {
+            visibility: hidden;
+          }
         }
     </style>
     <link href="~/assets/lib/jQueryConfirm/jquery-confirm.min.css" rel="stylesheet" />

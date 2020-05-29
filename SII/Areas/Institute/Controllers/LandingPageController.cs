@@ -31,6 +31,7 @@ namespace SII.Areas.Institute.Controllers
                     string localIP = "?";
                     localIP = Request.ServerVariables["REMOTE_ADDR"].ToString();
                     Session["localIP"] = localIP;
+                    Session["InstituteType"] = dr["InstituteType"].ToString();
                     Session["ParticipatedYear"] = ConfigurationManager.AppSettings["ParticipatedYear"].ToString();
                 }
                 if (ds.Tables[1].Rows.Count > 0)
