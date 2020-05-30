@@ -1,9 +1,11 @@
-﻿using SIIModel.Admin;
+﻿using ClosedXML.Excel;
+using SIIModel.Admin;
 using SIIRepository.Adminservice;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -258,5 +260,99 @@ namespace SII.Areas.Admin.Controllers
             return jsonResult;
 
         }
+
+        #region Export To Excel
+        [HttpPost]
+        public ActionResult ExportToExcel(string For = "All")
+        {
+            DocumentVerification_Repository _objRepository = new DocumentVerification_Repository();
+
+            DataSet _ds = _objRepository.Opr_DocumentVerification_Admin("EXPORT", ConfigurationManager.AppSettings["CurrentPhase"].ToString(), For);
+            DataTable _dt = _ds.Tables[0];
+            if (_dt.Rows.Count > 0)
+            {
+                _dt.Columns["Srno"].ColumnName = "Srno";
+                _dt.Columns["studentid"].ColumnName = "Student ID";
+                _dt.Columns["StudentName"].ColumnName = "Student Name";
+                _dt.Columns["Country_Name"].ColumnName = "Country";
+                _dt.Columns["ProgramLevel"].ColumnName = "Program Level";
+                _dt.Columns["OverallStatus"].ColumnName = "Overall Status";
+                _dt.Columns["VerifiedDate"].ColumnName = "Verified Date";
+                _dt.Columns["10th"].ColumnName = "10th";
+                _dt.Columns["10thReason"].ColumnName = "10thReason";
+                _dt.Columns["10thComment"].ColumnName = "10thComment";
+                _dt.Columns["12th"].ColumnName = "12th";
+                _dt.Columns["12thReason"].ColumnName = "12thReason";
+                _dt.Columns["12thComment"].ColumnName = "12thComment";
+                _dt.Columns["Diploma"].ColumnName = "Diploma";
+                _dt.Columns["DiplomaReason"].ColumnName = "DiplomaReason";
+                _dt.Columns["DiplomaComment"].ColumnName = "DiplomaComment";
+                _dt.Columns["UG"].ColumnName = "UG";
+                _dt.Columns["UGReason"].ColumnName = "UGReason";
+                _dt.Columns["UGComment"].ColumnName = "UGComment";
+                _dt.Columns["PG"].ColumnName = "PG";
+                _dt.Columns["PGReason"].ColumnName = "PGReason";
+                _dt.Columns["PGComment"].ColumnName = "PGComment";
+                _dt.Columns["MPhil"].ColumnName = "MPhil";
+                _dt.Columns["MPhilReason"].ColumnName = "MPhilReason";
+                _dt.Columns["MPhilComment"].ColumnName = "MPhilComment";
+
+                _dt.Columns["GRE"].ColumnName = "GRE";
+                _dt.Columns["GREReason"].ColumnName = "GREReason";
+                _dt.Columns["GREComment"].ColumnName = "GREComment";
+                _dt.Columns["GMAT"].ColumnName = "GMAT";
+                _dt.Columns["GMATReason"].ColumnName = "GMATReason";
+                _dt.Columns["GMATComment"].ColumnName = "GMATComment";
+                _dt.Columns["SATLevelI"].ColumnName = "SAT Level I";
+                _dt.Columns["SATLevelIReason"].ColumnName = "SATLevelIReason";
+                _dt.Columns["SATLevelIComment"].ColumnName = "SATLevelIComment";
+                _dt.Columns["SATLevelII"].ColumnName = "SAT Level II";
+                _dt.Columns["SATLevelIIReason"].ColumnName = "SATLevelIIReason";
+                _dt.Columns["SATLevelIIComment"].ColumnName = "SATLevelIIComment";
+                _dt.Columns["TOEFL"].ColumnName = "TOEFL";
+                _dt.Columns["TOEFLReason"].ColumnName = "TOEFLReason";
+                _dt.Columns["TOEFLComment"].ColumnName = "TOEFLComment";
+                _dt.Columns["IELTS"].ColumnName = "IELTS";
+                _dt.Columns["IELTSReason"].ColumnName = "IELTSReason";
+                _dt.Columns["IELTSComment"].ColumnName = "IELTSComment";
+                _dt.Columns["GATE"].ColumnName = "GATE";
+                _dt.Columns["GATEReason"].ColumnName = "GATEReason";
+                _dt.Columns["GATEComment"].ColumnName = "GATEComment";
+                _dt.Columns["JEEAdvanced"].ColumnName = "JEEAdvanced";
+                _dt.Columns["JEEAdvancedReason"].ColumnName = "JEEAdvancedReason";
+                _dt.Columns["JEEAdvancedComment"].ColumnName = "JEEAdvancedComment";
+                _dt.Columns["JEEMain"].ColumnName = "JEEMain";
+                _dt.Columns["JEEMainReason"].ColumnName = "JEEMainReason";
+                _dt.Columns["JEEMainComment"].ColumnName = "JEEMainComment";
+                _dt.Columns["NATA"].ColumnName = "NATA";
+                _dt.Columns["NATAReason"].ColumnName = "NATAReason";
+                _dt.Columns["NATAComment"].ColumnName = "NATAComment";
+
+
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(_dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=SIIDocumentVerification.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            return Redirect("~/Admin/VerifyDocuments/");
+        }
+        #endregion
     }
 }

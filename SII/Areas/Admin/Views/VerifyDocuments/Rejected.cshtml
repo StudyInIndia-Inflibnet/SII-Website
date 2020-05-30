@@ -11,6 +11,10 @@
         <div class="panel panel-default panel-border-color panel-border-color-custom panel-table">
             <div class="panel-heading">
                 Document Verification - Rejected Students
+                <form method="post" action="~/Admin/VerifyDocuments/ExportToExcel">
+                    <input type="hidden" name="For" value="Rejected" />
+                    <button type="submit" class="btn btn-warning">Export</button>
+                </form>
             </div>
             <div class="tab-container">
                 <div class="tab-content">
@@ -67,14 +71,14 @@
                 //paging: true,
                 //info: true,                   // TO DISPLAY THE INFO 'SHOWING 1 TO X OF Y ENTRIES'
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'csvHtml5',
-                        text: 'Export',
-                        titleAttr: 'CSV'
-                    },
-                ],
+                //dom: 'Bfrtip',
+                //buttons: [
+                //    {
+                //        extend: 'csvHtml5',
+                //        text: 'Export',
+                //        titleAttr: 'CSV'
+                //    },
+                //],
                 //columnDefs: [{
                 //    "targets": 5,
                 //    "orderable": false
