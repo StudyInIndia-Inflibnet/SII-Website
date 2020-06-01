@@ -607,6 +607,8 @@
     <Content Include="img\fairschedulepartofsii\tanzania.png" />
     <Content Include="img\fairschedulepartofsii\Usa.png" />
     <Content Include="img\favicon.ico" />
+    <Content Include="img\FB Messenger Logo_Black.png" />
+    <Content Include="img\FB Messenger Logo_Grey.png" />
     <Content Include="img\fee_waivers.jpg" />
     <Content Include="img\footer_logo.jpg" />
     <Content Include="img\frro.jpg" />
@@ -656,6 +658,7 @@
     <Content Include="img\IndSAT\SII_PDF.png" />
     <Content Include="img\ind_sat.jpg" />
     <Content Include="img\institutesList.jpg" />
+    <Content Include="img\new-gif.gif" />
     <Content Include="img\nicheCourse-01.jpg" />
     <Content Include="img\nicheCourse-02.jpg" />
     <Content Include="img\nicheCourse-03.jpg" />
@@ -1460,6 +1463,8 @@
     <Content Include="Areas\admission\Views\StudentChoiceFilling\Submitted.cshtml" />
     <Content Include="img\ALL_Work - Shortcut.lnk" />
     <Content Include="img\slider_images\ALL_Work - Shortcut.lnk" />
+    <Content Include="PDF\IndSAT PG mock test.pdf" />
+    <Content Include="PDF\IndSAT UG Mock Test.pdf" />
     <None Include="Properties\PublishProfiles\SIII.pubxml" />
     <Content Include="Views\Shared\_LayoutOther.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
