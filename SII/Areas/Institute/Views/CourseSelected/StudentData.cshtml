@@ -63,16 +63,18 @@
                                                 <td><b>Student Name</b> : @_ds.Tables[0].Rows[0]["name"].ToString()</td>
 
                                                 <td><b>Application No</b> : @_ds.Tables[0].Rows[0]["ApplicationNo"].ToString()</td>
-                                            </tr>
-                                            @*<tr>
-                                                <td><b>Photo</b> : </td>
-                                                <td colspan="2"><img src="data:image/jpeg;base64,@_ds.Tables[0].Rows[0]["Photo"].ToString()" style="width: 100px; min-height: 50px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Signature</b> : </td>
-                                                <td colspan="2"><img src="data:image/jpeg;base64,@_ds.Tables[0].Rows[0]["Signature"].ToString()" style="width: 100px; min-height: 50px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgSignature" /></td>
-                                            </tr>*@
-                                        </tbody>
+                                                <td>
+                                                    <b>Country</b> : @_ds.Tables[0].Rows[0]["Country_Name"].ToString()</td>
+                           </tr>
+                                                @*<tr>
+        <td><b>Photo</b> : </td>
+        <td colspan="2"><img src="data:image/jpeg;base64,@_ds.Tables[0].Rows[0]["Photo"].ToString()" style="width: 100px; min-height: 50px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" /></td>
+    </tr>
+    <tr>
+        <td><b>Signature</b> : </td>
+        <td colspan="2"><img src="data:image/jpeg;base64,@_ds.Tables[0].Rows[0]["Signature"].ToString()" style="width: 100px; min-height: 50px;border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgSignature" /></td>
+    </tr>*@
+</tbody>
                                     </table>
                                 </div>
                                 <div class="col-md-12">

@@ -774,7 +774,7 @@ namespace SIIRepository.Institute
                 _cn.Close();
             }
         }
-        public DataSet Opr_Select_First_Priority_StudentsList(string InstituteID = "", string RegistrationPhase = "")
+        public DataSet Opr_Select_First_Priority_StudentsList(string InstituteID = "", string RegistrationPhase = "", string ParticipatedYear = "")
         {
             try
             {
@@ -782,6 +782,7 @@ namespace SIIRepository.Institute
                 SqlCommand _cmd = new SqlCommand("Opr_Select_First_Priority_StudentsList", _cn);
                 _cmd.Parameters.AddWithValue("@InstituteID", InstituteID);
                 _cmd.Parameters.AddWithValue("@RegistrationPhase", RegistrationPhase);
+                _cmd.Parameters.AddWithValue("@ParticipatedYear", ParticipatedYear);
                 _cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter _adp = new SqlDataAdapter(_cmd);
                 DataSet _ds = new DataSet();

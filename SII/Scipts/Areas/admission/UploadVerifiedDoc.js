@@ -39,7 +39,7 @@ function page_click() {
         }
         c.append('ID', docid);
         c.append('EQ_AE_ID', rid);
-        c.append("name", a.parent().parent().parent().find("td:eq(0)").find('.lblFileName').text());
+        c.append("name", a.parent().parent().find('.lblFileName').text());
         c.append("MainPart", a.parent().prev().find('.drpPercentageMainPart').val());
         c.append("DeciamlPart", a.parent().prev().find('.drpPercentageDeciamlPart').val());
         c.append("Score", a.parent().prev().find('.drpAEScore').val());
