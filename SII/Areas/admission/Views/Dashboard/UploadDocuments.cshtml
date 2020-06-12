@@ -48,9 +48,11 @@
                                             <td>
                                                 <span class="lblFileName">@_dr["EQ_AE_Name"].ToString()</span> <strong style="color:red;">@(_dr["IsGiven"].ToString() == "2" ? (_dr["EQ_AE_ID"].ToString() == "2" ? "(In case of result awaited, upload Class XI document)" : "(Upload all mark sheets/transcripts till last exam cycle)") : "")</strong>
                                             </td>
-                                            @if (Convert.ToDateTime(_dr["VerifiedDate"].ToString()).AddDays(3) < DateTime.Now && _dr["ReVerify"].ToString().ToLower() == "false" && _dr["IsVerified"].ToString() == "Rejected")
+                                            @if (Convert.ToDateTime(_dr["VerifiedDate"].ToString()).AddDays(3) < DateTime.Now && (_dr["ReVerify"].ToString().ToLower() == "false" || (_dr["ReVerify"].ToString().ToLower() == "true" && Convert.ToDateTime(_dr["ModifiedDate"].ToString()) < Convert.ToDateTime(_dr["VerifiedDate"].ToString()))) && _dr["IsVerified"].ToString() == "Rejected")
                                             {
-                                                <td colspan="4"><i class="fa fa-clock-o"></i> Timeout!!</td>
+                                                <td colspan="4">
+                                                    <i class="fa fa-clock-o"></i> Timeout!!
+                                                </td>
                                             }
                                             else if (_dr["IsVerified"].ToString() == "Rejected")
                                             {
@@ -59,11 +61,14 @@
                                                 <td>
                                                     @if (_dr["Reason"].ToString() != "Percentage Mismatch")
                                                     {
+
                                                         <form id="frm@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" method="post">
                                                             @Html.AntiForgeryToken()
                                                             <input type="file" id="fuDoc@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" required="" />
                                                         </form>
                                                         <input type="hidden" class="doc_path" id="hdf@_dr["EQ_AE_For"].ToString()_@_dr["EQ_AE_ID"].ToString()" value="@_dr["Path"].ToString()" />
+
+
                                                     }
                                                     else
                                                     {
@@ -124,7 +129,8 @@
                                                 <span class="lblFileName">@_dr["EQ_AE_Name"].ToString()</span>
                                                 <strong style="color:red;">@(_dr["IsGiven"].ToString() == "2" ? "(Upload the Admit Card of the Examination, if appearing and results awaited)" : "")</strong>
                                             </td>
-                                            @if (Convert.ToDateTime(_dr["VerifiedDate"].ToString()).AddDays(3) < DateTime.Now && _dr["ReVerify"].ToString().ToLower() == "false" && _dr["IsVerified"].ToString() == "Rejected")
+                                            @*@if (Convert.ToDateTime(_dr["VerifiedDate"].ToString()).AddDays(3) < DateTime.Now && _dr["ReVerify"].ToString().ToLower() == "false" && _dr["IsVerified"].ToString() == "Rejected")*@
+                                            @if (Convert.ToDateTime(_dr["VerifiedDate"].ToString()).AddDays(3) < DateTime.Now && (_dr["ReVerify"].ToString().ToLower() == "false" || (_dr["ReVerify"].ToString().ToLower() == "true" && Convert.ToDateTime(_dr["ModifiedDate"].ToString()) < Convert.ToDateTime(_dr["VerifiedDate"].ToString()))) && _dr["IsVerified"].ToString() == "Rejected")
                                             {
                                                 <td colspan="4"><i class="fa fa-clock-o"></i> Timeout!!</td>
                                             }

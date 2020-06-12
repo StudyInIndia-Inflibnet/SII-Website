@@ -703,6 +703,7 @@
     <Content Include="img\slider_images\25.jpg" />
     <Content Include="img\slider_images\26.jpg" />
     <Content Include="img\slider_images\27.jpeg" />
+    <Content Include="img\slider_images\28.jpeg" />
     <Content Include="img\slider_images\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\02_Banner.jpg" />
     <Content Include="img\slider_images\mobile\09.jpg" />
@@ -719,6 +720,7 @@
     <Content Include="img\slider_images\mobile\25.jpg" />
     <Content Include="img\slider_images\mobile\26.jpg" />
     <Content Include="img\slider_images\mobile\27.jpeg" />
+    <Content Include="img\slider_images\mobile\28.jpeg" />
     <Content Include="img\slider_images\mobile\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\result-banner.jpg" />
     <Content Include="img\slider_images\mobile\slider7.jpg" />
@@ -1468,6 +1470,7 @@
     <Content Include="PDF\IndSAT PG mock test.pdf" />
     <Content Include="PDF\IndSAT UG Mock Test.pdf" />
     <Content Include="PDF\Candidate guide IND-SAT 2020.pdf" />
+    <Content Include="PDF\MSB Candidate Guide_NTA copy.pdf" />
     <None Include="Properties\PublishProfiles\SIII.pubxml" />
     <Content Include="Views\Shared\_LayoutOther.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
