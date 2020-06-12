@@ -263,7 +263,7 @@
 
                             if (Session["submitChoiceFill"] != null)
                             {
-                                if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-05-15 23:59:59") && Session["IsTestCentreCountry"].ToString().ToLower() == "true" && Session["IndSATCenter"].ToString() == "0" && Session["SCH_PhD"].ToString().ToLower() == "yes" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified")
+                                if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Session["EditApplication"].ToString().ToLower() == "false" && OpenEditApplication == true && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-04-30 23:59:59") && Session["IsTestCentreCountry"].ToString().ToLower() == "true" && Session["IndSATCenter"].ToString() == "0" && Session["SCH_PhD"].ToString().ToLower() == "yes" && OpenEditApplication == true && ViewBag.DocumentVerified != "Verified")
                                 {
                                     @*<a href="@Url.Content("~/")admission/Dashboard/ViewDetails?d=AcademicInformation" class="btn btn-warning btn-sm" title="View" target="_blank"><i class="mdi mdi-desktop-mac"></i></a>
                                         <strong>Edit the application under following cases only:</strong>

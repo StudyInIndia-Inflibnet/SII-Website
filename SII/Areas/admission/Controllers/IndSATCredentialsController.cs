@@ -18,6 +18,7 @@ namespace SII.Areas.admission.Controllers
         // GET: admission/IndSATCredentials
         public ActionResult Index()
         {
+
             #region Country Wise Time
             if (Session["CountryID"].ToString() == "4")
             {

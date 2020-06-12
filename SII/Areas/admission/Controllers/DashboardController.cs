@@ -45,8 +45,17 @@ namespace SII.Areas.admission.Controllers
                         _Obj.Uploded_doc = _dr["Uploded_doc"].ToString();
                         _Obj.finalSubmit = _dr["finalSubmit"].ToString();
                         _Obj.IndSATCenter = _dr["IndSATCenter"].ToString();
+                        if (Session["CountryID"].ToString() == "252")
+                        {
+                            Session["IndSATCenter"] = "False";
+                        }
+                        else
+                        {
+                            Session["IndSATCenter"] = _dr["IndSATCenter"].ToString();
+                        }
+                        
                         ViewBag.DocumentVerified = _dr["DocumentVerified"].ToString();
-                        Session["IndSATCenter"] = _dr["IndSATCenter"].ToString();
+                        
                         _list.Add(_Obj);
                     }
                 }
