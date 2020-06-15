@@ -90,12 +90,12 @@
                             </li>*@
 
                         }
-                        if (Session["IndSATCenter"] != null)
+                        if (Session["IsIndSATStudent"] != null)
                         {
-                            if (Session["submitChoiceFill"].ToString().ToLower() == "true" && Convert.ToDateTime(Session["submitchoiceDate"].ToString()) <= Convert.ToDateTime("2020-05-15 23:59:59") && Session["IndSATCenter"].ToString() != "0" && Session["SCH_PhD"].ToString().ToLower() == "no")
+                            if (Session["IsIndSATStudent"].ToString().ToLower() == "true")
                             {
                                 <li>
-                                    <a href="@Url.Content("~/")admission/IndSATCredentials" target="_blank" title="Ind-SAT Credential and Instructions"><i class="icon mdi mdi-desktop-classic"></i><span>Ind-SAT Credential and Instructions</span></a>
+                                    <a href="@Url.Content("~/")admission/IndSATCredentials" target="_blank" title=""><i class="icon mdi mdi-desktop-classic"></i><span>Ind-SAT Credential and Instructions</span></a>
                                 </li>
                             }
                         }

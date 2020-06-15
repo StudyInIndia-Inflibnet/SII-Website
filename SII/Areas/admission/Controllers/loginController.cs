@@ -121,6 +121,7 @@ namespace SII.Areas.admission.Controllers
                                 Session["Photo"] = dr["Photo"].ToString();
                                 Session["Signature"] = dr["Signature"].ToString();
                                 Session["IsTestCentreCountry"] = dr["IsTestCentreCountry"].ToString();
+                                Session["IsIndSATStudent"] = dr["IsIndSATStudent"].ToString();
                                 //if (dr["student_path"]!= null)
                                 //{
                                 //    if (dr["student_path"].ToString() != "")

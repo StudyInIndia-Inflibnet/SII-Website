@@ -979,6 +979,7 @@
     <Compile Include="Areas\admission\Controllers\forgotPasswordController.cs" />
     <Compile Include="Areas\admission\Controllers\IndSATCredentialsController.cs" />
     <Compile Include="Areas\admission\Controllers\IndSATSelectionController.cs" />
+    <Compile Include="Areas\admission\Controllers\LandingController.cs" />
     <Compile Include="Areas\admission\Controllers\loginController.cs" />
     <Compile Include="Areas\admission\Controllers\LogoutController.cs" />
     <Compile Include="Areas\admission\Controllers\MockcounsellingCategoryController.cs" />
@@ -1548,6 +1549,7 @@
     <Folder Include="Areas\Admin\Views\Logout\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\admission\Models\" />
+    <Folder Include="Areas\admission\Views\Landing\" />
     <Folder Include="Areas\admission\Views\Logout\" />
     <Folder Include="Areas\admission\Views\register\" />
     <Folder Include="Areas\GovernmentSchemeAdmission\Models\" />

@@ -57,8 +57,8 @@
                                             <thead>
                                                 <tr>
                                                     <td class="col-md-4">Firstname: <strong>@_dr["FirstName"].ToString()</strong></td>
-                                                    <td class="col-md-4">Middlename:  <strong>@_dr["FatherName"].ToString()</strong></td>
                                                     <td class="col-md-4">Lastname:  <strong>@_dr["LastName"].ToString()</strong></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Date of Birth:  <strong>@Convert.ToDateTime(_dr["DateOfBirth"].ToString()).ToString("dd-MM-yyyy")</strong></td>
@@ -107,15 +107,12 @@
                                                     <td><strong>16<sup>th</sup> June 2020</strong></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="col-md-4" rowspan="2"></td>
-                                                    <td class="col-md-4" rowspan="2"></td>
+                                                    <td class="col-md-4"></td>
+                                                    <td class="col-md-4"></td>
                                                     <td class="col-md-4 text-center">
                                                         <strong class="col-md-12">Candidate Singnature</strong>
                                                         <img src="data:image/jpeg;base64,@Session["Signature"].ToString()" style="width: 200px; border: 1px solid;box-shadow: 5px 5px 7px rgba(0,0,0,0.3);" id="imgPhoto" />
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center"><strong>Senior Director - NTA</strong></td>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -132,19 +129,20 @@
                                             <li>Candidate is advised to take the assessment on a laptop or desktop.</li>
                                             <li>Before starting the test, please close all chat windows, screen-saver(s), etc. and candidate needs to ensure they have good and consistent internet connectivity.</li>
                                             <li>Candidate is strongly advised to access the examination link 30 minutes ahead of time and download the MSB browser (details available on SII website on Ind-SAT page)</li>
-                                            <li>Candidate is advised not to toggle between the assessment console & other application else your system will get locked.</li>
+                                            <li>Candidate is advised not to toggle between the assessment console & other application else your system will get locked. </li>
                                             <li>Do not press F5 to refresh the assessment console during the examination else your examination will end immediately</li>
                                             <li>If your computer system shuts down suddenly due to power supply being disconnected, you can resume the test from the same question that you were attempting earlier. All your previous answers will be automatically saved. While resuming, please start the test as you did before and use the login details.</li>
+                                            <li>Your test will open in a new popup window once you press launch test button.</li>
+                                            <li>Candidate needs to ensure facing camera all the time during the exam, the candidate cannot take a break in between the exam. No food or beverages except water is allowed during the examination. </li>
                                             <li>Candidate needs to ensure no other person comes in front of your camera else your exam will be cancelled.</li>
-                                            <li>No Candidate should adopt any unfair means, or indulge in any unfair examination practices. Use of rough sheet is allowed, but you are not allowed to leave your seat during examination. Keep all of your required stationery materials ready before the start of examination.</li>
+                                            <li>No Candidate should adopt any unfair means, or indulge in any unfair examination practices.  Use of rough sheet is allowed, but you are not allowed to leave your seat during examination. Keep all of your required stationery materials ready before the start of examination.</li>
                                             <li>The Candidature of Candidates in case of impersonation will be automatically cancelled without any notice.</li>
                                             <li>Candidate needs to ensure they click <strong>Submit</strong> button at the end of the assessment.</li>
                                         </ol>
                                         <p class="text-center" style="margin:0;">
                                             <strong>For Any Assistance, Please contact:</strong>
                                         </p>
-                                        <p class="text-center text-info" style="margin:0;">Toll free no: +91 9899-450-350</p>
-                                        <p class="text-center text-info" style="margin:0;">Whatsapp: +91 8130-013-265</p>
+                                        <p class="text-center text-info" style="margin:0;">Toll Free no: +91 9899-450-350</p>
                                         <p class="text-center text-info" style="margin:0;">Email ID: help.studyinindia@gov.in</p>
                                     </td>
                                 </tr>

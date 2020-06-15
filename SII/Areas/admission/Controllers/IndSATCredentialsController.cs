@@ -18,7 +18,13 @@ namespace SII.Areas.admission.Controllers
         // GET: admission/IndSATCredentials
         public ActionResult Index()
         {
-
+            if (Session["IsIndSATStudent"] != null)
+            {
+                if (Session["IsIndSATStudent"].ToString().ToLower() == "false")
+                {
+                    return Redirect("~/admission/Dashboard");
+                }
+            }
             #region Country Wise Time
             if (Session["CountryID"].ToString() == "4")
             {
@@ -99,7 +105,7 @@ namespace SII.Areas.admission.Controllers
                     }
                 }
             }
-            
+
 
             return View();
         }
@@ -198,7 +204,7 @@ namespace SII.Areas.admission.Controllers
                         BorderWidthTop = 1,
                         PaddingBottom = 25,
                     });
-                    
+
                     _doc.Add(tableLayout);
                     #endregion
                 }
