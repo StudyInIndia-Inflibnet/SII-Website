@@ -543,12 +543,14 @@
     <Content Include="Areas\Admin\Views\VerifyDocuments\Timeouts.cshtml" />
     <Content Include="Areas\Institute\Views\CourseSelected\Index.cshtml" />
     <Content Include="Areas\Institute\Views\CourseSelected\StudentData.cshtml" />
+    <Content Include="Areas\scholarships\Views\FeeWaiversandConcessions\IndSAT - Copy.cshtml" />
     <None Include="css\responsive.css1" />
     <Content Include="css\responsive - Copy.css" />
     <Content Include="css\responsive.css" />
     <Content Include="css\slicknav.min.css" />
     <None Include="css\style.css1" />
     <None Include="css\style2.css2" />
+    <Content Include="css\style-blog.css" />
     <Content Include="css\style_BK.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.default.css" />
@@ -593,6 +595,11 @@
     <Content Include="img\blogs\this-is-second-bloge-text.png" />
     <Content Include="img\blogs\tips-on-how-to-travel-wonderfully-in-india.jpg" />
     <Content Include="img\blogs\useful-first-week-tips-for-new-students-in-india.jpg" />
+    <Content Include="img\blog\blog-1.jpg" />
+    <Content Include="img\blog\trend-01.jpg" />
+    <Content Include="img\blog\trend-02.jpg" />
+    <Content Include="img\blog\trend-03.jpg" />
+    <Content Include="img\blog\ViewedItem1.jpg" />
     <Content Include="img\calendar.png" />
     <Content Include="img\counter-icon.png" />
     <Content Include="img\event.jpg" />
@@ -659,6 +666,7 @@
     <Content Include="img\ind_sat.jpg" />
     <Content Include="img\institutesList.jpg" />
     <Content Include="img\new-gif.gif" />
+    <Content Include="img\newBlog.jpg" />
     <Content Include="img\nicheCourse-01.jpg" />
     <Content Include="img\nicheCourse-02.jpg" />
     <Content Include="img\nicheCourse-03.jpg" />
@@ -1527,6 +1535,7 @@
     <Content Include="Views\Shared\_GoogleTagManagerHead.cshtml" />
     <Content Include="Views\Shared\_GoogleTagManagerBody.cshtml" />
     <Content Include="Views\Privacypolicy\Index.cshtml" />
+    <Content Include="Views\blogs\List.cshtml" />
     <None Include="Web.config1">
       <SubType>Designer</SubType>
     </None>
