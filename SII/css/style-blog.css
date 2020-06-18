@@ -383,6 +383,7 @@
         left: 50%;
         font-size: 20px;
     }
+
 .carousel-indicators {
     width: initial; /* initial resets css to default */
     margin-left: initial;
@@ -391,3 +392,200 @@
     right: 10px; /*horizontal position */
     top: 100px; /* vertical position */
 }
+
+/* Individual Blog Page Design */
+.blogInnerbanner {
+    background: #d7391a;
+    padding: 200px;
+}
+
+    .blogInnerbanner h4 {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 44px;
+    }
+
+.Inner-blog-area {
+    background: #5e8da9;
+    padding: 35px 0px;
+}
+
+    .Inner-blog-area h4 {
+        color: #ffffff;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    .Inner-blog-area h6 {
+        color: #ffffff;
+        font-size: 35px;
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 18px;
+        margin-bottom: 0;
+    }
+
+.InblogBottom-area {
+    padding: 50px 0px;
+}
+
+.InBlog-rightAside {
+    width: 100%;
+    float: left;
+}
+
+.InBlog-center-area p {
+    text-align: justify;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+.InblogBottom-area h4 {
+    color: #999999;
+    font-size: 24px;
+    word-spacing: 5px;
+}
+
+    .InblogBottom-area h4 i {
+        color: #f68623;
+    }
+
+.InblogBottomUl {
+    padding-left: 0px;
+    margin-top: 60px;
+}
+
+    .InblogBottomUl li {
+        list-style: none;
+        margin-bottom: 12px;
+    }
+
+        .InblogBottomUl li a i {
+            width: 42px;
+            height: 42px;
+            text-align: center;
+            border-radius: 100px;
+        }
+
+.shareIcon a i {
+    background: #fff;
+    font-size: 21px;
+    border: 1px solid #F68623;
+    color: #F68623;
+    line-height: 42px;
+}
+
+.shareIcon a:hover i {
+    background: #F68623;
+    font-size: 21px;
+    border: 1px solid #F68623;
+    color: #ffffff;
+}
+
+.fbIcon a i {
+    background: #405b93;
+    font-size: 21px;
+    border: 1px solid #405b93;
+    color: #ffffff;
+    line-height: 42px;
+}
+
+.fbIcon a:hover i {
+    background: #ffffff;
+    font-size: 21px;
+    border: 1px solid #405b93;
+    color: #405b93;
+}
+
+.twIcon a i {
+    background: #50abf1;
+    font-size: 21px;
+    border: 1px solid #50abf1;
+    color: #ffffff;
+    line-height: 42px;
+}
+
+.twIcon a:hover i {
+    background: #ffffff;
+    font-size: 21px;
+    border: 1px solid #50abf1;
+    color: #50abf1;
+}
+
+.whtsIcon a i {
+    background: #25d366;
+    font-size: 21px;
+    border: 1px solid #25d366;
+    color: #ffffff;
+    line-height: 40px;
+}
+
+.whtsIcon a:hover i {
+    background: #ffffff;
+    font-size: 21px;
+    border: 1px solid #25d366;
+    color: #25d366;
+}
+
+.mailIcon a i {
+    background: #ff70a0;
+    font-size: 21px;
+    border: 1px solid #ff70a0;
+    color: #ffffff;
+    line-height: 40px;
+}
+
+.mailIcon a:hover i {
+    background: #ffffff;
+    font-size: 21px;
+    border: 1px solid #ff70a0;
+    color: #ff70a0;
+}
+
+.docIcon a i {
+    background: #00c1b7;
+    font-size: 21px;
+    border: 1px solid #00c1b7;
+    color: #ffffff;
+    line-height: 40px;
+}
+
+.docIcon a:hover i {
+    background: #ffffff;
+    font-size: 21px;
+    border: 1px solid #00c1b7;
+    color: #00c1b7;
+}
+
+.InblogBottombtn h5 {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 5px;
+}
+
+.InblogBottombtn {
+    margin-top: 60px;
+}
+
+    .InblogBottombtn ul {
+        padding-left: 0px;
+    }
+
+    .InblogBottombtn li {
+        list-style: none;
+        margin-bottom: 10px;
+    }
+
+    .InblogBottombtn ul li a {
+        background: #f3f3f3;
+        color: #9d9c9c;
+        padding: 5px 8px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+        .InblogBottombtn ul li a:hover {
+            background: #000000;
+            color: #ffffff;
+        }

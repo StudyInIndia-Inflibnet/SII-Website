@@ -596,6 +596,13 @@
     <Content Include="img\blogs\tips-on-how-to-travel-wonderfully-in-india.jpg" />
     <Content Include="img\blogs\useful-first-week-tips-for-new-students-in-india.jpg" />
     <Content Include="img\blog\blog-1.jpg" />
+    <Content Include="img\blog\blogInner.jpg" />
+    <Content Include="img\blog\blogInnerRed.jpg" />
+    <Content Include="img\blog\innerblog-01.jpg" />
+    <Content Include="img\blog\innerblog-02.jpg" />
+    <Content Include="img\blog\innerblog-03.jpg" />
+    <Content Include="img\blog\innerblog-04.jpg" />
+    <Content Include="img\blog\innerBlog.jpg" />
     <Content Include="img\blog\trend-01.jpg" />
     <Content Include="img\blog\trend-02.jpg" />
     <Content Include="img\blog\trend-03.jpg" />
@@ -1536,6 +1543,7 @@
     <Content Include="Views\Shared\_GoogleTagManagerBody.cshtml" />
     <Content Include="Views\Privacypolicy\Index.cshtml" />
     <Content Include="Views\blogs\List.cshtml" />
+    <Content Include="Views\blogs\Page.cshtml" />
     <None Include="Web.config1">
       <SubType>Designer</SubType>
     </None>

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="clearfix"></div>
+<div class="col-md-6 col-sm-6 col-xs-6 p0 blogInnerbanner">
+    <img src="~/img/blog/blogInner.jpg" class="img-responsive" />
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6 p0 blogInnerbanner">
+    <img src="~/img/blog/blogInnerRed.jpg" class="img-responsive" />
+</div>
+<div class="clearfix"></div>
+
+<div class="Inner-blog-area">
+    <div class="container">
+        <h4>“Education is the most powerful weapon one can use to change the world.“</h4>
+        <h6>- Nelson Mandela</h6>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="InblogBottom-area">
+    <div class="container">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <h4><i class="fa fa-calendar"></i> 26 Apr, 2019</h4>
+            <h4><i class="fa fa-bookmark-o"></i> Miscellaneous</h4>
+
+            <ul class="InblogBottomUl">
+                <li class="shareIcon"><a href="" target="_blank"><i class="fa fa-share-alt"></i></a></li>
+                <li class="fbIcon"><a href="http://www.facebook.com/sharer.php?u={{page_url}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li class="twIcon"><a href="https://twitter.com/share?url={{page_url}}&amp;text={{blog_title}}&amp;hashtags={{tags}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li class="whtsIcon"><a href="https://api.whatsapp.com/send?text=urlencodedtext"><i class="fa fa-whatsapp"></i></a></li>
+                <li class="mailIcon"><a href="mailto:?Subject={{BlogTitle}}&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20{{page_url}}"><i class="fa fa-envelope"></i></a></li>
+                <li class="docIcon"><a onclick="copyToClipboard("[[page_url]]");"><i class="fa fa-files-o"></i></a></li>
+            </ul>
+
+            <div class="InblogBottombtn">
+                <h5>TAGS</h5>
+                <ul>
+                    <li><a href="">Studyinindia</a></li>
+                    <li><a href="">Miscellaneous </a></li>
+                    <li><a href="">Indianeducation</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="InBlog-center-area">
+                <p>Indian education is the right ammunition to equip your mind with knowledge that will allow you to keep up with the dynamic global corporate environment. The world has lauded Indian students over the last three decades, recognizing India as a source for efficient and diligent employees. </p>
+                <p><span class="orange-text">Global Accreditation</span> – India signed the Washington Accord in 2014, which recognizes there is a substantial equivalence of engineering programs accredited by signatories of major countries of the world. Therefore, an engineering degree from premier institutes in India, is recognized across the globe.  </p>
+                <p><span class="orange-text">English, India’s Second Official Language</span> – English is the unofficial global language. Indians are only second to Americans when it comes to English speaking with over 125 million speaking the language. Moreover, majority of courses across Indian education systems are taught in English. </p>
+                <img src="~/img/blog/innerBlog.jpg" class="img-responsive" />
+
+                <p class="mt25"><span class="orange-text">Diverse Skillsets</span> – Indian education system has trained its students to be masters of multitasking and creativity. Indians make up the 2nd largest pool of engineers and doctors in the world. It speaks volumes about the training system in the country. India is a startup hub with over 6000 startups.  </p>
+                <p><span class="orange-text">MNCs love hiring from India</span> – Almost every major global giant has its presence in India. The big 4 consultancies like KPMG, Ernst and Young to major FMCG brands like P&G, Loreal to media houses like BBC, CNN to technology giants like Microsoft, IBM, Google to automobile brands like Hyundai, Ford, BMW to fashion giants like Nike, Adidas are operational in the country. The companies have become familiar with Indian culture and are aggressively hiring from Indian institutes for domestic and overseas assignments.  </p>
+                <p>Every year, companies across the world visit top Indian universities for campus placements. Salary up to $1,75,000 was offered to students of IIT Mumbai during campus placements in 2018. </p>
+                <p><span class="orange-text">Top of the world</span> – A total of 19 Indian institutes feature in the top 200 institutes of the world, according to the QS rankings. India’s higher education system is the 3rd largest education system on the planet and is equipped to take on the very best in the world.  </p>
+                <p><span class="orange-text">Established legacy</span> – A lofty building must have a solid foundation. Indian students have been trained with the right balance of theoretical, practical and hands-on knowledge, scaling it up to a global level. Indians like Sunder Pichai (CEO at Google LLC) and Raghuram Rajan (Chief Economist and Director of Research at the International Monetary Fund) are leading the world’s top brands. </p>
+                <p><span class="orange-text">Globally competitive</span> - National-level statutory bodies certify institutes listed with Study in India as recognised by NIRF and NAAC, therefore meeting global standards. Degrees from any of the institutes with Study in India will be surely recognized by the major countries in the world.  </p>
+                <p>Here’s your chance to leave a footprint on the world.  </p>
+
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="InBlog-rightAside">
+                <a href="">
+                    <div class="blogBox">
+                        <div>
+                            <img src="~/img/blog/innerblog-01.jpg" class="img-responsive" />
+                        </div>
+                        <h6>India, A home Away From Home</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="InBlog-rightAside">
+                <a href="">
+                    <div class="blogBox">
+                        <div>
+                            <img src="~/img/blog/innerblog-02.jpg" class="img-responsive" />
+                        </div>
+                        <h6>Managing your expenses while studying in India</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="InBlog-rightAside">
+                <a href="">
+                    <div class="blogBox">
+                        <div>
+                            <img src="~/img/blog/innerblog-03.jpg" class="img-responsive" />
+                        </div>
+                        <h6>Your one stop guide to passport and visa</h6>
+                    </div>
+                </a>
+            </div>
+            <div class="InBlog-rightAside">
+                <a href="">
+                    <div class="blogBox">
+                        <div>
+                            <img src="~/img/blog/innerblog-04.jpg" class="img-responsive" />
+                        </div>
+                        <h6>8 business hacks you will learn only in India</h6>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+
+@section styles{
+
+    <link href="~/css/style-blog.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script>
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+    }

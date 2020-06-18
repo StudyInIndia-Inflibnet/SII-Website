@@ -17,5 +17,9 @@ namespace SII.Controllers
         {
             return View();
         }
+        public ActionResult Page(string id = "")
+        {
+            return View();
+        }
     }
 }

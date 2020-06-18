@@ -4100,12 +4100,12 @@ header {
 
     .indSat_collapse > div h4 a i {
         color: #f68522;
-        font-size: 21px;
+        font-size: 30px;
         border-radius: 100px;
         border: 2px solid #f68522;
-        width: 28px;
-        height: 28px;
-        line-height: 25px;
+        width: 35px;
+        height: 35px;
+        line-height: 30px;
         text-align: center;
     }
 
