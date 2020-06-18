@@ -211,6 +211,8 @@
     <Content Include="assets\lib\jquery-flot\jquery.flot.resize.js" />
     <Content Include="assets\lib\jquery-flot\plugins\curvedLines.js" />
     <Content Include="assets\lib\jquery-flot\plugins\jquery.flot.orderBars.js" />
+    <Content Include="assets\lib\jquery-toast\jquery.toast.css" />
+    <Content Include="assets\lib\jquery-toast\jquery.toast.js" />
     <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
     <Content Include="assets\lib\jquery-ui\i18n\jquery-ui-timepicker-af.js" />
