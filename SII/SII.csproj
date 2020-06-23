@@ -721,6 +721,7 @@
     <Content Include="img\slider_images\26.jpg" />
     <Content Include="img\slider_images\27.jpeg" />
     <Content Include="img\slider_images\28.jpeg" />
+    <Content Include="img\slider_images\29.jpeg" />
     <Content Include="img\slider_images\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\02_Banner.jpg" />
     <Content Include="img\slider_images\mobile\09.jpg" />
@@ -738,6 +739,7 @@
     <Content Include="img\slider_images\mobile\26.jpg" />
     <Content Include="img\slider_images\mobile\27.jpeg" />
     <Content Include="img\slider_images\mobile\28.jpeg" />
+    <Content Include="img\slider_images\mobile\29.jpeg" />
     <Content Include="img\slider_images\mobile\HomePageBanner.jpg" />
     <Content Include="img\slider_images\mobile\result-banner.jpg" />
     <Content Include="img\slider_images\mobile\slider7.jpg" />
@@ -1489,6 +1491,10 @@
     <Content Include="PDF\IndSAT UG Mock Test.pdf" />
     <Content Include="PDF\Candidate guide IND-SAT 2020.pdf" />
     <Content Include="PDF\MSB Candidate Guide_NTA copy.pdf" />
+    <Content Include="PDF\IndSAT PG mock test %281%29.docx" />
+    <Content Include="PDF\IndSAT UG Mock Test %282%29 %281%29.docx" />
+    <Content Include="PDF\IndSAT PG mock test_16june2020.pdf" />
+    <Content Include="PDF\IndSAT UG Mock Test_16june2020.pdf" />
     <None Include="Properties\PublishProfiles\SIII.pubxml" />
     <Content Include="Views\Shared\_LayoutOther.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
